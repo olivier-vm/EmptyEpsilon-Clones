@@ -44,7 +44,7 @@ function mainMenu()
     end
 
     if comms_target:areEnemiesInRange(5000) then
-        setCommsMessage("We are under attack! No time for chatting!");
+        setCommsMessage("Nous sommes attaqués! Pas le temps de parler!");
         return true
     end
     if not player:isDocked(comms_target) then
@@ -58,85 +58,85 @@ end
 function handleDockedState()
     -- Handle communications while docked with this station.
     if player:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer!\nWhat can we do for you today?")
+        setCommsMessage("Bonjour, officier!\nQue pouvons-nous pour vous?")
     else
-        setCommsMessage("Welcome to our lovely station.")
+        setCommsMessage("Bienvenue dans notre charmante station.")
     end
 
     if player:getWeaponStorageMax("Homing") > 0 then
-        addCommsReply("Do you have spare homing missiles for us? ("..getWeaponCost("Homing").."rep each)", function()
+        addCommsReply("Avez-vous des missiles à guidage en stock pour nous? ("..getWeaponCost("Homing").."rep each)", function()
             handleWeaponRestock("Homing")
         end)
     end
     if player:getWeaponStorageMax("HVLI") > 0 then
-        addCommsReply("Can you restock us with HVLI? ("..getWeaponCost("HVLI").."rep each)", function()
+        addCommsReply("Pouvez-vous nous fournir en missiles Rafale? ("..getWeaponCost("HVLI").."rep each)", function()
             handleWeaponRestock("HVLI")
         end)
     end
     if player:getWeaponStorageMax("Mine") > 0 then
-        addCommsReply("Please re-stock our mines. ("..getWeaponCost("Mine").."rep each)", function()
+        addCommsReply("Fournissez-nous en mines SVP. ("..getWeaponCost("Mine").."rep each)", function()
             handleWeaponRestock("Mine")
         end)
     end
     if player:getWeaponStorageMax("Nuke") > 0 then
-        addCommsReply("Can you supply us with some nukes? ("..getWeaponCost("Nuke").."rep each)", function()
+        addCommsReply("Pouvez-vous nous fournir en Nano? ("..getWeaponCost("Nuke").."rep each)", function()
             handleWeaponRestock("Nuke")
         end)
     end
     if player:getWeaponStorageMax("EMP") > 0 then
-        addCommsReply("Please re-stock our EMP missiles. ("..getWeaponCost("EMP").."rep each)", function()
+        addCommsReply("Fournissez-nous en Axo-IEM SVP. ("..getWeaponCost("EMP").."rep each)", function()
             handleWeaponRestock("EMP")
         end)
     end
 end
 
 function handleWeaponRestock(weapon)
-    if not player:isDocked(comms_target) then setCommsMessage("You need to stay docked for that action."); return end
+    if not player:isDocked(comms_target) then setCommsMessage("Vous devez rester arrimés pour cette action."); return end
     if not isAllowedTo(comms_data.weapons[weapon]) then
-        if weapon == "Nuke" then setCommsMessage("We do not deal in weapons of mass destruction.")
-        elseif weapon == "EMP" then setCommsMessage("We do not deal in weapons of mass disruption.")
-        else setCommsMessage("We do not deal in those weapons.") end
+        if weapon == "Nuke" then setCommsMessage("Nous ne marchandons pas d'armes de destruction massive.")
+        elseif weapon == "EMP" then setCommsMessage("Nous ne marchandons pas d'armes de disruption massive.")
+        else setCommsMessage("Nous ne marchandons pas ce type d'armes.") end
         return
     end
     local points_per_item = getWeaponCost(weapon)
     local item_amount = math.floor(player:getWeaponStorageMax(weapon) * comms_data.max_weapon_refill_amount[getFriendStatus()]) - player:getWeaponStorage(weapon)
     if item_amount <= 0 then
         if weapon == "Nuke" then
-            setCommsMessage("All nukes are charged and primed for destruction.");
+            setCommsMessage("Toutes les Nanos sont chargées et amorcées en mode annihilation.");
         else
-            setCommsMessage("Sorry, sir, but you are as fully stocked as I can allow.");
+            setCommsMessage("Désolé, mais vous êtes chargés au maximum de ce que je peux vous fournir.");
         end
-        addCommsReply("Back", mainMenu)
+        addCommsReply("Retour", mainMenu)
     else
         if not player:takeReputationPoints(points_per_item * item_amount) then
-            setCommsMessage("Not enough reputation.")
+            setCommsMessage("Pas assez de trans-crébits.")
             return
         end
         player:setWeaponStorage(weapon, player:getWeaponStorage(weapon) + item_amount)
         if player:getWeaponStorage(weapon) == player:getWeaponStorageMax(weapon) then
-            setCommsMessage("You are fully loaded and ready to explode things.")
+            setCommsMessage("Vous êtes chargés au maximum et prêts à faire exploser des choses.")
         else
-            setCommsMessage("We generously resupplied you with some weapon charges.\nPut them to good use.")
+            setCommsMessage("Nous vous avons généreusement fournis avec quelques charges.\nFaites-en bon usage.")
         end
-        addCommsReply("Back", mainMenu)
+        addCommsReply("Retour", mainMenu)
     end
 end
 
 function handleUndockedState()
     --Handle communications when we are not docked with the station.
     if player:isFriendly(comms_target) then
-        setCommsMessage("Good day, officer.\nIf you need supplies, please dock with us first.")
+        setCommsMessage("Bonjour, officier.\nSi vous avez besoin de fournitures, arrimez-vous à nous au préalable SVP.")
     else
-        setCommsMessage("Greetings.\nIf you want to do business, please dock with us first.")
+        setCommsMessage("Bienvenue.\nSi vous voulez négocier, arrimez-vous à nous au préalable SVP.")
     end
     if isAllowedTo(comms_target.comms_data.services.supplydrop) then
-        addCommsReply("Can you send a supply drop? ("..getServiceCost("supplydrop").."rep)", function()
+        addCommsReply("Pouvez-vous nous envoyer un largage de fournitures? ("..getServiceCost("supplydrop").."rep)", function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request backup.");
+                setCommsMessage("Vous devez déployer une balise avant de demander du support.");
             else
-                setCommsMessage("To which waypoint should we deliver your supplies?");
+                setCommsMessage("Sur quelle balise devons nous larger les fournitures?");
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply("Balise " .. n, function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -144,36 +144,36 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage("We have dispatched a supply ship toward WP" .. n);
+                            setCommsMessage("Nous avons dépêché une navette de fournitures vers la balise " .. n);
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage("Pas assez de trans-crébits!");
                         end
-                        addCommsReply("Back", mainMenu)
+                        addCommsReply("Retour", mainMenu)
                     end)
                 end
             end
-            addCommsReply("Back", mainMenu)
+            addCommsReply("Retour", mainMenu)
         end)
     end
     if isAllowedTo(comms_target.comms_data.services.reinforcements) then
-        addCommsReply("Please send reinforcements! ("..getServiceCost("reinforcements").."rep)", function()
+        addCommsReply("Envoyez des renforts SVP! ("..getServiceCost("reinforcements").."rep)", function()
             if player:getWaypointCount() < 1 then
-                setCommsMessage("You need to set a waypoint before you can request reinforcements.");
+                setCommsMessage("Vous devez déployer une balise avant de demander des renforts.");
             else
-                setCommsMessage("To which waypoint should we dispatch the reinforcements?");
+                setCommsMessage("Sur quelle balise devons nous déployer les renforts?");
                 for n=1,player:getWaypointCount() do
-                    addCommsReply("WP" .. n, function()
+                    addCommsReply("Balise " .. n, function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage("We have dispatched " .. ship:getCallSign() .. " to assist at WP" .. n);
+                            setCommsMessage("Nous avons déployé " .. ship:getCallSign() .. " pour vous aider à la balise " .. n);
                         else
-                            setCommsMessage("Not enough reputation!");
+                            setCommsMessage("Pas assez de trans-crébits!");
                         end
-                        addCommsReply("Back", mainMenu)
+                        addCommsReply("Retour", mainMenu)
                     end)
                 end
             end
-            addCommsReply("Back", mainMenu)
+            addCommsReply("Retour", mainMenu)
         end)
     end
 end

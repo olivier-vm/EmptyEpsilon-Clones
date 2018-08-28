@@ -27,3 +27,30 @@ end
 template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
 template:setSpeed(0, 1, 0)
+
+-- Aérodock Trigone 4 - Rorqual (Enorme)
+
+template = ShipTemplate():setName("Aérodock Trigone 4 - Rorqual"):setClass("Corvette", "Support", "Dreadnaught", "Odin"):setModel("space_station_1")
+template:setDescription([[Station spatiale de classe "Rorqual". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons et à missiles guidés, un énorme blindage, et 6 niveaux de boucliers.
+
+Peut accueillir des chasseurs stellaires et des frégates.]])
+template:setRadarTrace("radartrace_hugestation.png")
+template:setHull(2000)
+template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
+template:setSpeed(0, 1, 0)
+template:setDockClasses("Starfighter", "Frigate")
+--                  Arc, Dir, Range, CycleTime, Dmg
+--template:setLASER(0, 30,   0, 4000.0, 1.5, 20)
+--template:setLASER(1, 30,  60, 4000.0, 1.5, 20)
+--template:setLASER(2, 30, 120, 4000.0, 1.5, 20)
+--template:setLASER(3, 30, 180, 4000.0, 1.5, 20)
+--template:setLASER(4, 30, 240, 4000.0, 1.5, 20)
+--template:setLASER(5, 30, 300, 4000.0, 1.5, 20)
+-- Missiles et lasers
+template:setTubes(16, 3.0)
+template:setWeaponStorage("Homing", 1000)
+template:setWeaponStorage("EMP", 100)
+for n=0,15 do
+    template:setLASERWeapon(n, 90,  n * 22.5, 4000, 1.5, 20)
+    template:setTubeDirection(n, n * 22.5)
+end

@@ -53,24 +53,24 @@ function update(delta)
 				
                 rnd = irandom(1, 5)
                 if rnd == 1 then
-                    name = "Personnel"
+                    name = "Transport personnes "
                 elseif rnd == 2 then
-                    name = "Goods"
-                elseif rnd == 2 then
-                    name = "Garbage"
-                elseif rnd == 2 then
-                    name = "Equipment"
+                    name = "Cargo Marchandise "
+                elseif rnd == 3 then
+                    name = "Cargo Dechets "
+                elseif rnd == 4 then
+                    name = "Cargo Equipement "
                 else
-                    name = "Fuel"
+                    name = "Cargo Carburant "
                 end
                 
                 if irandom(1, 100) < 15 then
-                    name = name .. " WARP Freighter " .. irandom(3, 5)
+                    name = "Transporteur WARP"
                 else
-                    name = name .. " Freighter " .. irandom(1, 5)
+                    name = name .. irandom(1, 5)
                 end
                 
-				obj = CpuShip():setTemplate(name):setFaction('Independent')
+				obj = CpuShip():setTemplate(name):setFaction('Neutre')
 				obj.target = target
 				obj.undock_delay = random(5, 30)
 				obj:orderDock(obj.target)

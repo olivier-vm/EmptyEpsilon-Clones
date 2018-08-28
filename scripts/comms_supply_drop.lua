@@ -3,12 +3,12 @@
 
 function mainMenu()
 	if player:isFriendly(comms_target) then
-		setCommsMessage("Transporting goods.");
+		setCommsMessage("Nous transportons des biens.");
 		return true
 	end
 	if player:isEnemy(comms_target) then
 		return false
 	end
-	setCommsMessage("We have nothing for you.\nGood day.");
+	setCommsMessage("Nous n'avons rien pour vous.\nBonne journée.");
 end
 mainMenu()

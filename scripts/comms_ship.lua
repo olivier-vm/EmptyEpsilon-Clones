@@ -18,43 +18,43 @@ end
 
 function friendlyComms(comms_data)
 	if comms_data.friendlyness < 20 then
-		setCommsMessage("What do you want?");
+		setCommsMessage("Que voulez-vous?");
 	else
-		setCommsMessage("Sir, how can we assist?");
+		setCommsMessage("Comment pouvons-nous vous aider?");
 	end
-	addCommsReply("Defend a waypoint", function()
+	addCommsReply("Defendre un point balise", function()
 		if player:getWaypointCount() == 0 then
-			setCommsMessage("No waypoints set. Please set a waypoint first.");
-			addCommsReply("Back", mainMenu)
+			setCommsMessage("Pas de balise. Placez d'abord une balise.");
+			addCommsReply("Retour", mainMenu)
 		else
-			setCommsMessage("Which waypoint should we defend?");
+			setCommsMessage("Quelle balise devons nous défendre ?");
 			for n=1,player:getWaypointCount() do
-				addCommsReply("Defend WP" .. n, function()
+				addCommsReply("Défendre balise " .. n, function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
-					setCommsMessage("We are heading to assist at WP" .. n ..".");
-					addCommsReply("Back", mainMenu)
+					setCommsMessage("Nous venons porter notre assistance à la balise " .. n ..".");
+					addCommsReply("Retour", mainMenu)
 				end)
 			end
 		end
 	end)
 	if comms_data.friendlyness > 0.2 then
-		addCommsReply("Assist me", function()
-			setCommsMessage("Heading toward you to assist.");
+		addCommsReply("Me soutenir", function()
+			setCommsMessage("Nous venons vous aider.");
 			comms_target:orderDefendTarget(player)
-			addCommsReply("Back", mainMenu)
+			addCommsReply("Retour", mainMenu)
 		end)
 	end
-	addCommsReply("Report status", function()
-		msg = "Hull: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
+	addCommsReply("Rapport d'état", function()
+		msg = "Coque: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
-			msg = msg .. "Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. "Bouclier: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
 		elseif shields == 2 then
-			msg = msg .. "Front Shield: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Rear Shield: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			msg = msg .. "Bouclier avant: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
+			msg = msg .. "Bouclier arrière: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
 		else
 			for n=0,shields-1 do
-				msg = msg .. "Shield " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
+				msg = msg .. "Bouclier " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
 			end
 		end
 
@@ -66,14 +66,14 @@ function friendlyComms(comms_data)
 		end
 
 		setCommsMessage(msg);
-		addCommsReply("Back", mainMenu)
+		addCommsReply("Retour", mainMenu)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Dock at " .. obj:getCallSign(), function()
-				setCommsMessage("Docking at " .. obj:getCallSign() .. ".");
+			addCommsReply("Arrimage à " .. obj:getCallSign(), function()
+				setCommsMessage("Arrimage à " .. obj:getCallSign() .. ".");
 				comms_target:orderDock(obj)
-				addCommsReply("Back", mainMenu)
+				addCommsReply("Retour", mainMenu)
 			end)
 		end
 	end
@@ -83,27 +83,15 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = "We will see to your destruction!"
-		taunt_success_reply = "Your bloodline will end here!"
-		taunt_failed_reply = "Your feeble threats are meaningless."
-		if faction == "Kraylor" then
-			setCommsMessage("Ktzzzsss.\nYou will DIEEee weaklingsss!");
-		elseif faction == "Arlenians" then
-			setCommsMessage("We wish you no harm, but will harm you if we must.\nEnd of transmission.");
-		elseif faction == "Exuari" then
-			setCommsMessage("Stay out of our way, or your death will amuse us extremely!");
-		elseif faction == "Ghosts" then
-			setCommsMessage("One zero one.\nNo binary communication detected.\nSwitching to universal speech.\nGenerating appropriate response for target from human language archives.\n:Do not cross us:\nCommunication halted.");
-			taunt_option = "EXECUTE: SELFDESTRUCT"
-			taunt_success_reply = "Rogue command received. Targeting source."
-			taunt_failed_reply = "External command ignored."
-		elseif faction == "Ktlitans" then
-			setCommsMessage("The hive suffers no threats. Opposition to any of us is opposition to us all.\nStand down or prepare to donate your corpses toward our nutrition.");
-			taunt_option = "<Transmit 'The Itsy-Bitsy Spider' on all wavelengths>"
-			taunt_success_reply = "We do not need permission to pluck apart such an insignificant threat."
-			taunt_failed_reply = "The hive has greater priorities than exterminating pests."
+		taunt_option = "Nous allons assister à votre destruction!"
+		taunt_success_reply = "Votre espérance de vie s'arrête ici!"
+		taunt_failed_reply = "Vos faibles menaces sont sans effet."
+		if faction == "Insurgés" then
+			setCommsMessage("Vous allez mourir! Sachez-le!");
+		elseif faction == "La Menace" then
+			setCommsMessage("Restez en-dehors de notre route, ou nous allons devoir tester nos nouveaux missiles.");
 		else
-			setCommsMessage("Mind your own business!");
+			setCommsMessage("Occupez-vous de vos affaires!");
 		end
 		comms_data.friendlyness = comms_data.friendlyness - random(0, 10)
 		addCommsReply(taunt_option, function()
@@ -121,9 +109,9 @@ end
 
 function neutralComms(comms_data)
 	if comms_data.friendlyness > 50 then
-		setCommsMessage("Sorry, we have no time to chat with you.\nWe are on an important mission.");
+		setCommsMessage("Désolé, nous n'avons pas le temps de discuter avec vous.\nNous sommes sur une mission importante.");
 	else
-		setCommsMessage("We have nothing for you.\nGood day.");
+		setCommsMessage("Nous n'avons rien pour vous.\nBonne journée.");
 	end
 	return true
 end

@@ -310,6 +310,8 @@ template:setHull(70)
 template:setShields(100, 150)
 template:setSpeed(60, 15, 25)
 
+--[[ Pas d'insecte dans clones !!!
+
 ----------------------Ktlitan ships
 template = ShipTemplate():setName("Ktlitan Fighter"):setModel("sci_fi_alien_ship_1")
 template:setRadarTrace("radar_ktlitan_fighter.png")
@@ -386,3 +388,4 @@ for type=1,5 do
         template:setRadarTrace("radar_transport.png")
     end
 end
+--]]
