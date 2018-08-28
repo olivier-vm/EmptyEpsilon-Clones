@@ -94,11 +94,11 @@ function addToSequence(sequence, data, data2)
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
@@ -109,7 +109,7 @@ function resetPlayerShip()
     player:setPosition(0, 0)
     player:setRotation(0)
     player:commandImpulse(0)
-    player:commandWarp(0)
+    player:commandRLS(0)
     player:commandTargetRotation(0)
     player:commandSetShields(false)
     player:setWeaponStorageMax("homing", 0)

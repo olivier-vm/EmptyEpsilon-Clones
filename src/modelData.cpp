@@ -20,7 +20,7 @@ REGISTER_SCRIPT_CLASS(ModelData)
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setRadius);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, setCollisionBox);
 
-    REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addBeamPosition);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addLASERPosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addTubePosition);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitor);
     REGISTER_SCRIPT_CLASS_FUNCTION(ModelData, addEngineEmitter);
@@ -84,9 +84,9 @@ void ModelData::setCollisionBox(sf::Vector2f collision_box)
     this->collision_box = collision_box;
 }
 
-void ModelData::addBeamPosition(sf::Vector3f position)
+void ModelData::addLASERPosition(sf::Vector3f position)
 {
-    beam_position.push_back(position);
+    LASER_position.push_back(position);
 }
 
 void ModelData::addTubePosition(sf::Vector3f position)
@@ -121,18 +121,18 @@ void ModelData::setCollisionData(P<SpaceObject> object)
         object->setCollisionBox(collision_box);
 }
 
-sf::Vector3f ModelData::getBeamPosition(int index)
+sf::Vector3f ModelData::getLASERPosition(int index)
 {
-    if (index < 0 || index >= (int)beam_position.size())
+    if (index < 0 || index >= (int)LASER_position.size())
         return sf::Vector3f(0.0f, 0.0f, 0.0f);
-    return (beam_position[index] + mesh_offset) * scale;
+    return (LASER_position[index] + mesh_offset) * scale;
 }
 
-sf::Vector2f ModelData::getBeamPosition2D(int index)
+sf::Vector2f ModelData::getLASERPosition2D(int index)
 {
-    if (index < 0 || index >= (int)beam_position.size())
+    if (index < 0 || index >= (int)LASER_position.size())
         return sf::Vector2f(0.0f, 0.0f);
-    return sf::Vector2f(beam_position[index].x + mesh_offset.x, beam_position[index].y + mesh_offset.y) * scale;
+    return sf::Vector2f(LASER_position[index].x + mesh_offset.x, LASER_position[index].y + mesh_offset.y) * scale;
 }
 
 sf::Vector3f ModelData::getTubePosition(int index)

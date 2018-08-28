@@ -87,7 +87,7 @@ void WeaponTube::fire(float target_angle)
     parent->didAnOffensiveAction();
 
     if (parent->docking_state != DS_NotDocking) return;
-    if (parent->current_warp > 0.0) return;
+    if (parent->current_RLS > 0.0) return;
     if (state != WTS_Loaded) return;
     
     if (type_loaded == MW_HVLI)

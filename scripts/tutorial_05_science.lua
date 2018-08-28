@@ -12,7 +12,7 @@
 --- -You can scan ships to get more information about them. The Science officer must align two of the ship's scanning frequencies with a target to complete the scan. Most ships are unknown (gray) to your crew at the start of a scenario and must be scanned before they can be identified as a friend (green), foe (red), or neutral (blue). A scan also identifies the ship's type, which the Science officer can use to identify its capabilities in the station's database.
 ---
 --- Deep Scans: 
---- -A second, more difficult scan yields more information about the ship, including its shield and beam frequencies. The Science officer must align both the frequency and modulation of each scan type to complete a deep scan. The helms and weapons screen can also see the firing arcs of deep-scanned ships, which help them guide your ship from being shot by their beams.
+--- -A second, more difficult scan yields more information about the ship, including its shield and LASER frequencies. The Science officer must align both the frequency and modulation of each scan type to complete a deep scan. The helms and weapons screen can also see the firing arcs of deep-scanned ships, which help them guide your ship from being shot by their LASERs.
 ---
 --- Nebulae: 
 --- -Nebulae block the ship's long-range scanner. The Science officer cannot see what's inside or behind them, and while in a nebula the ship's radars cannot detect what's outside of it. These traits make nebulae ideal places to hide for repairs or stage an ambush. To avoid surprises around nebulae, relay information about where you can and cannot see objects to both the Captain and the Relay officer.
@@ -100,11 +100,11 @@ function addToSequence(sequence, data, data2)
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
@@ -115,7 +115,7 @@ function resetPlayerShip()
     player:setPosition(0, 0)
     player:setRotation(0)
     player:commandImpulse(0)
-    player:commandWarp(0)
+    player:commandRLS(0)
     player:commandTargetRotation(0)
     player:commandSetShields(false)
     player:setWeaponStorageMax("homing", 0)
@@ -140,7 +140,7 @@ addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTempla
 addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
 addToSequence(scienceTutorial, [[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
-Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]])
+Heading and distance are of particular importance, as without these, the helms officer will be WARPing in the dark.]])
 addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
 addToSequence(scienceTutorial, [[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.

@@ -179,8 +179,8 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         case SYS_Reactor:
             textureManager.setTexture(sprite, "gui/icons/system_reactor");
             break;
-        case SYS_BeamWeapons:
             textureManager.setTexture(sprite, "gui/icons/system_beam");
+        case SYS_LASERWeapons:
             break;
         case SYS_MissileSystem:
             textureManager.setTexture(sprite, "gui/icons/system_missile");
@@ -191,11 +191,11 @@ void GuiShipRoom::onDraw(sf::RenderTarget& window)
         case SYS_Impulse:
             textureManager.setTexture(sprite, "gui/icons/system_impulse");
             break;
-        case SYS_Warp:
             textureManager.setTexture(sprite, "gui/icons/system_warpdrive");
+        case SYS_RLS:
             break;
-        case SYS_JumpDrive:
             textureManager.setTexture(sprite, "gui/icons/system_jumpdrive");
+        case SYS_WARPDrive:
             break;
         case SYS_FrontShield:
             textureManager.setTexture(sprite, "gui/icons/shields-fore");

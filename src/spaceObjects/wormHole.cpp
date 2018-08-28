@@ -135,7 +135,7 @@ void WormHole::collide(Collisionable* target, float collision_force)
                 obj->wormhole_alpha = 0.0;
     }
     
-    // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
+    // RLS postprocessor-alpha is calculated using alpha = (1 - (delay/10))
     if (obj)
         obj->wormhole_alpha = ((distance / getRadius()) * ALPHA_MULTIPLIER);
     

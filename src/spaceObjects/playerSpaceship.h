@@ -33,7 +33,7 @@ class PlayerSpaceship : public SpaceShip
 public:
     // Power consumption and generation base rates
     constexpr static float energy_shield_use_per_second = 1.5f;
-    constexpr static float energy_warp_per_second = 1.0f;
+    constexpr static float energy_RLS_per_second = 1.0f;
     constexpr static float system_heatup_per_second = 0.05f;
     constexpr static float system_power_level_change_per_second = 0.3;
     // Coolant change rate
@@ -87,9 +87,9 @@ public:
         bool operator!=(const CustomShipFunction& csf) { return type != csf.type || name != csf.name || caption != csf.caption || crew_position != csf.crew_position; }
     };
 
-    // Visual indicators of hull damage and in-progress jumps
+    // Visual indicators of hull damage and in-progress WARPs
     float hull_damage_indicator;
-    float jump_indicator;
+    float WARP_indicator;
     // Target of a scan. Server-only value
     P<SpaceObject> scanning_target;
     // Time in seconds to scan an object if scanning_complexity is 0 (none)
@@ -198,8 +198,8 @@ public:
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);
     void commandImpulse(float target);
-    void commandWarp(int8_t target);
-    void commandJump(float distance);
+    void commandRLS(int8_t target);
+    void commandWARP(float distance);
     void commandSetTarget(P<SpaceObject> target);
     void commandSetScienceLink(int32_t id);
     void commandLoadTube(int8_t tubeNumber, EMissileWeapons missileType);
@@ -220,8 +220,8 @@ public:
     void commandSendComm(uint8_t index);
     void commandSendCommPlayer(string message);
     void commandSetAutoRepair(bool enabled);
-    void commandSetBeamFrequency(int32_t frequency);
-    void commandSetBeamSystemTarget(ESystem system);
+    void commandSetLASERFrequency(int32_t frequency);
+    void commandSetLASERSystemTarget(ESystem system);
     void commandSetShieldFrequency(int32_t frequency);
     void commandAddWaypoint(sf::Vector2f position);
     void commandRemoveWaypoint(int32_t index);
@@ -244,7 +244,7 @@ public:
     virtual void applyTemplateValues() override;
 
     // Ship status functions
-    virtual void executeJump(float distance) override;
+    virtual void executeWARP(float distance) override;
     virtual void takeHullDamage(float damage_amount, DamageInfo& info) override;
     void setSystemCoolantRequest(ESystem system, float request);
     void setAutoCoolant(bool active) { auto_coolant_enabled = active; }

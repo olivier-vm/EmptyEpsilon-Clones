@@ -169,9 +169,9 @@ Head back to Orion-5 to deliver the criminals.]])
 end
 function missionWaitForAmbush(delta)
     if distance(player, main_station) < 50000 then
-        --We can jump to the Orion-5 station in 1 jump. So ambush the player!
+        --We can WARP to the Orion-5 station in 1 WARP. So ambush the player!
         x, y = player:getPosition()
-        WarpJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711)
+        RLSJammer():setFaction("Exuari"):setPosition(x - 2008, y + 2711)
         ambush_main = CpuShip():setFaction("Exuari"):setTemplate("Starhammer II"):setScanned(true):setPosition(x - 1667, y + 2611):setRotation(-80):orderAttack(player)
         ambush_side1 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 736, y + 2875):setRotation(-80):orderAttack(player)
         ambush_side2 = CpuShip():setFaction("Exuari"):setTemplate("Nirvana R5"):setScanned(true):setPosition(x - 2542, y + 2208):setRotation(-80):orderAttack(player)
@@ -226,7 +226,7 @@ function missionGotoTransport(delta)
     if distance(player, transport_target) < 30000 then
         main_station:sendCommsMessage(player, [[Scan the transports to identify the Exuari one. When you have identified it, do NOT destroy it.
 
-Target it's impulse engines with your beam weapons to halt it's progress.]])
+Target it's impulse engines with your LASER weapons to halt it's progress.]])
         for _, transport in ipairs(transports) do
             transport:orderDock(research_station)
         end
@@ -250,7 +250,7 @@ function missionStopTransport(delta)
     elseif transport_target:getSystemHealth("impulse") <= 0.0 then
         main_station:sendCommsMessage(player, [[Ok, transport disabled. We'll be sending a recovery team. Defend the transport, the Exuari will most likely rather destroy it then let it fall in our hands.]])
         transport_target:setFaction("Independent"):orderIdle():setCallSign(transport_target:getCallSign() .. "-CAP")
-        transport_target:setImpulseMaxSpeed(70):setJumpDrive(true)
+        transport_target:setImpulseMaxSpeed(70):setWARPDrive(true)
         mission_state = missionTransportWaitForRecovery
         mission_timer = 40
 		

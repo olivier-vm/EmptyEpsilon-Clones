@@ -7,18 +7,18 @@ template<> void convert<ESystem>::param(lua_State* L, int& idx, ESystem& es)
     string str = string(luaL_checkstring(L, idx++)).lower();
     if (str == "reactor")
         es = SYS_Reactor;
-    else if (str == "beamweapons")
-        es = SYS_BeamWeapons;
+    else if (str == "laserweapons")
+        es = SYS_LASERWeapons;
     else if (str == "missilesystem")
         es = SYS_MissileSystem;
     else if (str == "maneuver")
         es = SYS_Maneuver;
     else if (str == "impulse")
         es = SYS_Impulse;
-    else if (str == "warp")
-        es = SYS_Warp;
-    else if (str == "jumpdrive")
-        es = SYS_JumpDrive;
+    else if (str == "rls")
+        es = SYS_RLS;
+    else if (str == "warpdrive")
+        es = SYS_WARPDrive;
     else if (str == "frontshield")
         es = SYS_FrontShield;
     else if (str == "rearshield")

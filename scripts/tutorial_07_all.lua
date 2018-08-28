@@ -85,11 +85,11 @@ function addToSequence(sequence, data, data2)
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
@@ -100,7 +100,7 @@ function resetPlayerShip()
     player:setPosition(0, 0)
     player:setRotation(0)
     player:commandImpulse(0)
-    player:commandWarp(0)
+    player:commandRLS(0)
     player:commandTargetRotation(0)
     player:commandSetShields(false)
     player:setWeaponStorageMax("homing", 0)
@@ -147,16 +147,16 @@ addToSequence(radarTutorial, function() prev_object3:destroy() end)
 addToSequence(radarTutorial, function() prev_object4:destroy() end)
 addToSequence(radarTutorial, [[Next, we will look at the short-range radar.]])
 addToSequence(radarTutorial, function() tutorial:switchViewToTactical() end)
-addToSequence(radarTutorial, [[The short-range radar can detect objects up to 5u from your ship. It also depicts the range of your own beam weapons.
-Your ship has 2 beam weapons aimed forward. Each type of ship has different beam weapon layouts, with different ranges and locations.]])
+addToSequence(radarTutorial, [[The short-range radar can detect objects up to 5u from your ship. It also depicts the range of your own LASER weapons.
+Your ship has 2 LASER weapons aimed forward. Each type of ship has different LASER weapon layouts, with different ranges and locations.]])
 
 helmsTutorial = createSequence()
 addToSequence(helmsTutorial, function()
     tutorial:switchViewToScreen(0)
     tutorial:setMessageToTopPosition()
     resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(0);
     player:setRotationMaxSpeed(0);
 end)
@@ -185,23 +185,23 @@ addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
-Remember those beam weapons? As helms officer, it is your task to keep those beams on your target.
-I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
+Remember those LASER weapons? As helms officer, it is your task to keep those LASERs on your target.
+I've set up an stationary enemy ship as a target. Destroy it with your LASER weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
 
 On to the next task: moving long distances.
-There are two methods of moving long distances quickly. Depending on your ship, you either have a warp drive or a jump drive.
-The warp drive moves your ship at high speed, while the jump drive instantly teleports your ship a great distance.]])
-addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
-addToSequence(helmsTutorial, [[First, let us try the warp drive.
+There are two methods of moving long distances quickly. Depending on your ship, you either have a RLS drive or a WARP drive.
+The RLS drive moves your ship at high speed, while the WARP drive instantly teleports your ship a great distance.]])
+addToSequence(helmsTutorial, function() player:setRLSDrive(true) end)
+addToSequence(helmsTutorial, [[First, let us try the RLS drive.
 
 It functions like the impulse drive but only propels your ship forward, and consumes energy at a much faster rate.
-Use the warp drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
-addToSequence(helmsTutorial, [[Next, let us demonstrate the jump drive.
+Use the RLS drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
+addToSequence(helmsTutorial, function() player:setRLSDrive(false):setWARPDrive(true):setPosition(0, 0) end)
+addToSequence(helmsTutorial, [[Next, let us demonstrate the WARP drive.
 
-To use the jump drive, point your ship in the direction where you want to jump, configure a distance to jump, and then initiate it. The jump occurs 10 seconds after you initiate. Use the jump drive to jump more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, [[Notice how your jump drive needs to recharge after use.
+To use the WARP drive, point your ship in the direction where you want to WARP, configure a distance to WARP, and then initiate it. The WARP occurs 10 seconds after you initiate. Use the WARP drive to WARP more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
+addToSequence(helmsTutorial, [[Notice how your WARP drive needs to recharge after use.
 
 This covers the basics of the helms officer.]])
 
@@ -210,20 +210,20 @@ addToSequence(weaponsTutorial, function()
     tutorial:switchViewToScreen(1)
     tutorial:setMessageToTopPosition()
     resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(0)
     player:setRotationMaxSpeed(0)
 end)
 
 addToSequence(weaponsTutorial, [[This is the weapons screen.
-As the weapons officer, you are responsible for targeting beam weapons, loading and firing missile weapons, and controlling your shields.]])
+As the weapons officer, you are responsible for targeting LASER weapons, loading and firing missile weapons, and controlling your shields.]])
 addToSequence(weaponsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("MT52 Hornet"):setPosition(700, 0):setRotation(0):orderIdle():setScanned(true) end)
 addToSequence(weaponsTutorial, [[Your most fundamental task is to target your ship's weapons.
-Your beam weapons only fire at your selected target, and homing missiles travel toward your selected target.
+Your LASER weapons only fire at your selected target, and homing missiles travel toward your selected target.
 
 Target the ship in front of you by pressing it.]], function() return player:getTarget() == prev_object end)
-addToSequence(weaponsTutorial, [[Good! Notice that your beam weapons did not fire on this ship until you targeted it.
+addToSequence(weaponsTutorial, [[Good! Notice that your LASER weapons did not fire on this ship until you targeted it.
 
 Next up: shield controls.]])
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
@@ -233,12 +233,12 @@ addToSequence(weaponsTutorial, [[As you might notice, you are being shot at. Do 
 You are taking damage, however, so enable your shields to protect yourself.]], function()
     player:setHull(player:getHullMax())
     player:setSystemHealth("reactor", 1.0)
-    player:setSystemHealth("beamweapons", 1.0)
+    player:setSystemHealth("LASERweapons", 1.0)
     player:setSystemHealth("missilesystem", 1.0)
     player:setSystemHealth("maneuver", 1.0)
     player:setSystemHealth("impulse", 1.0)
-    player:setSystemHealth("warp", 1.0)
-    player:setSystemHealth("jumpdrive", 1.0)
+    player:setSystemHealth("RLS", 1.0)
+    player:setSystemHealth("WARPdrive", 1.0)
     player:setSystemHealth("frontshield", 1.0)
     player:setSystemHealth("rearshield", 1.0)
     return player:getShieldLevel(1) < player:getShieldMax(1)
@@ -247,7 +247,7 @@ addToSequence(weaponsTutorial, [[Shields protect your ship from direct damage, b
 
 Disable your shields to continue.]], function() return not player:getShieldsActive() end)
 addToSequence(weaponsTutorial, function() prev_object:destroy() end)
-addToSequence(weaponsTutorial, [[While only a single button, your shields are vital for survival. They protect against all kinds of damage, including beam weapons, missiles, asteroids, and mines, so make them one of your primary priorities.
+addToSequence(weaponsTutorial, [[While only a single button, your shields are vital for survival. They protect against all kinds of damage, including LASER weapons, missiles, asteroids, and mines, so make them one of your primary priorities.
 
 Next up, the real fun starts: missile weapons.]])
 
@@ -300,14 +300,14 @@ end)
 addToSequence(engineeringTutorial, [[Welcome to engineering.
 Engineering is split into two parts. The top part shows your ship's interior, including damage control teams stationed throughout.
 The bottom part controls power and coolant levels of your ship's systems.]])
-addToSequence(engineeringTutorial, function() player:setWarpDrive(true) end)
-addToSequence(engineeringTutorial, function() player:setSystemHeat("warp", 0.8) end)
+addToSequence(engineeringTutorial, function() player:setRLSDrive(true) end)
+addToSequence(engineeringTutorial, function() player:setSystemHeat("RLS", 0.8) end)
 addToSequence(engineeringTutorial, [[First, we will explain your control over your ship's systems.
 Each row on the bottom area of the screen represents one of your ship's system, and each system has a damage level, heat level, power level, and coolant level.
 
-I've overheated your warp system. An overheating system can damage your ship. You can prevent this by putting coolant in your warp system. Select the warp system and increase the coolant slider.]], function() return player:getSystemHeat("warp") < 0.05 end)
+I've overheated your RLS system. An overheating system can damage your ship. You can prevent this by putting coolant in your RLS system. Select the RLS system and increase the coolant slider.]], function() return player:getSystemHeat("RLS") < 0.05 end)
 addToSequence(engineeringTutorial, function() player:setSystemHeat("impulse", 0.8) end)
-addToSequence(engineeringTutorial, [[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the warp system's coolant level is automatically reduced to allow for coolant in the impulse system.
+addToSequence(engineeringTutorial, [[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the RLS system's coolant level is automatically reduced to allow for coolant in the impulse system.
 
 This is because you have a limited amount of coolant available to distribute this across your ship's systems.]], function() return player:getSystemHeat("impulse") < 0.05 end)
 addToSequence(engineeringTutorial, [[Good! Next up: power levels.
@@ -334,10 +334,10 @@ Remember, each system performs better with more power, but performs less well wh
 addToSequence(engineeringTutorial, [[Reactor:
 
 The reactor generates energy. Adding power to the reactor increases your energy generation rate.]])
-addToSequence(engineeringTutorial, [[Beam Weapons:
+addToSequence(engineeringTutorial, [[LASER Weapons:
 
-Adding power to the beam weapons system increases their rate of fire, which causes them to do more damage.
-Note that every beam you fire adds additional heat to the system.]])
+Adding power to the LASER weapons system increases their rate of fire, which causes them to do more damage.
+Note that every LASER you fire adds additional heat to the system.]])
 addToSequence(engineeringTutorial, [[Missile System:
 
 Increased missile system power lowers the reload time of weapon tubes.]])
@@ -347,12 +347,12 @@ Increasing power to the maneuvering system allows the ship to turn faster. It al
 addToSequence(engineeringTutorial, [[Impulse Engines:
 
 Adding power to the impulse engines increases your impulse flight speed.]])
-addToSequence(engineeringTutorial, [[Warp Drive:
+addToSequence(engineeringTutorial, [[RLS Drive:
 
-Adding power to the warp drive increases your warp drive flight speed.]])
-addToSequence(engineeringTutorial, [[Jump Drive:
+Adding power to the RLS drive increases your RLS drive flight speed.]])
+addToSequence(engineeringTutorial, [[WARP Drive:
 
-A higher-powered jump drive recharges faster and has a shorter delay before jumping.]])
+A higher-powered WARP drive recharges faster and has a shorter delay before WARPing.]])
 addToSequence(engineeringTutorial, [[Shields:
 
 Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]])
@@ -371,7 +371,7 @@ addToSequence(scienceTutorial, function() prev_object = SpaceStation():setTempla
 addToSequence(scienceTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
 addToSequence(scienceTutorial, [[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
-Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]])
+Heading and distance are of particular importance, as without these, the helms officer will be WARPing in the dark.]])
 addToSequence(scienceTutorial, function() prev_object:destroy() end)
 addToSequence(scienceTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
 addToSequence(scienceTutorial, [[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.
@@ -457,7 +457,7 @@ addToSequence(operationsTutorial, function() prev_object = SpaceStation():setTem
 addToSequence(operationsTutorial, function() prev_object2 = CpuShip():setFaction("Human Navy"):setTemplate("Phobos T3"):setPosition(5000, -17000):orderIdle():setScanned(true) end)
 addToSequence(operationsTutorial, [[On this radar, you can select objects to get information about them.
 I've added a friendly ship and a station for you to examine. Select them and notice how much information you can observe.
-Heading and distance are of particular importance, as without these, the helms officer will be jumping in the dark.]])
+Heading and distance are of particular importance, as without these, the helms officer will be WARPing in the dark.]])
 addToSequence(operationsTutorial, function() prev_object:destroy() end)
 addToSequence(operationsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Phobos T3"):setPosition(3000, -15000):orderIdle() end)
 addToSequence(operationsTutorial, [[I've replaced the friendly station with an unknown ship. Once you select it, notice that you know nothing about this ship.

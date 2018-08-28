@@ -53,7 +53,7 @@ public:
     GuiKeyValueDisplay* info_hull;
     GuiScrollText* info_description;
     GuiFrequencyCurve* info_shield_frequency;
-    GuiFrequencyCurve* info_beam_frequency;
+    GuiFrequencyCurve* info_LASER_frequency;
     GuiKeyValueDisplay* info_system[SYS_COUNT];
 
     GuiToggleButton* probe_view_button;

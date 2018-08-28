@@ -1,7 +1,7 @@
 -- Name: Deliver Ambassador Gremus
 -- Description: Unrest on Goltin 7 requires the skills of ambassador Gremus. Your mission: transport the ambassador wherever needed. You may encounter resistance.
 ---
---- You are not flying a destroyer bristling with weapons. You are on a transport freighter with weapons bolted on as an afterthought. These weapons are pointed behind you to deter any marauding pirates. You won't necessarily be able to just destroy any enemies that might attempt to stop you from accomplishing your mission, you may have to evade. The navy wants you to succeed, so has fitted your ship with warp drive and a single diverse ordnance weapons tube which includes nuclear capability. If you get lost or forget your orders, check in with stations for information.
+--- You are not flying a destroyer bristling with weapons. You are on a transport freighter with weapons bolted on as an afterthought. These weapons are pointed behind you to deter any marauding pirates. You won't necessarily be able to just destroy any enemies that might attempt to stop you from accomplishing your mission, you may have to evade. The navy wants you to succeed, so has fitted your ship with RLS drive and a single diverse ordnance weapons tube which includes nuclear capability. If you get lost or forget your orders, check in with stations for information.
 ---
 --- Player ship: Template model: Flavia P. Falcon. Suggest turning music volume to 10% and sound volume to 100% on server
 ---
@@ -146,7 +146,7 @@ function transportSpawn(delta)
 				name = "Fuel"
 			end
 			if irandom(1,100) < 15 then
-				name = name .. " Jump Freighter " .. irandom(3, 5)
+				name = name .. " WARP Freighter " .. irandom(3, 5)
 			else
 				name = name .. " Freighter " .. irandom(1, 5)
 			end
@@ -483,14 +483,14 @@ function getFromNingling(delta)
 	if player:isDocked(ningling) then
 		ningling:sendCommsMessage(player, "Audio message received. Auto-transcribed into log. Stored for playback: AMBGREMUS021")
 		player:addToShipLog("[AMBGREMUS021](Ambassador Gremus) Thank you for waiting and then for coming back and getting me. I needed the information provided by liaison Fordina to facilitate negotiations at Goltin 7. Let us away!","Yellow")
-		player:addToShipLog("Reconfigured beam weapons: pointed one forward, increased range and narrowed focus of rearward","Magenta")
+		player:addToShipLog("Reconfigured LASER weapons: pointed one forward, increased range and narrowed focus of rearward","Magenta")
 		if playMsgGremus4Button == nil then
 			playMsgGremus4Button = "play"
 			player:addCustomButton("Relay",playMsgGremus4Button,"|> AMBGREMUS021",playMsgGremus4)
 		end
 		player:setTypeName("Flavia P. Falcon MK2")
-		player:setBeamWeapon(0, 40, 180, 1200.0, 6.0, 6)
-		player:setBeamWeapon(1, 20, 0, 1600.0, 6.0, 6)
+		player:setLASERWeapon(0, 40, 180, 1200.0, 6.0, 6)
+		player:setLASERWeapon(1, 20, 0, 1600.0, 6.0, 6)
 		goltin = Planet():setPosition(93150,21387):setPlanetRadius(3000):setDistanceFromMovementPlane(-2000):setPlanetSurfaceTexture("planets/gas-1.png"):setAxialRotationTime(80.0)
 		artifactResearchCount = 0
 		plot1 = travelGoltin
@@ -619,12 +619,12 @@ function pangoraArtifactExplode(delta)
 	if pangoraExplodeCountdown > 15 then
 		if distance(player,nPangora) < 6000 then
 			player:setSystemHealth("reactor", player:getSystemHealth("reactor") - random(0.0, 0.5))
-			player:setSystemHealth("beamweapons", player:getSystemHealth("beamweapons") - random(0.0, 0.5))
+			player:setSystemHealth("LASERweapons", player:getSystemHealth("LASERweapons") - random(0.0, 0.5))
 			player:setSystemHealth("maneuver", player:getSystemHealth("maneuver") - random(0.0, 0.5))
 			player:setSystemHealth("missilesystem", player:getSystemHealth("missilesystem") - random(0.0, 0.5))
 			player:setSystemHealth("impulse", player:getSystemHealth("impulse") - random(1.3, 1.5))
-			player:setSystemHealth("warp", player:getSystemHealth("warp") - random(1.3, 1.5))
-			player:setSystemHealth("jumpdrive", player:getSystemHealth("jumpdrive") - random(1.3, 1.5))
+			player:setSystemHealth("RLS", player:getSystemHealth("RLS") - random(1.3, 1.5))
+			player:setSystemHealth("WARPdrive", player:getSystemHealth("WARPdrive") - random(1.3, 1.5))
 			player:setSystemHealth("frontshield", player:getSystemHealth("frontshield") - random(0.0, 0.5))
 			player:setSystemHealth("rearshield", player:getSystemHealth("rearshield") - random(0.0, 0.5))
 		end

@@ -25,16 +25,16 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     /// Set the amount of energy available for this ship. Note that only player ships use energy. So setting this for anything else is useless.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setEnergyStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRepairCrewCount);
-    /// Setup a beam weapon.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeam);
-    /// Setup a beam weapon.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeapon);
-    /// Setup a beam's turret.
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponTurret);
-    /// Setup a beam weapon texture
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamTexture);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponEnergyPerFire);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setBeamWeaponHeatPerFire);
+    /// Setup a LASER weapon.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASER);
+    /// Setup a LASER weapon.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASERWeapon);
+    /// Setup a LASER's turret.
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASERWeaponTurret);
+    /// Setup a LASER weapon texture
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASERTexture);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASERWeaponEnergyPerFire);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setLASERWeaponHeatPerFire);
     /// Set the amount of missile tubes, limited to a maximum of 16.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubes);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setTubeLoadTime);
@@ -51,13 +51,13 @@ REGISTER_SCRIPT_CLASS(ShipTemplate)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSpeed);
     /// Sets the combat maneuver power of this ship.
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCombatManeuver);
-    /// Set the warp speed for warp level 1 for this ship. Setting this will indicate that this ship has a warpdrive. (normal value is 1000)
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWarpSpeed);
+    /// Set the RLS speed for RLS level 1 for this ship. Setting this will indicate that this ship has a RLSdrive. (normal value is 1000)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setRLSSpeed);
     /// Set if this ship shares energy with docked ships. Example: template:setSharesEnergyWithDocked(false)
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setSharesEnergyWithDocked);
-    /// Set if this ship has a jump drive. Example: template:setJumpDrive(true)
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDrive);
-    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setJumpDriveRange);
+    /// Set if this ship has a WARP drive. Example: template:setWARPDrive(true)
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWARPDrive);
+    REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWARPDriveRange);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setCloaking);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, setWeaponStorage);
     REGISTER_SCRIPT_CLASS_FUNCTION(ShipTemplate, addRoom);
@@ -98,22 +98,22 @@ ShipTemplate::ShipTemplate()
     turn_speed = 10.0;
     combat_maneuver_boost_speed = 0.0f;
     combat_maneuver_strafe_speed = 0.0f;
-    warp_speed = 0.0;
-    has_jump_drive = false;
-    jump_drive_min_distance = 5000.0;
-    jump_drive_max_distance = 50000.0;
+    RLS_speed = 0.0;
+    has_WARP_drive = false;
+    WARP_drive_min_distance = 5000.0;
+    WARP_drive_max_distance = 50000.0;
     has_cloaking = false;
     for(int n=0; n<MW_Count; n++)
         weapon_storage[n] = 0;
     radar_trace = "RadarArrow.png";
 }
 
-void ShipTemplate::setBeamTexture(int index, string texture)
+void ShipTemplate::setLASERTexture(int index, string texture)
 
 {
-    if (index >= 0 && index < max_beam_weapons)
+    if (index >= 0 && index < max_LASER_weapons)
     {
-        beams[index].setBeamTexture(texture);
+        LASERs[index].setLASERTexture(texture);
     }
 }
 
@@ -189,29 +189,29 @@ void ShipTemplate::setClass(string class_name, string sub_class_name)
     this->sub_class_name = sub_class_name;
 }
 
-void ShipTemplate::setBeam(int index, float arc, float direction, float range, float cycle_time, float damage)
+void ShipTemplate::setLASER(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
-    setBeamWeapon(index, arc, direction, range, cycle_time, damage);
+    setLASERWeapon(index, arc, direction, range, cycle_time, damage);
 }
 
-void ShipTemplate::setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
+void ShipTemplate::setLASERWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
 {
-    if (index < 0 || index > max_beam_weapons)
+    if (index < 0 || index > max_LASER_weapons)
         return;
-    beams[index].setDirection(direction);
-    beams[index].setArc(arc);
-    beams[index].setRange(range);
-    beams[index].setCycleTime(cycle_time);
-    beams[index].setDamage(damage);
+    LASERs[index].setDirection(direction);
+    LASERs[index].setArc(arc);
+    LASERs[index].setRange(range);
+    LASERs[index].setCycleTime(cycle_time);
+    LASERs[index].setDamage(damage);
 }
 
-void ShipTemplate::setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
+void ShipTemplate::setLASERWeaponTurret(int index, float arc, float direction, float rotation_rate)
 {
-    if (index < 0 || index > max_beam_weapons)
+    if (index < 0 || index > max_LASER_weapons)
         return;
-    beams[index].setTurretArc(arc);
-    beams[index].setTurretDirection(direction);
-    beams[index].setTurretRotationRate(rotation_rate);
+    LASERs[index].setTurretArc(arc);
+    LASERs[index].setTurretDirection(direction);
+    LASERs[index].setTurretRotationRate(rotation_rate);
 }
 
 sf::Vector2i ShipTemplate::interiorSize()
@@ -294,17 +294,17 @@ string getSystemName(ESystem system)
 {
     switch(system)
     {
-    case SYS_Reactor: return "Reactor";
-    case SYS_BeamWeapons: return "Beam Weapons";
-    case SYS_MissileSystem: return "Missile System";
-    case SYS_Maneuver: return "Maneuvering";
-    case SYS_Impulse: return "Impulse Engines";
-    case SYS_Warp: return "Warp Drive";
-    case SYS_JumpDrive: return "Jump Drive";
-    case SYS_FrontShield: return "Front Shield Generator";
-    case SYS_RearShield: return "Rear Shield Generator";
+    case SYS_Reactor: return "Reacteur";
+    case SYS_LASERWeapons: return "LASER Weapons";
+    case SYS_MissileSystem: return "Systeme de Missiles";
+    case SYS_Maneuver: return "Manoeuvre";
+    case SYS_Impulse: return "Moteurs a Impulsion";
+    case SYS_RLS: return "RLS Drive";
+    case SYS_WARPDrive: return "WARP Drive";
+    case SYS_FrontShield: return "Generateur Bouclier Av";
+    case SYS_RearShield: return "Generateur Bouclier Arr";
     default:
-        return "UNKNOWN";
+        return "INCONNU";
     }
 }
 
@@ -341,9 +341,9 @@ void ShipTemplate::setCombatManeuver(float boost, float strafe)
     combat_maneuver_strafe_speed = strafe;
 }
 
-void ShipTemplate::setWarpSpeed(float warp)
+void ShipTemplate::setRLSSpeed(float RLS)
 {
-    warp_speed = warp;
+    RLS_speed = RLS;
 }
 
 void ShipTemplate::setSharesEnergyWithDocked(bool enabled)
@@ -356,9 +356,9 @@ void ShipTemplate::setRepairDocked(bool enabled)
     repair_docked = enabled;
 }
 
-void ShipTemplate::setJumpDrive(bool enabled)
+void ShipTemplate::setWARPDrive(bool enabled)
 {
-    has_jump_drive = enabled;
+    has_WARP_drive = enabled;
 }
 
 void ShipTemplate::setCloaking(bool enabled)
@@ -409,10 +409,10 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
     result->energy_storage_amount = energy_storage_amount;
     result->repair_crew_count = repair_crew_count;
     result->default_ai_name = default_ai_name;
-    for(int n=0; n<max_beam_weapons; n++)
-        result->beams[n] = beams[n];
+    for(int n=0; n<max_LASER_weapons; n++)
+        result->LASERs[n] = LASERs[n];
     result->weapon_tube_count = weapon_tube_count;
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n=0; n<max_LASER_weapons; n++)
         result->weapon_tube[n] = weapon_tube[n];
     result->hull = hull;
     result->shield_count = shield_count;
@@ -420,13 +420,13 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
         result->shield_level[n] = shield_level[n];
     result->impulse_speed = impulse_speed;
     result->turn_speed = turn_speed;
-    result->warp_speed = warp_speed;
+    result->RLS_speed = RLS_speed;
     result->impulse_acceleration;
     result->combat_maneuver_boost_speed;
     result->combat_maneuver_strafe_speed;
     result->shares_energy_with_docked = shares_energy_with_docked;
     result->repair_docked = repair_docked;
-    result->has_jump_drive = has_jump_drive;
+    result->has_WARP_drive = has_WARP_drive;
     result->has_cloaking = has_cloaking;
     for(int n=0; n<MW_Count; n++)
         result->weapon_storage[n] = weapon_storage[n];

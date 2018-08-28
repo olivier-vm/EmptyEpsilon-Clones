@@ -38,7 +38,7 @@ void GuiShieldsEnableButton::onDraw(sf::RenderTarget& window)
             button->show();
             button->setValue(my_spaceship->shields_active);
             bar->hide();
-            if (gameGlobalInfo->use_beam_shield_frequencies)
+            if (gameGlobalInfo->use_LASER_shield_frequencies)
                 button->setText(frequencyToString(my_spaceship->shield_frequency) + (my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF"));
             else
                 button->setText(my_spaceship->shields_active ? " Shields: ON" : " Shields: OFF");

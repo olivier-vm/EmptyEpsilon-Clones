@@ -6,8 +6,8 @@ These are older ship templates, going to be replaced soon.
 template = ShipTemplate():setName("Player Cruiser"):setModel("battleship_destroyer_5_upgraded"):setType("playership")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
-template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
+template:setLASER(0, 90, -15, 1000.0, 6.0, 10)
+template:setLASER(1, 90,  15, 1000.0, 6.0, 10)
 -- Setup 3 missile tubes. 2 forward at a slight angle, and 1 in the rear exclusive for mines.
 template:setTubes(3, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
 template:setTubeDirection(0, -5):weaponTubeDisallowMissle(0, "Mine")
@@ -16,8 +16,8 @@ template:setTubeDirection(2, 180):setWeaponTubeExclusiveFor(2, "Mine")
 template:setHull(200)
 template:setShields(80, 80)
 template:setSpeed(90, 10, 20)
-template:setWarpSpeed(0)
-template:setJumpDrive(true)
+template:setRLSSpeed(0)
+template:setWARPDrive(true)
 template:setCombatManeuver(400, 250)
 template:setWeaponStorage("Homing", 12)
 template:setWeaponStorage("Nuke", 4)
@@ -25,13 +25,13 @@ template:setWeaponStorage("Mine", 8)
 template:setWeaponStorage("EMP", 6)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+template:addRoomSystem(1, 1, 2, 1, "LASERWeapons");
 template:addRoom(2, 2, 2, 1);
 
 template:addRoomSystem(0, 3, 1, 2, "RearShield");
 template:addRoomSystem(1, 3, 2, 2, "Reactor");
-template:addRoomSystem(3, 3, 2, 2, "Warp");
-template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+template:addRoomSystem(3, 3, 2, 2, "RLS");
+template:addRoomSystem(5, 3, 1, 2, "WARPDrive");
 template:addRoom(6, 3, 2, 1);
 template:addRoom(6, 4, 2, 1);
 template:addRoomSystem(8, 3, 1, 2, "FrontShield");
@@ -75,8 +75,8 @@ template:setHull(200)
 template:setShields(110, 70)
 template:setSpeed(60, 8, 15)
 template:setCombatManeuver(450, 150)
-template:setWarpSpeed(800)
-template:setJumpDrive(false)
+template:setRLSSpeed(800)
+template:setWARPDrive(false)
 template:setCloaking(false)
 template:setWeaponStorage("Homing", 30)
 template:setWeaponStorage("Nuke", 8)
@@ -84,13 +84,13 @@ template:setWeaponStorage("Mine", 12)
 template:setWeaponStorage("EMP", 10)
 
 template:addRoomSystem(1, 0, 2, 1, "Maneuver");
-template:addRoomSystem(1, 1, 2, 1, "BeamWeapons");
+template:addRoomSystem(1, 1, 2, 1, "LASERWeapons");
 template:addRoom(2, 2, 2, 1);
 
 template:addRoomSystem(0, 3, 1, 2, "RearShield");
 template:addRoomSystem(1, 3, 2, 2, "Reactor");
-template:addRoomSystem(3, 3, 2, 2, "Warp");
-template:addRoomSystem(5, 3, 1, 2, "JumpDrive");
+template:addRoomSystem(3, 3, 2, 2, "RLS");
+template:addRoomSystem(5, 3, 1, 2, "WARPDrive");
 template:addRoom(6, 3, 2, 1);
 template:addRoom(6, 4, 2, 1);
 template:addRoomSystem(8, 3, 1, 2, "FrontShield");
@@ -116,26 +116,26 @@ template:addDoor(8, 4, false);
 template = ShipTemplate():setName("Player Fighter"):setModel("small_fighter_1"):setType("playership")
 template:setRadarTrace("radar_fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 40, -10, 1000.0, 6.0, 8)
-template:setBeam(1, 40,  10, 1000.0, 6.0, 8)
+template:setLASER(0, 40, -10, 1000.0, 6.0, 8)
+template:setLASER(1, 40,  10, 1000.0, 6.0, 8)
 template:setHull(60)
 template:setShields(40)
 template:setSpeed(110, 20, 40)
 template:setCombatManeuver(600, 0)
-template:setWarpSpeed(0)
-template:setJumpDrive(false)
+template:setRLSSpeed(0)
+template:setWARPDrive(false)
 template:setCloaking(false)
 template:setEnergyStorage(400)
 template:setTubes(1, 10.0) -- Amount of torpedo tubes, loading time
 template:setWeaponStorage("HVLI", 4)
 
 template:addRoomSystem(3, 0, 1, 1, "Maneuver");
-template:addRoomSystem(1, 0, 2, 1, "BeamWeapons");
+template:addRoomSystem(1, 0, 2, 1, "LASERWeapons");
 
 template:addRoomSystem(0, 1, 1, 2, "RearShield");
 template:addRoomSystem(1, 1, 2, 2, "Reactor");
-template:addRoomSystem(3, 1, 2, 1, "Warp");
-template:addRoomSystem(3, 2, 2, 1, "JumpDrive");
+template:addRoomSystem(3, 1, 2, 1, "RLS");
+template:addRoomSystem(3, 2, 2, 1, "WARPDrive");
 template:addRoomSystem(5, 1, 1, 2, "FrontShield");
 
 template:addRoomSystem(1, 3, 2, 1, "MissileSystem");
@@ -165,25 +165,25 @@ template:setWeaponStorage("EMP", 2)
 template:setDescription([[The tugboat is a reliable, but small and un-armed transport ship. Due to it's low cost, it is a favourite ship to teach the ropes to fledgeling captains, without risking friendly fire.]])
 
 --List of possible fighters --
--- Intercepter (anti fighter) -> High speed, low visibility, front beam weapons
+-- Intercepter (anti fighter) -> High speed, low visibility, front LASER weapons
 -- Bomber (anti capital) -> Low speed, high visibility, high armor (for a fighter), high shields (for a fighter), multiple missiles
 	-- Bomber mine
 
 -- Mine ship -- 
-	-- deploys some mines (the ones that don't explode with a 1u blast radius) and use long range beam weapons to fight
+	-- deploys some mines (the ones that don't explode with a 1u blast radius) and use long range LASER weapons to fight
 
 --[[ Enemy ship types --]]
 -- Fighters are quick agile ships that do not do a lot of damage, but usually come in larger groups. They are easy to take out, but should not be underestimated.
 template = ShipTemplate():setName("Fighter"):setModel("small_fighter_1")
 template:setRadarTrace("radar_fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 60, 0, 1000.0, 4.0, 4)
+template:setLASER(0, 60, 0, 1000.0, 4.0, 4)
 template:setHull(30)
 template:setShields(30)
 template:setSpeed(120, 30, 25)
 template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
--- The cruiser is an average ship you can encounter, it has average shields, and average beams. It's pretty much average with nothing special.
+-- The cruiser is an average ship you can encounter, it has average shields, and average LASERs. It's pretty much average with nothing special.
 -- Karnack cruiser mark I
 	-- Fabricated by: Repulse shipyards
 	-- Due to it's versitility, this ship has found wide adoptation in most factions. Most factions have extensively retrofitted these ships
@@ -196,8 +196,8 @@ template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, an
 template = ShipTemplate():setName("Cruiser"):setModel("small_frigate_4")
 template:setRadarTrace("radar_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 90, -15, 1000.0, 6.0, 6)
-template:setBeam(1, 90,  15, 1000.0, 6.0, 6)
+template:setLASER(0, 90, -15, 1000.0, 6.0, 6)
+template:setLASER(1, 90,  15, 1000.0, 6.0, 6)
 template:setHull(70)
 template:setShields(40, 40)
 template:setSpeed(60, 6, 10)
@@ -215,50 +215,50 @@ template:setShields(50, 50)
 template:setSpeed(45, 3, 10)
 template:setWeaponStorage("Homing", 10)
 
--- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing beams. It's designed to quickly take out the enemies weaker then itself.
+-- The advanced gunship is a ship equiped with 2 homing missiles to do initial damage and then take out the enemy with 2 front firing LASERs. It's designed to quickly take out the enemies weaker then itself.
 template = ShipTemplate():setName("Adv. Gunship"):setModel("battleship_destroyer_4_upgraded")
 template:setRadarTrace("radar_adv_gunship.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 50,-15, 1000.0, 6.0, 8)
-template:setBeam(1, 50, 15, 1000.0, 6.0, 8)
+template:setLASER(0, 50,-15, 1000.0, 6.0, 8)
+template:setLASER(1, 50, 15, 1000.0, 6.0, 8)
 template:setTubes(2, 8.0) -- Amount of torpedo tubes
 template:setHull(100)
 template:setShields(100, 80, 80)
 template:setSpeed(60, 5, 10)
 template:setWeaponStorage("Homing", 4)
 
--- The Strikeship is a warp-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
+-- The Strikeship is a RLS-drive equiped figher build for quick strikes, it's fast, it's aggile, but does not do an extreme amount of damage, and lacks in rear shields.
 template = ShipTemplate():setName("Strikeship"):setModel("small_frigate_3")
 template:setRadarTrace("radar_striker.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 40,-5, 1000.0, 6.0, 6)
-template:setBeam(1, 40, 5, 1000.0, 6.0, 6)
+template:setLASER(0, 40,-5, 1000.0, 6.0, 6)
+template:setLASER(1, 40, 5, 1000.0, 6.0, 6)
 template:setHull(100)
 template:setShields(80, 30, 30, 30)
 template:setSpeed(70, 12, 12)
-template:setWarpSpeed(1000)
+template:setRLSSpeed(1000)
 
--- The Adv. Striker is a jump-drive equiped figher build for quick strikes, it's slow but very aggile, but does not do an extreme amount of damage, and lacks in shields. However, due to the jump driver, it's quick to get into the action.
+-- The Adv. Striker is a WARP-drive equiped figher build for quick strikes, it's slow but very aggile, but does not do an extreme amount of damage, and lacks in shields. However, due to the WARP driver, it's quick to get into the action.
 template = ShipTemplate():setName("Adv. Striker"):setModel("dark_fighter_6")
 template:setRadarTrace("radar_adv_striker.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 50,-15, 1000.0, 6.0, 6)
-template:setBeam(1, 50, 15, 1000.0, 6.0, 6)
+template:setLASER(0, 50,-15, 1000.0, 6.0, 6)
+template:setLASER(1, 50, 15, 1000.0, 6.0, 6)
 template:setHull(70)
 template:setShields(50, 30)
 template:setSpeed(45, 12, 15)
-template:setJumpDrive(true)
+template:setWARPDrive(true)
 
--- The Dreadnough is a flying fortress, it's slow, slow to turn, but packs a huge amount of beam weapons in the front. Taking it head-on is suicide.
+-- The Dreadnough is a flying fortress, it's slow, slow to turn, but packs a huge amount of LASER weapons in the front. Taking it head-on is suicide.
 template = ShipTemplate():setName("Dreadnought"):setModel("battleship_destroyer_1_upgraded")
 template:setRadarTrace("radar_dread.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 90, -25, 1500.0, 6.0, 8)
-template:setBeam(1, 90,  25, 1500.0, 6.0, 8)
-template:setBeam(2,100, -60, 1000.0, 6.0, 8)
-template:setBeam(3,100,  60, 1000.0, 6.0, 8)
-template:setBeam(4, 30,   0, 2000.0, 6.0, 8)
-template:setBeam(5,100, 180, 1200.0, 6.0, 8)
+template:setLASER(0, 90, -25, 1500.0, 6.0, 8)
+template:setLASER(1, 90,  25, 1500.0, 6.0, 8)
+template:setLASER(2,100, -60, 1000.0, 6.0, 8)
+template:setLASER(3,100,  60, 1000.0, 6.0, 8)
+template:setLASER(4, 30,   0, 2000.0, 6.0, 8)
+template:setLASER(5,100, 180, 1200.0, 6.0, 8)
 template:setHull(70)
 template:setShields(300, 300, 300, 300, 300)
 template:setSpeed(30, 1.5, 5)
@@ -267,33 +267,33 @@ template:setSpeed(30, 1.5, 5)
 template = ShipTemplate():setName("Battlestation"):setModel("Ender Battlecruiser")
 template:setRadarTrace("radar_battleship.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 120, -90, 2500.0, 6.1, 4)
-template:setBeam(1, 120, -90, 2500.0, 6.0, 4)
-template:setBeam(2, 120,  90, 2500.0, 6.1, 4)
-template:setBeam(3, 120,  90, 2500.0, 6.0, 4)
-template:setBeam(4, 120, -90, 2500.0, 5.9, 4)
-template:setBeam(5, 120, -90, 2500.0, 6.2, 4)
-template:setBeam(6, 120,  90, 2500.0, 5.9, 4)
-template:setBeam(7, 120,  90, 2500.0, 6.2, 4)
-template:setBeam(8, 120, -90, 2500.0, 6.1, 4)
-template:setBeam(9, 120, -90, 2500.0, 6.0, 4)
-template:setBeam(10, 120,  90, 2500.0, 6.1, 4)
-template:setBeam(11, 120,  90, 2500.0, 6.0, 4)
+template:setLASER(0, 120, -90, 2500.0, 6.1, 4)
+template:setLASER(1, 120, -90, 2500.0, 6.0, 4)
+template:setLASER(2, 120,  90, 2500.0, 6.1, 4)
+template:setLASER(3, 120,  90, 2500.0, 6.0, 4)
+template:setLASER(4, 120, -90, 2500.0, 5.9, 4)
+template:setLASER(5, 120, -90, 2500.0, 6.2, 4)
+template:setLASER(6, 120,  90, 2500.0, 5.9, 4)
+template:setLASER(7, 120,  90, 2500.0, 6.2, 4)
+template:setLASER(8, 120, -90, 2500.0, 6.1, 4)
+template:setLASER(9, 120, -90, 2500.0, 6.0, 4)
+template:setLASER(10, 120,  90, 2500.0, 6.1, 4)
+template:setLASER(11, 120,  90, 2500.0, 6.0, 4)
 template:setHull(100)
 template:setShields(2500)
 template:setSpeed(20, 1.5, 3)
-template:setJumpDrive(true)
+template:setWARPDrive(true)
 
--- The weapons-platform is a stationary platform with beam-weapons. It's extremely slow to turn, but it's beam weapons do a huge amount of damage.
+-- The weapons-platform is a stationary platform with LASER-weapons. It's extremely slow to turn, but it's LASER weapons do a huge amount of damage.
 template = ShipTemplate():setName("Weapons platform"):setModel("space_cruiser_4")
 template:setRadarTrace("radar_missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 30,   0, 4000.0, 1.5, 20)
-template:setBeam(1, 30,  60, 4000.0, 1.5, 20)
-template:setBeam(2, 30, 120, 4000.0, 1.5, 20)
-template:setBeam(3, 30, 180, 4000.0, 1.5, 20)
-template:setBeam(4, 30, 240, 4000.0, 1.5, 20)
-template:setBeam(5, 30, 300, 4000.0, 1.5, 20)
+template:setLASER(0, 30,   0, 4000.0, 1.5, 20)
+template:setLASER(1, 30,  60, 4000.0, 1.5, 20)
+template:setLASER(2, 30, 120, 4000.0, 1.5, 20)
+template:setLASER(3, 30, 180, 4000.0, 1.5, 20)
+template:setLASER(4, 30, 240, 4000.0, 1.5, 20)
+template:setLASER(5, 30, 300, 4000.0, 1.5, 20)
 template:setHull(70)
 template:setShields(120, 120, 120, 120, 120, 120)
 template:setSpeed(0, 0.5, 0)
@@ -302,10 +302,10 @@ template:setSpeed(0, 0.5, 0)
 template = ShipTemplate():setName("Blockade Runner"):setModel("battleship_destroyer_3_upgraded")
 template:setRadarTrace("radar_blockade.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
-template:setBeam(0, 60, -15, 1000.0, 6.0, 8)
-template:setBeam(1, 60,  15, 1000.0, 6.0, 8)
-template:setBeam(2, 25,  170, 1000.0, 6.0, 8)
-template:setBeam(3, 25,  190, 1000.0, 6.0, 8)
+template:setLASER(0, 60, -15, 1000.0, 6.0, 8)
+template:setLASER(1, 60,  15, 1000.0, 6.0, 8)
+template:setLASER(2, 25,  170, 1000.0, 6.0, 8)
+template:setLASER(3, 25,  190, 1000.0, 6.0, 8)
 template:setHull(70)
 template:setShields(100, 150)
 template:setSpeed(60, 15, 25)
@@ -313,16 +313,16 @@ template:setSpeed(60, 15, 25)
 ----------------------Ktlitan ships
 template = ShipTemplate():setName("Ktlitan Fighter"):setModel("sci_fi_alien_ship_1")
 template:setRadarTrace("radar_ktlitan_fighter.png")
-template:setBeam(0, 60, 0, 1200.0, 4.0, 6)
+template:setLASER(0, 60, 0, 1200.0, 4.0, 6)
 template:setHull(70)
 template:setSpeed(140, 30, 25)
 template:setDefaultAI('fighter')	-- set fighter AI, which dives at the enemy, and then flies off, doing attack runs instead of "hanging in your face".
 
 template = ShipTemplate():setName("Ktlitan Breaker"):setModel("sci_fi_alien_ship_2")
 template:setRadarTrace("radar_ktlitan_breaker.png")
-template:setBeam(0, 40, 0, 800.0, 4.0, 6)
-template:setBeam(1, 35,-15, 800.0, 4.0, 6)
-template:setBeam(2, 35, 15, 800.0, 4.0, 6)
+template:setLASER(0, 40, 0, 800.0, 4.0, 6)
+template:setLASER(1, 35,-15, 800.0, 4.0, 6)
+template:setLASER(2, 35, 15, 800.0, 4.0, 6)
 template:setTubes(1, 13.0) -- Amount of torpedo tubes, loading time
 template:setWeaponStorage("HVLI", 5) --Only give this ship HVLI's
 template:setHull(120)
@@ -330,37 +330,37 @@ template:setSpeed(100, 5, 25)
 
 template = ShipTemplate():setName("Ktlitan Worker"):setModel("sci_fi_alien_ship_3")
 template:setRadarTrace("radar_ktlitan_worker.png")
-template:setBeam(0, 40, -90, 600.0, 4.0, 6)
-template:setBeam(1, 40, 90, 600.0, 4.0, 6)
+template:setLASER(0, 40, -90, 600.0, 4.0, 6)
+template:setLASER(1, 40, 90, 600.0, 4.0, 6)
 template:setHull(50)
 template:setSpeed(100, 35, 25)
 
 template = ShipTemplate():setName("Ktlitan Drone"):setModel("sci_fi_alien_ship_4")
 template:setRadarTrace("radar_ktlitan_drone.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
+template:setLASER(0, 40, 0, 600.0, 4.0, 6)
 template:setHull(30)
 template:setSpeed(120, 10, 25)
 
 template = ShipTemplate():setName("Ktlitan Feeder"):setModel("sci_fi_alien_ship_5")
 template:setRadarTrace("radar_ktlitan_feeder.png")
-template:setBeam(0, 20, 0, 800.0, 4.0, 6)
-template:setBeam(1, 35,-15, 600.0, 4.0, 6)
-template:setBeam(2, 35, 15, 600.0, 4.0, 6)
-template:setBeam(3, 20,-25, 600.0, 4.0, 6)
-template:setBeam(4, 20, 25, 600.0, 4.0, 6)
+template:setLASER(0, 20, 0, 800.0, 4.0, 6)
+template:setLASER(1, 35,-15, 600.0, 4.0, 6)
+template:setLASER(2, 35, 15, 600.0, 4.0, 6)
+template:setLASER(3, 20,-25, 600.0, 4.0, 6)
+template:setLASER(4, 20, 25, 600.0, 4.0, 6)
 template:setHull(150)
 template:setSpeed(120, 8, 25)
 
 template = ShipTemplate():setName("Ktlitan Scout"):setModel("sci_fi_alien_ship_6")
 template:setRadarTrace("radar_ktlitan_scout.png")
-template:setBeam(0, 40, 0, 600.0, 4.0, 6)
+template:setLASER(0, 40, 0, 600.0, 4.0, 6)
 template:setHull(100)
 template:setSpeed(150, 30, 25)
 
 template = ShipTemplate():setName("Ktlitan Destroyer"):setModel("sci_fi_alien_ship_7")
 template:setRadarTrace("radar_ktlitan_destroyer.png")
-template:setBeam(0, 90, -15, 1000.0, 6.0, 10)
-template:setBeam(1, 90,  15, 1000.0, 6.0, 10)
+template:setLASER(0, 90, -15, 1000.0, 6.0, 10)
+template:setLASER(1, 90,  15, 1000.0, 6.0, 10)
 template:setHull(300)
 template:setShields(50, 50, 50)
 template:setTubes(3, 15.0) -- Amount of torpedo tubes

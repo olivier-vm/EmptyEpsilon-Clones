@@ -12,8 +12,8 @@ ShipAI::ShipAI(CpuShip* owner)
     missile_fire_delay = 0.0;
 
     has_missiles = false;
-    has_beams = false;
-    beam_weapon_range = 0.0;
+    has_LASERs = false;
+    LASER_weapon_range = 0.0;
     weapon_direction = EWeaponDirection::Front;
     
     update_target_delay = 0.0;
@@ -55,7 +55,7 @@ void ShipAI::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position,
 void ShipAI::run(float delta)
 {
     owner->target_rotation = owner->getRotation();
-    owner->warp_request = 0.0;
+    owner->RLS_request = 0.0;
     owner->impulse_request = 0.0f;
 
     updateWeaponState(delta);
@@ -68,7 +68,7 @@ void ShipAI::run(float delta)
     }
 
     //If we have a target and weapons, engage the target.
-    if (owner->getTarget() && (has_missiles || has_beams))
+    if (owner->getTarget() && (has_missiles || has_LASERs))
     {
         runAttack(owner->getTarget());
     }else{
@@ -109,14 +109,14 @@ void ShipAI::updateWeaponState(float delta)
     if (missile_fire_delay > 0.0)
         missile_fire_delay -= delta;
 
-    //Update the weapon state, figure out which direction is our main attack vector. If we have missile and/or beam weapons, and what we should preferer.
+    //Update the weapon state, figure out which direction is our main attack vector. If we have missile and/or LASER weapons, and what we should preferer.
     has_missiles = false;
-    has_beams = false;
-    beam_weapon_range = 0;
+    has_LASERs = false;
+    LASER_weapon_range = 0;
     best_missile_type = MW_None;
     
     float tube_strength_per_direction[4] = {0, 0, 0, 0};
-    float beam_strength_per_direction[4] = {0, 0, 0, 0};
+    float LASER_strength_per_direction[4] = {0, 0, 0, 0};
     
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
@@ -142,23 +142,23 @@ void ShipAI::updateWeaponState(float delta)
         }
     }
 
-    for(int n=0; n<max_beam_weapons; n++)
+    for(int n=0; n<max_LASER_weapons; n++)
     {
-        BeamWeapon& beam = owner->beam_weapons[n];
-        if (beam.getRange() > 0)
+        LASERWeapon& LASER = owner->LASER_weapons[n];
+        if (LASER.getRange() > 0)
         {
-            int index = getDirectionIndex(beam.getDirection(), beam.getArc());
+            int index = getDirectionIndex(LASER.getDirection(), LASER.getArc());
             if (index >= 0)
             {
-                beam_strength_per_direction[index] += beam.getDamage() / beam.getCycleTime();
+                LASER_strength_per_direction[index] += LASER.getDamage() / LASER.getCycleTime();
             }
         }
     }
     
     int best_tube_index = -1;
     float best_tube_strenght = 0.0;
-    int best_beam_index = -1;
-    float best_beam_strenght = 0.0;
+    int best_LASER_index = -1;
+    float best_LASER_strenght = 0.0;
     for(int n=0; n<4; n++)
     {
         if (best_tube_strenght < tube_strength_per_direction[n])
@@ -166,28 +166,28 @@ void ShipAI::updateWeaponState(float delta)
             best_tube_index = n;
             best_tube_strenght = tube_strength_per_direction[n];
         }
-        if (best_beam_strenght < beam_strength_per_direction[n])
+        if (best_LASER_strenght < LASER_strength_per_direction[n])
         {
-            best_beam_index = n;
-            best_beam_strenght = beam_strength_per_direction[n];
+            best_LASER_index = n;
+            best_LASER_strenght = LASER_strength_per_direction[n];
         }
     }
     
-    has_beams = best_beam_index > -1;
+    has_LASERs = best_LASER_index > -1;
     has_missiles = best_tube_index > -1;
     
-    if (has_beams)
+    if (has_LASERs)
     {
-        //Figure out our beam weapon range.
-        for(int n=0; n<max_beam_weapons; n++)
+        //Figure out our LASER weapon range.
+        for(int n=0; n<max_LASER_weapons; n++)
         {
-            BeamWeapon& beam = owner->beam_weapons[n];
-            if (beam.getRange() > 0)
+            LASERWeapon& LASER = owner->LASER_weapons[n];
+            if (LASER.getRange() > 0)
             {
-                int index = getDirectionIndex(beam.getDirection(), beam.getArc());
-                if (index == best_beam_index)
+                int index = getDirectionIndex(LASER.getDirection(), LASER.getArc());
+                if (index == best_LASER_index)
                 {
-                    beam_weapon_range += beam.getRange() * (beam.getDamage() / beam.getCycleTime()) / beam_strength_per_direction[index];
+                    LASER_weapon_range += LASER.getRange() * (LASER.getDamage() / LASER.getCycleTime()) / LASER_strength_per_direction[index];
                 }
             }
         }
@@ -217,10 +217,10 @@ void ShipAI::updateWeaponState(float delta)
     
     int direction_index = best_tube_index;
     float* strength_per_direction = tube_strength_per_direction;
-    if (best_beam_strenght > best_tube_strenght)
+    if (best_LASER_strenght > best_tube_strenght)
     {
-        direction_index = best_beam_index;
-        strength_per_direction = beam_strength_per_direction;
+        direction_index = best_LASER_index;
+        strength_per_direction = LASER_strength_per_direction;
     }
     switch(direction_index)
     {
@@ -333,7 +333,7 @@ void ShipAI::runOrders()
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (has_missiles || has_beams)
+        if (has_missiles || has_LASERs)
         {
             P<SpaceObject> new_target = findBestTarget(owner->getPosition(), 50000);
             if (new_target)
@@ -421,8 +421,8 @@ void ShipAI::runAttack(P<SpaceObject> target)
     float attack_distance = 4000.0;
     if (has_missiles && best_missile_type == MW_HVLI)
         attack_distance = 2500.0;
-    if (has_beams)
-        attack_distance = beam_weapon_range * 0.7;
+    if (has_LASERs)
+        attack_distance = LASER_weapon_range * 0.7;
 
     sf::Vector2f position_diff = target->getPosition() - owner->getPosition();
     float distance = sf::length(position_diff);
@@ -449,7 +449,7 @@ void ShipAI::runAttack(P<SpaceObject> target)
     }else{
         if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
-            //We have side beams, find out where we want to attack from.
+            //We have side LASERs, find out where we want to attack from.
             sf::Vector2f target_position = target->getPosition();
             sf::Vector2f diff = target_position - owner->getPosition();
             float angle = sf::vector2ToAngle(diff);
@@ -481,33 +481,33 @@ void ShipAI::flyTowards(sf::Vector2f target, float keep_distance)
         owner->target_rotation = sf::vector2ToAngle(diff);
         float rotation_diff = fabs(sf::angleDifference(owner->target_rotation, owner->getRotation()));
 
-        if (owner->has_warp_drive && rotation_diff < 30.0 && distance > 2000)
+        if (owner->has_RLS_drive && rotation_diff < 30.0 && distance > 2000)
         {
-            owner->warp_request = 1.0;
+            owner->RLS_request = 1.0;
         }else{
-            owner->warp_request = 0.0;
+            owner->RLS_request = 0.0;
         }
-        if (distance > 10000 && owner->has_jump_drive && owner->jump_delay <= 0.0 && owner->jump_drive_charge >= owner->jump_drive_max_distance)
+        if (distance > 10000 && owner->has_WARP_drive && owner->WARP_delay <= 0.0 && owner->WARP_drive_charge >= owner->WARP_drive_max_distance)
         {
             if (rotation_diff < 1.0)
             {
-                float jump = distance;
+                float WARP = distance;
                 if (pathPlanner.route.size() < 2)
                 {
-                    jump -= 3000;
+                    WARP -= 3000;
                     if (has_missiles)
-                        jump -= 5000;
+                        WARP -= 5000;
                 }
-                if (owner->jump_drive_max_distance == 50000)
-                {   //If the ship has the default max jump drive distance of 50k, then limit our jumps to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
-                    if (jump > 15000)
-                        jump = 15000;
+                if (owner->WARP_drive_max_distance == 50000)
+                {   //If the ship has the default max WARP drive distance of 50k, then limit our WARPs to 15k, else we limit ourselves to whatever the ship layout is with a bit margin.
+                    if (WARP > 15000)
+                        WARP = 15000;
                 }else{
-                    if (jump > owner->jump_drive_max_distance - 2000)
-                        jump = owner->jump_drive_max_distance - 2000;
+                    if (WARP > owner->WARP_drive_max_distance - 2000)
+                        WARP = owner->WARP_drive_max_distance - 2000;
                 }
-                jump += random(-1500, 1500);
-                owner->initializeJump(jump);
+                WARP += random(-1500, 1500);
+                owner->initializeWARP(WARP);
             }
         }
         if (pathPlanner.route.size() > 1)
@@ -607,13 +607,13 @@ float ShipAI::targetScore(P<SpaceObject> target)
     if (distance < 5000 && has_missiles)
         score += 500;
 
-    if (distance < beam_weapon_range)
+    if (distance < LASER_weapon_range)
     {
-        for(int n=0; n<max_beam_weapons; n++)
+        for(int n=0; n<max_LASER_weapons; n++)
         {
-            if (distance < owner->beam_weapons[n].getRange())
+            if (distance < owner->LASER_weapons[n].getRange())
             {
-                if (fabs(sf::angleDifference(angle_difference, owner->beam_weapons[n].getDirection())) < owner->beam_weapons[n].getArc() / 2.0f)
+                if (fabs(sf::angleDifference(angle_difference, owner->LASER_weapons[n].getDirection())) < owner->LASER_weapons[n].getArc() / 2.0f)
                     score += 1000;
             }
         }

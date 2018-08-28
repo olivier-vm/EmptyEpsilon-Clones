@@ -16,8 +16,8 @@ private:
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
-    GuiElement* warp_controls;
-    GuiElement* jump_controls;
+    GuiElement* RLS_controls;
+    GuiElement* WARP_controls;
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
 public:

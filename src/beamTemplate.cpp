@@ -1,6 +1,6 @@
 #include "beamTemplate.h"
 
-BeamTemplate::BeamTemplate()
+LASERTemplate::LASERTemplate()
 {
     arc = 0;
     direction = 0;
@@ -12,27 +12,27 @@ BeamTemplate::BeamTemplate()
     damage = 0;
     beam_texture = "beam_orange.png";
 
-    energy_per_beam_fire = 3.0;
-    heat_per_beam_fire = 0.02;
+    energy_per_LASER_fire = 3.0;
+    heat_per_LASER_fire = 0.02;
 }
 
-string BeamTemplate::getBeamTexture()
+string LASERTemplate::getLASERTexture()
 {
-    return beam_texture;
+    return LASER_texture;
 }
 
-void BeamTemplate::setBeamTexture(string texture)
+void LASERTemplate::setLASERTexture(string texture)
 {
     //TODO: Add some more inteligent input checking
-    beam_texture = texture;
+    LASER_texture = texture;
 }
 
-float BeamTemplate::getDirection()
+float LASERTemplate::getDirection()
 {
     return direction;
 }
 
-void BeamTemplate::setDirection(float direction)
+void LASERTemplate::setDirection(float direction)
 {
     // Clamp values
     while(direction < 0)
@@ -42,12 +42,12 @@ void BeamTemplate::setDirection(float direction)
     this->direction = direction;
 }
 
-float BeamTemplate::getArc()
+float LASERTemplate::getArc()
 {
     return arc;
 }
 
-void BeamTemplate::setArc(float arc)
+void LASERTemplate::setArc(float arc)
 {
     while(arc < 0)
         arc += 360;
@@ -56,12 +56,12 @@ void BeamTemplate::setArc(float arc)
     this->arc = arc;
 }
 
-float BeamTemplate::getRange()
+float LASERTemplate::getRange()
 {
     return range;
 }
 
-void BeamTemplate::setRange(float range)
+void LASERTemplate::setRange(float range)
 {
     if(range <= 0)
         this->range = 0.1;
@@ -69,12 +69,12 @@ void BeamTemplate::setRange(float range)
         this->range = range;
 }
 
-float BeamTemplate::getTurretDirection()
+float LASERTemplate::getTurretDirection()
 {
     return turret_direction;
 }
 
-void BeamTemplate::setTurretDirection(float direction)
+void LASERTemplate::setTurretDirection(float direction)
 {
     // Clamp values
     while(direction < 0)
@@ -84,12 +84,12 @@ void BeamTemplate::setTurretDirection(float direction)
     this->turret_direction = direction;
 }
 
-float BeamTemplate::getTurretArc()
+float LASERTemplate::getTurretArc()
 {
     return turret_arc;
 }
 
-void BeamTemplate::setTurretArc(float arc)
+void LASERTemplate::setTurretArc(float arc)
 {
     while(arc < 0)
         arc += 360;
@@ -98,12 +98,12 @@ void BeamTemplate::setTurretArc(float arc)
     this->turret_arc = arc;
 }
 
-float BeamTemplate::getTurretRotationRate()
+float LASERTemplate::getTurretRotationRate()
 {
     return turret_rotation_rate;
 }
 
-void BeamTemplate::setTurretRotationRate(float rotation_rate)
+void LASERTemplate::setTurretRotationRate(float rotation_rate)
 {
     if (rotation_rate < 0)
         this->turret_rotation_rate = 0.0;
@@ -115,12 +115,12 @@ void BeamTemplate::setTurretRotationRate(float rotation_rate)
         this->turret_rotation_rate = rotation_rate;
 }
 
-float BeamTemplate::getCycleTime()
+float LASERTemplate::getCycleTime()
 {
     return cycle_time;
 }
 
-void BeamTemplate::setCycleTime(float cycle_time)
+void LASERTemplate::setCycleTime(float cycle_time)
 {
     if(cycle_time <= 0)
         this->cycle_time = 0.1;
@@ -128,12 +128,12 @@ void BeamTemplate::setCycleTime(float cycle_time)
         this->cycle_time = cycle_time;
 }
 
-float BeamTemplate::getDamage()
+float LASERTemplate::getDamage()
 {
     return damage;
 }
 
-void BeamTemplate::setDamage(float damage)
+void LASERTemplate::setDamage(float damage)
 {
     if(damage < 0)
         this->damage = 0;
@@ -141,29 +141,29 @@ void BeamTemplate::setDamage(float damage)
         this->damage = damage;
 }
 
-float BeamTemplate::getEnergyPerFire()
+float LASERTemplate::getEnergyPerFire()
 {
-    return energy_per_beam_fire;
+    return energy_per_LASER_fire;
 }
 
-void BeamTemplate::setEnergyPerFire(float energy)
+void LASERTemplate::setEnergyPerFire(float energy)
 {
-    energy_per_beam_fire = energy;
+    energy_per_LASER_fire = energy;
 }
 
-float BeamTemplate::getHeatPerFire()
+float LASERTemplate::getHeatPerFire()
 {
-    return heat_per_beam_fire;
+    return heat_per_LASER_fire;
 }
 
-void BeamTemplate::setHeatPerFire(float heat)
+void LASERTemplate::setHeatPerFire(float heat)
 {
-    heat_per_beam_fire = heat;
+    heat_per_LASER_fire = heat;
 }
 
-BeamTemplate& BeamTemplate::operator=(const BeamTemplate& other)
+LASERTemplate& LASERTemplate::operator=(const LASERTemplate& other)
 {
-    beam_texture = other.beam_texture;
+    LASER_texture = other.LASER_texture;
     direction = other.direction;
     arc = other.arc;
     range = other.range;
@@ -172,7 +172,7 @@ BeamTemplate& BeamTemplate::operator=(const BeamTemplate& other)
     turret_arc = other.turret_rotation_rate;
     cycle_time = other.cycle_time;
     damage = other.damage;
-    energy_per_beam_fire = other.energy_per_beam_fire;
-    heat_per_beam_fire = other.heat_per_beam_fire;
+    energy_per_LASER_fire = other.energy_per_LASER_fire;
+    heat_per_LASER_fire = other.heat_per_LASER_fire;
     return *this;
 }

@@ -52,8 +52,8 @@ private:
     GuiTextEntry* type_name;
     GuiTextEntry* callsign;
     GuiTextEntry* description;
-    GuiToggleButton* warp_toggle;
-    GuiToggleButton* jump_toggle;
+    GuiToggleButton* RLS_toggle;
+    GuiToggleButton* WARP_toggle;
     GuiSlider* impulse_speed_slider;
     GuiSlider* turn_speed_slider;
     GuiSlider* heading_slider;
@@ -117,12 +117,12 @@ public:
     virtual void open(P<SpaceObject> target) override;
 };
 
-class GuiShipTweakBeamweapons : public GuiTweakPage
+class GuiShipTweakLASERweapons : public GuiTweakPage
 {
 private:
     P<SpaceShip> target;
 
-    int beam_index;
+    int LASER_index;
     GuiSlider* arc_slider;
     GuiSlider* direction_slider;
     GuiSlider* range_slider;
@@ -133,7 +133,7 @@ private:
     GuiSlider* cycle_time_slider;
     GuiSlider* damage_slider;
 public:
-    GuiShipTweakBeamweapons(GuiContainer* owner);
+    GuiShipTweakLASERweapons(GuiContainer* owner);
 
     virtual void open(P<SpaceObject> target) override;
 

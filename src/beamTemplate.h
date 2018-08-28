@@ -5,23 +5,23 @@
 
 #include "stringImproved.h"
 
-class BeamTemplate : public sf::NonCopyable
+class LASERTemplate : public sf::NonCopyable
 {
 public:
-    BeamTemplate();
+    LASERTemplate();
 
-    string getBeamTexture();
+    string getLASERTexture();
 
-    void setBeamTexture(string texture);
+    void setLASERTexture(string texture);
 
     /**
-     * Beam weapons are 'arc-ed' weapons, the direction is the center of the arc.
+     * LASER weapons are 'arc-ed' weapons, the direction is the center of the arc.
      * Will always return values between 0 and 360
      */
     float getDirection();
 
     /**
-     * Set the direction of the beam weapon.
+     * Set the direction of the LASER weapon.
      */
     void setDirection(float direction);
 
@@ -52,10 +52,10 @@ public:
     float getHeatPerFire();
     void setHeatPerFire(float heat);
     
-    BeamTemplate& operator=(const BeamTemplate& other);
+    LASERTemplate& operator=(const LASERTemplate& other);
 
 protected:
-    string beam_texture;
+    string LASER_texture;
     float direction; // Value between 0 and 360 (degrees)
     float arc; // Value between 0 and 360
     float range; // Value greater than 0
@@ -64,8 +64,8 @@ protected:
     float turret_rotation_rate; // Value between 0 and 25 (degrees/tick)
     float cycle_time; // Value greater than 0
     float damage;
-    float energy_per_beam_fire;
-    float heat_per_beam_fire;
+    float energy_per_LASER_fire;
+    float heat_per_LASER_fire;
 };
 
 #endif//BEAM_TEMPLATE_H

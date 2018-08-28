@@ -9,14 +9,14 @@
 --- -In the upper-left corner, the Helms officer's screen displays the ship's energy (max is 1,000), current heading in degrees, and current speed in Units/minute. Below this data are two sliders.
 ---
 --- Engines: 
---- -The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider controls the ship's high-speed warp or instantly teleporting jump drives, if the ship is equipped with either.
---- -Setting a Heading: The Helms officer has a short-range radar. Pressing inside this radar sets the ship's heading in that direction. If the ship has beam weapons, the radar view includes those weapons' firing arcs to help the Helms officer keep targets in the Weapons officer's sights.
+--- -The left slider controls the impulse engines, from -100% (full reverse) to 0% (full stop) to 100% (full ahead). The right slider controls the ship's high-speed RLS or instantly teleporting WARP drives, if the ship is equipped with either.
+--- -Setting a Heading: The Helms officer has a short-range radar. Pressing inside this radar sets the ship's heading in that direction. If the ship has LASER weapons, the radar view includes those weapons' firing arcs to help the Helms officer keep targets in the Weapons officer's sights.
 ---
---- Jumping: 
---- -A jump drive teleports the ship across the specified distance along its current heading. The ship's impulse engines shut down, and after a countdown the ship disappears from its position and instantly reappears at its destination. Each jump consumes energy, with longer jumps consuming more energy. A standard jump takes 10 seconds to initiate, but depending on how much power is allocated to the drive (and how damaged it is), the time to power the jump might vary.
+--- WARPing: 
+--- -A WARP drive teleports the ship across the specified distance along its current heading. The ship's impulse engines shut down, and after a countdown the ship disappears from its position and instantly reappears at its destination. Each WARP consumes energy, with longer WARPs consuming more energy. A standard WARP takes 10 seconds to initiate, but depending on how much power is allocated to the drive (and how damaged it is), the time to power the WARP might vary.
 ---
---- Warping: 
---- -A warp drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A warping ship can still collide with hazards like asteroids and mines, but a ship can enter warp very quickly for rapid escapes and advanced tactical maneuvers.
+--- RLSing: 
+--- -A RLS drive propels the ship straight ahead several times faster than impulse engines, but drain energy at a much faster rate. A RLSing ship can still collide with hazards like asteroids and mines, but a ship can enter RLS very quickly for rapid escapes and advanced tactical maneuvers.
 ---
 --- Combat Maneuvers: 
 --- -For ships capable of performing combat maneuvers, the Helms screen includes up to two special sliders at the bottom right. The vertical slider rapidly increases the ship's forward speed above its maximum cruising speed, but generates lots of heat in the impulse engines and consumes energy quickly. The horizontal slider moves the ship laterally but can quickly overheat the maneuvering system. Combat maneuvers can be exhausted but recharge over time.
@@ -103,11 +103,11 @@ function addToSequence(sequence, data, data2)
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
@@ -118,7 +118,7 @@ function resetPlayerShip()
     player:setPosition(0, 0)
     player:setRotation(0)
     player:commandImpulse(0)
-    player:commandWarp(0)
+    player:commandRLS(0)
     player:commandTargetRotation(0)
     player:commandSetShields(false)
     player:setWeaponStorageMax("homing", 0)
@@ -135,8 +135,8 @@ addToSequence(helmsTutorial, function()
     tutorial:switchViewToScreen(0)
     tutorial:setMessageToTopPosition()
     resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(0);
     player:setRotationMaxSpeed(0);
 end)
@@ -165,22 +165,22 @@ addToSequence(helmsTutorial, function() prev_object:destroy() end)
 addToSequence(helmsTutorial, function() prev_object = CpuShip():setFaction("Kraylor"):setTemplate("Flavia"):setPosition(-1500, 1500):orderIdle():setScanned(true):setHull(15):setShieldsMax(15) end)
 addToSequence(helmsTutorial, function() player:commandSetTarget(prev_object) end)
 addToSequence(helmsTutorial, [[Ok, there are just a few more things that you need to know.
-Remember the beam weapons from the basics tutorial? As helms officer, it is your task to keep those beams on your target.
-I've set up an stationary enemy ship as a target. Destroy it with your beam weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
+Remember the LASER weapons from the basics tutorial? As helms officer, it is your task to keep those LASERs on your target.
+I've set up an stationary enemy ship as a target. Destroy it with your LASER weapons. Note that at every shot, the corresponding firing arc will change color.]], function() return not prev_object:isValid() end)
 addToSequence(helmsTutorial, [[Aggression is not always the solution, but boy, it is fun!
 
 On to the next task: moving long distances.
-There are two methods of moving long distances quickly. Depending on your ship, you either have a warp drive or a jump drive.
-The warp drive moves your ship at high speed, while the jump drive instantly teleports your ship a great distance.]])
-addToSequence(helmsTutorial, function() player:setWarpDrive(true) end)
-addToSequence(helmsTutorial, [[First, let us try the warp drive.
+There are two methods of moving long distances quickly. Depending on your ship, you either have a RLS drive or a WARP drive.
+The RLS drive moves your ship at high speed, while the WARP drive instantly teleports your ship a great distance.]])
+addToSequence(helmsTutorial, function() player:setRLSDrive(true) end)
+addToSequence(helmsTutorial, [[First, let us try the RLS drive.
 
 It functions like the impulse drive but only propels your ship forward, and consumes energy at a much faster rate.
-Use the warp drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, function() player:setWarpDrive(false):setJumpDrive(true):setPosition(0, 0) end)
-addToSequence(helmsTutorial, [[Next, let us demonstrate the jump drive.
+Use the RLS drive to move more than 30u away from this starting point.]], function() return distance(player, 0, 0) > 30000 end)
+addToSequence(helmsTutorial, function() player:setRLSDrive(false):setWARPDrive(true):setPosition(0, 0) end)
+addToSequence(helmsTutorial, [[Next, let us demonstrate the WARP drive.
 
-To use the jump drive, point your ship in the direction where you want to jump, configure a distance to jump, and then initiate it. The jump occurs 10 seconds after you initiate. Use the jump drive to jump more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
-addToSequence(helmsTutorial, [[Notice how your jump drive needs to recharge after use.
+To use the WARP drive, point your ship in the direction where you want to WARP, configure a distance to WARP, and then initiate it. The WARP occurs 10 seconds after you initiate. Use the WARP drive to WARP more than 30u from this starting point, in any direction.]], function() return distance(player, 0, 0) > 30000 end)
+addToSequence(helmsTutorial, [[Notice how your WARP drive needs to recharge after use.
 
 This covers the basics of the helms officer.]])

@@ -1,7 +1,7 @@
 -- Name: Ghost from the Past
 -- Description: Far from any frontline or civilization, patrolling the Stakhanov Mining Complex can be dull,
 --- consisting mainly of seizing contraband and stopping drunken brawls. It is indeed a lonely ward brightened only by R&R at the Marco Polo station.
---- However, when an inbound FTL-capable Ktlitan Swarm is announced, you must scramble to save the Sector ! [Requires beam/shield frequenies] [Hard]
+--- However, when an inbound FTL-capable Ktlitan Swarm is announced, you must scramble to save the Sector ! [Requires LASER/shield frequenies] [Hard]
 -- Type: Mission
 -- Author: Fouindor
 
@@ -73,7 +73,7 @@ function init()
 	stakhanov:sendCommsMessage(player, [[Your R&R stay onboard the Marco Polo is brought to quick end by an urgent broadcast from Central Command :
 	
 "Epsilon, please come in.
-We have an emergency situation, our sensors detect that a hostile Ktlitan Swarm just jumped in your sector, with the main force heading for the Stakhanov Mining Complex. Please proceed at once to Stakhanov and assist in the defence.
+We have an emergency situation, our sensors detect that a hostile Ktlitan Swarm just WARPed in your sector, with the main force heading for the Stakhanov Mining Complex. Please proceed at once to Stakhanov and assist in the defence.
 Be careful of the dense asteroid agglomeration en route to the SMC.
 I repeat, his is not an exercise, proceed at once to Stakhanov."]])
 end
@@ -388,7 +388,7 @@ There is a lot to process at the instant, we will contact you as soon as we unde
 		if (hacked == 0) and (bs114:sendCommsMessage(player, [[The dispatcher gets back to you :
 
 "Our analysts found out that this attack was orchestrated by a Rogue AI, created by this facility but escaped a few months ago.
-Even if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL jump indicates that a large structure made the jump.
+Even if we cannot pinpoint its physical location at the moment, the mass-energy balance of the Ktlitan Swarm FTL WARP indicates that a large structure made the WARP.
 This structure did not participate to any of the assaults so we presume that it is a command platform, hiding in a nebula.
 We want to deliver the first blow, locate and destroy it. To find its position, you can use the Nosy Sensing Array in the sector F5."]])) then
 		nsa:setCommsFunction(commsNSA)
@@ -399,7 +399,7 @@ We want to deliver the first blow, locate and destroy it. To find its position, 
 		--Go secure NSA to meet Shiva
 		if (hacked == 1) and (stakhanov:sendCommsMessage(player, [[The Central Command relay seems very worried :
 		"This is bad. Really bad. Things went FUBAR at a Navy Black Ops site, seems that a Rogue AI has taken control of the site and all ships around.  We are sending you the HNS Shiva to nuke the hell out of this haywire computer.
-It is due to come out of its FTL jump near the NSA array, secure the location and report back. The other troops are scrambling to crush their command platform before even more reinforcement comes."]])) then
+It is due to come out of its FTL WARP near the NSA array, secure the location and report back. The other troops are scrambling to crush their command platform before even more reinforcement comes."]])) then
 		main_mission = 9
 		
 		if euphrates:isValid() then
@@ -603,8 +603,8 @@ function spawnNuker()
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(100, 100):setShields(100, 100)
     ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
-    ship:setBeamWeapon(0, 0, 0, 0, 0, 0)
-    ship:setBeamWeapon(1, 0, 0, 0, 0, 0)
+    ship:setLASERWeapon(0, 0, 0, 0, 0, 0)
+    ship:setLASERWeapon(1, 0, 0, 0, 0, 0)
 	ship:setWeaponStorageMax("Homing", 0)
 	ship:setWeaponStorageMax("Nuke", 10)
     ship:setWeaponStorage("Nuke", 10)

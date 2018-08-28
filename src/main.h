@@ -18,7 +18,7 @@ extern RenderLayer* effectLayer;
 extern RenderLayer* hudLayer;
 extern RenderLayer* mouseLayer;
 extern PostProcessor* glitchPostProcessor;
-extern PostProcessor* warpPostProcessor;
+extern PostProcessor* RLSPostProcessor;
 
 void returnToMainMenu();
 void returnToShipSelection();

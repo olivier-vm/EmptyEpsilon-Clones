@@ -127,7 +127,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
     // If the server uses frequencies, add the Tactical sidebar page.
-    if (gameGlobalInfo->use_beam_shield_frequencies)
+    if (gameGlobalInfo->use_LASER_shield_frequencies)
     {
         sidebar_pager->addEntry("Tactical", "Tactical");
     }
@@ -144,14 +144,14 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
     info_shield_frequency->setSize(GuiElement::GuiSizeMax, 150);
-    info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", true, false);
-    info_beam_frequency->setSize(GuiElement::GuiSizeMax, 150);
+    info_LASER_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_LASER_FREQUENCY", true, false);
+    info_LASER_frequency->setSize(GuiElement::GuiSizeMax, 150);
 
-    // Show shield and beam frequencies only if enabled by the server.
-    if (!gameGlobalInfo->use_beam_shield_frequencies)
+    // Show shield and LASER frequencies only if enabled by the server.
+    if (!gameGlobalInfo->use_LASER_shield_frequencies)
     {
         info_shield_frequency->hide();
-        info_beam_frequency->hide();
+        info_LASER_frequency->hide();
     }
 
     // List each system's status.
@@ -171,7 +171,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", "Probe View", [this](bool value){
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", "Vue Sonde", [this](bool value){
         P<ScanProbe> probe;
 
         if (game_server)
@@ -263,7 +263,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
     info_shields->setValue("-");
     info_hull->setValue("-");
     info_shield_frequency->setFrequency(-1)->hide();
-    info_beam_frequency->setFrequency(-1)->hide();
+    info_LASER_frequency->setFrequency(-1)->hide();
     info_description->hide();
     info_type_button->hide();
     sidebar_pager->hide();
@@ -348,7 +348,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 if (sidebar_pager_selection == "Tactical")
                 {
                     info_shield_frequency->show();
-                    info_beam_frequency->show();
+                    info_LASER_frequency->show();
 
                     for(int n = 0; n < SYS_COUNT; n++)
                     {
@@ -360,7 +360,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 else if (sidebar_pager_selection == "Systems")
                 {
                     info_shield_frequency->hide();
-                    info_beam_frequency->hide();
+                    info_LASER_frequency->hide();
 
                     for(int n = 0; n < SYS_COUNT; n++)
                     {
@@ -372,7 +372,7 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                 else if (sidebar_pager_selection == "Description")
                 {
                     info_shield_frequency->hide();
-                    info_beam_frequency->hide();
+                    info_LASER_frequency->hide();
 
                     for(int n = 0; n < SYS_COUNT; n++)
                     {
@@ -386,12 +386,12 @@ void ScienceScreen::onDraw(sf::RenderTarget& window)
                     LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
                 }
 
-                // If beam and shield frequencies are enabled on the server,
+                // If LASER and shield frequencies are enabled on the server,
                 // populate their graphs.
-                if (gameGlobalInfo->use_beam_shield_frequencies)
+                if (gameGlobalInfo->use_LASER_shield_frequencies)
                 {
                     info_shield_frequency->setFrequency(ship->shield_frequency);
-                    info_beam_frequency->setFrequency(ship->beam_frequency);
+                    info_LASER_frequency->setFrequency(ship->LASER_frequency);
                 }
                 
                 // Show the status of each subsystem.

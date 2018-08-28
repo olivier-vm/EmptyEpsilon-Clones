@@ -279,7 +279,7 @@ void GameStateLogger::writeObjectEntry(JSONGenerator& json, P<SpaceObject> obj)
 
 void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
 {
-    bool has_beam_weapons = false;
+    bool has_LASER_weapons = false;
     
     json.write("callsign", ship->getCallSign());
     json.write("faction", ship->getFaction());
@@ -297,7 +297,7 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     }
     if (ship->shield_count > 0)
     {
-        if (gameGlobalInfo->use_beam_shield_frequencies)
+        if (gameGlobalInfo->use_LASER_shield_frequencies)
             json.write("shield_frequency", ship->shield_frequency);
         json.startArray("shields");
         for(int n=0; n<ship->shield_count; n++)
@@ -371,8 +371,8 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         JSONGenerator input = json.createDict("input");
         input.write("rotation", ship->target_rotation);
         input.write("impulse", ship->impulse_request);
-        if (ship->has_warp_drive)
-            input.write("warp", ship->warp_request);
+        if (ship->has_RLS_drive)
+            input.write("RLS", ship->RLS_request);
         if (ship->combat_maneuver_boost_speed > 0)
             input.write("combat_maneuver_boost", ship->combat_maneuver_boost_request);
         if (ship->combat_maneuver_strafe_speed > 0)
@@ -381,23 +381,23 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
     {
         JSONGenerator output = json.createDict("output");
         output.write("impulse", ship->current_impulse);
-        if (ship->has_warp_drive)
-            output.write("warp", ship->current_warp);
+        if (ship->has_RLS_drive)
+            output.write("RLS", ship->current_RLS);
         if (ship->combat_maneuver_boost_speed > 0 || ship->combat_maneuver_strafe_speed > 0)
             output.write("combat_maneuver_charge", ship->combat_maneuver_charge);
         if (ship->combat_maneuver_boost_speed > 0)
             output.write("combat_maneuver_boost", ship->combat_maneuver_boost_active);
         if (ship->combat_maneuver_strafe_speed > 0)
             output.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_active);
-        if (ship->has_jump_drive)
+        if (ship->has_WARP_drive)
         {
-            JSONGenerator jump = output.createDict("jump");
-            if (ship->jump_delay > 0)
+            JSONGenerator WARP = output.createDict("WARP");
+            if (ship->WARP_delay > 0)
             {
-                jump.write("distance", ship->jump_distance);
-                jump.write("delay", ship->jump_delay);
+                WARP.write("distance", ship->WARP_distance);
+                WARP.write("delay", ship->WARP_delay);
             }else{
-                jump.write("charge", ship->jump_drive_charge);
+                WARP.write("charge", ship->WARP_drive_charge);
             }
         }
     }
@@ -407,14 +407,14 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
         config.write("impulse_speed", ship->impulse_max_speed);
         config.write("impulse_acceleration", ship->impulse_acceleration);
         config.write("hull", ship->hull_max);
-        if (ship->has_warp_drive)
-            config.write("warp", ship->warp_speed_per_warp_level);
+        if (ship->has_RLS_drive)
+            config.write("RLS", ship->RLS_speed_per_RLS_level);
         if (ship->combat_maneuver_boost_speed > 0)
             config.write("combat_maneuver_boost", ship->combat_maneuver_boost_speed);
         if (ship->combat_maneuver_strafe_speed > 0)
             config.write("combat_maneuver_strafe", ship->combat_maneuver_strafe_speed);
-        if (ship->has_jump_drive)
-            config.write("jumpdrive", true);
+        if (ship->has_WARP_drive)
+            config.write("WARPdrive", true);
         if (ship->weapon_tube_count > 0)
         {
             JSONGenerator missiles = config.createDict("missiles");
@@ -446,35 +446,35 @@ void GameStateLogger::writeShipEntry(JSONGenerator& json, P<SpaceShip> ship)
             config.endArray();
         }
         
-        has_beam_weapons = false;
-        for(int n=0; n<max_beam_weapons; n++)
+        has_LASER_weapons = false;
+        for(int n=0; n<max_LASER_weapons; n++)
         {
-            if (ship->beam_weapons[n].getRange() > 0)
+            if (ship->LASER_weapons[n].getRange() > 0)
             {
-                if (!has_beam_weapons)
-                    config.startArray("beams");
-                has_beam_weapons = true;
-                JSONGenerator beam = config.arrayCreateDict();
-                beam.write("arc", ship->beam_weapons[n].getArc());
-                beam.write("direction", ship->beam_weapons[n].getDirection());
-                beam.write("range", ship->beam_weapons[n].getRange());
-                beam.write("turret_arc", ship->beam_weapons[n].getTurretArc());
-                beam.write("turret_direction", ship->beam_weapons[n].getTurretDirection());
-                beam.write("damage", ship->beam_weapons[n].getDamage());
-                beam.write("cycle_time", ship->beam_weapons[n].getCycleTime());
+                if (!has_LASER_weapons)
+                    config.startArray("LASERs");
+                has_LASER_weapons = true;
+                JSONGenerator LASER = config.arrayCreateDict();
+                LASER.write("arc", ship->LASER_weapons[n].getArc());
+                LASER.write("direction", ship->LASER_weapons[n].getDirection());
+                LASER.write("range", ship->LASER_weapons[n].getRange());
+                LASER.write("turret_arc", ship->LASER_weapons[n].getTurretArc());
+                LASER.write("turret_direction", ship->LASER_weapons[n].getTurretDirection());
+                LASER.write("damage", ship->LASER_weapons[n].getDamage());
+                LASER.write("cycle_time", ship->LASER_weapons[n].getCycleTime());
             }
         }
-        if (has_beam_weapons)
+        if (has_LASER_weapons)
         {
             config.endArray();
         }
     }
-    if (has_beam_weapons)
+    if (has_LASER_weapons)
     {
-        if (gameGlobalInfo->use_beam_shield_frequencies)
-            json.write("beam_frequency", ship->beam_frequency);
-        if (ship->beam_system_target != SYS_None)
-            json.write("beam_system_target", getSystemName(ship->beam_system_target));
+        if (gameGlobalInfo->use_LASER_shield_frequencies)
+            json.write("LASER_frequency", ship->LASER_frequency);
+        if (ship->LASER_system_target != SYS_None)
+            json.write("LASER_system_target", getSystemName(ship->LASER_system_target));
     }
 }
 

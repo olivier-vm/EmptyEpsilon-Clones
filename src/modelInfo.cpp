@@ -6,7 +6,7 @@
 #include "main.h"
 
 ModelInfo::ModelInfo()
-: last_engine_particle_time(0), last_warp_particle_time(0), engine_scale(0), warp_scale(0.0f)
+: last_engine_particle_time(0), last_RLS_particle_time(0), engine_scale(0), RLS_scale(0.0f)
 {
 }
 
@@ -43,11 +43,11 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
         }
     }
 
-    if (warp_scale > 0.0f)
+    if (RLS_scale > 0.0f)
     {
-        if (engine->getElapsedTime() - last_warp_particle_time > 0.1)
+        if (engine->getElapsedTime() - last_RLS_particle_time > 0.1)
         {
-            int count = warp_scale * 10.0f;
+            int count = RLS_scale * 10.0f;
             for(int n=0; n<count; n++)
             {
                 sf::Vector3f offset = (data->mesh->randomPoint() + data->mesh_offset) * data->scale;
@@ -56,7 +56,7 @@ void ModelInfo::render(sf::Vector2f position, float rotation)
                 sf::Vector3f pos3d = sf::Vector3f(pos2d.x, pos2d.y, offset.z);
                 ParticleEngine::spawn(pos3d, pos3d, color, color, data->getRadius() / 15.0f, 0.0, 3.0);
             }
-            last_warp_particle_time = engine->getElapsedTime();
+            last_RLS_particle_time = engine->getElapsedTime();
         }
     }
 }

@@ -17,12 +17,12 @@ public:
     string textureName;
 };
 
-enum EPlayerWarpJumpDrive
+enum EPlayerRLSWARPDrive
 {
     PWJ_ShipDefault = 0,
-    PWJ_WarpDrive,
-    PWJ_JumpDrive,
-    PWJ_WarpAndJumpDrive,
+    PWJ_RLSDrive,
+    PWJ_WARPDrive,
+    PWJ_RLSAndWARPDrive,
     PWJ_None,
     PWJ_MAX,
 };
@@ -62,13 +62,13 @@ public:
 
     std::vector<float> reputation_points;
     NebulaInfo nebula_info[max_nebulas];
-    EPlayerWarpJumpDrive player_warp_jump_drive_setting;
+    EPlayerRLSWARPDrive player_RLS_WARP_drive_setting;
     EScanningComplexity scanning_complexity;
     /*!
      * \brief Range of the science radar.
      */
     float long_range_radar_range;
-    bool use_beam_shield_frequencies;
+    bool use_LASER_shield_frequencies;
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
@@ -108,7 +108,7 @@ public:
     string getNextShipCallsign();
 };
 
-string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive);
+string playerRLSWARPDriveToString(EPlayerRLSWARPDrive player_RLS_WARP_drive);
 string getSectorName(sf::Vector2f position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);

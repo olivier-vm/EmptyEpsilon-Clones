@@ -413,7 +413,7 @@
                         {
                             this.drawShip(ctx, x, y, entry);
                         }
-                        else if (entry.type == "WarpJammer")
+                        else if (entry.type == "RLSJammer")
                         {
                             this.drawCircle(ctx, x, y, this._zoom_scale, "#C89664", 1.0, 4)
                         }
@@ -456,7 +456,7 @@
                         else if (entry.type == "VisualAsteroid")
                         {
                         }
-                        else if (entry.type == "BeamEffect")
+                        else if (entry.type == "LASEREffect")
                         {
                             this.drawCircle(ctx, x, y, this._zoom_scale, "#A60", 0.5, 2)
                         }
@@ -686,16 +686,16 @@
                     if (this.showCallsigns === true)
                         this.drawCallsign(ctx, x, y, this._zoom_scale, entry, "18", "B8", fillStyleMagnitude, 2);
 
-                    // Draw beam arcs if the object has them.
-                    if (typeof entry.config !== "undefined" && typeof entry.config.beams != "undefined")
+                    // Draw LASER arcs if the object has them.
+                    if (typeof entry.config !== "undefined" && typeof entry.config.LASERs != "undefined")
                     {
-                        for(var idx=0; idx<entry.config.beams.length; idx++)
+                        for(var idx=0; idx<entry.config.LASERs.length; idx++)
                         {
-                            var beam = entry.config.beams[idx];
-                            var a = entry.rotation + beam.direction;
-                            var r = beam.range * this._zoom_scale;
-                            var a1 = (a - beam.arc / 2.0) / 180.0 * Math.PI
-                            var a2 = (a + beam.arc / 2.0) / 180.0 * Math.PI
+                            var LASER = entry.config.LASERs[idx];
+                            var a = entry.rotation + LASER.direction;
+                            var r = LASER.range * this._zoom_scale;
+                            var a1 = (a - LASER.arc / 2.0) / 180.0 * Math.PI
+                            var a2 = (a + LASER.arc / 2.0) / 180.0 * Math.PI
                             var x1 = x + Math.cos(a1) * r;
                             var y1 = y + Math.sin(a1) * r;
                             var x2 = x + Math.cos(a2) * r;

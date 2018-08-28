@@ -92,11 +92,11 @@ function addToSequence(sequence, data, data2)
 end
 
 function resetPlayerShip()
-    player:setJumpDrive(false)
-    player:setWarpDrive(false)
+    player:setWARPDrive(false)
+    player:setRLSDrive(false)
     player:setImpulseMaxSpeed(1)
     player:setRotationMaxSpeed(1)
-    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
         player:setSystemHealth(system, 1.0)
         player:setSystemHeat(system, 0.0)
         player:setSystemPower(system, 1.0)
@@ -107,7 +107,7 @@ function resetPlayerShip()
     player:setPosition(0, 0)
     player:setRotation(0)
     player:commandImpulse(0)
-    player:commandWarp(0)
+    player:commandRLS(0)
     player:commandTargetRotation(0)
     player:commandSetShields(false)
     player:setWeaponStorageMax("homing", 0)
@@ -127,14 +127,14 @@ end)
 addToSequence(engineeringTutorial, [[Welcome to engineering.
 Engineering is split into two parts. The top part shows your ship's interior, including damage control teams stationed throughout.
 The bottom part controls power and coolant levels of your ship's systems.]])
-addToSequence(engineeringTutorial, function() player:setWarpDrive(true) end)
-addToSequence(engineeringTutorial, function() player:setSystemHeat("warp", 0.8) end)
+addToSequence(engineeringTutorial, function() player:setRLSDrive(true) end)
+addToSequence(engineeringTutorial, function() player:setSystemHeat("RLS", 0.8) end)
 addToSequence(engineeringTutorial, [[First, we will explain your control over your ship's systems.
 Each row on the bottom area of the screen represents one of your ship's system, and each system has a damage level, heat level, power level, and coolant level.
 
-I've overheated your warp system. An overheating system can damage your ship. You can prevent this by putting coolant in your warp system. Select the warp system and increase the coolant slider.]], function() return player:getSystemHeat("warp") < 0.05 end)
+I've overheated your RLS system. An overheating system can damage your ship. You can prevent this by putting coolant in your RLS system. Select the RLS system and increase the coolant slider.]], function() return player:getSystemHeat("RLS") < 0.05 end)
 addToSequence(engineeringTutorial, function() player:setSystemHeat("impulse", 0.8) end)
-addToSequence(engineeringTutorial, [[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the warp system's coolant level is automatically reduced to allow for coolant in the impulse system.
+addToSequence(engineeringTutorial, [[I've also overheated the impulse system. As before, increase the system's coolant level to mitigate the effect. Note that the RLS system's coolant level is automatically reduced to allow for coolant in the impulse system.
 
 This is because you have a limited amount of coolant available to distribute this across your ship's systems.]], function() return player:getSystemHeat("impulse") < 0.05 end)
 addToSequence(engineeringTutorial, [[Good! Next up: power levels.
@@ -161,10 +161,10 @@ Remember, each system performs better with more power, but performs less well wh
 addToSequence(engineeringTutorial, [[Reactor:
 
 The reactor generates energy. Adding power to the reactor increases your energy generation rate.]])
-addToSequence(engineeringTutorial, [[Beam Weapons:
+addToSequence(engineeringTutorial, [[LASER Weapons:
 
-Adding power to the beam weapons system increases their rate of fire, which causes them to do more damage.
-Note that every beam you fire adds additional heat to the system.]])
+Adding power to the LASER weapons system increases their rate of fire, which causes them to do more damage.
+Note that every LASER you fire adds additional heat to the system.]])
 addToSequence(engineeringTutorial, [[Missile System:
 
 Increased missile system power lowers the reload time of weapon tubes.]])
@@ -174,12 +174,12 @@ Increasing power to the maneuvering system allows the ship to turn faster. It al
 addToSequence(engineeringTutorial, [[Impulse Engines:
 
 Adding power to the impulse engines increases your impulse flight speed.]])
-addToSequence(engineeringTutorial, [[Warp Drive:
+addToSequence(engineeringTutorial, [[RLS Drive:
 
-Adding power to the warp drive increases your warp drive flight speed.]])
-addToSequence(engineeringTutorial, [[Jump Drive:
+Adding power to the RLS drive increases your RLS drive flight speed.]])
+addToSequence(engineeringTutorial, [[WARP Drive:
 
-A higher-powered jump drive recharges faster and has a shorter delay before jumping.]])
+A higher-powered WARP drive recharges faster and has a shorter delay before WARPing.]])
 addToSequence(engineeringTutorial, [[Shields:
 
 Additional power in the shield system increases their rate of recharge, and decreases the amount of degradation your shields sustain when damaged.]])

@@ -72,8 +72,8 @@ def convertComparator(node):
 
 def convertSystemName(node):
     system = node.get('systemType')
-    if system == 'systemBeam':
-        return 'beamweapons'
+    if system == 'systemLASER':
+        return 'LASERweapons'
     elif system == 'systemTorpedo':
         return 'missilesystem'
     elif system == 'systemTactical': # Sensors, we map it to reactor, as we don't have sensor power/damage
@@ -82,8 +82,8 @@ def convertSystemName(node):
         return 'maneuver'
     elif system == 'systemImpulse':
         return 'impulse'
-    elif system == 'systemWarp':
-        return 'warp'
+    elif system == 'systemRLS':
+        return 'RLS'
     elif system == 'systemFrontShield':
         return 'frontshield'
     elif system == 'systemBackShield':
@@ -164,8 +164,8 @@ class Event:
                     self._body.append('    %s:setFrontShieldMax(%f)' % (name, float(node.get('value'))))
                 elif property == 'shieldMaxStateBack':
                     self._body.append('    %s:setRearShieldMax(%f)' % (name, float(node.get('value'))))
-                elif property == 'systemDamageBeam':
-                    self._body.append('    %s:setSystemHealth("beamweapons", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
+                elif property == 'systemDamageLASER':
+                    self._body.append('    %s:setSystemHealth("LASERweapons", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
                 elif property == 'systemDamageTorpedo':
                     self._body.append('    %s:setSystemHealth("missilesystem", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
                 elif property == 'systemDamageTactical':
@@ -175,9 +175,9 @@ class Event:
                     self._body.append('    %s:setSystemHealth("maneuver", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
                 elif property == 'systemDamageImpulse':
                     self._body.append('    %s:setSystemHealth("impulse", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                elif property == 'systemDamageWarp':
-                    self._body.append('    %s:setSystemHealth("warp", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
-                    self._body.append('    %s:setSystemHealth("jumpdrive", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
+                elif property == 'systemDamageRLS':
+                    self._body.append('    %s:setSystemHealth("RLS", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
+                    self._body.append('    %s:setSystemHealth("WARPdrive", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
                 elif property == 'systemDamageFrontShield':
                     self._body.append('    %s:setSystemHealth("frontshield", %f)' % (name, 1.0 - float(node.get('value')) / 100.0))
                 elif property == 'systemDamageBackShield':
@@ -189,9 +189,9 @@ class Event:
                 elif property == 'eliteAbilityBits':
                     bits = int(node.get('value'))
                     if (bits & 8) or (bits & 64):
-                        self._body.append('    %s:setJumpDrive(True)' % (name))
+                        self._body.append('    %s:setWARPDrive(True)' % (name))
                     if bits & 32:
-                        self._body.append('    %s:setWarpDrive(True)' % (name))
+                        self._body.append('    %s:setRLSDrive(True)' % (name))
                 else:
                     self.warning('Ignore', node)
                     #raise UnknownArtemisTagError(node)
@@ -216,8 +216,8 @@ class Event:
             elif node.tag == 'end_mission':
                 self._body.append('victory("Independent")')
             elif node.tag == 'set_player_grid_damage':
-                if convertSystemName(node) == 'warp':
-                    self._body.append('getPlayerShip(-1):setSystemHealth("%s", %f)' % ('jumpdrive', 1.0 - float(node.get('value')) * 2.0))
+                if convertSystemName(node) == 'RLS':
+                    self._body.append('getPlayerShip(-1):setSystemHealth("%s", %f)' % ('WARPdrive', 1.0 - float(node.get('value')) * 2.0))
                 self._body.append('getPlayerShip(-1):setSystemHealth("%s", %f)' % (convertSystemName(node), 1.0 - float(node.get('value')) * 2.0))
             elif node.tag == 'destroy':
                 name = convertName(node.get('name'))

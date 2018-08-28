@@ -31,7 +31,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         color = colorConfig.overlay_damaged;
         display_text = "DAMAGED";
-    }else if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    }else if ((system == SYS_RLS || system == SYS_WARPDrive) && RLSJammer::isRLSJammed(my_spaceship->getPosition()))
     {
         color = colorConfig.overlay_jammed;
         display_text = "JAMMED";
@@ -110,7 +110,7 @@ void GuiPowerDamageIndicator::onDraw(sf::RenderTarget& window)
     {
         drawIcon(window, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
-    if ((system == SYS_Warp || system == SYS_JumpDrive) && WarpJammer::isWarpJammed(my_spaceship->getPosition()))
+    if ((system == SYS_RLS || system == SYS_WARPDrive) && RLSJammer::isRLSJammed(my_spaceship->getPosition()))
     {
         drawIcon(window, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }

@@ -61,12 +61,12 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", "Place waypoint", [this, science]() {
+    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", "Placer Balise", [this, science]() {
         mode = WaypointPlacement;
     });
     place_waypoint_button->setPosition(-270, -70, ABottomRight)->setSize(200, 50);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", "Delete waypoint", [this, science]() {
+    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", "Effacer Balise", [this, science]() {
         if (my_spaceship && science->targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(science->targets.getWaypointIndex());

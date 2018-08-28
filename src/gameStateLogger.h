@@ -14,7 +14,7 @@ class JSONGenerator;
  *
  * The resulting log contains 2 types of records:
  * 1) Periodic game data, update of all the objects in the game with all states.
- * 2) Events fired by certain actions. Missile firing, beams firing, damage, destruction of certain objects.
+ * 2) Events fired by certain actions. Missile firing, LASERs firing, damage, destruction of certain objects.
  */
 class GameStateLogger : public Updatable
 {

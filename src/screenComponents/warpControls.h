@@ -6,13 +6,13 @@
 class GuiKeyValueDisplay;
 class GuiSlider;
 
-class GuiWarpControls : public GuiElement
+class GuiRLSControls : public GuiElement
 {
 private:
     GuiKeyValueDisplay* label;
     GuiSlider* slider;
 public:
-    GuiWarpControls(GuiContainer* owner, string id);
+    GuiRLSControls(GuiContainer* owner, string id);
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;

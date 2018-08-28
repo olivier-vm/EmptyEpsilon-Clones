@@ -8,7 +8,7 @@
 
 #include "beamTemplate.h"
 #include "missileWeaponData.h"
-constexpr static int max_beam_weapons = 16;
+constexpr static int max_LASER_weapons = 16;
 constexpr static int max_weapon_tubes = 16;
 constexpr static int max_shield_count = 8;
 
@@ -16,12 +16,12 @@ enum ESystem
 {
     SYS_None = -1,
     SYS_Reactor = 0,
-    SYS_BeamWeapons,
+    SYS_LASERWeapons,
     SYS_MissileSystem,
     SYS_Maneuver,
     SYS_Impulse,
-    SYS_Warp,
-    SYS_JumpDrive,
+    SYS_RLS,
+    SYS_WARPDrive,
     SYS_FrontShield,
     SYS_RearShield,
     SYS_COUNT
@@ -91,19 +91,19 @@ public:
     float energy_storage_amount;
     int repair_crew_count;
     string default_ai_name;
-    BeamTemplate beams[max_beam_weapons];
+    LASERTemplate LASERs[max_LASER_weapons];
     int weapon_tube_count;
     TubeTemplate weapon_tube[max_weapon_tubes];
     float hull;
     int shield_count;
     float shield_level[max_shield_count];
-    float impulse_speed, turn_speed, warp_speed;
+    float impulse_speed, turn_speed, RLS_speed;
     float impulse_acceleration;
     float combat_maneuver_boost_speed;
     float combat_maneuver_strafe_speed;
-    bool has_jump_drive, has_cloaking;
-    float jump_drive_min_distance;
-    float jump_drive_max_distance;
+    bool has_WARP_drive, has_cloaking;
+    float WARP_drive_min_distance;
+    float WARP_drive_max_distance;
     int weapon_storage[MW_Count];
 
     string radar_trace;
@@ -125,16 +125,16 @@ public:
     void setEnergyStorage(float energy_amount);
     void setRepairCrewCount(int amount);
 
-    void setBeam(int index, float arc, float direction, float range, float cycle_time, float damage);
-    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
-    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate);
+    void setLASER(int index, float arc, float direction, float range, float cycle_time, float damage);
+    void setLASERWeapon(int index, float arc, float direction, float range, float cycle_time, float damage);
+    void setLASERWeaponTurret(int index, float arc, float direction, float rotation_rate);
 
     /**
-     * Convenience function to set the texture of a beam by index.
+     * Convenience function to set the texture of a LASER by index.
      */
-    void setBeamTexture(int index, string texture);
-    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setEnergyPerFire(energy); }
-    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beams[index].setHeatPerFire(heat); }
+    void setLASERTexture(int index, string texture);
+    void setLASERWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_LASER_weapons) return; return LASERs[index].setEnergyPerFire(energy); }
+    void setLASERWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_LASER_weapons) return; return LASERs[index].setHeatPerFire(heat); }
 
     void setTubes(int amount, float load_time);
     void setTubeLoadTime(int index, float load_time);
@@ -146,9 +146,9 @@ public:
     void setShields(std::vector<float> values);
     void setSpeed(float impulse, float turn, float acceleration);
     void setCombatManeuver(float boost, float strafe);
-    void setWarpSpeed(float warp);
-    void setJumpDrive(bool enabled);
-    void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
+    void setRLSSpeed(float RLS);
+    void setWARPDrive(bool enabled);
+    void setWARPDriveRange(float min, float max) { WARP_drive_min_distance = min; WARP_drive_max_distance = max; }
     void setCloaking(bool enabled);
     void setWeaponStorage(EMissileWeapons weapon, int amount);
     void addRoom(sf::Vector2i position, sf::Vector2i size);

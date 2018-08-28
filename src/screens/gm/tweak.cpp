@@ -37,8 +37,8 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         list->addEntry("Tubes", "");
         pages.push_back(new GuiShipTweakMissileWeapons(this));
         list->addEntry("Missiles", "");
-        pages.push_back(new GuiShipTweakBeamweapons(this));
-        list->addEntry("Beams", "");
+        pages.push_back(new GuiShipTweakLASERweapons(this));
+        list->addEntry("LASERs", "");
         pages.push_back(new GuiShipTweakSystems(this));
         list->addEntry("Systems", "");
     }
@@ -168,17 +168,17 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
    });
    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
    
-    // Warp and jump drive toggles
+    // RLS and WARP drive toggles
     (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
-    warp_toggle = new GuiToggleButton(right_col, "", "Warp Drive", [this](bool value) {
-        target->setWarpDrive(value);
+    RLS_toggle = new GuiToggleButton(right_col, "", "RLS Drive", [this](bool value) {
+        target->setRLSDrive(value);
     });
-    warp_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    RLS_toggle->setSize(GuiElement::GuiSizeMax, 40);
 
-    jump_toggle = new GuiToggleButton(right_col, "", "Jump Drive", [this](bool value) {
-        target->setJumpDrive(value);
+    WARP_toggle = new GuiToggleButton(right_col, "", "WARP Drive", [this](bool value) {
+        target->setWARPDrive(value);
     });
-    jump_toggle->setSize(GuiElement::GuiSizeMax, 40);
+    WARP_toggle->setSize(GuiElement::GuiSizeMax, 40);
 }
 
 void GuiShipTweakBase::onDraw(sf::RenderTarget& window)
@@ -195,8 +195,8 @@ void GuiShipTweakBase::open(P<SpaceObject> target)
     type_name->setText(ship->getTypeName());
     callsign->setText(ship->callsign);
     description->setText(ship->getDescription(SS_NotScanned));
-    warp_toggle->setValue(ship->has_warp_drive);
-    jump_toggle->setValue(ship->hasJumpDrive());
+    RLS_toggle->setValue(ship->has_RLS_drive);
+    WARP_toggle->setValue(ship->hasWARPDrive());
     impulse_speed_slider->setValue(ship->impulse_max_speed);
     impulse_speed_slider->clearSnapValues()->addSnapValue(ship->ship_template->impulse_speed, 5.0f);
     turn_speed_slider->setValue(ship->turn_speed);
@@ -388,10 +388,10 @@ void GuiShipTweakShields::open(P<SpaceObject> target)
     }
 }
 
-GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
+GuiShipTweakLASERweapons::GuiShipTweakLASERweapons(GuiContainer* owner)
 : GuiTweakPage(owner)
 {
-    beam_index = 0;
+    LASER_index = 0;
 
     GuiAutoLayout* left_col = new GuiAutoLayout(this, "LEFT_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     left_col->setPosition(50, 25, ATopLeft)->setSize(300, GuiElement::GuiSizeMax);
@@ -400,34 +400,34 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     
     GuiSelector* index_selector = new GuiSelector(left_col, "", [this](int index, string value)
     {
-        beam_index = index;
+        LASER_index = index;
     });
     index_selector->setSize(GuiElement::GuiSizeMax, 40);
-    for(int n=0; n<max_beam_weapons; n++)
-        index_selector->addEntry("Beam: " + string(n + 1), "");
+    for(int n=0; n<max_LASER_weapons; n++)
+        index_selector->addEntry("LASER: " + string(n + 1), "");
     index_selector->setSelectionIndex(0);
 
     (new GuiLabel(right_col, "", "Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setArc(roundf(value));
+        target->LASER_weapons[LASER_index].setArc(roundf(value));
     });
     arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setDirection(roundf(value));
+        target->LASER_weapons[LASER_index].setDirection(roundf(value));
     });
     direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Turret arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setTurretArc(roundf(value));
+        target->LASER_weapons[LASER_index].setTurretArc(roundf(value));
     });
     turret_arc_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Turret direction:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_direction_slider = new GuiSlider(right_col, "", -180.0, 180.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setTurretDirection(roundf(value));
+        target->LASER_weapons[LASER_index].setTurretDirection(roundf(value));
     });
     turret_direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
@@ -437,9 +437,9 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
     turret_rotation_rate_slider = new GuiSlider(right_col, "", 0.0, 250.0, 0.0, [this](float value) {
         // Divide a large value for granularity.
         if (value > 0)
-            target->beam_weapons[beam_index].setTurretRotationRate(value / 10.0);
+            target->LASER_weapons[LASER_index].setTurretRotationRate(value / 10.0);
         else
-            target->beam_weapons[beam_index].setTurretRotationRate(0.0);
+            target->LASER_weapons[LASER_index].setTurretRotationRate(0.0);
     });
     turret_rotation_rate_slider->setSize(GuiElement::GuiSizeMax, 30);
     // Override overlay label.
@@ -448,39 +448,39 @@ GuiShipTweakBeamweapons::GuiShipTweakBeamweapons(GuiContainer* owner)
 
     (new GuiLabel(right_col, "", "Range:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     range_slider = new GuiSlider(right_col, "", 0.0, 5000.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setRange(roundf(value / 100) * 100);
+        target->LASER_weapons[LASER_index].setRange(roundf(value / 100) * 100);
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setCycleTime(value);
+        target->LASER_weapons[LASER_index].setCycleTime(value);
     });
     cycle_time_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
     (new GuiLabel(right_col, "", "Damage:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     damage_slider = new GuiSlider(right_col, "", 0.1, 50.0, 0.0, [this](float value) {
-        target->beam_weapons[beam_index].setDamage(value);
+        target->LASER_weapons[LASER_index].setDamage(value);
     });
     damage_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 }
 
-void GuiShipTweakBeamweapons::onDraw(sf::RenderTarget& window)
+void GuiShipTweakLASERweapons::onDraw(sf::RenderTarget& window)
 {
     target->drawOnRadar(window, sf::Vector2f(rect.left - 150.0f + rect.width / 2.0f, rect.top + rect.height * 0.66), 300.0f / 5000.0f, false);
 
-    arc_slider->setValue(target->beam_weapons[beam_index].getArc());
-    direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getDirection()));
-    range_slider->setValue(target->beam_weapons[beam_index].getRange());
-    turret_arc_slider->setValue(target->beam_weapons[beam_index].getTurretArc());
-    turret_direction_slider->setValue(sf::angleDifference(0.0f, target->beam_weapons[beam_index].getTurretDirection()));
-    turret_rotation_rate_slider->setValue(target->beam_weapons[beam_index].getTurretRotationRate() * 10.0f);
-    turret_rotation_rate_overlay_label->setText(string(target->beam_weapons[beam_index].getTurretRotationRate()));
-    cycle_time_slider->setValue(target->beam_weapons[beam_index].getCycleTime());
-    damage_slider->setValue(target->beam_weapons[beam_index].getDamage());
+    arc_slider->setValue(target->LASER_weapons[LASER_index].getArc());
+    direction_slider->setValue(sf::angleDifference(0.0f, target->LASER_weapons[LASER_index].getDirection()));
+    range_slider->setValue(target->LASER_weapons[LASER_index].getRange());
+    turret_arc_slider->setValue(target->LASER_weapons[LASER_index].getTurretArc());
+    turret_direction_slider->setValue(sf::angleDifference(0.0f, target->LASER_weapons[LASER_index].getTurretDirection()));
+    turret_rotation_rate_slider->setValue(target->LASER_weapons[LASER_index].getTurretRotationRate() * 10.0f);
+    turret_rotation_rate_overlay_label->setText(string(target->LASER_weapons[LASER_index].getTurretRotationRate()));
+    cycle_time_slider->setValue(target->LASER_weapons[LASER_index].getCycleTime());
+    damage_slider->setValue(target->LASER_weapons[LASER_index].getDamage());
 }
 
-void GuiShipTweakBeamweapons::open(P<SpaceObject> target)
+void GuiShipTweakLASERweapons::open(P<SpaceObject> target)
 {
     P<SpaceShip> ship = target;
     this->target = ship;
@@ -556,7 +556,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     });
 
     // Edit reputation.
-    (new GuiLabel(left_col, "", "Reputation:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Trans-Crebits:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     reputation_point_slider = new GuiSlider(left_col, "", 0.0, 9999.0, 0.0, [this](float value) {
         target->setReputationPoints(value);

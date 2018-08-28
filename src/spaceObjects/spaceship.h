@@ -56,14 +56,14 @@ public:
     constexpr static float combat_maneuver_charge_time = 20.0f; /*< Amount of time it takes to fully charge the combat maneuver system */
     constexpr static float combat_maneuver_boost_max_time = 3.0f; /*< Amount of time we can boost with a fully charged combat maneuver system */
     constexpr static float combat_maneuver_strafe_max_time = 3.0f; /*< Amount of time we can strafe with a fully charged combat maneuver system */
-    constexpr static float warp_charge_time = 4.0f;
-    constexpr static float warp_decharge_time = 2.0f;
-    constexpr static float jump_drive_charge_time = 90.0;   /*<Total charge time for the jump drive after a max range jump */
-    constexpr static float jump_drive_energy_per_km_charge = 4.0f;
-    constexpr static float jump_drive_heat_per_jump = 0.35;
+    constexpr static float RLS_charge_time = 4.0f;
+    constexpr static float RLS_decharge_time = 2.0f;
+    constexpr static float WARP_drive_charge_time = 90.0;   /*<Total charge time for the WARP drive after a max range WARP */
+    constexpr static float WARP_drive_energy_per_km_charge = 4.0f;
+    constexpr static float WARP_drive_heat_per_WARP = 0.35;
     constexpr static float heat_per_combat_maneuver_boost = 0.2;
     constexpr static float heat_per_combat_maneuver_strafe = 0.2;
-    constexpr static float heat_per_warp = 0.02;
+    constexpr static float heat_per_RLS = 0.02;
     constexpr static float unhack_time = 180.0f; //It takes this amount of time to go from 100% hacked to 0% hacked for systems.
 
     float energy_level;
@@ -100,24 +100,24 @@ public:
     float impulse_acceleration;
 
     /*!
-     * [config] True if we have a warpdrive.
+     * [config] True if we have a RLSdrive.
      */
-    bool has_warp_drive;
+    bool has_RLS_drive;
 
     /*!
-     * [input] Level of warp requested, from 0 to 4
+     * [input] Level of RLS requested, from 0 to 4
      */
-    int8_t warp_request;
+    int8_t RLS_request;
 
     /*!
-     * [output] Current active warp amount, from 0.0 to 4.0
+     * [output] Current active RLS amount, from 0.0 to 4.0
      */
-    float current_warp;
+    float current_RLS;
 
     /*!
-     * [config] Amount of speed per warp level, in m/s
+     * [config] Amount of speed per RLS level, in m/s
      */
-    float warp_speed_per_warp_level;
+    float RLS_speed_per_RLS_level;
 
     /*!
      * [output] How much charge there is in the combat maneuvering system (0.0-1.0)
@@ -135,13 +135,13 @@ public:
     float combat_maneuver_boost_speed; /*< [config] Speed to indicate how fast we will fly forwards with a full boost */
     float combat_maneuver_strafe_speed; /*< [config] Speed to indicate how fast we will fly sideways with a full strafe */
 
-    bool has_jump_drive;      //[config]
-    float jump_drive_charge; //[output]
-    float jump_distance;     //[output]
-    float jump_delay;        //[output]
-    float jump_drive_min_distance; //[config]
-    float jump_drive_max_distance; //[config]
-    float wormhole_alpha;    //Used for displaying the Warp-postprocessor
+    bool has_WARP_drive;      //[config]
+    float WARP_drive_charge; //[output]
+    float WARP_distance;     //[output]
+    float WARP_delay;        //[output]
+    float WARP_drive_min_distance; //[config]
+    float WARP_drive_max_distance; //[config]
+    float wormhole_alpha;    //Used for displaying the RLS-postprocessor
 
     int weapon_storage[MW_Count];
     int weapon_storage_max[MW_Count];
@@ -149,11 +149,11 @@ public:
     WeaponTube weapon_tube[max_weapon_tubes];
 
     /*!
-     * [output] Frequency of beam weapons
+     * [output] Frequency of LASER weapons
      */
-    int beam_frequency;
-    ESystem beam_system_target;
-    BeamWeapon beam_weapons[max_beam_weapons];
+    int LASER_frequency;
+    ESystem LASER_system_target;
+    LASERWeapon LASER_weapons[max_LASER_weapons];
 
     /**
      * Frequency setting of the shields.
@@ -181,7 +181,7 @@ public:
     virtual void update(float delta) override;
     virtual float getShieldRechargeRate(int shield_index) override;
     virtual float getShieldDamageFactor(DamageInfo& info, int shield_index) override;
-    float getJumpDriveRechargeRate() { return Tween<float>::linear(getSystemEffectiveness(SYS_JumpDrive), 0.0, 1.0, -0.25, 1.0); }
+    float getWARPDriveRechargeRate() { return Tween<float>::linear(getSystemEffectiveness(SYS_WARPDrive), 0.0, 1.0, -0.25, 1.0); }
 
     /*!
      * Check if the ship can be targeted.
@@ -209,10 +209,10 @@ public:
     virtual void destroyedByDamage(DamageInfo& info);
 
     /*!
-     * Jump in current direction
-     * \param distance Distance to jump in meters)
+     * WARP in current direction
+     * \param distance Distance to WARP in meters)
      */
-    virtual void executeJump(float distance);
+    virtual void executeWARP(float distance);
 
     /*!
      * Check if object can dock with this ship.
@@ -223,9 +223,9 @@ public:
     virtual void collide(Collisionable* other, float force) override;
 
     /*!
-     * Start the jumping procedure.
+     * Start the WARPing procedure.
      */
-    void initializeJump(float distance);
+    void initializeWARP(float distance);
 
     /*!
      * Request to dock with target.
@@ -283,7 +283,7 @@ public:
     virtual std::unordered_map<string, string> getGMInfo();
 
     bool isDocked(P<SpaceObject> target) { return docking_state == DS_Docked && docking_target == target; }
-    bool canStartDocking() { return current_warp <= 0.0 && (!has_jump_drive || jump_delay <= 0.0); }
+    bool canStartDocking() { return current_RLS <= 0.0 && (!has_WARP_drive || WARP_delay <= 0.0); }
     int getWeaponStorage(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage[weapon]; }
     int getWeaponStorageMax(EMissileWeapons weapon) { if (weapon == MW_None) return 0; return weapon_storage_max[weapon]; }
     void setWeaponStorage(EMissileWeapons weapon, int amount) { if (weapon == MW_None) return; weapon_storage[weapon] = amount; }
@@ -306,85 +306,85 @@ public:
     void setRotationMaxSpeed(float speed) { turn_speed = speed; }
     void setCombatManeuver(float boost, float strafe) { combat_maneuver_boost_speed = boost; combat_maneuver_strafe_speed = strafe; }
 
-    bool hasJumpDrive() { return has_jump_drive; }
-    void setJumpDrive(bool has_jump) { has_jump_drive = has_jump; }
-    void setJumpDriveRange(float min, float max) { jump_drive_min_distance = min; jump_drive_max_distance = max; }
-    bool hasWarpDrive() { return has_warp_drive; }
-    void setWarpDrive(bool has_warp)
+    bool hasWARPDrive() { return has_WARP_drive; }
+    void setWARPDrive(bool has_WARP) { has_WARP_drive = has_WARP; }
+    void setWARPDriveRange(float min, float max) { WARP_drive_min_distance = min; WARP_drive_max_distance = max; }
+    bool hasRLSDrive() { return has_RLS_drive; }
+    void setRLSDrive(bool has_RLS)
     {
-        has_warp_drive = has_warp;
-        if (has_warp_drive)
+        has_RLS_drive = has_RLS;
+        if (has_RLS_drive)
         {
-            if (warp_speed_per_warp_level < 100)
-                warp_speed_per_warp_level = 1000;
+            if (RLS_speed_per_RLS_level < 100)
+                RLS_speed_per_RLS_level = 1000;
         }else{
-            warp_request = 0.0;
-            warp_speed_per_warp_level = 0;
+            RLS_request = 0.0;
+            RLS_speed_per_RLS_level = 0;
         }
     }
 
-    float getBeamWeaponArc(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getArc(); }
-    float getBeamWeaponDirection(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDirection(); }
-    float getBeamWeaponRange(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getRange(); }
+    float getLASERWeaponArc(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getArc(); }
+    float getLASERWeaponDirection(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getDirection(); }
+    float getLASERWeaponRange(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getRange(); }
 
-    float getBeamWeaponTurretArc(int index) 
+    float getLASERWeaponTurretArc(int index) 
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return 0.0;
-        return beam_weapons[index].getTurretArc();
+        return LASER_weapons[index].getTurretArc();
     }
 
-    float getBeamWeaponTurretDirection(int index)
+    float getLASERWeaponTurretDirection(int index)
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return 0.0;
-        return beam_weapons[index].getTurretDirection();
+        return LASER_weapons[index].getTurretDirection();
     }
 
-    float getBeamWeaponTurretRotationRate(int index)
+    float getLASERWeaponTurretRotationRate(int index)
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return 0.0;
-        return beam_weapons[index].getTurretRotationRate();
+        return LASER_weapons[index].getTurretRotationRate();
     }
 
-    float getBeamWeaponCycleTime(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getCycleTime(); }
-    float getBeamWeaponDamage(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getDamage(); }
-    float getBeamWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getEnergyPerFire(); }
-    float getBeamWeaponHeatPerFire(int index) { if (index < 0 || index >= max_beam_weapons) return 0.0; return beam_weapons[index].getHeatPerFire(); }
+    float getLASERWeaponCycleTime(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getCycleTime(); }
+    float getLASERWeaponDamage(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getDamage(); }
+    float getLASERWeaponEnergyPerFire(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getEnergyPerFire(); }
+    float getLASERWeaponHeatPerFire(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getHeatPerFire(); }
 
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
 
-    void setBeamWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
+    void setLASERWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return;
-        beam_weapons[index].setArc(arc);
-        beam_weapons[index].setDirection(direction);
-        beam_weapons[index].setRange(range);
-        beam_weapons[index].setCycleTime(cycle_time);
-        beam_weapons[index].setDamage(damage);
+        LASER_weapons[index].setArc(arc);
+        LASER_weapons[index].setDirection(direction);
+        LASER_weapons[index].setRange(range);
+        LASER_weapons[index].setCycleTime(cycle_time);
+        LASER_weapons[index].setDamage(damage);
     }
 
-    void setBeamWeaponTurret(int index, float arc, float direction, float rotation_rate)
+    void setLASERWeaponTurret(int index, float arc, float direction, float rotation_rate)
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return;
-        beam_weapons[index].setTurretArc(arc);
-        beam_weapons[index].setTurretDirection(direction);
-        beam_weapons[index].setTurretRotationRate(rotation_rate);
+        LASER_weapons[index].setTurretArc(arc);
+        LASER_weapons[index].setTurretDirection(direction);
+        LASER_weapons[index].setTurretRotationRate(rotation_rate);
     }
 
-    void setBeamWeaponTexture(int index, string texture)
+    void setLASERWeaponTexture(int index, string texture)
     {
-        if (index < 0 || index >= max_beam_weapons)
+        if (index < 0 || index >= max_LASER_weapons)
             return;
-        beam_weapons[index].setBeamTexture(texture);
+        LASER_weapons[index].setLASERTexture(texture);
     }
 
-    void setBeamWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setEnergyPerFire(energy); }
-    void setBeamWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_beam_weapons) return; return beam_weapons[index].setHeatPerFire(heat); }
+    void setLASERWeaponEnergyPerFire(int index, float energy) { if (index < 0 || index >= max_LASER_weapons) return; return LASER_weapons[index].setEnergyPerFire(energy); }
+    void setLASERWeaponHeatPerFire(int index, float heat) { if (index < 0 || index >= max_LASER_weapons) return; return LASER_weapons[index].setHeatPerFire(heat); }
 
     void setWeaponTubeCount(int amount);
     int getWeaponTubeCount();
@@ -403,7 +403,7 @@ public:
     string getScriptExportModificationsOnTemplate();
 };
 
-float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);
+float frequencyVsFrequencyDamageFactor(int LASER_frequency, int shield_frequency);
 
 string getMissileWeaponName(EMissileWeapons missile);
 REGISTER_MULTIPLAYER_ENUM(EMissileWeapons);

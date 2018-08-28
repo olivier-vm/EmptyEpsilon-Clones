@@ -6,10 +6,10 @@
 #include "spaceObjects/spaceObject.h"
 class SpaceShip;
 
-class BeamWeapon : public sf::NonCopyable
+class LASERWeapon : public sf::NonCopyable
 {
 public:
-    BeamWeapon();
+    LASERWeapon();
 
     void fire(P<SpaceObject> target, ESystem system_target);
 
@@ -48,17 +48,17 @@ public:
     void setPosition(sf::Vector3f position);
     sf::Vector3f getPosition();
     
-    void setBeamTexture(string beam_texture);
-    string getBeamTexture();
+    void setLASERTexture(string LASER_texture);
+    string getLASERTexture();
 
     float getCooldown();
     
     void update(float delta);
 protected:
-    sf::Vector3f position;//Visual position on the 3D model where this beam is fired from.
-    SpaceShip* parent; //The ship that this beam weapon is attached to.
+    sf::Vector3f position;//Visual position on the 3D model where this LASER is fired from.
+    SpaceShip* parent; //The ship that this LASER weapon is attached to.
 
-    //Beam configuration
+    //LASER configuration
     float arc;
     float direction;
     float range;
@@ -67,11 +67,11 @@ protected:
     float turret_rotation_rate;
     float cycle_time;
     float damage;//Server side only
-    float energy_per_beam_fire;//Server side only
-    float heat_per_beam_fire;//Server side only
-    //Beam runtime state
+    float energy_per_LASER_fire;//Server side only
+    float heat_per_LASER_fire;//Server side only
+    //LASER runtime state
     float cooldown;
-    string beam_texture;
+    string LASER_texture;
 };
 
 #endif//BEAM_WEAPON_H

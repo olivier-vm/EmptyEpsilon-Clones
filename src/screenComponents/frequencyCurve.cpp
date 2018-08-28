@@ -3,8 +3,8 @@
 #include "spaceObjects/playerSpaceship.h"
 #include "playerInfo.h"
 
-GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
-: GuiPanel(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
+GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_LASER, bool more_damage_is_positive)
+: GuiPanel(owner, id), frequency_is_LASER(frequency_is_LASER), more_damage_is_positive(more_damage_is_positive)
 {
     frequency = -1;
 }
@@ -20,7 +20,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
         {
             float x = rect.left + 20 + w * n;
             float f;
-            if (frequency_is_beam)
+            if (frequency_is_LASER)
                 f = frequencyVsFrequencyDamageFactor(frequency, n);
             else
                 f = frequencyVsFrequencyDamageFactor(n, frequency);
@@ -34,7 +34,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
             window.draw(bar);
             
-            if (my_spaceship && ((frequency_is_beam && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_beam && n == my_spaceship->beam_frequency)))
+            if (my_spaceship && ((frequency_is_LASER && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_LASER && n == my_spaceship->LASER_frequency)))
             {
                 sf::Sprite image;
                 textureManager.setTexture(image, "gui/SelectorArrow");
@@ -50,13 +50,13 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
         string text = "";
         if (rect.contains(InputHandler::getMousePos()) && mouse_freq_nr >= 0 && mouse_freq_nr <= SpaceShip::max_frequency)
         {
-            if (frequency_is_beam)
+            if (frequency_is_LASER)
                 text = frequencyToString(mouse_freq_nr) + " " + string(int(frequencyVsFrequencyDamageFactor(frequency, mouse_freq_nr) * 100)) + "% dmg";
             else
                 text = frequencyToString(mouse_freq_nr) + " " + string(int(frequencyVsFrequencyDamageFactor(mouse_freq_nr, frequency) * 100)) + "% dmg";
         }else{
             if (more_damage_is_positive)
-                text = "Damage with your beams";
+                text = "Damage with your LASERs";
             else
                 text = "Damage on your shields";
         }

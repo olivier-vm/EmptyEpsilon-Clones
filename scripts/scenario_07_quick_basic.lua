@@ -153,8 +153,8 @@ function init()
         player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Phobos M3P")
     end
     player:setPosition(random(-2000, 2000), random(-2000, 2000)):setCallSign(ship_names[math.random(1,#ship_names)])
-    player:setJumpDrive(true)
-    player:setWarpDrive(false)
+    player:setWARPDrive(true)
+    player:setRLSDrive(false)
 
 	-- Put a single small station here, which needs to be defended.
 	table.insert(friendlyList, SpaceStation():setTemplate('Small Station'):setCallSign("DS-1"):setRotation(random(0, 360)):setFaction("Human Navy"):setPosition(random(-2000, 2000), random(-2000, 2000)))
@@ -235,7 +235,7 @@ function init()
         target_practice_drone = CpuShip():setFaction("Ghosts"):setTemplate("MT52 Hornet"):setTypeName("Target practice")
         target_practice_drone:setScannedByFaction("Human Navy", true)
         target_practice_drone:setImpulseMaxSpeed(60)
-        target_practice_drone:setBeamWeapon(0, 0, 0, 0.0, 0, 0)
+        target_practice_drone:setLASERWeapon(0, 0, 0, 0.0, 0, 0)
         x, y = 2500, 3500
         target_practice_drone:setPosition(x, y):orderDefendLocation(x, y)
         addGMFunction("Start", function()

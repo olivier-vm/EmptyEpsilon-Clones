@@ -19,8 +19,8 @@ protected:
      */
     float missile_fire_delay;
     bool has_missiles;
-    bool has_beams;
-    float beam_weapon_range;
+    bool has_LASERs;
+    float LASER_weapon_range;
     enum class EWeaponDirection
     {
         Front,

@@ -50,7 +50,7 @@ end
 -----------------------------------------------------------------]]--
 function init()
 	missile_types = {'Homing', 'Nuke', 'Mine', 'EMP', 'HVLI'}
-	--Player Ship Beams
+	--Player Ship LASERs
 	psb = {}
 	psb["MP52 Hornet"] = 2
 	psb["Phobos M3P"] = 2
@@ -69,11 +69,11 @@ function init()
 					{"luxury",0},
 					{"cobalt",0},
 					{"impulse",0},
-					{"warp",0},
+					{"RLS",0},
 					{"shield",0},
 					{"tractor",0},
 					{"repulsor",0},
-					{"beam",0},
+					{"LASER",0},
 					{"optic",0},
 					{"robotic",0},
 					{"filament",0},
@@ -157,17 +157,17 @@ function setStations()
 	friendlyStations = friendlyStations + 1
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	stationZefram = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("Warp Engine Components")
+	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("RLS Engine Components")
 	table.insert(stationList,stationZefram)
 	friendlyStations = friendlyStations + 1
-	goods[stationZefram] = {{"warp",5,140},{"food",5,1}}
+	goods[stationZefram] = {{"RLS",5,140},{"food",5,1}}
 	marconiAngle = random(0,360)
 	xMarconi, yMarconi = vectorFromAngle(marconiAngle,random(12500,15000))
 	stationMarconi = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy Beam Components")
+	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy LASER Components")
 	table.insert(stationList,stationMarconi)
 	neutralStations = neutralStations + 1
-	goods[stationMarconi] = {{"beam",5,80}}
+	goods[stationMarconi] = {{"LASER",5,80}}
 	muddAngle = marconiAngle + random(60,180)
 	xMudd, yMudd = vectorFromAngle(muddAngle,random(12500,15000))
 	stationMudd = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -225,7 +225,7 @@ function setStations()
 	deerAngle = archerAngle + random(60,120)
 	xDeer, yDeer = vectorFromAngle(deerAngle,random(50000,61250))
 	stationDeer = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor Beam Components")
+	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor LASER Components")
 	table.insert(stationList,stationDeer)
 	neutralStations = neutralStations + 1
 	goods[stationDeer] = {{"tractor",5,90},{"repulsor",5,95}}
@@ -568,14 +568,14 @@ function setStations()
 	else
 		tubeComponent = "communication"
 	end
-	beamRangeBump = random(15,60)
-	beamRandom = math.random(1,3)
-	if beamRandom == 1 then
-		beamComponent = "filament"
-	elseif beamRandom == 2 then
-		beamComponent = "battery"
+	LASERRangeBump = random(15,60)
+	LASERRandom = math.random(1,3)
+	if LASERRandom == 1 then
+		LASERComponent = "filament"
+	elseif LASERRandom == 2 then
+		LASERComponent = "battery"
 	else
-		beamComponent = "optic"
+		LASERComponent = "optic"
 	end
 --	hullRandom = math.random(1,3)
 --	if hullRandom == 1 then
@@ -605,11 +605,11 @@ function setStations()
 	shieldBump = random(40,80)
 	energyRandom = math.random(1,3)
 	if energyRandom == 1 then
-		energyComponent = "beam"
+		energyComponent = "LASER"
 	elseif energyRandom == 2 then
 		energyComponent = "autodoc"
 	else
-		energyComponent = "warp"
+		energyComponent = "RLS"
 	end
 	if hazards then
 		hazardDelayReset = 20
@@ -1169,39 +1169,39 @@ function handleDockedState()
 			gi = gi + 1
 		until(gi > #goods[player])
 		if naniteQuantity > 0 then
-			if player:hasJumpDrive() then
-				addCommsReply("Provide nanites for jump drive upgrade", function()
-					if player.jumpUpgrade then
+			if player:hasWARPDrive() then
+				addCommsReply("Provide nanites for WARP drive upgrade", function()
+					if player.WARPUpgrade then
 						setCommsMessage("You already have the upgrade")
 					else
 						decrementPlayerGoods("nanites")
 						player.cargo = player.cargo + 1
-						player.jumpUpgrade = true
+						player.WARPUpgrade = true
 						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
+							player:setWARPDriveRange(3000,45000)
 						else
-							player:setJumpDriveRange(5000,55000)
+							player:setWARPDriveRange(5000,55000)
 						end
-						setCommsMessage("Your jump drive has been upgraded")
+						setCommsMessage("Your WARP drive has been upgraded")
 					end
 				end)
 			end
 		end
 		if roboticQuantity > 0 then
-			if player:hasJumpDrive() then
-				addCommsReply("Provide robotic goods for jump drive upgrade", function()
-					if player.jumpUpgrade then
+			if player:hasWARPDrive() then
+				addCommsReply("Provide robotic goods for WARP drive upgrade", function()
+					if player.WARPUpgrade then
 						setCommsMessage("You already have the upgrade")
 					else
 						decrementPlayerGoods("robotic")
 						player.cargo = player.cargo + 1
-						player.jumpUpgrade = true
+						player.WARPUpgrade = true
 						if player:getTypeName() == "Player Fighter" then
-							player:setJumpDriveRange(3000,45000)
+							player:setWARPDriveRange(3000,45000)
 						else
-							player:setJumpDriveRange(5000,55000)
+							player:setWARPDriveRange(5000,55000)
 						end
-						setCommsMessage("Your jump drive has been upgraded")
+						setCommsMessage("Your WARP drive has been upgraded")
 					end
 				end)
 			end
@@ -1272,34 +1272,34 @@ function handleDockedState()
 	end
 	if comms_target == stationMarconi then
 		gi = 1
-		beamQuantity = 0
+		LASERQuantity = 0
 		repeat
-			if goods[player][gi][1] == beamComponent then
-				beamQuantity = goods[player][gi][2]
+			if goods[player][gi][1] == LASERComponent then
+				LASERQuantity = goods[player][gi][2]
 			end
 			gi = gi + 1
 		until(gi > #goods[player])
-		if beamQuantity > 0 then
-			addCommsReply(string.format("Provide %s for %.2f percent beam range upgrade",beamComponent,beamRangeBump), function()
-				if player.beamRangeUpgrade then
+		if LASERQuantity > 0 then
+			addCommsReply(string.format("Provide %s for %.2f percent LASER range upgrade",LASERComponent,LASERRangeBump), function()
+				if player.LASERRangeUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
-					tempBeam = psb[player:getTypeName()]
-					if tempBeam == nil then
-						setCommsMessage("Your ship does not support a beam weapon upgrade")
+					tempLASER = psb[player:getTypeName()]
+					if tempLASER == nil then
+						setCommsMessage("Your ship does not support a LASER weapon upgrade")
 					else
-						decrementPlayerGoods(beamComponent)
+						decrementPlayerGoods(LASERComponent)
 						player.cargo = player.cargo + 1
-						player.beamRangeUpgrade = true
-						for b=0,tempBeam-1 do
-							newRange = player:getBeamWeaponRange(b) * (1+beamRangeBump/100)
-							tempCycle = player:getBeamWeaponCycleTime(b)
-							tempDamage = player:getBeamWeaponDamage(b)
-							tempArc = player:getBeamWeaponArc(b)
-							tempDirection = player:getBeamWeaponDirection(b)
-							player:setBeamWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
+						player.LASERRangeUpgrade = true
+						for b=0,tempLASER-1 do
+							newRange = player:getLASERWeaponRange(b) * (1+LASERRangeBump/100)
+							tempCycle = player:getLASERWeaponCycleTime(b)
+							tempDamage = player:getLASERWeaponDamage(b)
+							tempArc = player:getLASERWeaponArc(b)
+							tempDirection = player:getLASERWeaponDirection(b)
+							player:setLASERWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
 						end	
-						setCommsMessage("Your beam range has been upgraded")					
+						setCommsMessage("Your LASER range has been upgraded")					
 					end
 				end
 			end)
@@ -1487,13 +1487,13 @@ function handleUndockedState()
 		setCommsMessage("What kind of information do you need?")
 		addCommsReply("Do you upgrade spaceships?", function()
 			if comms_target == stationZefram then
-				setCommsMessage("We can upgrade your jump drive maximum range for nanites or robotic goods")
+				setCommsMessage("We can upgrade your WARP drive maximum range for nanites or robotic goods")
 			elseif comms_target == stationCarradine then
 				setCommsMessage(string.format("We can increase the speed of your impulse engines by %.2f percent for tritanium or dilithium",impulseBump))
 			elseif comms_target == spinStation then
 				setCommsMessage(string.format("We can increase the speed your rotate speed by %.2f percent for %s",spinBump,spinComponent))
 			elseif comms_target == stationMarconi then
-				setCommsMessage(string.format("We can increase the range of your beam weapons by %.2f percent for %s",beamRangeBump,beamComponent))
+				setCommsMessage(string.format("We can increase the range of your LASER weapons by %.2f percent for %s",LASERRangeBump,LASERComponent))
 			elseif comms_target == tubeStation then
 				setCommsMessage(string.format("We can add a homing missile tube to your ship for %s",tubeComponent))
 --			elseif comms_target == stationArcher then
@@ -2080,7 +2080,7 @@ function update(delta)
 						player.shipScore = 7
 						player.maxCargo = 3
 						player.cargo = 2
-						player:setWarpDrive(true)
+						player:setRLSDrive(true)
 						goods[player] = goodsList
 						player:addReputationPoints(5)
 						incrementPlayerGoods("food")
@@ -2117,7 +2117,7 @@ function update(delta)
 						player.shipScore = 19
 						player.maxCargo = 10
 						player.cargo = 9
-						player:setWarpDrive(true)
+						player:setRLSDrive(true)
 						goods[player] = goodsList
 						player:addReputationPoints(5)
 						incrementPlayerGoods("food")
@@ -2166,8 +2166,8 @@ function update(delta)
 						player.shipScore = 7
 						player.maxCargo = 3
 						player.cargo = 2
-						player:setJumpDrive(true)
-						player:setJumpDriveRange(3000,40000)
+						player:setWARPDrive(true)
+						player:setWARPDriveRange(3000,40000)
 						goods[player] = goodsList
 						player:addReputationPoints(5)
 						incrementPlayerGoods("food")
@@ -2180,7 +2180,7 @@ function update(delta)
 						player.shipScore = 24
 						player.maxCargo = 5
 						player.cargo = 4
-						player:setWarpDrive(true)
+						player:setRLSDrive(true)
 						goods[player] = goodsList
 						player:addReputationPoints(5)
 						incrementPlayerGoods("food")

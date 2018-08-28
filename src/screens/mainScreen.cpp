@@ -38,7 +38,7 @@ ScreenMainScreen::ScreenMainScreen()
 
     new GuiShipDestroyedPopup(this);
     
-    new GuiJumpIndicator(this);
+    new GuiWARPIndicator(this);
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
     new GuiIndicatorOverlays(this);

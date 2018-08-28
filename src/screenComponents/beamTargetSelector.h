@@ -3,10 +3,10 @@
 
 #include "gui/gui2_selector.h"
 
-class GuiBeamTargetSelector : public GuiSelector
+class GuiLASERTargetSelector : public GuiSelector
 {
 public:
-    GuiBeamTargetSelector(GuiContainer* owner, string id);
+    GuiLASERTargetSelector(GuiContainer* owner, string id);
     
     virtual void onHotkey(const HotkeyResult& key) override;
 };

@@ -3,7 +3,7 @@
 #include "spaceObjects/beamEffect.h"
 #include "spaceObjects/spaceObject.h"
 
-BeamWeapon::BeamWeapon()
+LASERWeapon::LASERWeapon()
 {
     arc = 0;
     direction = 0;
@@ -14,12 +14,12 @@ BeamWeapon::BeamWeapon()
     cycle_time = 6.0;
     cooldown = 0.0;
     damage = 1.0;
-    energy_per_beam_fire = 3.0;
-    heat_per_beam_fire = 0.02;
+    energy_per_LASER_fire = 3.0;
+    heat_per_LASER_fire = 0.02;
     parent = nullptr;
 }
 
-void BeamWeapon::setParent(SpaceShip* parent)
+void LASERWeapon::setParent(SpaceShip* parent)
 {
     assert(!this->parent);
     this->parent = parent;
@@ -34,141 +34,141 @@ void BeamWeapon::setParent(SpaceShip* parent)
     parent->registerMemberReplication(&cooldown, 0.5);
 }
 
-void BeamWeapon::setArc(float arc)
+void LASERWeapon::setArc(float arc)
 {
     this->arc = arc;
 }
 
-float BeamWeapon::getArc()
+float LASERWeapon::getArc()
 {
     return arc;
 }
 
-void BeamWeapon::setDirection(float direction)
+void LASERWeapon::setDirection(float direction)
 {
     this->direction = direction;
 }
 
-float BeamWeapon::getDirection()
+float LASERWeapon::getDirection()
 {
     return direction;
 }
 
-void BeamWeapon::setRange(float range)
+void LASERWeapon::setRange(float range)
 {
     this->range = range;
 }
 
-float BeamWeapon::getRange()
+float LASERWeapon::getRange()
 {
     return range;
 }
 
-void BeamWeapon::setTurretArc(float arc)
+void LASERWeapon::setTurretArc(float arc)
 {
     this->turret_arc = arc;
 }
 
-float BeamWeapon::getTurretArc()
+float LASERWeapon::getTurretArc()
 {
     return turret_arc;
 }
 
-void BeamWeapon::setTurretDirection(float direction)
+void LASERWeapon::setTurretDirection(float direction)
 {
     this->turret_direction = direction;
 }
 
-float BeamWeapon::getTurretDirection()
+float LASERWeapon::getTurretDirection()
 {
     return turret_direction;
 }
 
-void BeamWeapon::setTurretRotationRate(float rotation_rate)
+void LASERWeapon::setTurretRotationRate(float rotation_rate)
 {
     this->turret_rotation_rate = rotation_rate;
 }
 
-float BeamWeapon::getTurretRotationRate()
+float LASERWeapon::getTurretRotationRate()
 {
     return turret_rotation_rate;
 }
 
-void BeamWeapon::setCycleTime(float cycle_time)
+void LASERWeapon::setCycleTime(float cycle_time)
 {
     this->cycle_time = cycle_time;
 }
 
-float BeamWeapon::getCycleTime()
+float LASERWeapon::getCycleTime()
 {
     return cycle_time;
 }
 
-void BeamWeapon::setDamage(float damage)
+void LASERWeapon::setDamage(float damage)
 {
     this->damage = damage;
 }
 
-float BeamWeapon::getDamage()
+float LASERWeapon::getDamage()
 {
     return damage;
 }
 
-float BeamWeapon::getEnergyPerFire()
+float LASERWeapon::getEnergyPerFire()
 {
-    return energy_per_beam_fire;
+    return energy_per_LASER_fire;
 }
 
-void BeamWeapon::setEnergyPerFire(float energy)
+void LASERWeapon::setEnergyPerFire(float energy)
 {
-    energy_per_beam_fire = energy;
+    energy_per_LASER_fire = energy;
 }
 
-float BeamWeapon::getHeatPerFire()
+float LASERWeapon::getHeatPerFire()
 {
-    return heat_per_beam_fire;
+    return heat_per_LASER_fire;
 }
 
-void BeamWeapon::setHeatPerFire(float heat)
+void LASERWeapon::setHeatPerFire(float heat)
 {
-    heat_per_beam_fire = heat;
+    heat_per_LASER_fire = heat;
 }
 
-void BeamWeapon::setPosition(sf::Vector3f position)
+void LASERWeapon::setPosition(sf::Vector3f position)
 {
     this->position = position;
 }
 
-sf::Vector3f BeamWeapon::getPosition()
+sf::Vector3f LASERWeapon::getPosition()
 {
     return position;
 }
 
-void BeamWeapon::setBeamTexture(string beam_texture)
+void LASERWeapon::setLASERTexture(string LASER_texture)
 {
-    this->beam_texture = beam_texture;
+    this->LASER_texture = LASER_texture;
 }
 
-string BeamWeapon::getBeamTexture()
+string LASERWeapon::getLASERTexture()
 {
-    return beam_texture;
+    return LASER_texture;
 }
 
-float BeamWeapon::getCooldown()
+float LASERWeapon::getCooldown()
 {
     return cooldown;
 }
 
-void BeamWeapon::update(float delta)
+void LASERWeapon::update(float delta)
 {
     if (cooldown > 0.0)
-        cooldown -= delta * parent->getSystemEffectiveness(SYS_BeamWeapons);
+        cooldown -= delta * parent->getSystemEffectiveness(SYS_LASERWeapons);
 
     P<SpaceObject> target = parent->getTarget();
 
-    // Check on beam weapons only if we are on the server, have a target, and
-    // not paused, and if the beams are cooled down or have a turret arc.
-    if (game_server && range > 0.0 && target && parent->isEnemy(target) && delta > 0 && parent->current_warp == 0.0 && parent->docking_state == DS_NotDocking)
+    // Check on LASER weapons only if we are on the server, have a target, and
+    // not paused, and if the LASERs are cooled down or have a turret arc.
+    if (game_server && range > 0.0 && target && parent->isEnemy(target) && delta > 0 && parent->current_RLS == 0.0 && parent->docking_state == DS_NotDocking)
     {
         // Get the angle to the target.
         sf::Vector2f diff = target->getPosition() - (parent->getPosition() + sf::rotateVector(sf::Vector2f(position.x, position.y), parent->getRotation()));
@@ -193,62 +193,62 @@ void BeamWeapon::update(float delta)
                     // ... and if the target is within the turret's arc ...
                     if (fabsf(turret_angle_diff) < turret_arc / 2.0)
                     {
-                        // ... rotate the turret's beam toward the target.
+                        // ... rotate the turret's LASER toward the target.
                         if (fabsf(angle_diff) > 0)
                         {
-                            direction += (angle_diff / fabsf(angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(angle_diff));
+                            direction += (angle_diff / fabsf(angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_LASERWeapons), fabsf(angle_diff));
                         }
                     // If the target is outside of the turret's arc ...
                     } else {
-                        // ... rotate the turret's beam toward the turret's
+                        // ... rotate the turret's LASER toward the turret's
                         // direction to reset it.
                         float reset_angle_diff = sf::angleDifference(direction, turret_direction);
 
                         if (fabsf(reset_angle_diff) > 0)
                         {
-                            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(reset_angle_diff));
+                            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_LASERWeapons), fabsf(reset_angle_diff));
                         }
                     }
                 }
             }
 
-            // If the target is in the beam's arc and range, the beam has cooled
-            // down, and the beam can consume enough energy to fire ...
-            if (distance < range && cooldown <= 0.0 && fabsf(angle_diff) < arc / 2.0 && parent->useEnergy(energy_per_beam_fire))
+            // If the target is in the LASER's arc and range, the LASER has cooled
+            // down, and the LASER can consume enough energy to fire ...
+            if (distance < range && cooldown <= 0.0 && fabsf(angle_diff) < arc / 2.0 && parent->useEnergy(energy_per_LASER_fire))
             {
-                // ... add heat to the beam and zap the target.
-                parent->addHeat(SYS_BeamWeapons, heat_per_beam_fire);
-                fire(target, parent->beam_system_target);
+                // ... add heat to the LASER and zap the target.
+                parent->addHeat(SYS_LASERWeapons, heat_per_LASER_fire);
+                fire(target, parent->LASER_system_target);
             }
         }
-    // If the beam is turreted and can move, but doesn't have a target, reset it
+    // If the LASER is turreted and can move, but doesn't have a target, reset it
     // if necessary.
     } else if (game_server && range > 0.0 && delta > 0 && turret_arc > 0.0 && direction != turret_direction && turret_rotation_rate > 0) {
         float reset_angle_diff = sf::angleDifference(direction, turret_direction);
 
         if (fabsf(reset_angle_diff) > 0)
         {
-            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_BeamWeapons), fabsf(reset_angle_diff));
+            direction += (reset_angle_diff / fabsf(reset_angle_diff)) * std::min(turret_rotation_rate * parent->getSystemEffectiveness(SYS_LASERWeapons), fabsf(reset_angle_diff));
         }
     }
 }
 
-void BeamWeapon::fire(P<SpaceObject> target, ESystem system_target)
+void LASERWeapon::fire(P<SpaceObject> target, ESystem system_target)
 {
-    //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
+    //When we fire a LASER, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
     //  we now know if this ship is an enemy or friend.
     parent->didAnOffensiveAction();
 
     cooldown = cycle_time; // Reset time of weapon
 
     sf::Vector2f hit_location = target->getPosition() - sf::normalize(target->getPosition() - parent->getPosition()) * target->getRadius();
-    P<BeamEffect> effect = new BeamEffect();
+    P<LASEREffect> effect = new LASEREffect();
     effect->setSource(parent, position);
     effect->setTarget(target, hit_location);
-    effect->beam_texture = beam_texture;
+    effect->LASER_texture = LASER_texture;
 
     DamageInfo info(parent, DT_Energy, hit_location);
-    info.frequency = parent->beam_frequency; // Beam weapons now always use frequency of the ship.
+    info.frequency = parent->LASER_frequency; // LASER weapons now always use frequency of the ship.
     info.system_target = system_target;
     target->takeDamage(damage, info);
 }

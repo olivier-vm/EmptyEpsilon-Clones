@@ -9,8 +9,8 @@ class GuiLabel;
     * Full screen overlay for shield hit effect
     * Full screen overlay for hull hit effect
     * Full screen overlay for shields low warning
-    * Full screen overlay for jump indication
-    * Activating the warp/jump post process shaders
+    * Full screen overlay for WARP indication
+    * Activating the RLS/WARP post process shaders
     * Pause full screen overlay and text indicator
     * Victory/defeat result
 */

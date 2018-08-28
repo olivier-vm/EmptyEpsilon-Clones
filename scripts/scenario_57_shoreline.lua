@@ -140,7 +140,7 @@ function init()
 	stnl = {"MT52 Hornet","MU52 Hornet","Adder MK5","Adder MK4","WX-Lindworm","Adder MK6","Phobos T3","Phobos M3","Piranha F8","Piranha F12","Ranus U","Nirvana R5A","Stalker Q7","Stalker R7","Atlantis X23","Starhammer II","Odin"}
 	--Ship Template Score List
 	stsl = {5            ,5            ,7          ,6          ,7            ,8          ,15         ,16         ,15          ,15           ,25       ,20           ,25          ,25          ,50            ,70             ,250}
-	--Player Ship Beams
+	--Player Ship LASERs
 	psb = {}
 	psb["MP52 Hornet"] = 2
 	psb["Phobos M3P"] = 2
@@ -167,11 +167,11 @@ function init()
 					{"luxury",0},
 					{"cobalt",0},
 					{"impulse",0},
-					{"warp",0},
+					{"RLS",0},
 					{"shield",0},
 					{"tractor",0},
 					{"repulsor",0},
-					{"beam",0},
+					{"LASER",0},
 					{"optic",0},
 					{"robotic",0},
 					{"filament",0},
@@ -272,7 +272,7 @@ function setPlayers()
 					end
 					pobj.shipScore = 7
 					pobj.maxCargo = 3
-					pobj:setWarpDrive(true)
+					pobj:setRLSDrive(true)
 				elseif tempPlayerType == "Piranha" then
 					if #playerShipNamesForPiranha > 0 then
 						ni = math.random(1,#playerShipNamesForPiranha)
@@ -297,7 +297,7 @@ function setPlayers()
 					end
 					pobj.shipScore = 19
 					pobj.maxCargo = 10
-					pobj:setWarpDrive(true)
+					pobj:setRLSDrive(true)
 				elseif tempPlayerType == "Atlantis" then
 					if #playerShipNamesForAtlantis > 0 then
 						ni = math.random(1,#playerShipNamesForAtlantis)
@@ -330,8 +330,8 @@ function setPlayers()
 					end
 					pobj.shipScore = 7
 					pobj.maxCargo = 3
-					pobj:setJumpDrive(true)
-					pobj:setJumpDriveRange(3000,40000)
+					pobj:setWARPDrive(true)
+					pobj:setWARPDriveRange(3000,40000)
 				else
 					if #playerShipNamesForLeftovers > 0 then
 						ni = math.random(1,#playerShipNamesForLeftovers)
@@ -340,7 +340,7 @@ function setPlayers()
 					end
 					pobj.shipScore = 24
 					pobj.maxCargo = 5
-					pobj:setWarpDrive(true)
+					pobj:setRLSDrive(true)
 				end
 				if pobj.cargo == nil then
 					pobj.cargo = pobj.maxCargo
@@ -391,17 +391,17 @@ function setStations()
 	friendlyStations = friendlyStations + 1
 	goods[stationVaiken] = {{"food",10,1},{"medicine",5,5}}
 	stationZefram = SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCommsScript(""):setCommsFunction(commsStation)
-	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("Warp Engine Components")
+	stationZefram:setPosition(random(5000,8000),random(-8000,9000)):setCallSign("Zefram"):setDescription("RLS Engine Components")
 	table.insert(stationList,stationZefram)
 	friendlyStations = friendlyStations + 1
-	goods[stationZefram] = {{"warp",5,140},{"food",5,1}}
+	goods[stationZefram] = {{"RLS",5,140},{"food",5,1}}
 	marconiAngle = random(0,360)
 	xMarconi, yMarconi = vectorFromAngle(marconiAngle,random(12500,15000))
 	stationMarconi = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy Beam Components")
+	stationMarconi:setPosition(xMarconi,yMarconi):setCallSign("Marconi"):setDescription("Energy LASER Components")
 	table.insert(stationList,stationMarconi)
 	neutralStations = neutralStations + 1
-	goods[stationMarconi] = {{"beam",5,80}}
+	goods[stationMarconi] = {{"LASER",5,80}}
 	muddAngle = marconiAngle + random(60,180)
 	xMudd, yMudd = vectorFromAngle(muddAngle,random(12500,15000))
 	stationMudd = SpaceStation():setTemplate("Medium Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
@@ -459,7 +459,7 @@ function setStations()
 	deerAngle = archerAngle + random(60,120)
 	xDeer, yDeer = vectorFromAngle(deerAngle,random(50000,61250))
 	stationDeer = SpaceStation():setTemplate("Small Station"):setFaction("Independent"):setCommsScript(""):setCommsFunction(commsStation)
-	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor Beam Components")
+	stationDeer:setPosition(xDeer,yDeer):setCallSign("Deer"):setDescription("Repulsor and Tractor LASER Components")
 	table.insert(stationList,stationDeer)
 	neutralStations = neutralStations + 1
 	goods[stationDeer] = {{"tractor",5,90},{"repulsor",5,95}}
@@ -877,7 +877,7 @@ function transportPlot(delta)
 				name = "Fuel"
 			end
 			if irandom(1,100) < 30 then
-				name = name .. " Jump Freighter " .. irandom(3, 5)
+				name = name .. " WARP Freighter " .. irandom(3, 5)
 			else
 				name = name .. " Freighter " .. irandom(1, 5)
 			end
@@ -1229,9 +1229,9 @@ function handleDockedState()
 			end
 		end
 	end
-	if plotO == beamRangeUpgrade then
+	if plotO == LASERRangeUpgrade then
 		if comms_target == stationMarconi then
-			if player.beamComponents == nil then
+			if player.LASERComponents == nil then
 				gi = 1
 				br1partQuantity = 0
 				br2partQuantity = 0
@@ -1249,13 +1249,13 @@ function handleDockedState()
 					gi = gi + 1
 				until(gi > #goods[player])
 				if br1partQuantity > 0 and br2partQuantity > 0 and br3partQuantity > 0 then
-					addCommsReply(string.format("Provide %s, %s and %s for beam research project",br1part,br2part,br3part), function()
+					addCommsReply(string.format("Provide %s, %s and %s for LASER research project",br1part,br2part,br3part), function()
 						decrementPlayerGoods(br1part)
 						decrementPlayerGoods(br2part)
 						decrementPlayerGoods(br3part)
 						player.cargo = player.cargo + 3
-						setCommsMessage("With the goods you provided, we completed our advanced beam weapons prototype. We transmitted our research results to Vaiken. The next time you dock at Vaiken, you can have the range of your beam weapons upgraded.")
-						player.beamComponents = "provided"
+						setCommsMessage("With the goods you provided, we completed our advanced LASER weapons prototype. We transmitted our research results to Vaiken. The next time you dock at Vaiken, you can have the range of your LASER weapons upgraded.")
+						player.LASERComponents = "provided"
 					end)
 				end
 			end
@@ -1322,25 +1322,25 @@ function handleDockedState()
 		end
 	end
 	if comms_target == stationVaiken then
-		if beamRangeUpgradeAvailable then
-			addCommsReply("Apply Marconi station beam range upgrade", function()
-				if player.marconiBeamUpgrade then
+		if LASERRangeUpgradeAvailable then
+			addCommsReply("Apply Marconi station LASER range upgrade", function()
+				if player.marconiLASERUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
-					tempBeam = psb[player:getTypeName()]
-					if tempBeam == nil then
-						setCommsMessage("Your ship type does not support a beam weapon upgrade.")
+					tempLASER = psb[player:getTypeName()]
+					if tempLASER == nil then
+						setCommsMessage("Your ship type does not support a LASER weapon upgrade.")
 					else
-						for b=0,tempBeam-1 do
-							newRange = player:getBeamWeaponRange(b) * 1.25
-							tempCycle = player:getBeamWeaponCycleTime(b)
-							tempDamage = player:getBeamWeaponDamage(b)
-							tempArc = player:getBeamWeaponArc(b)
-							tempDirection = player:getBeamWeaponDirection(b)
-							player:setBeamWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
+						for b=0,tempLASER-1 do
+							newRange = player:getLASERWeaponRange(b) * 1.25
+							tempCycle = player:getLASERWeaponCycleTime(b)
+							tempDamage = player:getLASERWeaponDamage(b)
+							tempArc = player:getLASERWeaponArc(b)
+							tempDirection = player:getLASERWeaponDirection(b)
+							player:setLASERWeapon(b,tempArc,tempDirection,newRange,tempCycle,tempDamage)
 						end
-						player.marconiBeamUpgrade = true
-						setCommsMessage("Your beam range has been improved by 25 percent")
+						player.marconiLASERUpgrade = true
+						setCommsMessage("Your LASER range has been improved by 25 percent")
 					end
 				end
 			end)
@@ -1380,25 +1380,25 @@ function handleDockedState()
 				end
 			end)
 		end
-		if beamDamageUpgradeAvailable then
-			addCommsReply("Apply Nefatha beam damage upgrade", function()
+		if LASERDamageUpgradeAvailable then
+			addCommsReply("Apply Nefatha LASER damage upgrade", function()
 				if player.nefathaUpgrade then
 					setCommsMessage("You already have the upgrade")
 				else
-					tempBeam = psb[player:getTypeName()]
-					if tempBeam == nil then
-						setCommsMessage("Your ship type does not support a beam weapon upgrade.")
+					tempLASER = psb[player:getTypeName()]
+					if tempLASER == nil then
+						setCommsMessage("Your ship type does not support a LASER weapon upgrade.")
 					else
-						for b=0,tempBeam-1 do
-							tempRange = player:getBeamWeaponRange(b)
-							tempCycle = player:getBeamWeaponCycleTime(b)
-							newDamage = player:getBeamWeaponDamage(b) * 1.25
-							tempArc = player:getBeamWeaponArc(b)
-							tempDirection = player:getBeamWeaponDirection(b)
-							player:setBeamWeapon(b,tempArc,tempDirection,tempRange,tempCycle,newDamage)
+						for b=0,tempLASER-1 do
+							tempRange = player:getLASERWeaponRange(b)
+							tempCycle = player:getLASERWeaponCycleTime(b)
+							newDamage = player:getLASERWeaponDamage(b) * 1.25
+							tempArc = player:getLASERWeaponArc(b)
+							tempDirection = player:getLASERWeaponDirection(b)
+							player:setLASERWeapon(b,tempArc,tempDirection,tempRange,tempCycle,newDamage)
 						end
 						player.nefathaUpgrade = true
-						setCommsMessage("Your beam weapons damage has improved by 25 percent")
+						setCommsMessage("Your LASER weapons damage has improved by 25 percent")
 					end
 				end
 			end)
@@ -1642,10 +1642,10 @@ function handleUndockedState()
 			end
 			if plotO == nil then
 				addCommsReply("Choose optional mission", function()
-					if beamRangePlot ~= "done" then
-						addCommsReply("beam range", function()
-							chooseBeamRangeParts()
-							plotO = beamRangeMessage				
+					if LASERRangePlot ~= "done" then
+						addCommsReply("LASER range", function()
+							chooseLASERRangeParts()
+							plotO = LASERRangeMessage				
 						end)
 					end
 					if impulseSpeedPlot ~= "done" then
@@ -1665,10 +1665,10 @@ function handleUndockedState()
 							plotO = quantumArtMessage
 						end)
 					end
-					if beamDamagePlot ~= "done" then
-						addCommsReply("beam damage", function()
-							chooseBeamDamageParts()
-							plotO = beamDamageMessage
+					if LASERDamagePlot ~= "done" then
+						addCommsReply("LASER damage", function()
+							chooseLASERDamageParts()
+							plotO = LASERDamageMessage
 						end)
 					end
 					addCommsReply("Back", commsStation)
@@ -3272,9 +3272,9 @@ function scanBlackHole()
 	phScan:addToShipLog("[Scan technician] Black hole scan started","Blue")
 end
 --[[-----------------------------------------------------------------
-      Optional plot choice: Beam range upgrade
+      Optional plot choice: LASER range upgrade
 -----------------------------------------------------------------]]--
-function chooseBeamRangeParts()
+function chooseLASERRangeParts()
 	if br1part == nil then
 		br1partChoice = math.floor(random(1,3))
 		if br1partChoice == 1 then
@@ -3307,7 +3307,7 @@ function chooseBeamRangeParts()
 	end
 end
 
-function beamRangeMessage(delta)
+function LASERRangeMessage(delta)
 	optionalOrders = string.format("\nOptional: Gather and bring goods to station Marconi: %s, %s, %s",br1part,br2part,br3part)
 	obrMsg = string.format("[Station Marconi] Please bring us some components and materials for a project we are working on: %s, %s, %s",br1part,br2part,br3part)
 	for p18idx=1,8 do
@@ -3316,25 +3316,25 @@ function beamRangeMessage(delta)
 			p18:addToShipLog(obrMsg,"Magenta")
 		end
 	end	
-	plotO = beamRangeUpgrade
+	plotO = LASERRangeUpgrade
 end
 
-function beamRangeUpgrade(delta)
+function LASERRangeUpgrade(delta)
 	if stationMarconi:isValid() then
 		for p19idx=1,8 do
 			p19 = getPlayerShip(p19idx)
 			if p19 ~= nil and p19:isValid() then
 				if p19:isDocked(stationMarconi) then
-					if p19.beamComponents == "provided" then
-						beamRangeUpgradeAvailable = true
+					if p19.LASERComponents == "provided" then
+						LASERRangeUpgradeAvailable = true
 						optionalMissionDelay = delta + random(30,90)
-						beamRangePlot = "done"
+						LASERRangePlot = "done"
 						optionalOrders = ""
 						for p34idx=1,8 do
 							p34 = getPlayerShip(p34idx)
-							if p34 ~= nil and p34:isValid() and beamRangeRep == nil then
+							if p34 ~= nil and p34:isValid() and LASERRangeRep == nil then
 								p34:addReputationPoints(50-(difficulty*5))
-								beamRangeRep = "awarded"
+								LASERRangeRep = "awarded"
 							end
 						end
 						plotO = nil
@@ -3343,14 +3343,14 @@ function beamRangeUpgrade(delta)
 			end
 		end
 	else
-		beamRangePlot = "done"
+		LASERRangePlot = "done"
 		plotO = nil
 	end
 end
 --[[-----------------------------------------------------------------
-      Optional plot choice: Beam damage upgrade
+      Optional plot choice: LASER damage upgrade
 -----------------------------------------------------------------]]--
-function beamDamageParts()
+function LASERDamageParts()
 	if bd1part == nil then
 		bd1partChoice = math.floor(random(1,3))
 		if bd1partChoice == 1 then
@@ -3383,7 +3383,7 @@ function beamDamageParts()
 	end
 end
 
-function beamDamageMessage(delta)
+function LASERDamageMessage(delta)
 	optionalOrders = string.format("\nOptional: Gather and bring goods to station Nefatha: %s, %s, %s",bd1part,bd2part,bd3part)
 	obdMsg = string.format("[Station Nefatha] Please bring us some components and materials for a weapons project we are working on: %s, %s, %s",bd1part,bd2part,bd3part)
 	for p20idx=1,8 do
@@ -3392,25 +3392,25 @@ function beamDamageMessage(delta)
 			p20:addToShipLog(obdMsg,"Magenta")
 		end
 	end	
-	plotO = beamDamageUpgrade
+	plotO = LASERDamageUpgrade
 end
 
-function beamDamageUpgrade(delta)
+function LASERDamageUpgrade(delta)
 	if stationNefatha:isValid() then
 		for p21idx=1,8 do
 			p21 = getPlayerShip(p21idx)
 			if p21 ~= nil and p21:isValid() then
 				if p21:isDocked(stationNefatha) then
-					if p21.beamDamageComponents == "provided" then
-						beamDamageUpgradeAvailable = true
+					if p21.LASERDamageComponents == "provided" then
+						LASERDamageUpgradeAvailable = true
 						optionalMissionDelay = delta + random(30,90)
-						beamDamagePlot = "done"
+						LASERDamagePlot = "done"
 						optionalOrders = ""
 						for p35idx=1,8 do
 							p35 = getPlayerShip(p35idx)
-							if p35 ~= nil and p35:isValid() and beamDamageRep == nil then
+							if p35 ~= nil and p35:isValid() and LASERDamageRep == nil then
 								p35:addReputationPoints(50-(difficulty*5))
-								beamDamageRep = "awarded"
+								LASERDamageRep = "awarded"
 							end
 						end
 						plotO = nil
@@ -3419,7 +3419,7 @@ function beamDamageUpgrade(delta)
 			end
 		end
 	else
-		beamDamagePlot = "done"
+		LASERDamagePlot = "done"
 		plotO = nil
 	end
 end
@@ -3831,9 +3831,9 @@ function update(delta)
 		if optionalMissionDelay < 0 then
 			optionalMissionChoice = math.random(5)
 			if optionalMissionChoice == 1 then
-				if beamRangePlot ~= "done" then
-					chooseBeamRangeParts()
-					plotO = beamRangeMessage
+				if LASERRangePlot ~= "done" then
+					chooseLASERRangeParts()
+					plotO = LASERRangeMessage
 				end
 			elseif optionalMissionChoice == 2 then
 				if impulseSpeedPlot ~= "done" then
@@ -3850,9 +3850,9 @@ function update(delta)
 					plotO = quantumArtMessage
 				end
 			else
-				if beamDamagePlot ~= "done" then
-					chooseBeamDamageParts()
-					plotO = beamDamageMessage
+				if LASERDamagePlot ~= "done" then
+					chooseLASERDamageParts()
+					plotO = LASERDamageMessage
 				end
 			end
 			optionalMissionDelay = delta + random(20,40)

@@ -65,7 +65,7 @@ function update(delta)
                 end
                 
                 if irandom(1, 100) < 15 then
-                    name = name .. " Jump Freighter " .. irandom(3, 5)
+                    name = name .. " WARP Freighter " .. irandom(3, 5)
                 else
                     name = name .. " Freighter " .. irandom(1, 5)
                 end

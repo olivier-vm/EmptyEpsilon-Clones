@@ -91,7 +91,7 @@ void GuiRotatingModelView::onDraw(sf::RenderTarget& window)
         }
         float r = model->getRadius() * 0.1f;
         glColor3f(1.0, 1.0, 1.0);
-        for (const sf::Vector3f& position : model->beam_position)
+        for (const sf::Vector3f& position : model->LASER_position)
         {
             sf::Vector3f offset = position * model->scale;
             

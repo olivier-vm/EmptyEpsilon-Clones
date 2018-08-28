@@ -3,10 +3,10 @@
 
 #include "gui/gui2_selector.h"
 
-class GuiBeamFrequencySelector : public GuiSelector
+class GuiLASERFrequencySelector : public GuiSelector
 {
 public:
-    GuiBeamFrequencySelector(GuiContainer* owner, string id);
+    GuiLASERFrequencySelector(GuiContainer* owner, string id);
     
     virtual void onHotkey(const HotkeyResult& key) override;
 };

@@ -24,8 +24,8 @@ private:
     GuiKeyValueDisplay* heading_display;
     GuiKeyValueDisplay* velocity_display;
     GuiKeyValueDisplay* shields_display;
-    GuiElement* warp_controls;
-    GuiElement* jump_controls;
+    GuiElement* RLS_controls;
+    GuiElement* WARP_controls;
     
     TargetsContainer targets;
     GuiRadarView* radar;

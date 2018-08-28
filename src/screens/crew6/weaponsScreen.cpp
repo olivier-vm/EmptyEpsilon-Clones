@@ -53,19 +53,19 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 20, ATopCenter)->setSize(130, 50);
 
-    if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
+    if (gameGlobalInfo->use_LASER_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -120, ABottomRight)->setSize(280, 150);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", "Beam info", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", SYS_BeamWeapons, ACenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+        GuiElement* LASER_info_box = new GuiElement(this, "LASER_INFO_BOX");
+        LASER_info_box->setPosition(-20, -120, ABottomRight)->setSize(280, 150);
+        (new GuiLabel(LASER_info_box, "LASER_INFO_LABEL", "LASER info", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiPowerDamageIndicator(LASER_info_box, "", SYS_LASERWeapons, ACenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLASERFrequencySelector(LASER_info_box, "LASER_FREQUENCY_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiLASERTargetSelector(LASER_info_box, "LASER_TARGET_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
 
-        if (!gameGlobalInfo->use_beam_shield_frequencies)
+        if (!gameGlobalInfo->use_LASER_shield_frequencies)
         {   //If we do have system damage, but no shield frequencies, we can partially overlap this with the shield button.
-            //So move the beam configuration a bit down.
-            beam_info_box->setPosition(-20, -50, ABottomRight);
+            //So move the LASER configuration a bit down.
+            LASER_info_box->setPosition(-20, -50, ABottomRight);
         }
     }
 
@@ -76,7 +76,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     rear_shield_display = new GuiKeyValueDisplay(this, "REAR_SHIELD_DISPLAY", 0.45, "Rear", "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
 
-    if (gameGlobalInfo->use_beam_shield_frequencies)
+    if (gameGlobalInfo->use_LASER_shield_frequencies)
     {
         //The shield frequency selection includes a shield enable button.
         (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, ABottomRight)->setSize(280, 100);

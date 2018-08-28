@@ -26,10 +26,10 @@ GameGlobalInfo::GameGlobalInfo()
     }
 
     global_message_timeout = 0.0;
-    player_warp_jump_drive_setting = PWJ_ShipDefault;
+    player_RLS_WARP_drive_setting = PWJ_ShipDefault;
     scanning_complexity = SC_Normal;
     long_range_radar_range = 30000;
-    use_beam_shield_frequencies = true;
+    use_LASER_shield_frequencies = true;
     use_system_damage = true;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
@@ -42,7 +42,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&banner_string);
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&long_range_radar_range);
-    registerMemberReplication(&use_beam_shield_frequencies);
+    registerMemberReplication(&use_LASER_shield_frequencies);
     registerMemberReplication(&use_system_damage);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
@@ -180,17 +180,17 @@ void GameGlobalInfo::destroy()
         state_logger->destroy();
 }
 
-string playerWarpJumpDriveToString(EPlayerWarpJumpDrive player_warp_jump_drive)
+string playerRLSWARPDriveToString(EPlayerRLSWARPDrive player_RLS_WARP_drive)
 {
-    switch(player_warp_jump_drive)
+    switch(player_RLS_WARP_drive)
     {
     case PWJ_ShipDefault:
         return "Ship default";
-    case PWJ_WarpDrive:
-        return "Warp-drive";
-    case PWJ_JumpDrive:
-        return "Jump-drive";
-    case PWJ_WarpAndJumpDrive:
+    case PWJ_RLSDrive:
+        return "RLS-drive";
+    case PWJ_WARPDrive:
+        return "WARP-drive";
+    case PWJ_RLSAndWARPDrive:
         return "Both";
     default:
         return "?";

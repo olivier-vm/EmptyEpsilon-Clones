@@ -117,12 +117,12 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Place Waypoint", [this]() {
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", "Placer Balise", [this]() {
         mode = WaypointPlacement;
         option_buttons->hide();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Delete Waypoint", [this]() {
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", "Effacer Balise", [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
             my_spaceship->commandRemoveWaypoint(targets.getWaypointIndex());
@@ -131,14 +131,14 @@ RelayScreen::RelayScreen(GuiContainer* owner)
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Launch probe button.
-    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", "Launch Probe", [this]() {
+    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", "Lancer Sonde", [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Reputation display.
-    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Reputation:", "");
+    info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.7, "Trans-Crebits:", "");
     info_reputation->setSize(GuiElement::GuiSizeMax, 40);
 
     // Bottom layout.
@@ -268,7 +268,7 @@ void RelayScreen::onDraw(sf::RenderTarget& window)
     if (my_spaceship)
     {
         info_reputation->setValue(string(my_spaceship->getReputationPoints(), 0));
-        launch_probe_button->setText("Launch probe (" + string(my_spaceship->scan_probe_stock) + ")");
+        launch_probe_button->setText("Lancer sonde (" + string(my_spaceship->scan_probe_stock) + ")");
     }
 
     if (targets.getWaypointIndex() >= 0)

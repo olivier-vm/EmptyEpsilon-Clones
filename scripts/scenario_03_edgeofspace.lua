@@ -13,8 +13,8 @@ function init()
     -- Modify the default cruiser into a technical cruiser, which has less weapon power then the normal player cruiser.
     Player:setTypeName("Technician Cruiser")
     --             		 # Arc, Dir, Range, CycleTime, Dmg
-    Player:setBeamWeapon(0, 90,-25, 1000.0, 6.0, 10)
-    Player:setBeamWeapon(1, 90, 25, 1000.0, 6.0, 10)
+    Player:setLASERWeapon(0, 90,-25, 1000.0, 6.0, 10)
+    Player:setLASERWeapon(1, 90, 25, 1000.0, 6.0, 10)
     Player:setWeaponTubeCount(1)
     Player:setWeaponTubeDirection(0, 0)
     Player:setWeaponStorageMax("Nuke", 0)
@@ -596,9 +596,9 @@ Please dock so we can come aboard.]])
             -- Reconfigure the player ship into a Wartime Technician, which has more weapon capabilities then the Technical cruiser.
 			Player:setTypeName("Wartime Technician")
             --                    # Arc, Dir, Range, CycleTime, Dmg
-            Player:setBeamWeapon(0, 100, -20, 1000.0, 6.0, 10)
-            Player:setBeamWeapon(1, 100,  20, 1000.0, 6.0, 10)
-            Player:setBeamWeapon(2,  90, 180, 1000.0, 6.0, 10)
+            Player:setLASERWeapon(0, 100, -20, 1000.0, 6.0, 10)
+            Player:setLASERWeapon(1, 100,  20, 1000.0, 6.0, 10)
+            Player:setLASERWeapon(2,  90, 180, 1000.0, 6.0, 10)
             Player:setWeaponTubeCount(3)
             Player:setWeaponTubeDirection(0, 0):weaponTubeDisallowMissle(0, "Mine")
             Player:setWeaponTubeDirection(1, 0):weaponTubeDisallowMissle(1, "Mine")

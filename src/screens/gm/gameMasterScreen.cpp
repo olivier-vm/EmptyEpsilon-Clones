@@ -568,8 +568,8 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         y += 30;
     }
     
-    (new GuiButton(box, "CREATE_WARP_JAMMER", "Warp Jammer", [this]() {
-        setCreateScript("WarpJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
+    (new GuiButton(box, "CREATE_RLS_JAMMER", "RLS Jammer", [this]() {
+        setCreateScript("RLSJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     (new GuiButton(box, "CREATE_MINE", "Mine", [this]() {

@@ -8,7 +8,7 @@ class GuiSlider;
 class GuiButton;
 class GuiProgressbar;
 
-class GuiJumpControls : public GuiElement
+class GuiWARPControls : public GuiElement
 {
 private:
     GuiKeyValueDisplay* label;
@@ -16,7 +16,7 @@ private:
     GuiButton* button;
     GuiProgressbar* charge_bar;
 public:
-    GuiJumpControls(GuiContainer* owner, string id);
+    GuiWARPControls(GuiContainer* owner, string id);
     
     virtual void onDraw(sf::RenderTarget& window) override;
     virtual void onHotkey(const HotkeyResult& key) override;

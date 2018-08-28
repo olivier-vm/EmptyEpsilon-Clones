@@ -122,30 +122,30 @@ void fillDefaultDatabaseData()
         entry->addKeyValue("Hull", string(int(ship_template->hull)));
         entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));
         entry->addKeyValue("Turn speed", string(int(ship_template->turn_speed)));
-        if (ship_template->warp_speed > 0.0)
+        if (ship_template->RLS_speed > 0.0)
         {
-            entry->addKeyValue("Has warp drive", "True");
-            entry->addKeyValue("Warp speed", string(int(ship_template->warp_speed)));
+            entry->addKeyValue("Has RLS drive", "True");
+            entry->addKeyValue("RLS speed", string(int(ship_template->RLS_speed)));
         }
-        if (ship_template->has_jump_drive)
+        if (ship_template->has_WARP_drive)
         {
-            entry->addKeyValue("Has jump drive", "True");
+            entry->addKeyValue("Has WARP drive", "True");
         }
-        for(int n=0; n<max_beam_weapons; n++)
+        for(int n=0; n<max_LASER_weapons; n++)
         {
-            if (ship_template->beams[n].getRange() > 0)
+            if (ship_template->LASERs[n].getRange() > 0)
             {
                 string name = "?";
-                if (std::abs(sf::angleDifference(0.0f, ship_template->beams[n].getDirection())) <= 45)
+                if (std::abs(sf::angleDifference(0.0f, ship_template->LASERs[n].getDirection())) <= 45)
                     name = "Front";
-                if (std::abs(sf::angleDifference(90.0f, ship_template->beams[n].getDirection())) < 45)
+                if (std::abs(sf::angleDifference(90.0f, ship_template->LASERs[n].getDirection())) < 45)
                     name = "Right";
-                if (std::abs(sf::angleDifference(-90.0f, ship_template->beams[n].getDirection())) < 45)
+                if (std::abs(sf::angleDifference(-90.0f, ship_template->LASERs[n].getDirection())) < 45)
                     name = "Left";
-                if (std::abs(sf::angleDifference(180.0f, ship_template->beams[n].getDirection())) <= 45)
+                if (std::abs(sf::angleDifference(180.0f, ship_template->LASERs[n].getDirection())) <= 45)
                     name = "Rear";
 
-                entry->addKeyValue(name + " beam weapon", string(ship_template->beams[n].getDamage() / ship_template->beams[n].getCycleTime(), 2) + " DPS");
+                entry->addKeyValue(name + " LASER weapon", string(ship_template->LASERs[n].getDamage() / ship_template->LASERs[n].getCycleTime(), 2) + " DPS");
             }
         }
         if (ship_template->weapon_tube_count > 0)

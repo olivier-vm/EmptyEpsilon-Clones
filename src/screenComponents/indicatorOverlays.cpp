@@ -18,10 +18,10 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
     shield_low_warning_overlay = new GuiOverlay(this, "SHIELD_LOW", sf::Color(255, 0, 0, 0));
     pause_overlay = new GuiOverlay(this, "PAUSE", sf::Color(0, 0, 0, 128));
     (new GuiPanel(pause_overlay, "PAUSE_BOX"))->setPosition(0, 0, ACenter)->setSize(500, 100);
-    (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Game Paused", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
+    (new GuiLabel(pause_overlay, "PAUSE_LABEL", "Pas de Signal", 70))->setPosition(0, 0, ACenter)->setSize(500, 100);
     if (game_server)
     {
-        (new GuiButton(pause_overlay, "PAUSE_RESUME", "Unpause", []() {
+        (new GuiButton(pause_overlay, "PAUSE_RESUME", "Activer", []() {
             engine->setGameSpeed(1.0);
         }))->setPosition(0, 75, ACenter)->setSize(500, 50);
     }
@@ -34,7 +34,7 @@ GuiIndicatorOverlays::GuiIndicatorOverlays(GuiContainer* owner)
 
 GuiIndicatorOverlays::~GuiIndicatorOverlays()
 {
-    warpPostProcessor->enabled = false;
+    RLSPostProcessor->enabled = false;
     glitchPostProcessor->enabled = false;
 }
 
@@ -76,27 +76,27 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
 
     if (my_spaceship)
     {
-        if (my_spaceship->jump_indicator > 0.0)
+        if (my_spaceship->WARP_indicator > 0.0)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", my_spaceship->jump_indicator * 10.0);
+            glitchPostProcessor->setUniform("magtitude", my_spaceship->WARP_indicator * 10.0);
             glitchPostProcessor->setUniform("delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
         }
-        if (my_spaceship->current_warp > 0.0)
+        if (my_spaceship->current_RLS > 0.0)
         {
-            warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", my_spaceship->current_warp * 0.01);
-        }else if (my_spaceship->jump_delay > 0.0 && my_spaceship->jump_delay < 2.0)
+            RLSPostProcessor->enabled = true;
+            RLSPostProcessor->setUniform("amount", my_spaceship->current_RLS * 0.01);
+        }else if (my_spaceship->WARP_delay > 0.0 && my_spaceship->WARP_delay < 2.0)
         {
-            warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0 - my_spaceship->jump_delay) * 0.1);
+            RLSPostProcessor->enabled = true;
+            RLSPostProcessor->setUniform("amount", (2.0 - my_spaceship->WARP_delay) * 0.1);
         }else{
-            warpPostProcessor->enabled = false;
+            RLSPostProcessor->enabled = false;
         }
     }else{
-        warpPostProcessor->enabled = false;
+        RLSPostProcessor->enabled = false;
         glitchPostProcessor->enabled = false;
     }
     
@@ -118,13 +118,13 @@ void GuiIndicatorOverlays::onDraw(sf::RenderTarget& window)
             switch(fvf_state)
             {
             case FVF_Enemy:
-                victory_label->setText("Defeat!");
+                victory_label->setText("Echec!");
                 break;
             case FVF_Friendly:
-                victory_label->setText("Victory!");
+                victory_label->setText("Mission OK!");
                 break;
             case FVF_Neutral:
-                victory_label->setText(factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " wins");
+                victory_label->setText(factionInfo[gameGlobalInfo->getVictoryFactionId()]->getName() + " gagne");
                 break;
             }
         }

@@ -4,9 +4,9 @@
 #include "mesh.h"
 #include "main.h"
 
-REGISTER_MULTIPLAYER_CLASS(BeamEffect, "BeamEffect");
-BeamEffect::BeamEffect()
-: SpaceObject(1000, "BeamEffect")
+REGISTER_MULTIPLAYER_CLASS(LASEREffect, "LASEREffect");
+LASEREffect::LASEREffect()
+: SpaceObject(1000, "LASEREffect")
 {
     setCollisionRadius(1.0);
     lifetime = 1.0;
@@ -19,18 +19,18 @@ BeamEffect::BeamEffect()
     registerMemberReplication(&targetOffset);
     registerMemberReplication(&targetLocation, 1.0);
     registerMemberReplication(&hitNormal);
-    registerMemberReplication(&beam_texture);
+    registerMemberReplication(&LASER_texture);
 }
 
 #if FEATURE_3D_RENDERING
-void BeamEffect::draw3DTransparent()
+void LASEREffect::draw3DTransparent()
 {
     glTranslatef(-getPosition().x, -getPosition().y, 0);
     sf::Vector3f startPoint(getPosition().x, getPosition().y, sourceOffset.z);
     sf::Vector3f endPoint(targetLocation.x, targetLocation.y, targetOffset.z);
     sf::Vector3f eyeNormal = sf::normalize(sf::cross(camera_position - startPoint, endPoint - startPoint));
 
-    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture(beam_texture));
+    ShaderManager::getShader("basicShader")->setParameter("textureMap", *textureManager.getTexture(LASER_texture));
     sf::Shader::bind(ShaderManager::getShader("basicShader"));
     glColor3f(lifetime, lifetime, lifetime);
     {
@@ -76,7 +76,7 @@ void BeamEffect::draw3DTransparent()
 }
 #endif//FEATURE_3D_RENDERING
 
-void BeamEffect::update(float delta)
+void LASEREffect::update(float delta)
 {
     P<SpaceObject> source, target;
     if (game_server)
@@ -99,14 +99,14 @@ void BeamEffect::update(float delta)
         destroy();
 }
 
-void BeamEffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
+void LASEREffect::setSource(P<SpaceObject> source, sf::Vector3f offset)
 {
     sourceId = source->getMultiplayerId();
     sourceOffset = offset;
     update(0);
 }
 
-void BeamEffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
+void LASEREffect::setTarget(P<SpaceObject> target, sf::Vector2f hitLocation)
 {
     target_id = target->getMultiplayerId();
     float r = target->getRadius();

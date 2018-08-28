@@ -65,7 +65,7 @@ float ThreatLevelEstimate::getThreatFor(P<SpaceShip> ship)
         {
             if (P<MissileWeapon>(obj))
                 threat += 5000.0f;
-            if (P<BeamEffect>(obj))
+            if (P<LASEREffect>(obj))
                 threat += 5000.0f;
             continue;
         }

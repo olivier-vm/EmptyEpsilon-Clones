@@ -121,8 +121,8 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalRightToLeft);
     engine_layout->setPosition(-20, -80, ABottomRight)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
-    warp_controls = (new GuiWarpControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    jump_controls = (new GuiJumpControls(engine_layout, "JUMP"))->setSize(100, GuiElement::GuiSizeMax);
+    RLS_controls = (new GuiRLSControls(engine_layout, "RLS"))->setSize(100, GuiElement::GuiSizeMax);
+    WARP_controls = (new GuiWARPControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
     (new GuiDockingButton(this, "DOCKING"))->setPosition(-20, -20, ABottomRight)->setSize(280, 50);
 
     (new GuiCustomShipFunctions(this, tacticalOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
@@ -137,8 +137,8 @@ void TacticalScreen::onDraw(sf::RenderTarget& window)
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
 
-        warp_controls->setVisible(my_spaceship->has_warp_drive);
-        jump_controls->setVisible(my_spaceship->has_jump_drive);
+        RLS_controls->setVisible(my_spaceship->has_RLS_drive);
+        WARP_controls->setVisible(my_spaceship->has_WARP_drive);
 
         shields_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "% " + string(my_spaceship->getShieldPercentage(1)) + "%");
         targets.set(my_spaceship->getTarget());

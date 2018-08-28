@@ -5,17 +5,17 @@
 #include "main.h"
 
 #include "scriptInterface.h"
-REGISTER_SCRIPT_SUBCLASS(WarpJammer, SpaceObject)
+REGISTER_SCRIPT_SUBCLASS(RLSJammer, SpaceObject)
 {
-    REGISTER_SCRIPT_CLASS_FUNCTION(WarpJammer, setRange);
+    REGISTER_SCRIPT_CLASS_FUNCTION(RLSJammer, setRange);
 }
 
-REGISTER_MULTIPLAYER_CLASS(WarpJammer, "WarpJammer");
+REGISTER_MULTIPLAYER_CLASS(RLSJammer, "RLSJammer");
 
-PVector<WarpJammer> WarpJammer::jammer_list;
+PVector<RLSJammer> RLSJammer::jammer_list;
 
-WarpJammer::WarpJammer()
-: SpaceObject(100, "WarpJammer")
+RLSJammer::RLSJammer()
+: SpaceObject(100, "RLSJammer")
 {
     range = 7000.0;
     hull = 50;
@@ -28,7 +28,7 @@ WarpJammer::WarpJammer()
     model_info.setData("shield_generator");
 }
 
-void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
+void RLSJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range)
 {
     sf::Sprite object_sprite;
     textureManager.setTexture(object_sprite, "RadarBlip.png");
@@ -54,7 +54,7 @@ void WarpJammer::drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, fl
     }
 }
 
-void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
+void RLSJammer::takeDamage(float damage_amount, DamageInfo info)
 {
     if (info.type == DT_EMP)
         return;
@@ -68,9 +68,9 @@ void WarpJammer::takeDamage(float damage_amount, DamageInfo info)
     }
 }
 
-bool WarpJammer::isWarpJammed(sf::Vector2f position)
+bool RLSJammer::isRLSJammed(sf::Vector2f position)
 {
-    foreach(WarpJammer, wj, jammer_list)
+    foreach(RLSJammer, wj, jammer_list)
     {
         if (wj->getPosition() - position < wj->range)
             return true;
@@ -78,14 +78,14 @@ bool WarpJammer::isWarpJammed(sf::Vector2f position)
     return false;
 }
 
-sf::Vector2f WarpJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end)
+sf::Vector2f RLSJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end)
 {
     sf::Vector2f startEndDiff = end - start;
     float startEndLength = sf::length(startEndDiff);
-    P<WarpJammer> first_jammer;
+    P<RLSJammer> first_jammer;
     float first_jammer_f = startEndLength;
     sf::Vector2f first_jammer_q;
-    foreach(WarpJammer, wj, jammer_list)
+    foreach(RLSJammer, wj, jammer_list)
     {
         float f = sf::dot(startEndDiff, wj->getPosition() - start) / startEndLength;
         if (f < 0.0)

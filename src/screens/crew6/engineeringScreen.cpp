@@ -207,13 +207,13 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                     effectiveness = (1.0f + effectiveness) / 2.0f;
                 addSystemEffect("Energy production", string(effectiveness * -PlayerSpaceship::system_power_user_factor[SYS_Reactor] * 60.0, 1) + "/m");
                 break;
-            case SYS_BeamWeapons:
+            case SYS_LASERWeapons:
                 addSystemEffect("Firing rate", string(int(effectiveness * 100)) + "%");
                 // If the ship has a turret, also note that the rotation rate
                 // is affected.
-                for(int n = 0; n < max_beam_weapons; n++)
+                for(int n = 0; n < max_LASER_weapons; n++)
                 {
-                    if (my_spaceship->beam_weapons[n].getTurretArc() > 0)
+                    if (my_spaceship->LASER_weapons[n].getTurretArc() > 0)
                     {
                         addSystemEffect("Turret rotation rate", string(int(effectiveness * 100)) + "%");
                         break;
@@ -233,15 +233,15 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
                     addSystemEffect("Combat recharge rate", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
                 break;
-            case SYS_Warp:
-                addSystemEffect("Warp drive speed", string(int(effectiveness * 100)) + "%");
+            case SYS_RLS:
+                addSystemEffect("RLS drive speed", string(int(effectiveness * 100)) + "%");
                 break;
-            case SYS_JumpDrive:
-                addSystemEffect("Jump drive recharge rate", string(int(my_spaceship->getJumpDriveRechargeRate() * 100)) + "%");
-                addSystemEffect("Jump drive jump speed", string(int(effectiveness * 100)) + "%");
+            case SYS_WARPDrive:
+                addSystemEffect("WARP drive recharge rate", string(int(my_spaceship->getWARPDriveRechargeRate() * 100)) + "%");
+                addSystemEffect("WARP drive WARP speed", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_FrontShield:
-                if (gameGlobalInfo->use_beam_shield_frequencies)
+                if (gameGlobalInfo->use_LASER_shield_frequencies)
                     addSystemEffect("Calibration speed", string(int((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100)) + "%");
                 addSystemEffect("Charge rate", string(int(effectiveness * 100)) + "%");
                 {
@@ -255,7 +255,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 }
                 break;
             case SYS_RearShield:
-                if (gameGlobalInfo->use_beam_shield_frequencies)
+                if (gameGlobalInfo->use_LASER_shield_frequencies)
                     addSystemEffect("Calibration speed", string(int((my_spaceship->getSystemEffectiveness(SYS_FrontShield) + my_spaceship->getSystemEffectiveness(SYS_RearShield)) / 2.0 * 100)) + "%");
                 addSystemEffect("Charge rate", string(int(effectiveness * 100)) + "%");
                 {
@@ -283,12 +283,12 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
     if (key.category == "ENGINEERING" && my_spaceship)
     {
         if (key.hotkey == "SELECT_REACTOR") selectSystem(SYS_Reactor);
-        if (key.hotkey == "SELECT_BEAM_WEAPONS") selectSystem(SYS_BeamWeapons);
+        if (key.hotkey == "SELECT_LASER_WEAPONS") selectSystem(SYS_LASERWeapons);
         if (key.hotkey == "SELECT_MISSILE_SYSTEM") selectSystem(SYS_MissileSystem);
         if (key.hotkey == "SELECT_MANEUVER") selectSystem(SYS_Maneuver);
         if (key.hotkey == "SELECT_IMPULSE") selectSystem(SYS_Impulse);
-        if (key.hotkey == "SELECT_WARP") selectSystem(SYS_Warp);
-        if (key.hotkey == "SELECT_JUMP_DRIVE") selectSystem(SYS_JumpDrive);
+        if (key.hotkey == "SELECT_RLS") selectSystem(SYS_RLS);
+        if (key.hotkey == "SELECT_WARP_DRIVE") selectSystem(SYS_WARPDrive);
         if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
         if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
         

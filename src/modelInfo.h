@@ -8,12 +8,12 @@ class ModelInfo : sf::NonCopyable
 private:
     P<ModelData> data;
     float last_engine_particle_time;
-    float last_warp_particle_time;
+    float last_RLS_particle_time;
 public:
     ModelInfo();
     
     float engine_scale;
-    float warp_scale;
+    float RLS_scale;
 
     void render(sf::Vector2f position, float rotation);
     void renderOverlay(sf::Texture* texture, float alpha);

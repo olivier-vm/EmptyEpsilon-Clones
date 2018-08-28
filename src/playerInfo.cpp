@@ -185,18 +185,18 @@ string getCrewPositionName(ECrewPosition position)
 {
     switch(position)
     {
-    case helmsOfficer: return "Helms";
-    case weaponsOfficer: return "Weapons";
-    case engineering: return "Engineering";
+    case helmsOfficer: return "Pilote";
+    case weaponsOfficer: return "Armes";
+    case engineering: return "Ingenieur";
     case scienceOfficer: return "Science";
-    case relayOfficer: return "Relay";
-    case tacticalOfficer: return "Tactical";
-    case engineeringAdvanced: return "Engineering+";
+    case relayOfficer: return "Communications";
+    case tacticalOfficer: return "Tactique";
+    case engineeringAdvanced: return "Ingenieur+";
     case operationsOfficer: return "Operations";
-    case singlePilot: return "Single Pilot";
-    case damageControl: return "Damage Control";
-    case powerManagement: return "Power Management";
-    case databaseView: return "Database";
+    case singlePilot: return "Pilote Solo";
+    case damageControl: return "Controle Degats";
+    case powerManagement: return "Gestion Puissance";
+    case databaseView: return "Base de Donnees";
     default: return "ErrUnk: " + string(position);
     }
 }

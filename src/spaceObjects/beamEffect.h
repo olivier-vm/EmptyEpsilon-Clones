@@ -3,7 +3,7 @@
 
 #include "spaceObject.h"
 
-class BeamEffect : public SpaceObject, public Updatable
+class LASEREffect : public SpaceObject, public Updatable
 {
     float lifetime;
     int32_t sourceId;
@@ -13,8 +13,8 @@ class BeamEffect : public SpaceObject, public Updatable
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
 public:
-    string beam_texture;
-    BeamEffect();
+    string LASER_texture;
+    LASEREffect();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();

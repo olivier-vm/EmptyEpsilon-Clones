@@ -53,7 +53,7 @@ private:
      */
     sf::Vector2f collision_box;
 
-    std::vector<sf::Vector3f> beam_position;
+    std::vector<sf::Vector3f> LASER_position;
     std::vector<sf::Vector3f> tube_position;
     std::vector<EngineEmitterData> engine_emitters;
 
@@ -97,9 +97,9 @@ public:
     void setCollisionBox(sf::Vector2f collision_box);
 
     /*!
-     * Add a beam position (location from which a beam weapon is fired
+     * Add a LASER position (location from which a LASER weapon is fired
      */
-    void addBeamPosition(sf::Vector3f position);
+    void addLASERPosition(sf::Vector3f position);
 
     /*!
      * Add a (missile) tube position (location from which a tube based weapon is fired
@@ -113,8 +113,8 @@ public:
     //Depricated
     void addEngineEmitor(sf::Vector3f position, sf::Vector3f color, float scale);
 
-    sf::Vector3f getBeamPosition(int index);
-    sf::Vector2f getBeamPosition2D(int index);
+    sf::Vector3f getLASERPosition(int index);
+    sf::Vector2f getLASERPosition2D(int index);
     sf::Vector3f getTubePosition(int index);
     sf::Vector2f getTubePosition2D(int index);
     void setCollisionData(P<SpaceObject> object);

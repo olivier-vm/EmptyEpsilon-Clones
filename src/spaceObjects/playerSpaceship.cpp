@@ -67,8 +67,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWarp);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandJump);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRLS);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandWARP);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandLoadTube);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandUnloadTube);
@@ -91,8 +91,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     // Use this command on ships to require less player interaction, especially
     // when combined with setAutoCoolant/auto_coolant_enabled.
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetAutoRepair);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamFrequency);
-    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetBeamSystemTarget);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetLASERFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetLASERSystemTarget);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandSetShieldFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandAddWaypoint);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandRemoveWaypoint);
@@ -121,20 +121,20 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 
 float PlayerSpaceship::system_power_user_factor[] = {
     /*SYS_Reactor*/     -25.0 * 0.08,
-    /*SYS_BeamWeapons*/   3.0 * 0.08,
+    /*SYS_LASERWeapons*/   3.0 * 0.08,
     /*SYS_MissileSystem*/ 1.0 * 0.08,
     /*SYS_Maneuver*/      2.0 * 0.08,
     /*SYS_Impulse*/       4.0 * 0.08,
-    /*SYS_Warp*/          5.0 * 0.08,
-    /*SYS_JumpDrive*/     5.0 * 0.08,
+    /*SYS_RLS*/          5.0 * 0.08,
+    /*SYS_WARPDrive*/     5.0 * 0.08,
     /*SYS_FrontShield*/   5.0 * 0.08,
     /*SYS_RearShield*/    5.0 * 0.08,
 };
 
 static const int16_t CMD_TARGET_ROTATION = 0x0001;
 static const int16_t CMD_IMPULSE = 0x0002;
-static const int16_t CMD_WARP = 0x0003;
-static const int16_t CMD_JUMP = 0x0004;
+static const int16_t CMD_RLS = 0x0003;
+static const int16_t CMD_WARP = 0x0004;
 static const int16_t CMD_SET_TARGET = 0x0005;
 static const int16_t CMD_LOAD_TUBE = 0x0006;
 static const int16_t CMD_UNLOAD_TUBE = 0x0007;
@@ -154,8 +154,8 @@ static const int16_t CMD_SEND_TEXT_COMM = 0x0014;
 static const int16_t CMD_SEND_TEXT_COMM_PLAYER = 0x0015;
 static const int16_t CMD_ANSWER_COMM_HAIL = 0x0016;
 static const int16_t CMD_SET_AUTO_REPAIR = 0x0017;
-static const int16_t CMD_SET_BEAM_FREQUENCY = 0x0018;
-static const int16_t CMD_SET_BEAM_SYSTEM_TARGET = 0x0019;
+static const int16_t CMD_SET_LASER_FREQUENCY = 0x0018;
+static const int16_t CMD_SET_LASER_SYSTEM_TARGET = 0x0019;
 static const int16_t CMD_SET_SHIELD_FREQUENCY = 0x001A;
 static const int16_t CMD_ADD_WAYPOINT = 0x001B;
 static const int16_t CMD_REMOVE_WAYPOINT = 0x001C;
@@ -198,7 +198,7 @@ PlayerSpaceship::PlayerSpaceship()
     main_screen_setting = MSS_Front;
     main_screen_overlay = MSO_HideComms;
     hull_damage_indicator = 0.0;
-    jump_indicator = 0.0;
+    WARP_indicator = 0.0;
     comms_state = CS_Inactive;
     comms_open_delay = 0.0;
     shield_calibration_delay = 0.0;
@@ -224,7 +224,7 @@ PlayerSpaceship::PlayerSpaceship()
 
     updateMemberReplicationUpdateDelay(&target_rotation, 0.1);
     registerMemberReplication(&hull_damage_indicator, 0.5);
-    registerMemberReplication(&jump_indicator, 0.5);
+    registerMemberReplication(&WARP_indicator, 0.5);
     registerMemberReplication(&energy_level, 0.1);
     registerMemberReplication(&max_energy_level);
     registerMemberReplication(&main_screen_setting);
@@ -236,7 +236,7 @@ PlayerSpaceship::PlayerSpaceship()
     registerMemberReplication(&shield_calibration_delay, 0.5);
     registerMemberReplication(&auto_repair_enabled);
     registerMemberReplication(&auto_coolant_enabled);
-    registerMemberReplication(&beam_system_target);
+    registerMemberReplication(&LASER_system_target);
     registerMemberReplication(&comms_state);
     registerMemberReplication(&comms_open_delay, 1.0);
     registerMemberReplication(&comms_reply_message);
@@ -303,9 +303,9 @@ void PlayerSpaceship::update(float delta)
     if (hull_damage_indicator > 0)
         hull_damage_indicator -= delta;
 
-    // If we're jumping, tick the countdown timer.
-    if (jump_indicator > 0)
-        jump_indicator -= delta;
+    // If we're WARPing, tick the countdown timer.
+    if (WARP_indicator > 0)
+        WARP_indicator -= delta;
 
     // If shields are calibrating, tick the calibration delay. Factor shield
     // subsystem effectiveness when determining the tick rate.
@@ -487,14 +487,14 @@ void PlayerSpaceship::update(float delta)
             shields_active = false;
         }
 
-        // If a ship is jumping or warping, consume additional energy.
-        if (has_warp_drive && warp_request > 0 && !(has_jump_drive && jump_delay > 0))
+        // If a ship is WARPing or RLSing, consume additional energy.
+        if (has_RLS_drive && RLS_request > 0 && !(has_WARP_drive && WARP_delay > 0))
         {
-            // If warping, consume energy at a rate of 120% the warp request.
+            // If RLSing, consume energy at a rate of 120% the RLS request.
             // If shields are up, that rate is increased by an additional 50%.
-            if (!useEnergy(energy_warp_per_second * delta * powf(warp_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
-                // If there's not enough energy, fall out of warp.
-                warp_request = 0;
+            if (!useEnergy(energy_RLS_per_second * delta * powf(RLS_request, 1.2f) * (shields_active ? 1.5 : 1.0)))
+                // If there's not enough energy, fall out of RLS.
+                RLS_request = 0;
         }
 
         if (scanning_target)
@@ -584,27 +584,27 @@ void PlayerSpaceship::applyTemplateValues()
     // Apply default spaceship object values first.
     SpaceShip::applyTemplateValues();
 
-    // Override whether the ship has jump and warp drives based on the server
+    // Override whether the ship has WARP and RLS drives based on the server
     // setting.
-    switch(gameGlobalInfo->player_warp_jump_drive_setting)
+    switch(gameGlobalInfo->player_RLS_WARP_drive_setting)
     {
     default:
         break;
-    case PWJ_WarpDrive:
-        setWarpDrive(true);
-        setJumpDrive(false);
+    case PWJ_RLSDrive:
+        setRLSDrive(true);
+        setWARPDrive(false);
         break;
-    case PWJ_JumpDrive:
-        setWarpDrive(false);
-        setJumpDrive(true);
+    case PWJ_WARPDrive:
+        setRLSDrive(false);
+        setWARPDrive(true);
         break;
-    case PWJ_WarpAndJumpDrive:
-        setWarpDrive(true);
-        setJumpDrive(true);
+    case PWJ_RLSAndWARPDrive:
+        setRLSDrive(true);
+        setWARPDrive(true);
         break;
     case PWJ_None:
-        setWarpDrive(false);
-        setJumpDrive(false);
+        setRLSDrive(false);
+        setWARPDrive(false);
         break;
     }
 
@@ -613,11 +613,11 @@ void PlayerSpaceship::applyTemplateValues()
     setRepairCrewCount(ship_template->repair_crew_count);
 }
 
-void PlayerSpaceship::executeJump(float distance)
+void PlayerSpaceship::executeWARP(float distance)
 {
-    // When jumping, reset the jump effect and move the ship.
-    jump_indicator = 2.0;
-    SpaceShip::executeJump(distance);
+    // When WARPing, reset the WARP effect and move the ship.
+    WARP_indicator = 2.0;
+    SpaceShip::executeWARP(distance);
 }
 
 void PlayerSpaceship::takeHullDamage(float damage_amount, DamageInfo& info)
@@ -1044,14 +1044,14 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_IMPULSE:
         packet >> impulse_request;
         break;
-    case CMD_WARP:
-        packet >> warp_request;
+    case CMD_RLS:
+        packet >> RLS_request;
         break;
-    case CMD_JUMP:
+    case CMD_WARP:
         {
             float distance;
             packet >> distance;
-            initializeJump(distance);
+            initializeWARP(distance);
         }
         break;
     case CMD_SET_TARGET:
@@ -1302,26 +1302,26 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
     case CMD_SET_AUTO_REPAIR:
         packet >> auto_repair_enabled;
         break;
-    case CMD_SET_BEAM_FREQUENCY:
+    case CMD_SET_LASER_FREQUENCY:
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            beam_frequency = new_frequency;
-            if (beam_frequency < 0)
-                beam_frequency = 0;
-            if (beam_frequency > SpaceShip::max_frequency)
-                beam_frequency = SpaceShip::max_frequency;
+            LASER_frequency = new_frequency;
+            if (LASER_frequency < 0)
+                LASER_frequency = 0;
+            if (LASER_frequency > SpaceShip::max_frequency)
+                LASER_frequency = SpaceShip::max_frequency;
         }
         break;
-    case CMD_SET_BEAM_SYSTEM_TARGET:
+    case CMD_SET_LASER_SYSTEM_TARGET:
         {
             ESystem system;
             packet >> system;
-            beam_system_target = system;
-            if (beam_system_target < SYS_None)
-                beam_system_target = SYS_None;
-            if (beam_system_target > ESystem(int(SYS_COUNT) - 1))
-                beam_system_target = ESystem(int(SYS_COUNT) - 1);
+            LASER_system_target = system;
+            if (LASER_system_target < SYS_None)
+                LASER_system_target = SYS_None;
+            if (LASER_system_target > ESystem(int(SYS_COUNT) - 1))
+                LASER_system_target = ESystem(int(SYS_COUNT) - 1);
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
@@ -1494,17 +1494,17 @@ void PlayerSpaceship::commandImpulse(float target)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandWarp(int8_t target)
+void PlayerSpaceship::commandRLS(int8_t target)
 {
     sf::Packet packet;
-    packet << CMD_WARP << target;
+    packet << CMD_RLS << target;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandJump(float distance)
+void PlayerSpaceship::commandWARP(float distance)
 {
     sf::Packet packet;
-    packet << CMD_JUMP << distance;
+    packet << CMD_WARP << distance;
     sendClientCommand(packet);
 }
 
@@ -1648,17 +1648,17 @@ void PlayerSpaceship::commandSetAutoRepair(bool enabled)
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetBeamFrequency(int32_t frequency)
+void PlayerSpaceship::commandSetLASERFrequency(int32_t frequency)
 {
     sf::Packet packet;
-    packet << CMD_SET_BEAM_FREQUENCY << frequency;
+    packet << CMD_SET_LASER_FREQUENCY << frequency;
     sendClientCommand(packet);
 }
 
-void PlayerSpaceship::commandSetBeamSystemTarget(ESystem system)
+void PlayerSpaceship::commandSetLASERSystemTarget(ESystem system)
 {
     sf::Packet packet;
-    packet << CMD_SET_BEAM_SYSTEM_TARGET << system;
+    packet << CMD_SET_LASER_SYSTEM_TARGET << system;
     sendClientCommand(packet);
 }
 

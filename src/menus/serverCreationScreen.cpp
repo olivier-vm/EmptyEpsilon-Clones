@@ -24,10 +24,10 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     // Set defaults from preferences.
-    gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
+    gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(PreferencesManager::get("server_config_RLS_WARP_drive_setting", "0").toInt());
     gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
-    gameGlobalInfo->use_beam_shield_frequencies = PreferencesManager::get("server_config_use_beam_shield_frequencies", "1").toInt();
+    gameGlobalInfo->use_LASER_shield_frequencies = PreferencesManager::get("server_config_use_LASER_shield_frequencies", "1").toInt();
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
     gameGlobalInfo->allow_main_screen_long_range_radar = PreferencesManager::get("server_config_allow_main_screen_long_range_radar", "1").toInt();
@@ -80,13 +80,13 @@ ServerCreationScreen::ServerCreationScreen()
     // Player Ships section.
     (new GuiLabel(left_panel, "PLAYER_SHIP_LABEL", "Player ship options", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Warp/Jump drive row.
+    // RLS/WARP drive row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiLabel(row, "WARP_JUMP_LABEL", "Warp/Jump: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
-        gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(index);
-    }))->setOptions({"Ship default", "Warp drive", "Jump drive", "Both", "Neither"})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiLabel(row, "RLS_WARP_LABEL", "RLS/WARP: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiSelector(row, "RLS_WARP_SELECT", [](int index, string value) {
+        gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(index);
+    }))->setOptions({"Par defaut", "RLS drive", "WARP drive", "Moteurs RLS+Warp", "Neither"})->setSelectionIndex((int)gameGlobalInfo->player_RLS_WARP_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar range limit row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
@@ -123,9 +123,9 @@ ServerCreationScreen::ServerCreationScreen()
     // Frequency and system damage row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
-    (new GuiToggleButton(row, "GAME_FREQUENCIES_TOGGLE", "Beam/shield frequencies", [](bool value) {
-        gameGlobalInfo->use_beam_shield_frequencies = value == 1;
-    }))->setValue(gameGlobalInfo->use_beam_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
+    (new GuiToggleButton(row, "GAME_FREQUENCIES_TOGGLE", "LASER/shield frequencies", [](bool value) {
+        gameGlobalInfo->use_LASER_shield_frequencies = value == 1;
+    }))->setValue(gameGlobalInfo->use_LASER_shield_frequencies)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, ACenterLeft);
 
     (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", "Per-system damage", [](bool value) {
         gameGlobalInfo->use_system_damage = value == 1;
@@ -227,10 +227,10 @@ void ServerCreationScreen::selectScenario(string filename)
 void ServerCreationScreen::startScenario()
 {
     // Set these settings to use as future defaults.
-    PreferencesManager::set("server_config_warp_jump_drive_setting", string(int(gameGlobalInfo->player_warp_jump_drive_setting)));
+    PreferencesManager::set("server_config_RLS_WARP_drive_setting", string(int(gameGlobalInfo->player_RLS_WARP_drive_setting)));
     PreferencesManager::set("server_config_long_range_radar_range", string(gameGlobalInfo->long_range_radar_range, 0));
     PreferencesManager::set("server_config_scanning_complexity", string(int(gameGlobalInfo->scanning_complexity)));
-    PreferencesManager::set("server_config_use_beam_shield_frequencies", string(int(gameGlobalInfo->use_beam_shield_frequencies)));
+    PreferencesManager::set("server_config_use_LASER_shield_frequencies", string(int(gameGlobalInfo->use_LASER_shield_frequencies)));
     PreferencesManager::set("server_config_use_system_damage", string(int(gameGlobalInfo->use_system_damage)));
     PreferencesManager::set("server_config_allow_main_screen_tactical_radar", string(int(gameGlobalInfo->allow_main_screen_tactical_radar)));
     PreferencesManager::set("server_config_allow_main_screen_long_range_radar", string(int(gameGlobalInfo->allow_main_screen_long_range_radar)));
