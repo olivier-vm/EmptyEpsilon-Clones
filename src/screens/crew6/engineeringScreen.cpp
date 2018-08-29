@@ -83,12 +83,12 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     (new GuiImage(icon_layout, "COOLANT_ICON", "gui/icons/coolant"))->setSize(100, GuiElement::GuiSizeMax);
 
     system_rows[SYS_Reactor].button->setIcon("gui/icons/system_reactor");
-    system_rows[SYS_BeamWeapons].button->setIcon("gui/icons/system_beam");
+    system_rows[SYS_LASERWeapons].button->setIcon("gui/icons/system_beam");
     system_rows[SYS_MissileSystem].button->setIcon("gui/icons/system_missile");
     system_rows[SYS_Maneuver].button->setIcon("gui/icons/system_maneuver");
     system_rows[SYS_Impulse].button->setIcon("gui/icons/system_impulse");
-    system_rows[SYS_Warp].button->setIcon("gui/icons/system_warpdrive");
-    system_rows[SYS_JumpDrive].button->setIcon("gui/icons/system_jumpdrive");
+    system_rows[SYS_RLS].button->setIcon("gui/icons/system_warpdrive");
+    system_rows[SYS_WARPDrive].button->setIcon("gui/icons/system_jumpdrive");
     system_rows[SYS_FrontShield].button->setIcon("gui/icons/shields-fore");
     system_rows[SYS_RearShield].button->setIcon("gui/icons/shields-aft");
 
@@ -119,7 +119,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     coolant_slider->disable();
 
     (new GuiShipInternalView(system_row_layouts, "SHIP_INTERNAL_VIEW", 48.0f))->setShip(my_spaceship)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     (new GuiCustomShipFunctions(this, crew_position, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 
     previous_energy_level = 0.0;
@@ -143,7 +143,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 float delta_e = my_spaceship->energy_level - previous_energy_level;
                 float delta_e_per_second = delta_e / delta_t;
                 average_energy_delta = average_energy_delta * 0.99 + delta_e_per_second * 0.01;
-                
+
                 previous_energy_level = my_spaceship->energy_level;
                 previous_energy_measurement = engine->getElapsedTime();
             }
@@ -197,7 +197,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
             power_label->setText("Power: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
             coolant_label->setText("Coolant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant * 100)) + "%/" + string(int(system.coolant_request / PlayerSpaceship::max_coolant * 100)) + "%");
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
-            
+
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
             switch(selected_system)
@@ -291,7 +291,7 @@ void EngineeringScreen::onHotkey(const HotkeyResult& key)
         if (key.hotkey == "SELECT_WARP_DRIVE") selectSystem(SYS_WARPDrive);
         if (key.hotkey == "SELECT_FRONT_SHIELDS") selectSystem(SYS_FrontShield);
         if (key.hotkey == "SELECT_REAR_SHIELDS") selectSystem(SYS_RearShield);
-        
+
         if (selected_system != SYS_None)
         {
             if (key.hotkey == "INCREASE_POWER")
@@ -322,7 +322,7 @@ void EngineeringScreen::selectSystem(ESystem system)
 {
     if (my_spaceship && !my_spaceship->hasSystem(system))
         return;
-    
+
     for(int idx=0; idx<SYS_COUNT; idx++)
     {
         system_rows[idx].button->setValue(idx == system);
