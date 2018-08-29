@@ -1,6 +1,6 @@
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "LASERFrequencySelector.h"
+#include "beamFrequencySelector.h"
 
 GuiLASERFrequencySelector::GuiLASERFrequencySelector(GuiContainer* owner, string id)
 : GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_spaceship->commandSetLASERFrequency(index); })
