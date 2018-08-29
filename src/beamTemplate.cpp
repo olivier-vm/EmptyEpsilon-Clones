@@ -10,7 +10,7 @@ LASERTemplate::LASERTemplate()
     turret_rotation_rate = 0;
     cycle_time = 0;
     damage = 0;
-    beam_texture = "beam_orange.png";
+    LASER_texture = "beam_orange.png";
 
     energy_per_LASER_fire = 3.0;
     heat_per_LASER_fire = 0.02;
