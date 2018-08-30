@@ -11,11 +11,11 @@ function init()
 	x, y = player:getPosition()
 	asteroidList = {}
 	-- Création d'une aura d'asteroïdes
-	-- La répartition de fait "carrée" pour une bonne répartition géométrique
+	-- La répartition est "carrée" pour une bonne répartition géométrique
 	-- Si la répartition se faisait concentrique, il y a une plus forte concentration d'élément près du centre que de l'extérieur
 
 	for n=1,500 do
-		table.insert(asteroidList, Asteroid():setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):setSize(random(10, 500)))
+		Asteroid():setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):setSize(random(10, 500))
 	end
 
 	-- GM buttons
@@ -39,38 +39,38 @@ function asteroidUpdate()
 	player:setHull(1000)
 	-- Il faut repérer dans quel quadrant (et quel coin éventuel) un astéroid est supprimé, pour en rajouter un dans le côté opposé, afin de garantir une répartition régulière
 	local x, y = player:getPosition()
-	for n = 1,500 do
-		distanceTooFar = 0
-		local i, j = asteroidList[n]:getPosition()
-		local xxx = x - i
-		local yyy = y - j
-		if xxx > 30200 then distanceTooFar = distanceTooFar + 1 end -- West
-		if xxx < -30200 then distanceTooFar = distanceTooFar + 2 end -- East
-		if yyy > 30200 then distanceTooFar = distanceTooFar + 4 end -- North
-		if yyy < -30200 then distanceTooFar = distanceTooFar + 8 end -- South
-		if distanceTooFar > 0 then
-			-- On change la position de l'astéroïde qui est trop loin, et on le place dans le quadrant opposé à une distance supérieur au champ de vision 30000 < ... < 30200
-			if distanceTooFar == 1 then
-				asteroidList[n]:setPosition(x + random(30000, 30200), y + random(-30000, 30000)):setSize(random(10, 500))
-			elseif distanceTooFar == 2 then
-				asteroidList[n]:setPosition(x + random(-30000, -30200), y + random(-30000, 30000)):setSize(random(10, 500))
-			elseif distanceTooFar == 4 then
-				asteroidList[n]:setPosition(x + random(-30000, 30000), y + random(30000, 30200)):setSize(random(10, 500))
-			elseif distanceTooFar == 8 then
-				asteroidList[n]:setPosition(x + random(-30000, 30000), y + random(-30000, -30200)):setSize(random(10, 500))
-			elseif distanceTooFar == 5 then
-				asteroidList[n]:setPosition(x + random(30000, 30200), y + random(30000, 30200)):setSize(random(10, 500))
-			elseif distanceTooFar == 6 then
-				asteroidList[n]:setPosition(x + random(-30000, -30200), y + random(30000, 30200)):setSize(random(10, 500))
-			elseif distanceTooFar == 9 then
-				asteroidList[n]:setPosition(x + random(30000, 30200), y + random(-30000, -30200)):setSize(random(10, 500))
-			elseif distanceTooFar == 10 then
-				asteroidList[n]:setPosition(x + random(-30000, -30200), y + random(-30000, -30200)):setSize(random(10, 500))
+	for _, astero in ipairs(getAllObjects()) do
+		if astero.typeName == "Asteroid" then
+			distanceTooFar = 0
+			local i, j = astero:getPosition()
+			local xxx = x - i
+			local yyy = y - j
+			if xxx > 30200 then distanceTooFar = distanceTooFar + 1 end -- West
+			if xxx < -30200 then distanceTooFar = distanceTooFar + 2 end -- East
+			if yyy > 30200 then distanceTooFar = distanceTooFar + 4 end -- North
+			if yyy < -30200 then distanceTooFar = distanceTooFar + 8 end -- South
+			if distanceTooFar > 0 then
+				-- On change la position de l'astéroïde qui est trop loin, et on le place dans le quadrant opposé à une distance supérieur au champ de vision 30000 < ... < 30200
+				if distanceTooFar == 1 then
+					astero:setPosition(x + random(30000, 30200), y + random(-30000, 30000)):setSize(random(10, 500))
+				elseif distanceTooFar == 2 then
+					astero:setPosition(x + random(-30000, -30200), y + random(-30000, 30000)):setSize(random(10, 500))
+				elseif distanceTooFar == 4 then
+					astero:setPosition(x + random(-30000, 30000), y + random(30000, 30200)):setSize(random(10, 500))
+				elseif distanceTooFar == 8 then
+					astero:setPosition(x + random(-30000, 30000), y + random(-30000, -30200)):setSize(random(10, 500))
+				elseif distanceTooFar == 5 then
+					astero:setPosition(x + random(30000, 30200), y + random(30000, 30200)):setSize(random(10, 500))
+				elseif distanceTooFar == 6 then
+					astero:setPosition(x + random(-30000, -30200), y + random(30000, 30200)):setSize(random(10, 500))
+				elseif distanceTooFar == 9 then
+					astero:setPosition(x + random(30000, 30200), y + random(-30000, -30200)):setSize(random(10, 500))
+				elseif distanceTooFar == 10 then
+					astero:setPosition(x + random(-30000, -30200), y + random(-30000, -30200)):setSize(random(10, 500))
+				end
 			end
 		end
 	end
-
-
 end
 
 ------------------------------------
