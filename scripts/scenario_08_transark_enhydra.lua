@@ -1,7 +1,7 @@
 -- Name: Simulation Enhydra
--- Description: Vous êtes le premier équipage d'une nouvelle version améliorée d'un explorateur spatial Enhydra.
---- Votre mission sera de lui faire subir sa première série de tests et son baptème spatial.
---- En cours de mission l'équipage tombe sur d'étranges phénomènes... (il s'agit d'une fiction de combat pour entraîner les hommes à toutes sortes de situations imprévisibles).
+-- Description: Vous Ãªtes le premier Ã©quipage d'une nouvelle version amÃ©liorÃ©e d'un explorateur spatial Enhydra.
+--- Votre mission sera de lui faire subir sa premiÃ¨re sÃ©rie de tests et son baptÃ¨me spatial.
+--- En cours de mission l'Ã©quipage tombe sur d'Ã©tranges phÃ©nomÃ¨nes... (il s'agit d'une fiction de combat pour entraÃ®ner les hommes Ã  toutes sortes de situations imprÃ©visibles).
 -- Type: Mission
 
 require("utils.lua")
@@ -20,21 +20,21 @@ Rundown of the mission:
 ==Phase 2: Discovery
 * You first mission will be to investigate a strange signal from a nebula.
 * As the nebula is in the outer space regions, you'll have you use a WARP carrier.
-* The WARP carrier delivers you to the edge of a nebulea cloud. There are a few Insurgés ships here for you to fight.
+* The WARP carrier delivers you to the edge of a nebulea cloud. There are a few InsurgÃ©s ships here for you to fight.
 * The objective is to find an artifact within the nebulea, and scan it. This is a tough scan (lvl3)
 * In these nebulea, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artefacts that are not the source of the signal.
 * When you scan the proper artifact, it gives you 4 readings in the description. Relay needs to pass these readings to the JC-88 or Shipyard before the mission continues.
 * When this is done, the artifact becomes unstable, and becomes a wormhole that sucks in the player.
 ==Phase 3: Lost in enemy space...
-* After the wormhole, the player finds himself in Insurgés space.
+* After the wormhole, the player finds himself in InsurgÃ©s space.
 * There are RLS jammers blocking you from WARPing away. And these jammers are well defended. You'll need to navigate or fight you way out of this.
 * I highly recommend navigating. Really. There is some code in place that makes all enemies attack if you engage the jammers.
 * JC88 will be waiting for you outside of the defense line. He will take you back to the shipyard.
 * At the shipyard you will hand in your data, and get your new objective.
 ==Phase 4: Nice transport you have there, would be bad if something would happen to it...
-* At this point a transport will be created and flying around the forwards stations of the Insurgés defense line.
+* At this point a transport will be created and flying around the forwards stations of the InsurgÃ©s defense line.
 * Your task is to destroy this transport and secure it's cargo.
-* Engaging it at one of the stations will call the whole Insurgés fleet on your ass. So engage the transport between stations.
+* Engaging it at one of the stations will call the whole InsurgÃ©s fleet on your ass. So engage the transport between stations.
 * Attacking it between stations will still call a taskforce on your ass, so you need to make haste to secure the cargo and get out of there.
 ==Phase 5:...
 --]]
@@ -82,8 +82,8 @@ function init()
 	transport_f1 = CpuShip():setFaction("Transark"):setTemplate("Flavia"):setCallSign("F-1"):setScanned(true):setPosition(28521, 114945):orderIdle()
 	transport_f1:setCommsScript("")
 
-	target_dummy_1 = CpuShip():setFaction("Insurgés"):setTemplate("MT52 Hornet"):setCallSign("Factice-1"):setPosition(29269, 109499):orderIdle():setRotation(random(0, 360))
-	target_dummy_2 = CpuShip():setFaction("Insurgés"):setTemplate("MT52 Hornet"):setCallSign("Factice-2"):setPosition(31032, 109822):orderIdle():setRotation(random(0, 360))
+	target_dummy_1 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("MT52 Hornet"):setCallSign("Factice-1"):setPosition(29269, 109499):orderIdle():setRotation(random(0, 360))
+	target_dummy_2 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("MT52 Hornet"):setCallSign("Factice-2"):setPosition(31032, 109822):orderIdle():setRotation(random(0, 360))
 	target_dummy_1:setHullMax(1):setHull(1):setShieldsMax(300):setScanningParameters(1, 1):setCommsScript("")
 	target_dummy_2:setHullMax(1):setHull(1):setShieldsMax(300):setScanningParameters(1, 1):setCommsScript("")
 
@@ -91,9 +91,9 @@ function init()
 	jc88:setCommsFunction(jc88Comms)
 
 	--Sector B20
-	insurge_b20_1 = CpuShip():setFaction("Insurgés"):setTemplate("WX-Lindworm"):setCallSign("S11"):setPosition(304666, -75558):orderDefendLocation(304666, -75558):setWeaponStorage("Homing", 0):setWeaponStorage("HVLI", 4)
-	insurge_b20_2 = CpuShip():setFaction("Insurgés"):setTemplate("MU52 Hornet"):setCallSign("S10"):setPosition(306010, -74718):orderDefendLocation(306010, -74718)
-	insurge_b20_3 = CpuShip():setFaction("Insurgés"):setTemplate("Adder MK5"):setCallSign("CCN8"):setPosition(304364, -74222):orderDefendLocation(304364, -74222):setWeaponStorage("HVLI", 3)
+	insurge_b20_1 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("WX-Lindworm"):setCallSign("S11"):setPosition(304666, -75558):orderDefendLocation(304666, -75558):setWeaponStorage("Homing", 0):setWeaponStorage("HVLI", 4)
+	insurge_b20_2 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("MU52 Hornet"):setCallSign("S10"):setPosition(306010, -74718):orderDefendLocation(306010, -74718)
+	insurge_b20_3 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Adder MK5"):setCallSign("CCN8"):setPosition(304364, -74222):orderDefendLocation(304364, -74222):setWeaponStorage("HVLI", 3)
 	b20_nebula_list = {}
 	table.insert(b20_nebula_list, Nebula():setPosition(319259, -78069))
 	table.insert(b20_nebula_list, Nebula():setPosition(321469, -70621))
@@ -113,19 +113,19 @@ function init()
 	b20_artifact.gravity_disruption = irandom(1, 10)
 	b20_artifact.ionic_phase_shift = irandom(1, 10)
 	b20_artifact.doppler_instability = irandom(1, 10)
-	b20_artifact:setDescriptions("Un déchet flottant dans l'espace.", string.format([[Trouvé! Nous obtenons des mesures étranges sur cet objet.
+	b20_artifact:setDescriptions("Un dÃ©chet flottant dans l'espace.", string.format([[TrouvÃ©! Nous obtenons des mesures Ã©tranges sur cet objet.
 Nos capteurs observent:
 Radiation beta: %i
-Déplacement de phase ionic: %i
+DÃ©placement de phase ionic: %i
 Perturbation gravitationnelle: %i
-Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase_shift, b20_artifact.gravity_disruption, b20_artifact.doppler_instability))
+InstabilitÃ© Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase_shift, b20_artifact.gravity_disruption, b20_artifact.doppler_instability))
 
 	x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-	b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("Un déchet flottant dans l'espace.", "Cela semble inerte, et nos capteurs ne détectent rien. L'objet doit se trouver ailleurs.")
+	b20_dummy_artifact_1 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("Un dÃ©chet flottant dans l'espace.", "Cela semble inerte, et nos capteurs ne dÃ©tectent rien. L'objet doit se trouver ailleurs.")
 	b20_dummy_artifact_1:setScanningParameters(3, 1)
 
 	x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
-	b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("Un déchet flottant dans l'espace.", "Cela semble inerte, et nos capteurs ne détectent rien. L'objet doit se trouver ailleurs.")
+	b20_dummy_artifact_2 = Artifact():setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setDescriptions("Un dÃ©chet flottant dans l'espace.", "Cela semble inerte, et nos capteurs ne dÃ©tectent rien. L'objet doit se trouver ailleurs.")
 	b20_dummy_artifact_2:setScanningParameters(3, 1)
 
 	x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
@@ -137,36 +137,36 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 	x, y = table.remove(b20_nebula_list, math.random(#b20_nebula_list)):getPosition()
 	CpuShip():setFaction("Ghosts"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):setTemplate("Starhammer II"):orderDefendLocation(x, y)
 
-	--Insurgés defense line.
+	--InsurgÃ©s defense line.
 	insurges_defense_line = {
-		RLSJammer():setFaction("Insurgés"):setPosition(7657, -264940),
-		RLSJammer():setFaction("Insurgés"):setPosition(9915, -289620),
-		RLSJammer():setFaction("Insurgés"):setPosition(1822, -287037),
-		RLSJammer():setFaction("Insurgés"):setPosition(-6615, -285401),
-		RLSJammer():setFaction("Insurgés"):setPosition(-18324, -283593),
-		RLSJammer():setFaction("Insurgés"):setPosition(-24522, -276878),
-		RLSJammer():setFaction("Insurgés"):setPosition(-28138, -268613),
-		RLSJammer():setFaction("Insurgés"):setPosition(-23403, -256302),
-		RLSJammer():setFaction("Insurgés"):setPosition(-11608, -254149),
-		RLSJammer():setFaction("Insurgés"):setPosition(46849, -260262),
-		RLSJammer():setFaction("Insurgés"):setPosition(35571, -254924),
-		RLSJammer():setFaction("Insurgés"):setPosition(22312, -254063),
-		RLSJammer():setFaction("Insurgés"):setPosition(10842, -255239),
-		RLSJammer():setFaction("Insurgés"):setPosition(65015, -272745),
-		RLSJammer():setFaction("Insurgés"):setPosition(60452, -263189),
-		RLSJammer():setFaction("Insurgés"):setPosition(56664, -280494),
-		RLSJammer():setFaction("Insurgés"):setPosition(48829, -284454),
-		RLSJammer():setFaction("Insurgés"):setPosition(22915, -287381),
-		RLSJammer():setFaction("Insurgés"):setPosition(36690, -287554),
-		RLSJammer():setFaction("Insurgés"):setPosition(-34202, -259093),
-		RLSJammer():setFaction("Insurgés"):setPosition(29547, -294816),
-		RLSJammer():setFaction("Insurgés"):setPosition(54372, -255958)
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(7657, -264940),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(9915, -289620),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(1822, -287037),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-6615, -285401),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-18324, -283593),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-24522, -276878),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-28138, -268613),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-23403, -256302),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-11608, -254149),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(46849, -260262),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(35571, -254924),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(22312, -254063),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(10842, -255239),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(65015, -272745),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(60452, -263189),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(56664, -280494),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(48829, -284454),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(22915, -287381),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(36690, -287554),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(-34202, -259093),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(29547, -294816),
+		RLSJammer():setFaction("InsurgÃ©s"):setPosition(54372, -255958)
 	}
 	insurges_defense_line_ships = {}
 	insurges_defense_line_engaged = false
 	for _, RLS_jammer in ipairs(insurges_defense_line) do
 		x, y = RLS_jammer:getPosition()
-		ship = CpuShip():setFaction("Insurgés"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
+		ship = CpuShip():setFaction("InsurgÃ©s"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
 		if random(0, 100) < 20 then
 			ship:setTemplate("Defense platform")
 		elseif random(0, 100) < 50 then
@@ -176,7 +176,7 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 		end
 		table.insert(insurges_defense_line_ships, ship)
 		for n=1,3 do
-			ship2 = CpuShip():setFaction("Insurgés"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
+			ship2 = CpuShip():setFaction("InsurgÃ©s"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
 			if random(0, 100) < 50 then
 				ship2:setTemplate("Phobos T3")
 			elseif random(0, 100) < 20 then
@@ -188,20 +188,20 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 		end
 	end
 
-	SpaceStation():setTemplate("Huge Station"):setFaction("Insurgés"):setPosition(32099, -291152)
-	SpaceStation():setTemplate("Huge Station"):setFaction("Insurgés"):setPosition(-4252, -297462)
-	SpaceStation():setTemplate("Huge Station"):setFaction("Insurgés"):setPosition(-27984, -262071)
+	SpaceStation():setTemplate("Huge Station"):setFaction("InsurgÃ©s"):setPosition(32099, -291152)
+	SpaceStation():setTemplate("Huge Station"):setFaction("InsurgÃ©s"):setPosition(-4252, -297462)
+	SpaceStation():setTemplate("Huge Station"):setFaction("InsurgÃ©s"):setPosition(-27984, -262071)
 
 	insurges_forward_line = {
-		SpaceStation():setTemplate("Small Station"):setFaction("Insurgés"):setPosition(-7278, -197898),
-		SpaceStation():setTemplate("Large Station"):setFaction("Insurgés"):setPosition(-13839, -233328),
-		SpaceStation():setTemplate("Large Station"):setFaction("Insurgés"):setPosition(29333, -240151),
-		SpaceStation():setTemplate("Small Station"):setFaction("Insurgés"):setPosition(36681, -200260)
+		SpaceStation():setTemplate("Small Station"):setFaction("InsurgÃ©s"):setPosition(-7278, -197898),
+		SpaceStation():setTemplate("Large Station"):setFaction("InsurgÃ©s"):setPosition(-13839, -233328),
+		SpaceStation():setTemplate("Large Station"):setFaction("InsurgÃ©s"):setPosition(29333, -240151),
+		SpaceStation():setTemplate("Small Station"):setFaction("InsurgÃ©s"):setPosition(36681, -200260)
 	}
 	insurges_transport = nil
 	for _, station in ipairs(insurges_forward_line) do
 		x, y = station:getPosition()
-		ship = CpuShip():setFaction("Insurgés"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
+		ship = CpuShip():setFaction("InsurgÃ©s"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
 		if random(0, 100) < 20 then
 			ship:setTemplate("Defense platform")
 		elseif random(0, 100) < 50 then
@@ -211,7 +211,7 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 		end
 		table.insert(insurges_defense_line_ships, ship)
 		for n=1,3 do
-			ship2 = CpuShip():setFaction("Insurgés"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
+			ship2 = CpuShip():setFaction("InsurgÃ©s"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendTarget(ship)
 			if random(0, 100) < 50 then
 				ship2:setTemplate("Phobos T3")
 			elseif random(0, 100) < 20 then
@@ -266,7 +266,7 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 	end)
 	addGMFunction("Moteurs OFF", function()
 		moteursEnRade()
-	end)	
+	end)
 	addGMFunction("Phase 3", function()
 		player:commandUndock(shipyard_gamma)
 		player:commandAbortDock(shipyard_gamma)
@@ -280,7 +280,7 @@ Instabilité Doppler: %i]], b20_artifact.beta_radiation, b20_artifact.ionic_phase
 		mission_state = phase3ReportBackToShipyard
 	end)
 	addGMFunction("Phase 5", function()
-		--Remove all the Insurgés ships from the game that where attacking the player. We no longer need them, and they could mess things up if they get the time to fly all the way to the shipyard.
+		--Remove all the InsurgÃ©s ships from the game that where attacking the player. We no longer need them, and they could mess things up if they get the time to fly all the way to the shipyard.
 		for _, ship in ipairs(insurges_defense_line_ships) do
 			if ship:isValid() then ship:destroy() end
 		end
@@ -323,11 +323,11 @@ end
 function phase1MessagePowerup(delta)
 	if delta > 0 then
 		shipyard_gamma:sendCommsMessage(player, [[Bien Enhydra-1.
-Votre système de communication semble fonctionner.
-Comme vous le savez, vous êtes à bord de la nouvelle version de l'explorateur spatial Enhydra.
+Votre systÃ¨me de communication semble fonctionner.
+Comme vous le savez, vous Ãªtes Ã  bord de la nouvelle version de l'explorateur spatial Enhydra.
 Nous allons vous guider au travers de quelques tests de simulation pour voir si le vaisseau fonctionne convenablement.
 
-Premièrement, assurez-vous que votre opérateur "ingénieur" monte la puissance de tous les systèmes à 100%, car actuellement ils sont tous éteints.]])
+PremiÃ¨rement, assurez-vous que votre opÃ©rateur "ingÃ©nieur" monte la puissance de tous les systÃ¨mes Ã  100%, car actuellement ils sont tous Ã©teints.]])
 		mission_state = phase1WaitForPowerup
 	end
 end
@@ -340,7 +340,7 @@ function phase1WaitForPowerup(delta)
 	end
 	--All system powered, give the next objective.
 	shipyard_gamma:sendCommsMessage(player, [[Enhydra-1,
-Bien, nous voyons que tous vos sytèmes sont opérationnels. Vous pouvez vous décrocher sans risque.
+Bien, nous voyons que tous vos sytÃ¨mes sont opÃ©rationnels. Vous pouvez vous dÃ©crocher sans risque.
 
 Foncez au secteur K6, il y a un largage provenant du transporteur F-1. Ramassez-le pour faire le plein de missiles.]])
 	supply_drop = SupplyDrop():setFaction("Transark"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)
@@ -355,12 +355,12 @@ function phase1WaitForSupplyPickup(delta)
 
 	if not supply_drop:isValid() then
 		shipyard_gamma:sendCommsMessage(player, [[Bien Enhydra-1,
-Je vois que vous êtes à présent équippés en missiles.
+Je vois que vous Ãªtes Ã  prÃ©sent Ã©quippÃ©s en missiles.
 
 Il y a deux vaisseaux factices dans vos environs proches.
 
-Avant de tester votre système d'armement, nous allons d'abord identifier les vaisseaux pour être certains de ne pas détruire un vaisseau allié.
-Demandez à votre opérateur "Sciences/Radar" de scanner les vaisseaux Factice-1 et Factice-2 pour les identifier correctement.]])
+Avant de tester votre systÃ¨me d'armement, nous allons d'abord identifier les vaisseaux pour Ãªtre certains de ne pas dÃ©truire un vaisseau alliÃ©.
+Demandez Ã  votre opÃ©rateur "Sciences/Radar" de scanner les vaisseaux Factice-1 et Factice-2 pour les identifier correctement.]])
 		mission_state = phase1ScanDummyShips
 	end
 end
@@ -372,9 +372,9 @@ function phase1ScanDummyShips(delta)
 
 	if target_dummy_1:isScannedBy(player) and target_dummy_2:isScannedBy(player) then
 		shipyard_gamma:sendCommsMessage(player, [[Parfait Enhydra-1,
-Ils sont identifiés comme vaisseaux "Insurgés" (nous les avons maquillés électroniquement).
-Maintenant, détruisez "Factice-1" avec vos lasers.
-Et utilisez un missile à autoguidage pour anéantir "Factice-2" (ses boucliers sont configurés pour résister à vos lasers).]])
+Ils sont identifiÃ©s comme vaisseaux "InsurgÃ©s" (nous les avons maquillÃ©s Ã©lectroniquement).
+Maintenant, dÃ©truisez "Factice-1" avec vos lasers.
+Et utilisez un missile Ã  autoguidage pour anÃ©antir "Factice-2" (ses boucliers sont configurÃ©s pour rÃ©sister Ã  vos lasers).]])
 		mission_state = phase1DestroyDummyShips
 		target_dummy_1:setShieldsMax(30)
 		target_dummy_2:setShieldsMax(30)
@@ -388,12 +388,12 @@ function phase1DestroyDummyShips(delta)
 	end
 
 	if not target_dummy_1:isValid() and not target_dummy_2:isValid() then
-		shipyard_gamma:sendCommsMessage(player, [[Bien, toutes les armes sont opérationnelles.
-Votre vaisseau semble en parfait état de marche.
+		shipyard_gamma:sendCommsMessage(player, [[Bien, toutes les armes sont opÃ©rationnelles.
+Votre vaisseau semble en parfait Ã©tat de marche.
 
-Maintenant, lorsque vous êtes prêts pour une première mission d'essai, contactez-nous.
+Maintenant, lorsque vous Ãªtes prÃªts pour une premiÃ¨re mission d'essai, contactez-nous.
 
-(Arrimez-vous à au Spatiodock Supply-6 quand vous en avez besoin pour refaire le plein)]])
+(Arrimez-vous Ã  au Spatiodock Supply-6 quand vous en avez besoin pour refaire le plein)]])
 		mission_state = phase1WaitForContact
 	end
 end
@@ -410,11 +410,11 @@ function phase2WaitForWARP(delta)
 		jc88:sendCommsMessage(player, [[Enhydra-1,
 Nous y sommes. Secteur B20.
 
-On dirait qu'il y a quelques Insurgés qui se sont incrustés chez nous.
-Ils n'ont rien à faire ici, et ne veulent pas se rendre.
-Vous avez l'autorisation de les éliminer.
+On dirait qu'il y a quelques InsurgÃ©s qui se sont incrustÃ©s chez nous.
+Ils n'ont rien Ã  faire ici, et ne veulent pas se rendre.
+Vous avez l'autorisation de les Ã©liminer.
 
-Revenez au rapport lorsque vous aurez trouvé ce qui provoque des anomalies sur nos capteurs.]])
+Revenez au rapport lorsque vous aurez trouvÃ© ce qui provoque des anomalies sur nos capteurs.]])
 		mission_state = phase2SeekArtifact
 	end
 end
@@ -445,14 +445,14 @@ function phase2SpawnWormhole(delta)
 	if not puitGravitationnelActive then
 		puitGravitationnelActive = true
 		jc88:sendCommsMessage(player, [[Enhydra-1? Que se passe-t-il?
-	Nous détectons un énorme afflux gravitationnel allant dans votre direction. Fichez-le camps d'ici.]])
+	Nous dÃ©tectons un Ã©norme afflux gravitationnel allant dans votre direction. Fichez-le camps d'ici.]])
 		x, y = b20_artifact:getPosition()
 		b20_artifact:explode()
 		b20_artifact.nebula:destroy() --Remove the nebula, else it will get sucked into the wormhole. Now it just looks the wormhole replaces the nebula.
 		WormHole():setPosition(x, y):setTargetPosition(30036, -270545) --Wormhole to to ZR6
 	end
 	--The explosion damages all systems, but makes sure the impulse, RLS and WARPdrive are none-functional. This prevents the player from escaping the grasp of the wormhole.
-	--We made sure we are around 2U of the wormhole before this function is called. 
+	--We made sure we are around 2U of the wormhole before this function is called.
 	if puitGravitationnelActive then
 		moteursEnRade()
 		mission_state = phase2WaitTillWormholeRLSedPlayer
@@ -463,8 +463,8 @@ function phase2WaitTillWormholeRLSedPlayer(delta)
 	if distance(player, 30036, -270545) < 2000 then
 		shipyard_gamma:sendCommsMessage(player, scrambleMessage([[Enhydra-1,
 A vous ! A vous !
-Nous lisons sur nos écrans radar que vous êtes à présent derrière des lignes de défenses d'Insurgés.
-Ne les provoquez pas. Je repète: NE LES ATTAQUEZ PAS!]]))
+Nous lisons sur nos Ã©crans radar que vous Ãªtes Ã  prÃ©sent derriÃ¨re des lignes de dÃ©fenses d'InsurgÃ©s.
+Ne les provoquez pas. Je repÃ¨te: NE LES ATTAQUEZ PAS!]]))
 		mission_state = phase3FindHoleInTheInsurgesDefenseLine
 	end
 end
@@ -474,16 +474,16 @@ end
 function phase3FindHoleInTheInsurgesDefenseLine(delta)
 	if distance(player, -5000, -260000) < 10000 then
 		shipyard_gamma:sendCommsMessage(player, [[Enfin Enhydra-1,
-nous pensions vous avoir perdu. Vous n'êtes pas encore sorti de la mélasse.
-Cherchez après une faille au-travers des défenses des Insurgés.
-Essayez d'atteindre le secteur ZU5. Nous vous envoyons "JC-88" pour vous sortir de là.
+nous pensions vous avoir perdu. Vous n'Ãªtes pas encore sorti de la mÃ©lasse.
+Cherchez aprÃ¨s une faille au-travers des dÃ©fenses des InsurgÃ©s.
+Essayez d'atteindre le secteur ZU5. Nous vous envoyons "JC-88" pour vous sortir de lÃ .
 
-Les insurgés semblent utiliser des brouilleurs RLS. Il est possible que vos moteurs RLS restent en rade dans cette zone.
+Les insurgÃ©s semblent utiliser des brouilleurs RLS. Il est possible que vos moteurs RLS restent en rade dans cette zone.
 ]])
 		jc88:orderFlyTowardsBlind(10000, -210000)
 		mission_state = phase3EscapeTheInsurgesDefenseLine
 	end
-	--RLS jammer: RLS en permanence sans puissance et à niveau de santé proche de 0, mais le moteur à impulsion fonctionne
+	--RLS jammer: RLS en permanence sans puissance et Ã  niveau de santÃ© proche de 0, mais le moteur Ã  impulsion fonctionne
 	moteurRLSJammed()
 end
 
@@ -491,8 +491,8 @@ function phase3EscapeTheInsurgesDefenseLine(delta)
 	if handleWARPCarrier(jc88, 10000, -210000, 24000, 125000, [[Tenez-vous bien, direction Spatiodock Gamma!]]) then
 		--Good, continue.
 		jc88:sendCommsMessage(player, [[Bon retour parmi nous Enhydra-1.
-Le mieux est de vous accrocher à "Supply-6" pour refaire le plein.
-Ensuite, faites un rapport de mission auprès du Spatiodock Gamma.]])
+Le mieux est de vous accrocher Ã  "Supply-6" pour refaire le plein.
+Ensuite, faites un rapport de mission auprÃ¨s du Spatiodock Gamma.]])
 		mission_state = phase3ReportBackToShipyard
 	end
 end
@@ -505,20 +505,20 @@ function phase3AnalizingData(delta)
 	phase3AnalizingData_timeout = phase3AnalizingData_timeout - delta
 	if phase3AnalizingData_timeout < 0.0 then
 		shipyard_gamma:sendCommsMessage(player, [[Enhydra-1,
-nous avons analysé les données récoltées sur l'anomalie qui s'est désintégrée.
-Il y a des traces de technologies oubliées là-dedans. Ce qui est plutôt inquiétant.
+nous avons analysÃ© les donnÃ©es rÃ©coltÃ©es sur l'anomalie qui s'est dÃ©sintÃ©grÃ©e.
+Il y a des traces de technologies oubliÃ©es lÃ -dedans. Ce qui est plutÃ´t inquiÃ©tant.
 
-Cela pourrait signifier que des insurgés possèdent des technologies oubliées, potentiellement dangereuses.
+Cela pourrait signifier que des insurgÃ©s possÃ¨dent des technologies oubliÃ©es, potentiellement dangereuses.
 
-Tout récemment nous avons pu observer des va-et-vients importants de transports spatiaux Insurgés avec la mise en place de ces lignes de défenses que vous avez rencontrées.
-Nous avons des raisons de penser que ces transports vont nous donner des indices sur ce que serait ces technologies oubliées.
+Tout rÃ©cemment nous avons pu observer des va-et-vients importants de transports spatiaux InsurgÃ©s avec la mise en place de ces lignes de dÃ©fenses que vous avez rencontrÃ©es.
+Nous avons des raisons de penser que ces transports vont nous donner des indices sur ce que serait ces technologies oubliÃ©es.
 
-Nous vous affectons une mission éclair: retournez aux lignes de défense de ces Insurgés et détruisez l'un de leurs transports. Prenez une des cargaisons qui traine. Cela pourra nous être utile.
+Nous vous affectons une mission Ã©clair: retournez aux lignes de dÃ©fense de ces InsurgÃ©s et dÃ©truisez l'un de leurs transports. Prenez une des cargaisons qui traine. Cela pourra nous Ãªtre utile.
 
-Arrimez-vous à "JC88" qui vous emmenera sur place directement.
+Arrimez-vous Ã  "JC88" qui vous emmenera sur place directement.
 
-Attention. N'attaquez PAS les bases d'Insurgés directement. Vous n'êtes pas équippés pour un tel assaut.]])
-		insurges_transport = CpuShip():setFaction("Insurgés"):setTemplate("Flavia"):setCallSign("KHVT"):orderIdle()
+Attention. N'attaquez PAS les bases d'InsurgÃ©s directement. Vous n'Ãªtes pas Ã©quippÃ©s pour un tel assaut.]])
+		insurges_transport = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Flavia"):setCallSign("KHVT"):orderIdle()
 		insurges_transport:setCommsScript(""):setImpulseMaxSpeed(60)
 		insurges_transport.current_station = insurges_forward_line[irandom(1, #insurges_forward_line)]
 		local x, y = insurges_transport.current_station:getPosition()
@@ -532,10 +532,10 @@ end
 --[[*********************************************************************--]]
 
 function phase4WARPBackToInsurgesLine(delta)
-	if handleWARPCarrier(jc88, 24000, 125000, 10000, -210000, [[C'est parti! Direction lignes de défenses Insurgés.]]) then
+	if handleWARPCarrier(jc88, 24000, 125000, 10000, -210000, [[C'est parti! Direction lignes de dÃ©fenses InsurgÃ©s.]]) then
 		--Good, continue.
-		jc88:sendCommsMessage(player, [[Nous y sommes. Attendez le bon moment pour éliminer ce transporteur, et prendre sa cargaison. Ensuite arrimez-vous à moi.
-Vous pouvez vous attendre à de vives représailles une fois que vous aurez entammé l'attaque du transporteur.]])
+		jc88:sendCommsMessage(player, [[Nous y sommes. Attendez le bon moment pour Ã©liminer ce transporteur, et prendre sa cargaison. Ensuite arrimez-vous Ã  moi.
+Vous pouvez vous attendre Ã  de vives reprÃ©sailles une fois que vous aurez entammÃ© l'attaque du transporteur.]])
 		mission_state = phase4DestroyTheTransport
 	end
 end
@@ -558,7 +558,7 @@ function phase4DestroyTheTransport(delta)
 		putInsurgesDefenseLineOnFullOffense()
 		insurges_transport.drop = SupplyDrop():setFaction("Transark"):setPosition(insurges_transport.x, insurges_transport.y)
 	elseif not insurges_transport.drop:isValid() then
-		jc88:sendCommsMessage(player, [[Revenez ici MAINTENANT. Toute la flotte d'Insurgés colle à vos basques. Quoique vous ayez, cela nous sera utile.]])
+		jc88:sendCommsMessage(player, [[Revenez ici MAINTENANT. Toute la flotte d'InsurgÃ©s colle Ã  vos basques. Quoique vous ayez, cela nous sera utile.]])
 		mission_state = phase4WARPBackToShipyard
 	end
 end
@@ -567,9 +567,9 @@ function phase4WARPBackToShipyard(delta)
 	if handleWARPCarrier(jc88, 10000, -210000, 24000, 125000, [[Tenez-vous bien, direction Spatiodock Gamma.]]) then
 		--Good, continue.
 		shipyard_gamma:sendCommsMessage(player, [[Enhydra-1,
-Remis de vos émotions? On dirait que ces transporteurs contenaient des documents hautement encryptés
-Appontez sur notre station. Nous allons mettre nos spécialistes d'Intricomm et de Moebius sur le coup.]])
-		--Remove all the Insurgés ships from the game that where attacking the player. We no longer need them, and they could mess things up if they get the time to fly all the way to the shipyard.
+Remis de vos Ã©motions? On dirait que ces transporteurs contenaient des documents hautement encryptÃ©s
+Appontez sur notre station. Nous allons mettre nos spÃ©cialistes d'Intricomm et de Moebius sur le coup.]])
+		--Remove all the InsurgÃ©s ships from the game that where attacking the player. We no longer need them, and they could mess things up if they get the time to fly all the way to the shipyard.
 		for _, ship in ipairs(insurges_defense_line_ships) do
 			if ship:isValid() then ship:destroy() end
 		end
@@ -582,8 +582,8 @@ end
 function phase5DockWithShipyard(delta)
 	if player:isDocked(shipyard_gamma) then
 		shipyard_gamma:sendCommsMessage(player, [[Merci. Nous allons tout de suite analyser ces documents.
-Le cryptage a l'air particulièrement évoluée pour des Insurgés. Mais bon... les Insurgés ne sont pas tous des as du chiffrement non plus.
-Cela va prendre un tout petit peu de temps pour craquer ces codes. Mais ca ne posera aucun problème à nos analyseur algorithmique quantique. Ca doit être l'affaire de quelques minutes.]])
+Le cryptage a l'air particuliÃ¨rement Ã©voluÃ©e pour des InsurgÃ©s. Mais bon... les InsurgÃ©s ne sont pas tous des as du chiffrement non plus.
+Cela va prendre un tout petit peu de temps pour craquer ces codes. Mais ca ne posera aucun problÃ¨me Ã  nos analyseur algorithmique quantique. Ca doit Ãªtre l'affaire de quelques minutes.]])
 		cracking_delay = 30
 		mission_state = phase5Cracking1
 	end
@@ -593,10 +593,10 @@ function phase5Cracking1(delta)
 	if player:isCommsInactive() then
 		cracking_delay = cracking_delay - delta
 		if cracking_delay < 0.0 then
-			shipyard_gamma:sendCommsMessage(player, [[Nous avons craqué la première partie des documents.
+			shipyard_gamma:sendCommsMessage(player, [[Nous avons craquÃ© la premiÃ¨re partie des documents.
 
 
-On dirait que les insurgés ont trouvé une Technologie Oubliée, un équipement capable de provoquer une nano-singularités gravitationnelles. Cela signifierait la création de particules de masse négative!
+On dirait que les insurgÃ©s ont trouvÃ© une Technologie OubliÃ©e, un Ã©quipement capable de provoquer une nano-singularitÃ©s gravitationnelles. Cela signifierait la crÃ©ation de particules de masse nÃ©gative!
 Mais il semble aussi qu'il ne maitrise pas la technologie.]])
 			cracking_delay = 30
 			mission_state = phase5Cracking2
@@ -608,14 +608,14 @@ function phase5Cracking2(delta)
 	if player:isCommsInactive() then
 		cracking_delay = cracking_delay - delta
 		if cracking_delay < 0.0 then
-			shipyard_gamma:sendCommsMessage(player, [[Voilà plus de résultat de l'équipe de décryptage.
+			shipyard_gamma:sendCommsMessage(player, [[VoilÃ  plus de rÃ©sultat de l'Ã©quipe de dÃ©cryptage.
 
-La technologie des Premiers, que vous avez mis en évidence, provoque la création de nano particules à masse négative, comme nous le soupçonnions.
-Mais cela semble incontrolable et instable, jusqu'à l'effondrement en une sorte de micro trou noir en l'espace de quelque secondes.
-Une énorme quantité énergétique serait nécessaire pour ariver à générer un champ de rétention magnétique nécessaire au confinement de ces particules dans un état stable.
+La technologie des Premiers, que vous avez mis en Ã©vidence, provoque la crÃ©ation de nano particules Ã  masse nÃ©gative, comme nous le soupÃ§onnions.
+Mais cela semble incontrolable et instable, jusqu'Ã  l'effondrement en une sorte de micro trou noir en l'espace de quelque secondes.
+Une Ã©norme quantitÃ© Ã©nergÃ©tique serait nÃ©cessaire pour ariver Ã  gÃ©nÃ©rer un champ de rÃ©tention magnÃ©tique nÃ©cessaire au confinement de ces particules dans un Ã©tat stable.
 
-Il se pourrait que cela permette un jour la création de faille ou trou de ver dans l'espace, pour permettre des voyages à l'aide de véhicule adapté.
-Polaris sera très content de ces trouvailles. Cela pourrait faire avancer les recherches sur l'évolution des moteurs RLS, comme ces prototypes à accélération WARP dont on parle tant.]])
+Il se pourrait que cela permette un jour la crÃ©ation de faille ou trou de ver dans l'espace, pour permettre des voyages Ã  l'aide de vÃ©hicule adaptÃ©.
+Polaris sera trÃ¨s content de ces trouvailles. Cela pourrait faire avancer les recherches sur l'Ã©volution des moteurs RLS, comme ces prototypes Ã  accÃ©lÃ©ration WARP dont on parle tant.]])
 			cracking_delay = 30
 			mission_state = phase5Cracking3
 		end
@@ -626,14 +626,14 @@ function phase5Cracking3(delta)
 	if player:isCommsInactive() then
 		cracking_delay = cracking_delay - delta
 		if cracking_delay < 0.0 then
-			shipyard_gamma:sendCommsMessage(player, [[Il semble que les insurgés faisaient des expériences un peu hasardeuses avec cette technologie.
+			shipyard_gamma:sendCommsMessage(player, [[Il semble que les insurgÃ©s faisaient des expÃ©riences un peu hasardeuses avec cette technologie.
 
-Selon les document volés, les Insurgés ont perdu le contrôle sur certains essais dans le secteur D20. Ce qui explique probablement le phénomène que vous avez observé.
+Selon les document volÃ©s, les InsurgÃ©s ont perdu le contrÃ´le sur certains essais dans le secteur D20. Ce qui explique probablement le phÃ©nomÃ¨ne que vous avez observÃ©.
 
-Le document n'est pas encore suffisemment décrypté actuellement, mais il semble que les Insurgés ont expérimenté le passage d'objet et de vaisseaux-épaves non habités au travers de ce qu'ils appellent des failles inter-spatiales.
-Ils tenteraient l'expédition d'armement lourd, missile ou bombes par ce moyen. Sans doute pour provoquer des attaques chirugicales instantannées dans nos installations sans qu'on ne puisse les voir arriver.
+Le document n'est pas encore suffisemment dÃ©cryptÃ© actuellement, mais il semble que les InsurgÃ©s ont expÃ©rimentÃ© le passage d'objet et de vaisseaux-Ã©paves non habitÃ©s au travers de ce qu'ils appellent des failles inter-spatiales.
+Ils tenteraient l'expÃ©dition d'armement lourd, missile ou bombes par ce moyen. Sans doute pour provoquer des attaques chirugicales instantannÃ©es dans nos installations sans qu'on ne puisse les voir arriver.
 
-Les documents mentionnent des tailles de 2000 Unité de distance de vol spatiale qui auraient été parcourues grâce à ses nano singularités. Sans aucune précision, et avec des résulats fort hasardeux... Biensûr...]])
+Les documents mentionnent des tailles de 2000 UnitÃ© de distance de vol spatiale qui auraient Ã©tÃ© parcourues grÃ¢ce Ã  ses nano singularitÃ©s. Sans aucune prÃ©cision, et avec des rÃ©sulats fort hasardeux... BiensÃ»r...]])
 			cracking_delay = 30
 			mission_state = phase5Cracking4
 		end
@@ -644,13 +644,13 @@ function phase5Cracking4(delta)
 	if player:isCommsInactive() then
 		cracking_delay = cracking_delay - delta
 		if cracking_delay < 0.0 then
-			shipyard_gamma:sendCommsMessage(player, [[La dernière pièce du puzzle est enfin décryptée.
+			shipyard_gamma:sendCommsMessage(player, [[La derniÃ¨re piÃ¨ce du puzzle est enfin dÃ©cryptÃ©e.
 
-C'est incroyable. C'est énorme ! On a trouvé les plans d'une sorte d'énorme station spatiale de combat. Il y aurait un moteur de transfert au centre de cette station utilisant ces générateurs de nano particules anti-gravitationnelles.
-On dirait que les Insurgés construisent (mais avec quelles moyens??) une station de combat avec une puissance de feu incroyable, qui puisse se déplacer sur de très grandes distances... instantanément!
+C'est incroyable. C'est Ã©norme ! On a trouvÃ© les plans d'une sorte d'Ã©norme station spatiale de combat. Il y aurait un moteur de transfert au centre de cette station utilisant ces gÃ©nÃ©rateurs de nano particules anti-gravitationnelles.
+On dirait que les InsurgÃ©s construisent (mais avec quelles moyens??) une station de combat avec une puissance de feu incroyable, qui puisse se dÃ©placer sur de trÃ¨s grandes distances... instantanÃ©ment!
 
-Bienque la technologie découverte ne soient pas stable, ils sont assez fous pour tenter le coup, et nous attaquer par surprise.
-Cela leur donnerait une avance stratégique insouçonnable!]])
+Bienque la technologie dÃ©couverte ne soient pas stable, ils sont assez fous pour tenter le coup, et nous attaquer par surprise.
+Cela leur donnerait une avance stratÃ©gique insouÃ§onnable!]])
 			mission_state = phase5CrackingDone
 		end
 	end
@@ -658,10 +658,10 @@ end
 
 function phase5CrackingDone(delta)
 	if player:isCommsInactive() then
-		shipyard_gamma:sendCommsMessage(player, [[Nous détectons un afflux de puissance... C'EST LA STATION DE COMBAT !
+		shipyard_gamma:sendCommsMessage(player, [[Nous dÃ©tectons un afflux de puissance... C'EST LA STATION DE COMBAT !
 
-Stoppez vos activités! Retraite! A toutes les statiosn, évacuez au plus vite! Sauvez ce que vous pouvez!]])
-		odin = CpuShip():setFaction("Insurgés"):setTemplate("Odin"):setCallSign("Odin"):setScanned(true):setPosition(26900, 132872):orderAttack(shipyard_gamma)
+Stoppez vos activitÃ©s! Retraite! A toutes les statiosn, Ã©vacuez au plus vite! Sauvez ce que vous pouvez!]])
+		odin = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Odin"):setCallSign("Odin"):setScanned(true):setPosition(26900, 132872):orderAttack(shipyard_gamma)
 		odin.target = shipyard_gamma
 		WormHole():setPosition(23984, 126258):setTargetPosition(0, 0)
 		mission_state = phase5OdinAttack
@@ -674,7 +674,7 @@ function phase5OdinAttack(delta)
 		victory("Transark")
 		return
 	end
-	-- Soit on s'est barré à temps comme des lâches... mais on est vivant.
+	-- Soit on s'est barrÃ© Ã  temps comme des lÃ¢ches... mais on est vivant.
 	if distance(player, odin) > 30000 then
 		victory("Transark")
 	end
@@ -690,7 +690,7 @@ function phase5OdinAttack(delta)
 		elseif player:isValid() then
 			odin.target = player
 		end
-	-- Tant qu'à faire, autant se téléporter près de sa victime, qui ne sait pas encore qu'elle va mourir
+	-- Tant qu'Ã  faire, autant se tÃ©lÃ©porter prÃ¨s de sa victime, qui ne sait pas encore qu'elle va mourir
 		if odin.target:isValid() then
 			odin:orderAttack(odin.target)
 			local x, y = odin.target:getPosition()
@@ -707,16 +707,16 @@ function shipyardGammaComms()
 	--comms_source
 	--comms_target
 	if mission_state == phase1WaitForContact then
-		setCommsMessage([[Enhydra-1, vous êtes prêts pour votre première mission?]])
+		setCommsMessage([[Enhydra-1, vous Ãªtes prÃªts pour votre premiÃ¨re mission?]])
 		addCommsReply("Oui", function()
 			setCommsMessage([[Bien.
-Votre première mission sera de chercher après une source qui émet d'étranges données. Cette source est perdue dans le nuage de nébuleuse dans le secteur B20.
-Votre vaisseau n'est pas équipé pour parcourir une telle distance. Nous avons donc préparé le transporteur JC-88 pour vous y mener.
+Votre premiÃ¨re mission sera de chercher aprÃ¨s une source qui Ã©met d'Ã©tranges donnÃ©es. Cette source est perdue dans le nuage de nÃ©buleuse dans le secteur B20.
+Votre vaisseau n'est pas Ã©quipÃ© pour parcourir une telle distance. Nous avons donc prÃ©parÃ© le transporteur JC-88 pour vous y mener.
 Aponter avec JC-88 et il s'occupera du reste.]])
 			mission_state = phase2WaitForWARP
 		end)
 		addCommsReply("Non", function()
-			setCommsMessage([[Alors, contactez-nous lorsque vous êtes prêts.]])
+			setCommsMessage([[Alors, contactez-nous lorsque vous Ãªtes prÃªts.]])
 		end)
 		return
 	end
@@ -726,14 +726,14 @@ Aponter avec JC-88 et il s'occupera du reste.]])
 	end
 	if mission_state == phase3ReportBackToShipyard then
 		setCommsMessage([[Enhydra-1,
-Nous avons téléchargé toutes les données que vous avez collectées grâce au radar quantique de capture de donnée à courte portée.
-Nous analysons les données en ce moment. Nous vous contacterons lorsque nous aurons plus de détail.]])
+Nous avons tÃ©lÃ©chargÃ© toutes les donnÃ©es que vous avez collectÃ©es grÃ¢ce au radar quantique de capture de donnÃ©e Ã  courte portÃ©e.
+Nous analysons les donnÃ©es en ce moment. Nous vous contacterons lorsque nous aurons plus de dÃ©tail.]])
 		mission_state = phase3AnalizingData
 		phase3AnalizingData_timeout = 60.0
 		return
 	end
 	if mission_state == phase4WARPBackToInsurgesLine then
-		setCommsMessage([[Allez vous arrimer à "JC-88". Ils vont vous emmener sur place près des Insurgés.]])
+		setCommsMessage([[Allez vous arrimer Ã  "JC-88". Ils vont vous emmener sur place prÃ¨s des InsurgÃ©s.]])
 		return
 	end
 	setCommsMessage([[Bonjour Enhydra-1.
@@ -749,43 +749,43 @@ function jc88Comms()
 		return
 	end
 	if mission_state == phase4WARPBackToInsurgesLine then
-		setCommsMessage([[Venez vous arrimer à nous. Nous allons vous emmener sur place près des Insurgés.]])
+		setCommsMessage([[Venez vous arrimer Ã  nous. Nous allons vous emmener sur place prÃ¨s des InsurgÃ©s.]])
 		return
 	end
 	setCommsMessage([[Transporteur JC-88 au rapport!
-Tous les sytèmes sont à leurs valeurs nominales.]])
+Tous les sytÃ¨mes sont Ã  leurs valeurs nominales.]])
 end
 
 function artifactReportComms()
 	setCommsMessage([[Enhydra-1,
-Avez-vous trouvé la source bizarre d'émission que nos capteurs observent?]])
+Avez-vous trouvÃ© la source bizarre d'Ã©mission que nos capteurs observent?]])
 	addCommsReply("Oui", function()
-		setCommsMessage([[Super, comme nos mesures sont incohérentes, pouvez-vous nous donner vos lectures avec vos capteurs?
+		setCommsMessage([[Super, comme nos mesures sont incohÃ©rentes, pouvez-vous nous donner vos lectures avec vos capteurs?
 
 D'abord, que lisez-vous comme radiation beta??]])
 		for beta=1,10 do
 			addCommsReply(beta, function()
-				setCommsMessage([[Ensuite, qu'observez-vous comme déplacement de phase ionic?]])
+				setCommsMessage([[Ensuite, qu'observez-vous comme dÃ©placement de phase ionic?]])
 				for ionic=1,10 do
 					addCommsReply(ionic, function()
 						setCommsMessage([[Puis, que lisez-vous comme perturbation gravitationnelle?]])
 						for gravity=1,10 do
 							addCommsReply(gravity, function()
-								setCommsMessage([[Finalement, quelle instabilité Doppler est observée?]])
+								setCommsMessage([[Finalement, quelle instabilitÃ© Doppler est observÃ©e?]])
 								for doppler=1,10 do
 									addCommsReply(doppler, function()
 										if b20_artifact.beta_radiation == beta and b20_artifact.gravity_disruption == gravity and b20_artifact.ionic_phase_shift == ionic and b20_artifact.doppler_instability == doppler then
 											if distance(player, b20_artifact) < 2000 then
-												setCommsMessage([[Êtes-vous surs? Ces valeurs sont vraiment hors norme.
-Eloignez-vous de l'objet, ces valeurs montrent une grande instabilité!]])
+												setCommsMessage([[ÃŠtes-vous surs? Ces valeurs sont vraiment hors norme.
+Eloignez-vous de l'objet, ces valeurs montrent une grande instabilitÃ©!]])
 												mission_state = phase2WaitTillAwayFromObject
 											else
-												setCommsMessage([[Êtes-vous surs? Ces valeurs sont vraiment hors norme.
-Pouvez-vous vous rapprocher de l'objet pour voir si vous pouvez améliorer vos lectures. La micro-nébuleuse peut interférer avec vos capteurs.]])
+												setCommsMessage([[ÃŠtes-vous surs? Ces valeurs sont vraiment hors norme.
+Pouvez-vous vous rapprocher de l'objet pour voir si vous pouvez amÃ©liorer vos lectures. La micro-nÃ©buleuse peut interfÃ©rer avec vos capteurs.]])
 												mission_state = phase2WaitTillNearObject
 											end
 										else
-											setCommsMessage([[Êtes-vous surs? Pouvez-vous faire une deuxième vérification et nous recontacter. Ceci ne s'aligne pas avec nos mesures.]])
+											setCommsMessage([[ÃŠtes-vous surs? Pouvez-vous faire une deuxiÃ¨me vÃ©rification et nous recontacter. Ceci ne s'aligne pas avec nos mesures.]])
 										end
 									end)
 								end
@@ -797,7 +797,7 @@ Pouvez-vous vous rapprocher de l'objet pour voir si vous pouvez améliorer vos le
 		end
 	end)
 	addCommsReply("Non", function()
-		setCommsMessage([[Alors continuez à la chercher.]])
+		setCommsMessage([[Alors continuez Ã  la chercher.]])
 	end)
 end
 
@@ -818,7 +818,7 @@ function scrambleMessage(message)
 		local pos = irandom(1, #message - 1)
 		message = message:sub(0, pos) .. "$" .. message:sub(pos + 1)
 	end
-	message = [[(La transmission est fort bruitée)
+	message = [[(La transmission est fort bruitÃ©e)
 ]] .. message
 	return message
 end
@@ -845,8 +845,8 @@ function handleWARPCarrier(jc, source_x, source_y, dest_x, dest_y, WARPing_messa
 		else
 			--You idiot. JC-88 will fly back.
 			jc88:orderFlyTowardsBlind(source_x, source_y)
-			jc88:sendCommsMessage(player, [[On dirait que le système de couplage des structures s'est détaché prématurément...
-Cela arrive parfois. Je reviens pour que l'on puisse réessayer.]])
+			jc88:sendCommsMessage(player, [[On dirait que le systÃ¨me de couplage des structures s'est dÃ©tachÃ© prÃ©maturÃ©ment...
+Cela arrive parfois. Je reviens pour que l'on puisse rÃ©essayer.]])
 		end
 	end
 	return false
@@ -868,12 +868,12 @@ function update(delta)
 	if not player:isValid() or (not jc88:isValid() and mission_state ~= phase5OdinAttack) then
 		defeat_timeout = defeat_timeout - delta
 		if defeat_timeout < 0.0 then
-			victory("Insurgés")
+			victory("InsurgÃ©s")
 			return
 		end
 	end
 
-	--If the player enters the Insurgés defense line, or engages a forward station, attack him full force.
+	--If the player enters the InsurgÃ©s defense line, or engages a forward station, attack him full force.
 	for _, RLS_jammer in ipairs(insurges_defense_line) do
 		if distance(player, RLS_jammer) < 6000 then
 			putInsurgesDefenseLineOnFullOffense()

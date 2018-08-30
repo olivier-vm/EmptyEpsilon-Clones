@@ -6,7 +6,7 @@ function mainMenu()
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
 	comms_data = comms_target.comms_data
-	
+
 	if player:isFriendly(comms_target) then
 		return friendlyComms(comms_data)
 	end
@@ -27,11 +27,11 @@ function friendlyComms(comms_data)
 			setCommsMessage("Pas de balise. Placez d'abord une balise.");
 			addCommsReply("Retour", mainMenu)
 		else
-			setCommsMessage("Quelle balise devons nous défendre ?");
+			setCommsMessage("Quelle balise devons nous dÃ©fendre ?");
 			for n=1,player:getWaypointCount() do
-				addCommsReply("Défendre balise " .. n, function()
+				addCommsReply("DÃ©fendre balise " .. n, function()
 					comms_target:orderDefendLocation(player:getWaypoint(n))
-					setCommsMessage("Nous venons porter notre assistance à la balise " .. n ..".");
+					setCommsMessage("Nous venons porter notre assistance Ã  la balise " .. n ..".");
 					addCommsReply("Retour", mainMenu)
 				end)
 			end
@@ -44,14 +44,14 @@ function friendlyComms(comms_data)
 			addCommsReply("Retour", mainMenu)
 		end)
 	end
-	addCommsReply("Rapport d'état", function()
+	addCommsReply("Rapport d'Ã©tat", function()
 		msg = "Coque: " .. math.floor(comms_target:getHull() / comms_target:getHullMax() * 100) .. "%\n"
 		shields = comms_target:getShieldCount()
 		if shields == 1 then
 			msg = msg .. "Bouclier: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
 		elseif shields == 2 then
 			msg = msg .. "Bouclier avant: " .. math.floor(comms_target:getShieldLevel(0) / comms_target:getShieldMax(0) * 100) .. "%\n"
-			msg = msg .. "Bouclier arrière: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
+			msg = msg .. "Bouclier arriÃ¨re: " .. math.floor(comms_target:getShieldLevel(1) / comms_target:getShieldMax(1) * 100) .. "%\n"
 		else
 			for n=0,shields-1 do
 				msg = msg .. "Bouclier " .. n .. ": " .. math.floor(comms_target:getShieldLevel(n) / comms_target:getShieldMax(n) * 100) .. "%\n"
@@ -70,8 +70,8 @@ function friendlyComms(comms_data)
 	end)
 	for _, obj in ipairs(comms_target:getObjectsInRange(5000)) do
 		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
-			addCommsReply("Arrimage à " .. obj:getCallSign(), function()
-				setCommsMessage("Arrimage à " .. obj:getCallSign() .. ".");
+			addCommsReply("Arrimage Ã  " .. obj:getCallSign(), function()
+				setCommsMessage("Arrimage Ã  " .. obj:getCallSign() .. ".");
 				comms_target:orderDock(obj)
 				addCommsReply("Retour", mainMenu)
 			end)
@@ -83,10 +83,10 @@ end
 function enemyComms(comms_data)
 	if comms_data.friendlyness > 50 then
 		faction = comms_target:getFaction()
-		taunt_option = "Nous allons assister à votre destruction!"
-		taunt_success_reply = "Votre espérance de vie s'arrête ici!"
+		taunt_option = "Nous allons assister Ã  votre destruction!"
+		taunt_success_reply = "Votre espÃ©rance de vie s'arrÃªte ici!"
 		taunt_failed_reply = "Vos faibles menaces sont sans effet."
-		if faction == "Insurgés" then
+		if faction == "InsurgÃ©s" then
 			setCommsMessage("Vous allez mourir! Sachez-le!");
 		elseif faction == "La Menace" then
 			setCommsMessage("Restez en-dehors de notre route, ou nous allons devoir tester nos nouveaux missiles.");
@@ -109,9 +109,9 @@ end
 
 function neutralComms(comms_data)
 	if comms_data.friendlyness > 50 then
-		setCommsMessage("Désolé, nous n'avons pas le temps de discuter avec vous.\nNous sommes sur une mission importante.");
+		setCommsMessage("DÃ©solÃ©, nous n'avons pas le temps de discuter avec vous.\nNous sommes sur une mission importante.");
 	else
-		setCommsMessage("Nous n'avons rien pour vous.\nBonne journée.");
+		setCommsMessage("Nous n'avons rien pour vous.\nBonne journÃ©e.");
 	end
 	return true
 end

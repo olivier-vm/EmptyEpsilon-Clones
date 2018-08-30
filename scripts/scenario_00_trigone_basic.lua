@@ -1,10 +1,10 @@
 -- Name: Simulation Trigone - Combat de base
--- Description: Scénario de base. Quelques stations au hasard, avec des objets autours, sont attaquées par des Insurgés. Tuer tous les ennemis pour gagner.
+-- Description: ScÃ©nario de base. Quelques stations au hasard, avec des objets autours, sont attaquÃ©es par des InsurgÃ©s. Tuer tous les ennemis pour gagner.
 -- Type: Basic
--- Variation[Vide]: Pas d'ennemis. Recommandé pour une partie géré par un instructeur, et tester les rookies pour leur affectation. Le scénario continue jusqu'à ce que l'instructeur déclare la victoire ou que tous les vaisseaux du Trigone soient détruits.
--- Variation[Facile]: Quelques Insurgés. Recommandé pour les équipages sans expérience.
--- Variation[Difficile]: Plus d'Insurgés. Recommandé pour les entraînements à plusieurs équipages.
--- Variation[Héroïque]: Enormément d'Insurgés. Vous êtes quasi sur d'être submergés.
+-- Variation[Vide]: Pas d'ennemis. RecommandÃ© pour une partie gÃ©rÃ© par un instructeur, et tester les rookies pour leur affectation. Le scÃ©nario continue jusqu'Ã  ce que l'instructeur dÃ©clare la victoire ou que tous les vaisseaux du Trigone soient dÃ©truits.
+-- Variation[Facile]: Quelques InsurgÃ©s. RecommandÃ© pour les Ã©quipages sans expÃ©rience.
+-- Variation[Difficile]: Plus d'InsurgÃ©s. RecommandÃ© pour les entraÃ®nements Ã  plusieurs Ã©quipages.
+-- Variation[HÃ©roÃ¯que]: EnormÃ©ment d'InsurgÃ©s. Vous Ãªtes quasi sur d'Ãªtre submergÃ©s.
 
 require("utils.lua")
 -- For this scenario, utils.lua provides:
@@ -21,38 +21,38 @@ require("utils.lua")
 -- d: The spawned wave's distance from the players' spawn point.
 function addWave(enemyList,type,a,d)
 	if type < 1.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Stalker Q7'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Stalker Q7'):setRotation(a + 180):orderRoaming(), 0, 0, a, d))
 	elseif type < 2.0 then
 		leader = setCirclePos(CpuShip():setFaction("La Menace"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-1, 1), d + random(-100, 100))
 		table.insert(enemyList, leader)
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 400, 0), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 400, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
 	elseif type < 3.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Adder MK5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Adder MK5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Adder MK5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Adder MK5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	elseif type < 4.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	elseif type < 5.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Enhydra X23'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Enhydra X23'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	elseif type < 6.0 then
 		leader = setCirclePos(CpuShip():setFaction("La Menace"):setTemplate('Piranha F12'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100))
 		table.insert(enemyList, leader)
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader,-1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MT52 Hornet'):setRotation(a + 180):orderFlyFormation(leader, 1500, 400), 0, 0, a + random(-1, 1), d + random(-100, 100)))
 	elseif type < 7.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Phobos T3'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	elseif type < 8.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Nirvana R5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Nirvana R5'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	elseif type < 9.0 then
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('MU52 Hornet'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('MU52 Hornet'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	else
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
-		table.insert(enemyList, setCirclePos(CpuShip():setFaction("Insurgés"):setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
+		table.insert(enemyList, setCirclePos(CpuShip():setFaction("InsurgÃ©s"):setTemplate('Stalker R7'):setRotation(a + 180):orderRoaming(), 0, 0, a + random(-5, 5), d + random(-100, 100)))
 	end
 end
 
@@ -115,7 +115,7 @@ function init()
 		addWave(enemyList,2,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
 	end)
 
-	addGMFunction("Cuirassé", function()
+	addGMFunction("CuirassÃ©", function()
 		addWave(enemyList,4,setWaveAngle(math.random(20), math.random(20)),setWaveDistance(math.random(5)))
 	end)
 
@@ -132,7 +132,7 @@ function init()
 	end)
 
 	-- Let the GM spawn a random enemy wave.
-	addGMFunction("Vague aléatoire", function()
+	addGMFunction("Vague alÃ©atoire", function()
 		a = setWaveAngle(math.random(20), math.random(20))
 		d = setWaveDistance(math.random(20))
 		type = random(0, 10)
@@ -141,7 +141,7 @@ function init()
 
 	-- Let the GM spawn random reinforcements. Their distance from the
 	-- players' spawn point is about half that of enemy waves.
-	addGMFunction("Renfort aléatoire", function()
+	addGMFunction("Renfort alÃ©atoire", function()
 		a = setWaveAngle(math.random(20), math.random(20))
 		d = random(15000, 20000 + math.random(20) * 1500)
 		friendlyShip = {'Phobos T3','MU52 Hornet','Piranha F12'}
@@ -155,7 +155,7 @@ function init()
 	end)
 
 	-- Set the number of enemy waves based on the scenario variation.
-	if getScenarioVariation() == "Héroïque" then
+	if getScenarioVariation() == "HÃ©roÃ¯que" then
 		enemy_group_count = 20
 	elseif getScenarioVariation() == "Difficile" then
 		enemy_group_count = 8
@@ -279,7 +279,7 @@ function update(delta)
 
 	-- If all allies are destroyed, the Humans (players) lose.
 	if friendly_count == 0 then
-		victory("Insurgés");
+		victory("InsurgÃ©s");
 	else
 		-- As the battle continues, award reputation based on
 		-- the players' progress and number of surviving allies.

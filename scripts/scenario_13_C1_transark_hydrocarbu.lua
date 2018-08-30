@@ -1,5 +1,5 @@
--- Name: C1 - Real Transark - Récolte Hydrocarbu
--- Description: Mission de pilotage sans ennemis. Un cargo mineur Transark doit récolter les composants (minerai, gaz) nécessaire pour le raffinage d'hydrocarbu. 
+-- Name: C1 - Real Transark - RÃ©colte Hydrocarbu
+-- Description: Mission de pilotage sans ennemis. Un cargo mineur Transark doit rÃ©colter les composants (minerai, gaz) nÃ©cessaire pour le raffinage d'hydrocarbu.
 -- Type: Mission
 
 require("utils.lua")
@@ -10,10 +10,10 @@ function init()
 
 	x, y = player:getPosition()
 	asteroidList = {}
-	-- Création d'une aura d'asteroïdes
-	-- La répartition de fait "carrée" pour une bonne répartition géométrique
-	-- Si la répartition se faisait concentrique, il y a une plus forte concentration d'élément près du centre que de l'extérieur
-	
+	-- CrÃ©ation d'une aura d'asteroÃ¯des
+	-- La rÃ©partition de fait "carrÃ©e" pour une bonne rÃ©partition gÃ©omÃ©trique
+	-- Si la rÃ©partition se faisait concentrique, il y a une plus forte concentration d'Ã©lÃ©ment prÃ¨s du centre que de l'extÃ©rieur
+
 	for n=1,4000 do
 		table.insert(asteroidList, Asteroid():setPosition(x + random(-300000, 300000), y + random(-300000, 300000)):setSize(random(10, 500)))
 	end
@@ -21,7 +21,7 @@ function init()
 	-- Station
 	SpaceStation():setTemplate("Large Station"):setFaction("Transark"):setCallSign("DS-HYDRO"):setPosition(-68203, 28889)
 
-	-- Nébuleuses
+	-- NÃ©buleuses
 	Nebula():setPosition(15444, -69333)
     Nebula():setPosition(29000, -50889)
     Nebula():setPosition(35444, -43111)
@@ -44,20 +44,20 @@ function init()
     Nebula():setPosition(79222, -45556)
     Nebula():setPosition(92556, -21333)
 
-	
+
 	-- GM buttons
 	addGMFunction("phase 1", function()
 		mission_state = phase1
 	end)
-	
+
 	Script():run("scenar_minerai.lua")
-	
+
 	-- Etat initial de la mission
 	mission_state = phase1
 end
 
 function asteroidUpdate()
-	-- Il faut repérer dans quel quadrant (et quel coin éventuel) un astéroide est supprimé, pour en rajouter un dans le côté opposé, afin de garantir une répartition régulière
+	-- Il faut repÃ©rer dans quel quadrant (et quel coin Ã©ventuel) un astÃ©roide est supprimÃ©, pour en rajouter un dans le cÃ´tÃ© opposÃ©, afin de garantir une rÃ©partition rÃ©guliÃ¨re
 	local x, y = player:getPosition()
 	for n = 1,4000 do
 		distanceTooFar = 0
@@ -69,7 +69,7 @@ function asteroidUpdate()
 		if yyy > 302000 then distanceTooFar = distanceTooFar + 4 end -- North
 		if yyy < -302000 then distanceTooFar = distanceTooFar + 8 end -- South
 		if distanceTooFar > 0 then
-			-- On change la position de l'astéroïde qui est trop loin, et on le place dans le quadrant opposé à une distance supérieur au champ de vision 300000 < ... < 302000
+			-- On change la position de l'astÃ©roÃ¯de qui est trop loin, et on le place dans le quadrant opposÃ© Ã  une distance supÃ©rieur au champ de vision 300000 < ... < 302000
 			if distanceTooFar == 1 then
 				asteroidList[n]:setPosition(x + random(30000, 302000), y + random(-300000, 300000)):setSize(random(10, 500))
 			elseif distanceTooFar == 2 then
@@ -95,7 +95,7 @@ end
 -- Gestion des phases de missions
 ------------------------------------
 
--- Première phase de la mission
+-- PremiÃ¨re phase de la mission
 function phase1(delta)
 --	if delta > 0 then
 --		mission_state = phase2

@@ -1,14 +1,14 @@
--- Name: C1 - Real Transark - Food supply astéroïdes
--- Description: Mission de pilotage sans ennemis. Un cargo Transark doit traverser une petite ceinture d'asteroides afin d'atteindre la station de provisionnement en nourriture, et le ramener à la station de transit.
+-- Name: C1 - Real Transark - Food supply astÃ©roÃ¯des
+-- Description: Mission de pilotage sans ennemis. Un cargo Transark doit traverser une petite ceinture d'asteroides afin d'atteindre la station de provisionnement en nourriture, et le ramener Ã  la station de transit.
 -- Type: Mission
 
 require("utils.lua")
 
 function init()
 	-- Vaisseau joueur
-	player = PlayerSpaceship():setCallSign("Sigma 7"):setFaction("Transark"):setTemplate("Cargo Matériel RLS"):setPosition(-40000, 0):setRotation(-90):commandTargetRotation(-90)
- 
-	-- Station relais en bordure d'astéroïdes
+	player = PlayerSpaceship():setCallSign("Sigma 7"):setFaction("Transark"):setTemplate("Cargo MatÃ©riel RLS"):setPosition(-40000, 0):setRotation(-90):commandTargetRotation(-90)
+
+	-- Station relais en bordure d'astÃ©roÃ¯des
 	transarkast = SpaceStation():setCallSign("Transark AST"):setTemplate("Medium Station"):setFaction("Transark"):setPosition(-40000, 100)
 	transarkast:setCommsFunction(transarkASTComms)
 	CpuShip():setCallSign("US-57"):setFaction("Utanscale"):setTemplate("Cargo Marchandise 1"):setPosition(-41000, -1000):setRotation(0):orderDock(transarkast)
@@ -16,25 +16,25 @@ function init()
 	CpuShip():setCallSign("TC-82"):setFaction("Technocorp"):setTemplate("Cargo Marchandise 2"):setPosition(-50000, 3000):setRotation(0):orderDefendTarget(transarkast)
 	CpuShip():setCallSign("TC-26"):setFaction("Technocorp"):setTemplate("Cargo Marchandise 3"):setPosition(-47000, -5000):setRotation(0):orderDefendTarget(transarkast)
 	player:commandDock(transarkast)
-	
+
 	-- Station d'approvisionnement de l'Utanscale
 	utanscale_supply = SpaceStation():setCallSign("US-17"):setPosition(44905, -31080):setTemplate('Medium Station'):setFaction("Utanscale"):setRotation(random(0, 360))
 	utanscale_supply:setCommsFunction(usSupplyComms)
 	CpuShip():setCallSign("US-96"):setFaction("Utanscale"):setTemplate("Cargo Marchandise 1"):setPosition(46000, -32000):setRotation(0):orderDock(utanscale_supply)
-	
-	-- Débris et vaisseaux looser pour occuper le radar
-	Artifact():setPosition(-142, -8147):setModel("Cargo Dechets 1"):setFaction("Technocorp"):setDescription("Un vieux débris spatial")
-	Artifact():setPosition(-6505, 27406):setModel("Cargo Dechets 2"):setFaction("Technocorp"):setDescription("Un vieux débris spatial")
+
+	-- DÃ©bris et vaisseaux looser pour occuper le radar
+	Artifact():setPosition(-142, -8147):setModel("Cargo Dechets 1"):setFaction("Technocorp"):setDescription("Un vieux dÃ©bris spatial")
+	Artifact():setPosition(-6505, 27406):setModel("Cargo Dechets 2"):setFaction("Technocorp"):setDescription("Un vieux dÃ©bris spatial")
 	looser = CpuShip():setCallSign("TR-41"):setFaction("Transark"):setTemplate("Cargo Equipement 1"):setPosition(5899, -21563):setRotation(0):orderDefendLocation(5899, -21563)
 	looser:setCommsFunction(transarkLooserComms)
-	
+
 	-- Station Polaris
     polShip1 = CpuShip():setFaction("Polaris"):setTemplate("Enhydra X23"):setCallSign("PO-EN-8"):setPosition(216141, 29927):orderDefendLocation(216141, 29927)
 	polShip2 = CpuShip():setFaction("Polaris"):setTemplate("Cargo Equipement 1"):setCallSign("PO-61"):setPosition(216117, 31443):orderIdle()
-	polaris = SpaceStation():setTemplate("Medium Station"):setFaction("Polaris"):setCallSign("POL Zéro G"):setPosition(214556, 31889)
+	polaris = SpaceStation():setTemplate("Medium Station"):setFaction("Polaris"):setCallSign("POL ZÃ©ro G"):setPosition(214556, 31889)
 	polaris:setCommsFunction(polarisComms)
 
-	-- Astéroides autours de la station Polaris	
+	-- AstÃ©roides autours de la station Polaris
     Asteroid():setPosition(212077, 26064)
     Asteroid():setPosition(214198, 27797)
     Asteroid():setPosition(211582, 28469)
@@ -50,8 +50,8 @@ function init()
     Asteroid():setPosition(219008, 33101)
     Asteroid():setPosition(218088, 31652)
     Asteroid():setPosition(211299, 34198)
-	
-	-- Mines de défense de la station Polaris
+
+	-- Mines de dÃ©fense de la station Polaris
     Mine():setPosition(223534, 25534)
     Mine():setPosition(225302, 28575)
     Mine():setPosition(224135, 30308)
@@ -74,7 +74,7 @@ function init()
     Mine():setPosition(221448, 24155)
     Mine():setPosition(219715, 23624)
 
-	-- Nébuleuses
+	-- NÃ©buleuses
     Nebula():setPosition(133424, 50101)
     Nebula():setPosition(71964, 33469)
     Nebula():setPosition(213850, 36613)
@@ -94,7 +94,7 @@ function init()
 	Nebula():setPosition(-32000, 24889)
 	Nebula():setPosition(55111, 9556)
 	Nebula():setPosition(43556, 33444)
-    
+
 	-- Placement de la ceinture d'asteroides
 	for n=1,2000 do
 		Asteroid():setPosition(random(-15000, 15000), random(-100000, 100000)):setSize(random(100, 1000))
@@ -111,24 +111,24 @@ function init()
 	addGMFunction("Polaris livraison", function()
 		phase3ContainerTaken()
 	end)
-	
+
 	-- Etat initial de la mission
 	mission_state = phase1MessagePosition
 end
 
--- Première phase de la mission
+-- PremiÃ¨re phase de la mission
 function phase1MessagePosition(delta)
     if delta > 0 then
         transarkast:sendCommsMessage(player, [[Bonjour Sigma-7, ici la station relais "Transark AST".
 Nous vous attendions pour votre ordre de mission.
-Le relais des commandes du cargo vous est à présent attribué.
+Le relais des commandes du cargo vous est Ã  prÃ©sent attribuÃ©.
 
-La station de réapprovisionnement de l'Utanscale ("US Supply 17") se trouve dans le Secteur D7.
-Sondez la zone, et une fois avoir repéré "US Supply 17", placer un marqueur pour indiquer la route à votre navigateur.
-Vous pourrez entrer en communication avec la station pour connaître la suite de votre ordre de mission.
+La station de rÃ©approvisionnement de l'Utanscale ("US Supply 17") se trouve dans le Secteur D7.
+Sondez la zone, et une fois avoir repÃ©rÃ© "US Supply 17", placer un marqueur pour indiquer la route Ã  votre navigateur.
+Vous pourrez entrer en communication avec la station pour connaÃ®tre la suite de votre ordre de mission.
 
-Attention, vous êtes en bordure de la ceinture d'astéroïdes.
-La zone ne présente aucun vaisseau d'insurgés mais soyez très prudents, le passage est très délicat.]])
+Attention, vous Ãªtes en bordure de la ceinture d'astÃ©roÃ¯des.
+La zone ne prÃ©sente aucun vaisseau d'insurgÃ©s mais soyez trÃ¨s prudents, le passage est trÃ¨s dÃ©licat.]])
         mission_state = phase1WaitForContactSupply
     end
 end
@@ -136,7 +136,7 @@ end
 function phase1WaitForContactSupply(delta)
 	if distance(player, utanscale_supply) < 30000 then
 		utanscale_supply:sendCommsMessage(player, [[Sigma 7, rapprochez-vous de la station, et entammez un arrimage.
-Vos fournitures sont préparées pour le chargement]])
+Vos fournitures sont prÃ©parÃ©es pour le chargement]])
 		mission_state = phase2WaitForDocked
 	end
 end
@@ -144,7 +144,7 @@ end
 -- Phase 2 - La station de l'Utanscale attend que le vaisseau fasse un arrimage
 function phase2WaitCloser(delta)
 	if distance(player, utanscale_supply) < 5000 then
-		utanscale_supply:sendCommsMessage(player, [[Sigma 7, une fois à côté de la station, votre navigateur peut entammer l'arrimage.]])
+		utanscale_supply:sendCommsMessage(player, [[Sigma 7, une fois Ã  cÃ´tÃ© de la station, votre navigateur peut entammer l'arrimage.]])
 		mission_state = phase2WaitForDocked
 	end
 end
@@ -153,8 +153,8 @@ end
 function phase2WaitForDocked(delta)
 	if player:isDocked(utanscale_supply) then
 		mission_state = phase3Return
-		utanscale_supply:sendCommsMessage(player, [[Très bien Sigma 7, nous avons électro-cramponné les containers de nourriture.
-Vous pouvez vous détacher et retourner à l'aérogare "Transark AST".
+		utanscale_supply:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous avons Ã©lectro-cramponnÃ© les containers de nourriture.
+Vous pouvez vous dÃ©tacher et retourner Ã  l'aÃ©rogare "Transark AST".
 
 Au revoir !
 Bonne route !
@@ -162,23 +162,23 @@ Soyez prudents !]])
 	end
 end
 
--- Phase 3 - La station de Transark attend que le vaisseau fasse un arrimage avec la marchandise. Possibilité de mission d'entraide avec looser
+-- Phase 3 - La station de Transark attend que le vaisseau fasse un arrimage avec la marchandise. PossibilitÃ© de mission d'entraide avec looser
 function phase3Return(delta)
 	if distance(player, looser) < 5000 then
 		mission_state = phase3ReturnSOS
 		looser:sendCommsMessage(player, [[Euh.... Sigma 7...
 
-Dites, en fait, on a un léger petit problème. Vous pourriez tout de même pas nous aider?
+Dites, en fait, on a un lÃ©ger petit problÃ¨me. Vous pourriez tout de mÃªme pas nous aider?
 Si vous avez du temps recontactez-nous SVP.
 
 Merci.]])
 	end
 	if player:isDocked(transarkast) then
 		mission_state = phase4End
-		transarkast:sendCommsMessage(player, [[Très bien Sigma 7, nous déchargeons les containers de nourriture.
-Ils vont êtres acheminés sur Khayyam.
+		transarkast:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous dÃ©chargeons les containers de nourriture.
+Ils vont Ãªtres acheminÃ©s sur Khayyam.
 
-A bientôt!]])
+A bientÃ´t!]])
 	end
 end
 
@@ -187,40 +187,40 @@ end
 function phase3ReturnSOS(delta)
 	if player:isDocked(transarkast) then
 		mission_state = phase4End
-		transarkast:sendCommsMessage(player, [[Très bien Sigma 7, nous déchargeons les containers de nourriture.
-Ils vont êtres acheminés sur Khayyam.
+		transarkast:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous dÃ©chargeons les containers de nourriture.
+Ils vont Ãªtres acheminÃ©s sur Khayyam.
 
-A bientôt!]])
+A bientÃ´t!]])
 	end
 end
 
--- Phase 3 - Les loosers donnent la destination une fois le container ramassé
+-- Phase 3 - Les loosers donnent la destination une fois le container ramassÃ©
 
 function phase3TakeContainer(delta)
 	if not supply_drop:isValid() then
         looser:sendCommsMessage(player, [[Parfait !
 
-On vous a transféré leurs coordonnées. La station "POL Zéro G" se trouve dans le secteur G15
+On vous a transfÃ©rÃ© leurs coordonnÃ©es. La station "POL ZÃ©ro G" se trouve dans le secteur G15
 
-On vous a aussi mis des cellules de charges d'hyper-deuterium pour vous faire le plein d'énergie pour le trajet.
-Dépéchez-vous SVP c'est très urgent. Il va falloir foncer pour être à l'heure prévue! Mais c'est encore possible.
+On vous a aussi mis des cellules de charges d'hyper-deuterium pour vous faire le plein d'Ã©nergie pour le trajet.
+DÃ©pÃ©chez-vous SVP c'est trÃ¨s urgent. Il va falloir foncer pour Ãªtre Ã  l'heure prÃ©vue! Mais c'est encore possible.
 
 A charge de revanche...]])
 		phase3ContainerTaken()
 	end
 	if player:isDocked(transarkast) then
 		mission_state = phase4End
-		transarkast:sendCommsMessage(player, [[Très bien Sigma 7, nous déchargeons les containers de nourriture.
-Ils vont êtres acheminés sur Khayyam.
+		transarkast:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous dÃ©chargeons les containers de nourriture.
+Ils vont Ãªtres acheminÃ©s sur Khayyam.
 
-A bientôt!]])
+A bientÃ´t!]])
 	end
 end
 
 function phase3ContainerTaken()
-		-- On donne les coordonnées aux joueurs via un waypoint
+		-- On donne les coordonnÃ©es aux joueurs via un waypoint
 		player:commandAddWaypoint(214556, 31889)
-		-- On rend la station visible à Transark en changeant la faction de l'un des vaisseaux aux abords
+		-- On rend la station visible Ã  Transark en changeant la faction de l'un des vaisseaux aux abords
 		polShip2:setFaction("Transark")
 		polaris:setScannedByFaction("Transark", true)
 		polShip1:setScannedByFaction("Transark", true)
@@ -234,17 +234,17 @@ function phase3Polaris(delta)
 	if player:isDocked(polaris) then
 		polaris:sendCommsMessage(player, [[Merci Transark, nous attendions ce container impatiemment.
 
-Comme d'habitude vous êtes dans les temps ! Félicitations !
+Comme d'habitude vous Ãªtes dans les temps ! FÃ©licitations !
 
 Encore merci!]])
 		mission_state = phase4Retour
 	end
 	if player:isDocked(transarkast) then
 		mission_state = phase4End
-		transarkast:sendCommsMessage(player, [[Très bien Sigma 7, nous déchargeons les containers de nourriture.
-Ils vont êtres acheminés sur Khayyam.
+		transarkast:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous dÃ©chargeons les containers de nourriture.
+Ils vont Ãªtres acheminÃ©s sur Khayyam.
 
-A bientôt!]])
+A bientÃ´t!]])
 	end
 end
 
@@ -252,11 +252,11 @@ end
 function phase4Retour(delta)
 	if player:isDocked(transarkast) then
 		mission_state = phase4End
-		transarkast:sendCommsMessage(player, [[Très bien Sigma 7, nous déchargeons les containers de nourriture.
-Ils vont êtres acheminés sur Khayyam.
+		transarkast:sendCommsMessage(player, [[TrÃ¨s bien Sigma 7, nous dÃ©chargeons les containers de nourriture.
+Ils vont Ãªtres acheminÃ©s sur Khayyam.
 
 Merci Sigma 7, nous reprenons les commandes.
-A bientôt!]])
+A bientÃ´t!]])
 --	victory("Transark");
 	end
 end
@@ -270,8 +270,8 @@ end
 
 function transarkASTComms()
 	if mission_state == phase1WaitForContactSupply then
-		setCommsMessage([[La station de réapprovisionnement de l'Utanscale ("US Supply 17") se trouve dans le Secteur D7.
-Une fois proche de la station, vous pourrez la contacter pour connaître la suite de votre ordre de mission.]])
+		setCommsMessage([[La station de rÃ©approvisionnement de l'Utanscale ("US Supply 17") se trouve dans le Secteur D7.
+Une fois proche de la station, vous pourrez la contacter pour connaÃ®tre la suite de votre ordre de mission.]])
 		return
 	end
 	if mission_state == phase3Return then
@@ -279,7 +279,7 @@ Une fois proche de la station, vous pourrez la contacter pour connaître la suite
 		return
 	end
 	if mission_state == phase4End then
-		setCommsMessage([[Tous nos opérateurs sont occupés pour l'instant.
+		setCommsMessage([[Tous nos opÃ©rateurs sont occupÃ©s pour l'instant.
 Veuillez patientez, nous vous recontacterons.]])
 		return
 	end
@@ -289,14 +289,14 @@ end
 
 function usSupplyComms()
 	if mission_state == phase1WaitForContactSupply then
-		setCommsMessage([[Sigma 7, avez-vous déjà traversé la ceinture d'astéroïdes?]])
+		setCommsMessage([[Sigma 7, avez-vous dÃ©jÃ  traversÃ© la ceinture d'astÃ©roÃ¯des?]])
 		addCommsReply("Oui", function()
 			setCommsMessage([[Bien, approchez-vous de la station et entammez un arrimage.
-Vos fournitures sont préparées pour le chargement.]])
+Vos fournitures sont prÃ©parÃ©es pour le chargement.]])
 			mission_state = phase2WaitCloser
 			end)
 		addCommsReply("Non", function()
-			setCommsMessage([[Recontactez-nous lorsque vous êtes proches de la station.]])
+			setCommsMessage([[Recontactez-nous lorsque vous Ãªtes proches de la station.]])
 			end)
 		return
 	end
@@ -317,15 +317,15 @@ Vos fournitures sont préparées pour le chargement.]])
 		return
 	end
 	if mission_state == phase3Polaris then
-		setCommsMessage([[Sigma 7, "Transark AST" attend toujours votre livraison. Vous en êtes où ?]])
+		setCommsMessage([[Sigma 7, "Transark AST" attend toujours votre livraison. Vous en Ãªtes oÃ¹ ?]])
 		return
 	end
 	if mission_state == phase4Retour then
-		setCommsMessage([[Sigma 7, "Transark AST" attend toujours votre livraison. Vous en êtes où ?]])
+		setCommsMessage([[Sigma 7, "Transark AST" attend toujours votre livraison. Vous en Ãªtes oÃ¹ ?]])
 		return
-	end	
+	end
 	if mission_state == phase4End then
-		setCommsMessage([[Tous nos opérateurs sont occupés pour l'instant.
+		setCommsMessage([[Tous nos opÃ©rateurs sont occupÃ©s pour l'instant.
 Veuillez patientez, nous vous recontacterons.]])
 		return
 	end
@@ -337,10 +337,10 @@ function transarkLooserComms()
 	if mission_state == phase3ReturnSOS then
 		setCommsMessage([[On a quelques ennuis moteurs, rien de grave, nos nakas travaillent dessus.
 
-Mais on risque d'encore être bloqué ici un petit temps, et on a une livraison urgente pour la station "POL Zéro G".
+Mais on risque d'encore Ãªtre bloquÃ© ici un petit temps, et on a une livraison urgente pour la station "POL ZÃ©ro G".
 
-Si on vous largue un container, vous pouvez venir le prendre et le livrer à notre place?]])
-		addCommsReply("Oui bien sûr on vient le chercher.", function()
+Si on vous largue un container, vous pouvez venir le prendre et le livrer Ã  notre place?]])
+		addCommsReply("Oui bien sÃ»r on vient le chercher.", function()
 			setCommsMessage([[Merci les gars! Vous nous sauvez les miches.
 
 Venez chercher le container que l'on vient de larguer.]])
@@ -348,46 +348,46 @@ Venez chercher le container que l'on vient de larguer.]])
 			supply_drop = SupplyDrop():setFaction("Transark"):setPosition(x, y):setEnergy(1000)
 			mission_state = phase3TakeContainer
 			end)
-		addCommsReply("Désolé, nos cales sont remplies au maximum.", function()
-			setCommsMessage([[Tant pis, merci tout de même. On se débrouillera.
+		addCommsReply("DÃ©solÃ©, nos cales sont remplies au maximum.", function()
+			setCommsMessage([[Tant pis, merci tout de mÃªme. On se dÃ©brouillera.
 
-A bientôt.]])
+A bientÃ´t.]])
 			end)
 		return
 	end
 	if mission_state == phase3TakeContainer then
 		setCommsMessage([[Venez prendre le container proche de nous.
-Dépéchez-vous SVP c'est très urgent.]])
+DÃ©pÃ©chez-vous SVP c'est trÃ¨s urgent.]])
 		return
 	end
 	if mission_state == phase3Polaris then
-		setCommsMessage([[La station "POL Zéro G" dans le secteur G15 attend la livraison.
-Dépêchez-vous !]])
+		setCommsMessage([[La station "POL ZÃ©ro G" dans le secteur G15 attend la livraison.
+DÃ©pÃªchez-vous !]])
 		return
 	end
 	if mission_state == phase4Retour then
 		setCommsMessage([[Encore merci les gars !
-Vous avez assuré.]])
+Vous avez assurÃ©.]])
 		return
 	end
 	if mission_state == phase4End then
 		setCommsMessage([[Encore merci les gars !
-Vous avez assuré.]])
+Vous avez assurÃ©.]])
 		return
 	end
-    setCommsMessage([[Merci de vous inquiétez pour nous, Sigma 7, mais nous sommes occupés avec des stagiaires pilotes.
-	
-Vous pouvez continuer votre ordre de mission. Nous gérons la situation.]])
+    setCommsMessage([[Merci de vous inquiÃ©tez pour nous, Sigma 7, mais nous sommes occupÃ©s avec des stagiaires pilotes.
+
+Vous pouvez continuer votre ordre de mission. Nous gÃ©rons la situation.]])
 end
 
 function polarisComms()
 	if mission_state == phase3Polaris then
-		setCommsMessage([[Nous attendons la livraison... Arrimez-vous à nous une fois à portée de la station.
-		
-Faites attention aux astéroïdes et au champs de mines aux abords de la station.]])
+		setCommsMessage([[Nous attendons la livraison... Arrimez-vous Ã  nous une fois Ã  portÃ©e de la station.
+
+Faites attention aux astÃ©roÃ¯des et au champs de mines aux abords de la station.]])
 		return
 	end
-    setCommsMessage([[... Canaux de communication non autorisés ...]])
+    setCommsMessage([[... Canaux de communication non autorisÃ©s ...]])
 end
 
 

@@ -1,5 +1,5 @@
 -- Name: C2 - Real Transark - Supply
--- Description: Clones 2 - Mission de pilotage, approvisionnement avec passager à bord. Un cargo transport Transark doit rejoindre une station éloignée afin de livrer une commande. Un passager important est à bord et doit y être aussi déposé sains et sauf. Le pilotage doit être exemplaire et sans prise de risque. Remarque: du fait de la présence de passager, les accélérations sont fortement bridées.
+-- Description: Clones 2 - Mission de pilotage, approvisionnement avec passager Ã  bord. Un cargo transport Transark doit rejoindre une station Ã©loignÃ©e afin de livrer une commande. Un passager important est Ã  bord et doit y Ãªtre aussi dÃ©posÃ© sains et sauf. Le pilotage doit Ãªtre exemplaire et sans prise de risque. Remarque: du fait de la prÃ©sence de passager, les accÃ©lÃ©rations sont fortement bridÃ©es.
 -- Type: Mission
 
 require("utils.lua")
@@ -8,7 +8,7 @@ function init()
 	-- Vaisseau joueur
 	player = PlayerSpaceship():setCallSign("Sigma 7"):setFaction("Transark"):setTemplate("Transport personnes RLS"):setPosition(-40000, 0):setRotation(-90):commandTargetRotation(-90)
 
-	-- Station relais 
+	-- Station relais
 	transark_tr_18 = SpaceStation():setCallSign("TR-18"):setTemplate("Medium Station"):setFaction("Transark"):setPosition(-40000, 100)
 	transark_tr_18:setCommsFunction(tr_18_Comms)
 	CpuShip():setCallSign("US-57"):setFaction("Utanscale"):setTemplate("Cargo Marchandise 1"):setPosition(-41000, -1000):setRotation(random(0, 360)):orderDock(transark_tr_18)
@@ -25,12 +25,12 @@ function init()
 	CpuShip():setFaction("Transark"):setTemplate("Transport personnes 2"):setCallSign("TR-54"):setPosition(-25878, 76266):orderDefendTarget(transark_spacedeck)
 	CpuShip():setFaction("Transark"):setTemplate("Transport personnes 1"):setCallSign("TR-63"):setPosition(-26126, 73410):orderDefendTarget(transark_spacedeck)
 
-	-- Insurgés chargés avec missiles Axo-IEM
-	insurge_1 = CpuShip():setFaction("Insurgés"):setTemplate("Stalker Q7"):setCallSign("VK13"):setPosition(507654, 164085):orderIdle()
-	insurge_2 = CpuShip():setFaction("Insurgés"):setTemplate("Stalker Q7"):setCallSign("JQ19"):setPosition(507655, 164086):orderDefendTarget(insurge_1)
-	insurge_3 = CpuShip():setFaction("Insurgés"):setTemplate("Stalker Q7"):setCallSign("LZ37"):setPosition(507656, 164088):orderDefendTarget(insurge_1)
-	insurge_4 = CpuShip():setFaction("Insurgés"):setTemplate("Stalker Q7"):setCallSign("CP66"):setPosition(507657, 164088):orderDefendTarget(insurge_1)
-	insurge_5 = CpuShip():setFaction("Insurgés"):setTemplate("Stalker Q7"):setCallSign("AW94"):setPosition(507658, 164090):orderDefendTarget(insurge_1)
+	-- InsurgÃ©s chargÃ©s avec missiles Axo-IEM
+	insurge_1 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Stalker Q7"):setCallSign("VK13"):setPosition(507654, 164085):orderIdle()
+	insurge_2 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Stalker Q7"):setCallSign("JQ19"):setPosition(507655, 164086):orderDefendTarget(insurge_1)
+	insurge_3 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Stalker Q7"):setCallSign("LZ37"):setPosition(507656, 164088):orderDefendTarget(insurge_1)
+	insurge_4 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Stalker Q7"):setCallSign("CP66"):setPosition(507657, 164088):orderDefendTarget(insurge_1)
+	insurge_5 = CpuShip():setFaction("InsurgÃ©s"):setTemplate("Stalker Q7"):setCallSign("AW94"):setPosition(507658, 164090):orderDefendTarget(insurge_1)
 
 	insurge_1:setLASERWeapon(0, 40, 355, 0, 0, 0):setLASERWeaponTurret(0, 0, 0, 0):setLASERWeapon(1, 40, 5, 0, 0, 0):setLASERWeaponTurret(1, 0, 0, 0)
 	insurge_2:setLASERWeapon(0, 40, 355, 0, 0, 0):setLASERWeaponTurret(0, 0, 0, 0):setLASERWeapon(1, 40, 5, 0, 0, 0):setLASERWeaponTurret(1, 0, 0, 0)
@@ -43,7 +43,7 @@ function init()
 	insurge_4:weaponTubeAllowMissle(0, "EMP"):setWeaponTubeExclusiveFor(0, "EMP"):setWeaponTubeCount(1):setWeaponTubeDirection(0, 0):setWeaponStorageMax("EMP", 2):setWeaponStorage("EMP", 2)
 	insurge_5:weaponTubeAllowMissle(0, "EMP"):setWeaponTubeExclusiveFor(0, "EMP"):setWeaponTubeCount(1):setWeaponTubeDirection(0, 0):setWeaponStorageMax("EMP", 2):setWeaponStorage("EMP", 2)
 
-	-- Nébuleuses`qui cachent les insurgés
+	-- NÃ©buleuses`qui cachent les insurgÃ©s
 	Nebula():setPosition(505436, 152917)
 	Nebula():setPosition(511383, 149858)
 	Nebula():setPosition(518520, 147819)
@@ -57,7 +57,7 @@ function init()
 	Nebula():setPosition(504926, 139493)
 
 
-	-- Supply drop à proximité de la station
+	-- Supply drop Ã  proximitÃ© de la station
 	SupplyDrop():setFaction("Transark"):setPosition(-13213, 80177):setEnergy(500)
 	SupplyDrop():setFaction("Transark"):setPosition(-10792, 78936):setEnergy(500)
 	SupplyDrop():setFaction("Transark"):setPosition(-12220, 77570):setEnergy(500)
@@ -78,8 +78,8 @@ function init()
 	SupplyDrop():setFaction("Transark"):setPosition(-21470, 81667):setEnergy(500)
 	SupplyDrop():setFaction("Transark"):setPosition(-20663, 76639):setEnergy(500)
 
-	-- Débris et vaisseaux looser pour occuper le radar
-	Artifact():setPosition(-10293, -24888):setModel("Cargo Dechets 1"):setFaction("Technocorp"):setDescription("Un vieux débris spatial")
+	-- DÃ©bris et vaisseaux looser pour occuper le radar
+	Artifact():setPosition(-10293, -24888):setModel("Cargo Dechets 1"):setFaction("Technocorp"):setDescription("Un vieux dÃ©bris spatial")
 	Artifact():setPosition(-6505, 27406):setModel("Cargo Dechets 2"):setFaction("Technocorp"):setDescription("Un vieux cargo spatial")
 	looser = CpuShip():setCallSign("TR-41"):setFaction("Transark"):setTemplate("Cargo Equipement 1"):setPosition(5899, -21563):setRotation(0):orderDefendLocation(5899, -21563)
 	looser:setCommsFunction(transarkLooserComms)
@@ -90,7 +90,7 @@ function init()
 	tcStation = SpaceStation():setTemplate("Medium Station"):setFaction("Technocorp"):setCallSign("TC-04"):setPosition(1142784, 7490)
 	tcStation:setCommsFunction(tcStationComms)
 
-	-- Astéroides autours de la station tcStation	
+	-- AstÃ©roides autours de la station tcStation
 	Asteroid():setPosition(1140305, 1665)
 	Asteroid():setPosition(1142426, 3398)
 	Asteroid():setPosition(1139810, 4070)
@@ -107,7 +107,7 @@ function init()
 	Asteroid():setPosition(1146316, 7253)
 	Asteroid():setPosition(1139527, 9799)
 
-	-- Mines de défense de la station tcStation
+	-- Mines de dÃ©fense de la station tcStation
 	Mine():setPosition(1151762, 1135)
 	Mine():setPosition(1153530, 4176)
 	Mine():setPosition(1152363, 5909)
@@ -130,7 +130,7 @@ function init()
 	Mine():setPosition(1149676, -244)
 	Mine():setPosition(1147943, -775)
 
-	-- Nébuleuses
+	-- NÃ©buleuses
 	Nebula():setPosition(1061652, 25702)
 	Nebula():setPosition(71964, 33469)
 	Nebula():setPosition(1142078, 12214)
@@ -151,7 +151,7 @@ function init()
 	Nebula():setPosition(55111, 9556)
 	Nebula():setPosition(43556, 33444)
 
-	-- Quelque astéroides près de la station de départ (ancienne ceinture)
+	-- Quelque astÃ©roides prÃ¨s de la station de dÃ©part (ancienne ceinture)
 	Asteroid():setPosition(-338, -18347)
 	Asteroid():setPosition(5601, -22084)
 	Asteroid():setPosition(5691, -22854)
@@ -170,7 +170,7 @@ function init()
 	Asteroid():setPosition(-7861, -22299)
 	Asteroid():setPosition(1527, -18380)
 
-	-- Nuage de nébuleuse à mi-chemin
+	-- Nuage de nÃ©buleuse Ã  mi-chemin
 	Nebula():setPosition(501329, -7379)
 	Nebula():setPosition(513261, 14170)
 	Nebula():setPosition(518070, 25390)
@@ -217,15 +217,15 @@ function init()
 	Nebula():setPosition(698479, 38213)
 
 	-- GM buttons
-	addGMFunction("Vaisseau hacké", function()
+	addGMFunction("Vaisseau hackÃ©", function()
 		vaisseauHacked = true
-		-- Gestion automatique des réparations et du refroidissement
+		-- Gestion automatique des rÃ©parations et du refroidissement
 		player:commandSetAutoRepair(true)
 		player:setAutoCoolant(true)
 	end)
 	addGMFunction("Vaisseau libre", function()
 		vaisseauHacked = false
-		-- Gestion automatique des réparations et du refroidissement
+		-- Gestion automatique des rÃ©parations et du refroidissement
 		player:commandSetAutoRepair(false)
 		player:setAutoCoolant(false)
 	end)
@@ -244,16 +244,16 @@ function init()
 		passager_away = true
 		passager_ko = false
 	end)
-	
+
 	-- Gestion du passager
 	passager_ok = true
 	passager_away = false
 	passager_ko = false
 
-	player:addCustomButton("relay", "VERIF_PASSAGER", "Vérifier Passager", function()
-		if passager_ok then player:addToShipLog("Passager à bord. Sain et sauf.","green") end
+	player:addCustomButton("relay", "VERIF_PASSAGER", "VÃ©rifier Passager", function()
+		if passager_ok then player:addToShipLog("Passager Ã  bord. Sain et sauf.","green") end
 		if passager_ko then player:addToShipLog("Le passager est inconscient. Il a besoin de soin urgent !","yellow") end
-		if passager_away then player:addToShipLog("Le passager n'est plus à bord !","red") end
+		if passager_away then player:addToShipLog("Le passager n'est plus Ã  bord !","red") end
 	end)
 
 	-- Gestion des distances (pilote)
@@ -287,7 +287,7 @@ end
 
 -- Auto pilot the player ship targetting another object
 function autoPilot()
-	-- désactive les laser, bouclier et moteur RLS
+	-- dÃ©sactive les laser, bouclier et moteur RLS
 	for _, system in ipairs({"LASERweapons", "missilesystem", "frontshield", "rearshield", "RLS"}) do
 		player:setSystemPower(system, player:getSystemPower(system)-0.001)
 		player:commandSetSystemPowerRequest(system, random(0.1, 0.2))
@@ -296,7 +296,7 @@ function autoPilot()
 		--	player:setSystemHealth(system, health-0.0005)
 		--end
 	end
-	-- Diminue la puissance des moteurs à impulsion
+	-- Diminue la puissance des moteurs Ã  impulsion
 	for _, system in ipairs({"impulse"}) do
 		player:setSystemPower(system, player:getSystemPower(system)-0.001)
 		player:commandSetSystemPowerRequest(system, random(0.4, 0.5))
@@ -310,8 +310,8 @@ function autoPilot()
 	--		player:setEnergyLevel(energy_level-1)
 	--end
 
-	-- Donne l'ordre au vaisseau insurgé de se diriger vers le vaisseau joueur sans attaquer
-	-- Change la direction du vaisseau joueur pour aller vers le vaissseau insurgé
+	-- Donne l'ordre au vaisseau insurgÃ© de se diriger vers le vaisseau joueur sans attaquer
+	-- Change la direction du vaisseau joueur pour aller vers le vaissseau insurgÃ©
 	local player_x, player_y = player:getPosition()
 	local insurge_x, insurge_y = insurge_1:getPosition()
 	insurge_1:orderFlyTowardsBlind(player_x, player_y)
@@ -329,7 +329,7 @@ function autoPilot()
 end
 
 
--- Première phase de la mission
+-- PremiÃ¨re phase de la mission
 function phase1(delta)
 	if vaisseauHacked then
 		autoPilot()
@@ -337,15 +337,15 @@ function phase1(delta)
 	if delta > 0 then
 		transark_tr_18:sendCommsMessage(player, [[Bonjour Sigma-7, ici la station relais "Transark TR-18".
 Nous vous attendions pour votre ordre de mission.
-Le relais des commandes du cargo vous est à présent attribué.
+Le relais des commandes du cargo vous est Ã  prÃ©sent attribuÃ©.
 
 Le space deck de Transark ("TR-83") se trouve dans le secteur I4.
-Consultez la zone, et une fois avoir repéré "TR-83", placez-y un marqueur pour indiquer la route à votre navigateur.
-Vous pourrez entrer en communication avec la station pour connaître la suite de votre ordre de mission.
+Consultez la zone, et une fois avoir repÃ©rÃ© "TR-83", placez-y un marqueur pour indiquer la route Ã  votre navigateur.
+Vous pourrez entrer en communication avec la station pour connaÃ®tre la suite de votre ordre de mission.
 
-N'oubliez pas que votre véhicule est prévu pour le transport de personnel. Donc l'usage des moteurs RLS est fort restreint.
-Utilisez vos moteurs à impulsion qui vous permettront d'atteindre de beaucoup plus grandes vitesses.
-N'oubliez pas de décélérer bien à temps (à mi-parcours).]])
+N'oubliez pas que votre vÃ©hicule est prÃ©vu pour le transport de personnel. Donc l'usage des moteurs RLS est fort restreint.
+Utilisez vos moteurs Ã  impulsion qui vous permettront d'atteindre de beaucoup plus grandes vitesses.
+N'oubliez pas de dÃ©cÃ©lÃ©rer bien Ã  temps (Ã  mi-parcours).]])
 		mission_state = phase2
 	end
 end

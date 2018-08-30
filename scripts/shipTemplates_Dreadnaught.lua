@@ -14,7 +14,7 @@ The ship is often nicknamed the "all-father", a name that aptly describes the ma
 
 Odin's core contains the largest WARP drive ever created. About 150 support crew are needed to operate the WARP drive alone, and it takes 5 days of continuous operation to power it.
 
-Due to the enormous cost of this dreadnaught, only the richest star systems are able to build and maintain ships like the Odin. 
+Due to the enormous cost of this dreadnaught, only the richest star systems are able to build and maintain ships like the Odin.
 
 This machine's primary tactic is to WARP into an unsuspecting enemy system and destroy everything before they know what hit them. It's effective and destructive, but extremely expensive.]])
 template:setWARPDrive(true)
@@ -28,12 +28,12 @@ template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
 template:setSpeed(0, 1, 0)
 
--- Aérodock Trigone 4 - Rorqual (Enorme)
+-- AÃ©rodock Trigone 4 - Rorqual (Enorme)
 
-template = ShipTemplate():setName("Aérodock Trigone 4 - Rorqual"):setClass("Corvette", "Support", "Dreadnaught", "Odin"):setModel("space_station_1")
-template:setDescription([[Station spatiale de classe "Rorqual". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons et à missiles guidés, un énorme blindage, et 6 niveaux de boucliers.
+template = ShipTemplate():setName("AÃ©rodock Trigone 4 - Rorqual"):setClass("Corvette", "Support", "Dreadnaught", "Odin"):setModel("space_station_1")
+template:setDescription([[Station spatiale de classe "Rorqual". AÃ©rogare du Trigone ArmÃ©. PossÃ¨de de trÃ¨s bons systÃ¨mes de dÃ©fense Ã  rayons et Ã  missiles guidÃ©s, un Ã©norme blindage, et 6 niveaux de boucliers.
 
-Peut accueillir des chasseurs stellaires et des frégates.]])
+Peut accueillir des chasseurs stellaires et des frÃ©gates.]])
 template:setRadarTrace("radartrace_hugestation.png")
 template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
