@@ -420,6 +420,9 @@ if(WIN32)
     install(FILES ${DRMINGW_ROOT}/bin/symsrv.yes DESTINATION .)
   endif()
 
+  # Remark: creating log file fails when the "logs" directory doesn't exist as fopen (in gameStateLogger.cpp) cannot create the directory
+
+  install(DIRECTORY logs DESTINATION .)
   install(DIRECTORY resources DESTINATION .)
   install(DIRECTORY scripts DESTINATION .)
   install(DIRECTORY packs DESTINATION .)
@@ -427,11 +430,13 @@ if(WIN32)
 elseif(APPLE)
   install(FILES logo.icns DESTINATION "EmptyEpsilon.app/Contents/Resources" RENAME "${EXECUTABLE_NAME}.icns")
 
+  install(DIRECTORY logs DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY resources DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY scripts DESTINATION "EmptyEpsilon.app/Contents/Resources")
   install(DIRECTORY packs DESTINATION "EmptyEpsilon.app/Contents/Resources")
 else()
   include(GNUInstallDirs)
+  install(DIRECTORY logs DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
   install(DIRECTORY resources DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
   install(DIRECTORY scripts DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
   install(DIRECTORY packs DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/emptyepsilon/")
