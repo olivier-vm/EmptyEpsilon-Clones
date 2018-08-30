@@ -120,7 +120,7 @@ GameMasterScreen::GameMasterScreen()
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
     // Tweak object button
-    tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
+    tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Ajustements", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
             if (P<PlayerSpaceship>(obj))
@@ -143,7 +143,7 @@ GameMasterScreen::GameMasterScreen()
     tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
 
     // Hail player ship button
-    player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
+    player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Appeler vaisseau", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
             if (P<PlayerSpaceship>(obj))
@@ -177,23 +177,23 @@ GameMasterScreen::GameMasterScreen()
     order_layout = new GuiAutoLayout(this, "ORDER_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     order_layout->setPosition(20, 130, ATopLeft)->setSize(250, GuiElement::GuiSizeMax);
 
-    (new GuiLabel(order_layout, "ORDERS_LABEL", "Orders:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_IDLE", "Idle", [this]() {
+    (new GuiLabel(order_layout, "ORDERS_LABEL", "Ordres:", 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiButton(order_layout, "ORDER_IDLE", "Inactif", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderIdle();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_ROAMING", "Roaming", [this]() {
+    (new GuiButton(order_layout, "ORDER_ROAMING", "Patrouiller", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderRoaming();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Stand ground", [this]() {
+    (new GuiButton(order_layout, "ORDER_STAND_GROUND", "Rester en position", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderStandGround();
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defend location", [this]() {
+    (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", "Defendre une position", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
             if (P<CpuShip>(obj))
                 P<CpuShip>(obj)->orderDefendLocation(obj->getPosition());
@@ -554,11 +554,11 @@ GuiGlobalMessageEntry::GuiGlobalMessageEntry(GuiContainer* owner)
     message_entry = new GuiTextEntry(box, "MESSAGE_ENTRY", "");
     message_entry->setPosition(0, 20, ATopCenter)->setSize(700, 50);
 
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
+    (new GuiButton(box, "CLOSE_BUTTON", "Annuler", [this]() {
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);
 
-    (new GuiButton(box, "SEND_BUTTON", "Send", [this]() {
+    (new GuiButton(box, "SEND_BUTTON", "Envoyer", [this]() {
         string message = message_entry->getText();
         if (message.length() > 0)
         {
@@ -608,23 +608,23 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
     // Default supply drop values copied from scripts/supply_drop.lua
-    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Supply Drop", [this]() {
+    (new GuiButton(box, "CREATE_SUPPLY_DROP", "Largage fourniture", [this]() {
         setCreateScript("SupplyDrop():setFactionId(" + string(faction_selector->getSelectionIndex()) + "):setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1)");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_ASTEROID", "Asteroid", [this]() {
+    (new GuiButton(box, "CREATE_ASTEROID", "Asteroide", [this]() {
         setCreateScript("Asteroid()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_BLACKHOLE", "BlackHole", [this]() {
+    (new GuiButton(box, "CREATE_BLACKHOLE", "Trou noir", [this]() {
         setCreateScript("BlackHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_NEBULA", "Nebula", [this]() {
+    (new GuiButton(box, "CREATE_NEBULA", "Nebuleuse", [this]() {
         setCreateScript("Nebula()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
-    (new GuiButton(box, "CREATE_WORMHOLE", "Worm Hole", [this]() {
+    (new GuiButton(box, "CREATE_WORMHOLE", "Trou de ver", [this]() {
         setCreateScript("WormHole()");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;
@@ -641,7 +641,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         listbox->addEntry(template_name, template_name);
     }
 
-    (new GuiButton(box, "CLOSE_BUTTON", "Cancel", [this]() {
+    (new GuiButton(box, "CLOSE_BUTTON", "Annuler", [this]() {
         create_script = "";
         this->hide();
     }))->setPosition(20, -20, ABottomLeft)->setSize(300, 50);

@@ -61,20 +61,20 @@ void GameMasterChatDialog::onDraw(sf::RenderTarget& window)
         break;
     case CS_OpeningChannel:
     case CS_BeingHailed:
-        disableComms(player->getCallSign() + " - Ouvrir communications avec " + player->getCommsTargetName());
+        disableComms(player->getCallSign() + " - Appel destination " + player->getCommsTargetName());
         break;
     case CS_BeingHailedByGM:
-        disableComms(player->getCallSign() + " - Appeler en tant que " + player->getCommsTargetName());
+        disableComms(player->getCallSign() + " - Appel source " + player->getCommsTargetName());
         break;
     case CS_ChannelOpen:
     case CS_ChannelOpenPlayer:
-        disableComms(player->getCallSign() + " - Communiquer avec " + player->getCommsTargetName());
+        disableComms(player->getCallSign() + " - Appel destination " + player->getCommsTargetName());
         break;
     case CS_ChannelOpenGM:
         if (notification)
-            setTitle("**" + player->getCallSign() + " - Communiquer en tant que " + player->getCommsTargetName() + "**");
+            setTitle("**" + player->getCallSign() + " - Appel source " + player->getCommsTargetName() + "**");
         else
-            setTitle(player->getCallSign() + " - Communiquer en tant que " + player->getCommsTargetName());
+            setTitle(player->getCallSign() + " - Appel source " + player->getCommsTargetName());
         chat_text->enable();
         text_entry->enable();
         if (chat_text->getText() != player->getCommsIncommingMessage())
