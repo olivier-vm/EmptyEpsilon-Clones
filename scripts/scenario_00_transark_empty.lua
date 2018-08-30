@@ -1,14 +1,13 @@
 -- Name: Simulation Transark - mission vide
-
--- Description: Scénario vide.
+-- Description: Scï¿½nario vide.
 -- Type: Basic
 
 function init()
-	--CpuShip():setPosition(5000, 5000):setTemplate('Aérodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(5000, 5000)
-	--CpuShip():setPosition(-5000, 5000):setTemplate('Aérodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(-5000, 5000)
-	--CpuShip():setPosition(5000, -5000):setTemplate('Aérodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(5000, -5000)
-	--CpuShip():setPosition(-5000, -5000):setTemplate('Aérodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(-5000, -5000)
-	player1 = PlayerSpaceship():setFaction("Transark"):setTemplate("Cargo Matériel RLS"):setRotation(200)
+	--CpuShip():setPosition(5000, 5000):setTemplate('Aï¿½rodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(5000, 5000)
+	--CpuShip():setPosition(-5000, 5000):setTemplate('Aï¿½rodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(-5000, 5000)
+	--CpuShip():setPosition(5000, -5000):setTemplate('Aï¿½rodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(5000, -5000)
+	--CpuShip():setPosition(-5000, -5000):setTemplate('Aï¿½rodock Trigone - Petit'):setFaction("Trigone"):setRotation(random(0, 360)):orderDefendLocation(-5000, -5000)
+	player1 = PlayerSpaceship():setFaction("Transark"):setTemplate("Cargo Matï¿½riel RLS"):setRotation(200)
     --player2 = PlayerSpaceship():setFaction("Transark"):setTemplate("Enhydra"):setRotation(0)
 	--Nebula():setPosition(-5000, 0)
     --Artifact():setPosition(1000, 9000):setModel("small_frigate_1"):setDescription("An old space derelict.")
@@ -17,23 +16,23 @@ function init()
     --addGMFunction("move 1 to 2", function() player1:transferPlayersToShip(player2) end)
     --addGMFunction("move 2 to 1", function() player2:transferPlayersToShip(player1) end)
     --CpuShip():setTemplate("Adder MK5"):setPosition(0, 0):setRotation(0):setFaction("Transark")
-    --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Insurgés")
+    --CpuShip():setTemplate("Piranha F12"):setPosition(2000, 0):setRotation(-90):setFaction("Insurgï¿½s")
 
-    
-    addGMFunction("Random champ d'astéroïdes", function()
+
+    addGMFunction("Random champ d'astï¿½roï¿½des", function()
         cleanup()
         for n=1,1000 do
 			Asteroid():setPosition(random(-50000, 50000), random(-100000, 100000)):setSize(random(100, 500))
 			VisualAsteroid():setPosition(random(-55000, 55000), random(-100000, 100000)):setSize(random(100, 500))
         end
     end)
-    addGMFunction("Random champ de micro-nébuleuses", function()
+    addGMFunction("Random champ de micro-nï¿½buleuses", function()
         cleanup()
         for n=1,50 do
 			Nebula():setPosition(random(-50000, 50000), random(-50000, 50000))
         end
     end)
-    addGMFunction("Effacer non-sélectionnés", function()
+    addGMFunction("Effacer non-sï¿½lectionnï¿½s", function()
         local gm_selection = getGMSelection()
         for _, obj in ipairs(getAllObjects()) do
             local found = false
