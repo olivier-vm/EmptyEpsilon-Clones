@@ -89,7 +89,7 @@ OptionsMenu::OptionsMenu()
     (new GuiLabel(this, "MUSIC_PLAYBACK_LABEL", "Music Playback", 30))->addBackground()->setPosition(50, top, ATopLeft)->setSize(300, 50);
 
     // Determine when music is enabled.
-    int music_enabled_index = PreferencesManager::get("music_enabled", "2").toInt();
+    int music_enabled_index = PreferencesManager::get("music_enabled", "0").toInt();
     top += 50;
     (new GuiSelector(this, "MUSIC_ENABLED", [](int index, string value)
     {
