@@ -30,13 +30,15 @@ function init()
 end
 
 function asteroidUpdate()
-	for _, system in ipairs({"reactor", "LASERweapons", "maneuver", "missilesystem", "frontshield", "rearshield", "RLS", "impulse", "WARPdrive"}) do
-		player:setSystemPower(system, 1.0)
-		player:commandSetSystemPowerRequest(system, 1.0)
-		player:setSystemHealth(system, 1.0)
-	end
-	player:setHullMax(1000)
-	player:setHull(1000)
+	-- Vaisseau ne meurt jamais (pour des tests seulement)
+	--for _, system in ipairs({"reactor", "LASERweapons", "maneuver", "missilesystem", "frontshield", "rearshield", "RLS", "impulse", "WARPdrive"}) do
+	--	player:setSystemPower(system, 1.0)
+	--	player:commandSetSystemPowerRequest(system, 1.0)
+	--	player:setSystemHealth(system, 1.0)
+	--end
+	--player:setHullMax(1000)
+	--player:setHull(1000)
+
 	-- Il faut repérer dans quel quadrant (et quel coin éventuel) un astéroid est supprimé, pour en rajouter un dans le côté opposé, afin de garantir une répartition régulière
 	local x, y = player:getPosition()
 	for _, astero in ipairs(getAllObjects()) do

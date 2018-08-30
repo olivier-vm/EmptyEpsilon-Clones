@@ -82,7 +82,7 @@ GameMasterScreen::GameMasterScreen()
     	main_radar->setViewPosition(ship->getPosition());
     	targets.set(ship);
     });
-    CPU_ship_selector->setPosition(270, -70, ABottomLeft)->setSize(250, 50);
+    CPU_ship_selector->setPosition(270, -70, ABottomLeft)->setSize(350, 50);
 
     // Space station selector
     space_station_selector = new GuiSelector(this, "SPACE_STATION_SELECTOR", [this](int index, string value) {
@@ -92,7 +92,7 @@ GameMasterScreen::GameMasterScreen()
     	main_radar->setViewPosition(station->getPosition());
     	targets.set(station);
     });
-    space_station_selector->setPosition(270, -120, ABottomLeft)->setSize(250, 50);
+    space_station_selector->setPosition(270, -120, ABottomLeft)->setSize(350, 50);
 
     // Create button
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
