@@ -263,6 +263,31 @@ void GameMasterScreen::update(float delta)
         }
     }
 
+    // Add and remove entries from the CPU ship and space station list.
+    int n = 0;
+    foreach(SpaceObject, obj, space_object_list)
+    {
+    	P<SpaceShip> ship = obj;
+    	P<SpaceStation> station = obj;
+    	if (ship)
+    	{
+    		if (CPU_ship_selector->indexByValue(string(n)) == -1)
+    			CPU_ship_selector->addEntry(ship->getTypeName() + " " + ship->getCallSign(), string(n));
+    		}else{
+    			if (CPU_ship_selector->indexByValue(string(n)) != -1)
+    				CPU_ship_selector->removeEntry(CPU_ship_selector->indexByValue(string(n)));
+    		}
+    	if (station)
+    	{
+    		if (space_station_selector->indexByValue(string(n)) == -1)
+    			space_station_selector->addEntry(station->getTypeName() + " " + station->getCallSign(), string(n));
+    		}else{
+    			if (space_station_selector->indexByValue(string(n)) != -1)
+    				space_station_selector->removeEntry(space_station_selector->indexByValue(string(n)));
+    		}
+    	n += 1;
+    }
+
     // Record object type.
     for(P<SpaceObject> obj : targets.getTargets())
     {
