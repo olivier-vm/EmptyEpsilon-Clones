@@ -32,6 +32,7 @@ GameMasterScreen::GameMasterScreen()
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", sf::Color(255, 255, 255, 32));
     box_selection_overlay->hide();
 
+    // pause button
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", "Pause", [this](bool value) {
         if (!value)
             engine->setGameSpeed(1.0f);
@@ -40,11 +41,13 @@ GameMasterScreen::GameMasterScreen()
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
+    // Comm interception button
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercept all comms", [this](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
 
+    // Patrie selection
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -55,11 +58,13 @@ GameMasterScreen::GameMasterScreen()
         faction_selector->addEntry(info->getName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
 
+    // Global message button
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
         global_message_entry->show();
     });
     global_message_button->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
 
+    // Player ship selector
     player_ship_selector = new GuiSelector(this, "PLAYER_SHIP_SELECTOR", [this](int index, string value) {
         P<SpaceObject> ship = gameGlobalInfo->getPlayerShip(value.toInt());
         if (ship)
@@ -69,6 +74,7 @@ GameMasterScreen::GameMasterScreen()
     });
     player_ship_selector->setPosition(270, -20, ABottomLeft)->setSize(350, 50);
 
+    // CPU ship selector
     CPU_ship_selector = new GuiSelector(this, "CPU_SHIP_SELECTOR", [this](int index, string value) {
     	P<SpaceObject> ship = space_object_list[value.toInt()];
     	if (ship)
@@ -78,6 +84,7 @@ GameMasterScreen::GameMasterScreen()
     });
     CPU_ship_selector->setPosition(270, -70, ABottomLeft)->setSize(250, 50);
 
+    // Space station selector
     space_station_selector = new GuiSelector(this, "SPACE_STATION_SELECTOR", [this](int index, string value) {
     	P<SpaceObject> station = space_object_list[value.toInt()];
     	if (station)
@@ -87,27 +94,32 @@ GameMasterScreen::GameMasterScreen()
     });
     space_station_selector->setPosition(270, -120, ABottomLeft)->setSize(250, 50);
 
+    // Create button
     create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
+    // Copy scenario button
     copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", "Copy scenario", [this]() {
         Clipboard::setClipboard(getScriptExport(false));
     });
     copy_scenario_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
 
+    // Copy selected button
     copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", "Copy selected", [this]() {
         Clipboard::setClipboard(getScriptExport(true));
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
+    // Cancel create button
     cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
         create_button->show();
         cancel_create_button->hide();
     });
     cancel_create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50)->hide();
 
+    // Tweak object button
     tweak_button = new GuiButton(this, "TWEAK_OBJECT", "Tweak", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {
@@ -130,6 +142,7 @@ GameMasterScreen::GameMasterScreen()
     });
     tweak_button->setPosition(20, -120, ABottomLeft)->setSize(250, 50)->hide();
 
+    // Hail player ship button
     player_comms_hail = new GuiButton(this, "HAIL_PLAYER", "Hail ship", [this]() {
         for(P<SpaceObject> obj : targets.getTargets())
         {

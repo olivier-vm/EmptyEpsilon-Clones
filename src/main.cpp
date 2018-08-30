@@ -215,7 +215,7 @@ int main(int argc, char** argv)
         }
     }
 
-    soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
+    soundManager->setMusicVolume(PreferencesManager::get("music_volume", "0").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
     if (PreferencesManager::get("disable_shaders").toInt())
