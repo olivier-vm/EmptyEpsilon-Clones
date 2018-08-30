@@ -52,7 +52,7 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setEnergyLevelMax);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevel);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getEnergyLevelMax);
-    
+
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getScanProbeCount);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, setMaxScanProbeCount);
@@ -960,7 +960,7 @@ bool PlayerSpaceship::hailCommsByGM(string target_name)
         return false;
 
     // Log the hail.
-    addToShipLog("Hailed by " + target_name, colorConfig.log_generic);
+    addToShipLog("Appele par " + target_name, colorConfig.log_generic);
 
     // Set comms to the hail state and notify Relay/comms.
     comms_state = CS_BeingHailedByGM;
@@ -1007,7 +1007,7 @@ void PlayerSpaceship::closeComms()
         {
             P<PlayerSpaceship> player_ship = comms_target;
             player_ship->comms_state = CS_ChannelClosed;
-            player_ship->addToShipLog("Communication channel closed by other side", colorConfig.log_generic);
+            player_ship->addToShipLog("Canal de communication ferme par l'autre cote", colorConfig.log_generic);
         }
         if (comms_state == CS_OpeningChannel && comms_target)
         {
@@ -1017,11 +1017,11 @@ void PlayerSpaceship::closeComms()
                 if (player_ship->comms_state == CS_BeingHailed && player_ship->comms_target == this)
                 {
                     player_ship->comms_state = CS_Inactive;
-                    player_ship->addToShipLog("Hailing from " + getCallSign() + " stopped", colorConfig.log_generic);
+                    player_ship->addToShipLog("Appel de " + getCallSign() + " stoppe", colorConfig.log_generic);
                 }
             }
         }
-        addToShipLog("Communication channel closed", colorConfig.log_generic);
+        addToShipLog("Canal de communication ferme", colorConfig.log_generic);
         if (comms_state == CS_ChannelOpenGM)
             comms_state = CS_ChannelClosed;
         else
@@ -1186,8 +1186,8 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 comms_state = CS_OpeningChannel;
                 comms_open_delay = comms_channel_open_time;
                 comms_target_name = comms_target->getCallSign();
-                comms_incomming_message = "Opened comms with " + comms_target_name;
-                addToShipLog("Hailing: " + comms_target_name, colorConfig.log_generic);
+                comms_incomming_message = "Comms ouvertes avec " + comms_target_name;
+                addToShipLog("Appeler: " + comms_target_name, colorConfig.log_generic);
             }else{
                 comms_state = CS_Inactive;
             }
@@ -1210,13 +1210,13 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     comms_state = CS_ChannelOpenPlayer;
                     playerShip->comms_state = CS_ChannelOpenPlayer;
 
-                    comms_incomming_message = "Opened comms to " + playerShip->getCallSign();
-                    playerShip->comms_incomming_message = "Opened comms to " + getCallSign();
-                    addToShipLog("Opened communication channel to " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Opened communication channel to " + getCallSign(), colorConfig.log_generic);
+                    comms_incomming_message = "Comms ouvertes vers " + playerShip->getCallSign();
+                    playerShip->comms_incomming_message = "Comms ouvertes vers " + getCallSign();
+                    addToShipLog("Canal de communication ouvert vers " + playerShip->getCallSign(), colorConfig.log_generic);
+                    playerShip->addToShipLog("Canal de communication ouvert vers " + getCallSign(), colorConfig.log_generic);
                 }else{
-                    addToShipLog("Refused communications from " + playerShip->getCallSign(), colorConfig.log_generic);
-                    playerShip->addToShipLog("Refused communications to " + getCallSign(), colorConfig.log_generic);
+                    addToShipLog("Communications refusee de " + playerShip->getCallSign(), colorConfig.log_generic);
+                    playerShip->addToShipLog("Communications refusee vers " + getCallSign(), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                     playerShip->comms_state = CS_ChannelFailed;
                 }
@@ -1225,10 +1225,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                 {
                     if (!comms_target)
                     {
-                        addToShipLog("Hail suddenly went dead.", colorConfig.log_generic);
+                        addToShipLog("L'appel s'est interrompu.", colorConfig.log_generic);
                         comms_state = CS_ChannelBroken;
                     }else{
-                        addToShipLog("Accepted hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog("Appel accepte provenant de " + comms_target->getCallSign(), colorConfig.log_generic);
                         comms_reply_id.clear();
                         comms_reply_message.clear();
                         if (comms_incomming_message == "")
@@ -1248,7 +1248,7 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
                     }
                 }else{
                     if (comms_target)
-                        addToShipLog("Refused hail from " + comms_target->getCallSign(), colorConfig.log_generic);
+                        addToShipLog("Appel refuse provenant de " + comms_target->getCallSign(), colorConfig.log_generic);
                     comms_state = CS_Inactive;
                 }
             }
@@ -1262,10 +1262,10 @@ void PlayerSpaceship::onReceiveClientCommand(int32_t client_id, sf::Packet& pack
             {
                 comms_state = CS_ChannelOpenGM;
 
-                addToShipLog("Opened communication channel to " + comms_target_name, colorConfig.log_generic);
-                comms_incomming_message = "Opened comms with " + comms_target_name;
+                addToShipLog("Canal de communication ouvert vers " + comms_target_name, colorConfig.log_generic);
+                comms_incomming_message = "Comms ouvertes avec " + comms_target_name;
             }else{
-                addToShipLog("Refused hail from " + comms_target_name, colorConfig.log_generic);
+                addToShipLog("Appel refuse provenant de " + comms_target_name, colorConfig.log_generic);
                 comms_state = CS_Inactive;
             }
         }
