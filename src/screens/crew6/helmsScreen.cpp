@@ -29,10 +29,10 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", 5000.0, nullptr);
-    
+
     combat_maneuver = new GuiCombatManeuver(this, "COMBAT_MANEUVER");
     combat_maneuver->setPosition(-20, -20, ABottomRight)->setSize(280, 215);
-    
+
     radar->setPosition(0, 0, ACenter)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableGhostDots()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->enableMissileTubeIndicators();
@@ -59,7 +59,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             heading_hint->hide();
         }
     );
-    
+
     radar->setJoystickCallbacks(
         [this](float x_position) {
             if (my_spaceship)
@@ -77,7 +77,7 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
                     value = (y_position-20)*1.25/100;
                 else
                     value = (y_position+20)*1.25/100;
-                
+
                 my_spaceship->commandCombatManeuverBoost(-value);
                 combat_maneuver->setBoostValue(fabs(value));
             }
@@ -101,19 +101,19 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     heading_hint = new GuiLabel(this, "HEADING_HINT", "", 30);
     heading_hint->setAlignment(ACenter)->setSize(0, 0);
 
-    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energy", "");
+    energy_display = new GuiKeyValueDisplay(this, "ENERGY_DISPLAY", 0.45, "Energie", "");
     energy_display->setIcon("gui/icons/energy")->setTextSize(20)->setPosition(20, 100, ATopLeft)->setSize(240, 40);
-    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, "Heading", "");
+    heading_display = new GuiKeyValueDisplay(this, "HEADING_DISPLAY", 0.45, "Cap", "");
     heading_display->setIcon("gui/icons/heading")->setTextSize(20)->setPosition(20, 140, ATopLeft)->setSize(240, 40);
-    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Speed", "");
+    velocity_display = new GuiKeyValueDisplay(this, "VELOCITY_DISPLAY", 0.45, "Vitesse", "");
     velocity_display->setIcon("gui/icons/speed")->setTextSize(20)->setPosition(20, 180, ATopLeft)->setSize(240, 40);
-    
+
     GuiAutoLayout* engine_layout = new GuiAutoLayout(this, "ENGINE_LAYOUT", GuiAutoLayout::LayoutHorizontalLeftToRight);
     engine_layout->setPosition(20, -100, ABottomLeft)->setSize(GuiElement::GuiSizeMax, 300);
     (new GuiImpulseControls(engine_layout, "IMPULSE"))->setSize(100, GuiElement::GuiSizeMax);
     RLS_controls = (new GuiRLSControls(engine_layout, "RLS"))->setSize(100, GuiElement::GuiSizeMax);
     WARP_controls = (new GuiWARPControls(engine_layout, "WARP"))->setSize(100, GuiElement::GuiSizeMax);
-    
+
     (new GuiDockingButton(this, "DOCKING"))->setPosition(20, -20, ABottomLeft)->setSize(280, 50);
 
     (new GuiCustomShipFunctions(this, helmsOfficer, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
@@ -127,7 +127,7 @@ void HelmsScreen::onDraw(sf::RenderTarget& window)
         heading_display->setValue(string(my_spaceship->getHeading(), 1));
         float velocity = sf::length(my_spaceship->getVelocity()) / 1000 * 60;
         velocity_display->setValue(string(velocity, 1) + DISTANCE_UNIT_1K + "/min");
-        
+
         RLS_controls->setVisible(my_spaceship->has_RLS_drive);
         WARP_controls->setVisible(my_spaceship->has_WARP_drive);
     }

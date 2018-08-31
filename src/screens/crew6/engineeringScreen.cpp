@@ -98,7 +98,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     box->setPosition(0, 0, ABottomRight)->setSize(270, 400);
     power_label = new GuiLabel(box, "POWER_LABEL", "Puissance", 30);
     power_label->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
-    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Refrigerant", 30);
+    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Liquide de refroidissement", 30);
     coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
@@ -224,14 +224,14 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
                 addSystemEffect("Vitesse de recharge", string(int(effectiveness * 100)) + "%");
                 break;
             case SYS_Maneuver:
-                addSystemEffect("Vitesse de virage", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Vitesse de manoeuvre", string(int(effectiveness * 100)) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect("Vitessde de recharge de combat", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
+                    addSystemEffect("Efficacite manoeuvre de combat", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
                 break;
             case SYS_Impulse:
-                addSystemEffect("Vitesse d'impulsion", string(int(effectiveness * 100)) + "%");
+                addSystemEffect("Niveau d'impulsion", string(int(effectiveness * 100)) + "%");
                 if (my_spaceship->combat_maneuver_boost_speed > 0.0 || my_spaceship->combat_maneuver_strafe_speed)
-                    addSystemEffect("Vitessde de recharge de combat", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
+                    addSystemEffect("Efficacite manoeuvre de combat", string(int(((my_spaceship->getSystemEffectiveness(SYS_Maneuver) + my_spaceship->getSystemEffectiveness(SYS_Impulse)) / 2.0) * 100)) + "%");
                 break;
             case SYS_RLS:
                 addSystemEffect("Vitesse RLS", string(int(effectiveness * 100)) + "%");
