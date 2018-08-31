@@ -33,7 +33,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
             else
                 bar.setFillColor(sf::Color(255 * f, 255 * (1.0 - f), 0));
             window.draw(bar);
-            
+
             if (my_spaceship && ((frequency_is_LASER && n == my_spaceship->getShieldsFrequency()) || (!frequency_is_LASER && n == my_spaceship->LASER_frequency)))
             {
                 sf::Sprite image;
@@ -44,7 +44,7 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 window.draw(image);
             }
         }
-        
+
         int mouse_freq_nr = int((InputHandler::getMousePos().x - rect.left - 20) / w);
 
         string text = "";
@@ -56,12 +56,12 @@ void GuiFrequencyCurve::onDraw(sf::RenderTarget& window)
                 text = frequencyToString(mouse_freq_nr) + " " + string(int(frequencyVsFrequencyDamageFactor(mouse_freq_nr, frequency) * 100)) + "% dmg";
         }else{
             if (more_damage_is_positive)
-                text = "Damage with your LASERs";
+                text = "Dommages infliges par vos lasers";
             else
-                text = "Damage on your shields";
+                text = "Dommages sur vos boucliers";
         }
         drawText(window, sf::FloatRect(rect.left, rect.top, rect.width, 40), text, ACenter, 20);
     }else{
-        drawText(window, rect, "No data", ACenter, 35);
+        drawText(window, rect, "Pas de donnees", ACenter, 35);
     }
 }

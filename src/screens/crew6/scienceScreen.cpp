@@ -133,7 +133,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     }
 
     // Add sidebar page for systems.
-    sidebar_pager->addEntry("Systems", "Systemes");
+    sidebar_pager->addEntry("Systems", "Systems");
 
     // Add sidebar page for a description.
     sidebar_pager->addEntry("Description", "Description");
