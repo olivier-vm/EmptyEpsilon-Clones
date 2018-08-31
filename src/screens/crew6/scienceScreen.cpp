@@ -129,7 +129,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, ECrewPosition crew_position)
     // If the server uses frequencies, add the Tactical sidebar page.
     if (gameGlobalInfo->use_LASER_shield_frequencies)
     {
-        sidebar_pager->addEntry("Tactical", "Tactique");
+        sidebar_pager->addEntry("Tactical", "Tactical");
     }
 
     // Add sidebar page for systems.

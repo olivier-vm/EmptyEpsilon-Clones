@@ -5,7 +5,7 @@
 GuiLASERTargetSelector::GuiLASERTargetSelector(GuiContainer* owner, string id)
 : GuiSelector(owner, id, [](int index, string value) { if (my_spaceship) my_spaceship->commandSetLASERSystemTarget(ESystem(index + SYS_None)); })
 {
-    addEntry("Hull", "-1");
+    addEntry("Coque", "-1");
     for(int n=0; n<SYS_COUNT; n++)
         addEntry(getSystemName(ESystem(n)), string(n));
     if (my_spaceship)
