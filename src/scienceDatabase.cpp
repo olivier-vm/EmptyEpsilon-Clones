@@ -92,9 +92,9 @@ void fillDefaultDatabaseData()
             class_set.insert(class_name);
         }
     }
-    
+
     std::sort(class_list.begin(), class_list.end());
-    
+
     std::map<string, P<ScienceDatabase> > class_database_entries;
     for(string& class_name : class_list)
     {
@@ -105,7 +105,7 @@ void fillDefaultDatabaseData()
     {
         P<ShipTemplate> ship_template = ShipTemplate::getTemplate(template_name);
         P<ScienceDatabase> entry = class_database_entries[ship_template->getClass()]->addEntry(template_name);
-        
+
         entry->model_data = ship_template->model_data;
 
         entry->addKeyValue("Class", ship_template->getClass());
@@ -118,10 +118,10 @@ void fillDefaultDatabaseData()
                 shield_info += "/";
             shield_info += string(int(ship_template->shield_level[n]));
         }
-        entry->addKeyValue("Shield", shield_info);
-        entry->addKeyValue("Hull", string(int(ship_template->hull)));
-        entry->addKeyValue("Move speed", string(int(ship_template->impulse_speed)));
-        entry->addKeyValue("Turn speed", string(int(ship_template->turn_speed)));
+        entry->addKeyValue("Bouclier", shield_info);
+        entry->addKeyValue("Coque", string(int(ship_template->hull)));
+        entry->addKeyValue("Vitesse de deplacement", string(int(ship_template->impulse_speed)));
+        entry->addKeyValue("Vitesse de rotation", string(int(ship_template->turn_speed)));
         if (ship_template->RLS_speed > 0.0)
         {
             entry->addKeyValue("Has RLS drive", "True");
@@ -137,27 +137,27 @@ void fillDefaultDatabaseData()
             {
                 string name = "?";
                 if (std::abs(sf::angleDifference(0.0f, ship_template->LASERs[n].getDirection())) <= 45)
-                    name = "Front";
+                    name = "Avant";
                 if (std::abs(sf::angleDifference(90.0f, ship_template->LASERs[n].getDirection())) < 45)
-                    name = "Right";
+                    name = "Droite";
                 if (std::abs(sf::angleDifference(-90.0f, ship_template->LASERs[n].getDirection())) < 45)
-                    name = "Left";
+                    name = "Gauche";
                 if (std::abs(sf::angleDifference(180.0f, ship_template->LASERs[n].getDirection())) <= 45)
-                    name = "Rear";
+                    name = "Arriere";
 
-                entry->addKeyValue(name + " LASER weapon", string(ship_template->LASERs[n].getDamage() / ship_template->LASERs[n].getCycleTime(), 2) + " DPS");
+                entry->addKeyValue(name + " arme laser", string(ship_template->LASERs[n].getDamage() / ship_template->LASERs[n].getCycleTime(), 2) + " DPS");
             }
         }
         if (ship_template->weapon_tube_count > 0)
         {
-            entry->addKeyValue("Missile tubes", string(ship_template->weapon_tube_count));
-            entry->addKeyValue("Missile load time", string(int(ship_template->weapon_tube[0].load_time)));
+            entry->addKeyValue("Tubes missile", string(ship_template->weapon_tube_count));
+            entry->addKeyValue("Temps de charge de missile", string(int(ship_template->weapon_tube[0].load_time)));
         }
         for(int n=0; n < MW_Count; n++)
         {
             if (ship_template->weapon_storage[n] > 0)
             {
-                entry->addKeyValue("Storage " + getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]));
+                entry->addKeyValue("Stockage " + getMissileWeaponName(EMissileWeapons(n)), string(ship_template->weapon_storage[n]));
             }
         }
         if (ship_template->getDescription().length() > 0)

@@ -86,7 +86,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "RLS_WARP_LABEL", "RLS/WARP: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "RLS_WARP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(index);
-    }))->setOptions({"Par defaut", "RLS drive", "WARP drive", "Moteurs RLS+Warp", "Neither"})->setSelectionIndex((int)gameGlobalInfo->player_RLS_WARP_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({"Defaut", "Moteur RLS drive", "Moteur WARP", "Moteurs RLS+WARP", "Aucun"})->setSelectionIndex((int)gameGlobalInfo->player_RLS_WARP_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar range limit row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
@@ -218,7 +218,7 @@ void ServerCreationScreen::selectScenario(string filename)
         variation_names_list.push_back(variation.first);
         variation_descriptions_list.push_back(variation.second);
     }
-    
+
     variation_selection->setOptions(variation_names_list);
     // Show the variation information only if there's more than 1.
     variation_container->setVisible(variation_names_list.size() > 1);

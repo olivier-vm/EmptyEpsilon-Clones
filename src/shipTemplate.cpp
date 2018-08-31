@@ -74,7 +74,7 @@ std::unordered_map<string, P<ShipTemplate> > ShipTemplate::templateMap;
 ShipTemplate::ShipTemplate()
 {
     if (game_server) { LOG(ERROR) << "ShipTemplate objects can not be created during a scenario."; destroy(); return; }
-    
+
     type = Ship;
     class_name = "No class";
     class_name = "No sub-class";
@@ -294,15 +294,15 @@ string getSystemName(ESystem system)
 {
     switch(system)
     {
-    case SYS_Reactor: return "Reacteur";
-    case SYS_LASERWeapons: return "LASER Weapons";
+    case SYS_Reactor: return "Generateur";
+    case SYS_LASERWeapons: return "Armes Laser";
     case SYS_MissileSystem: return "Systeme de Missiles";
     case SYS_Maneuver: return "Manoeuvre";
     case SYS_Impulse: return "Moteurs a Impulsion";
-    case SYS_RLS: return "RLS Drive";
-    case SYS_WARPDrive: return "WARP Drive";
-    case SYS_FrontShield: return "Generateur Bouclier Av";
-    case SYS_RearShield: return "Generateur Bouclier Arr";
+    case SYS_RLS: return "Moteur RLS";
+    case SYS_WARPDrive: return "Moteur WARP";
+    case SYS_FrontShield: return "Bouclier Avant";
+    case SYS_RearShield: return "Bouclier Arriere";
     default:
         return "INCONNU";
     }
@@ -434,7 +434,7 @@ P<ShipTemplate> ShipTemplate::copy(string new_name)
 
     result->rooms = rooms;
     result->doors = doors;
-    
+
     return result;
 }
 
