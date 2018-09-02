@@ -13,19 +13,19 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
         has_position[n] = false;
 
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    
+
     box = new GuiPanel(this, id + "_BOX");
     box->setPosition(0, 0, ACenter);
     GuiAutoLayout* layout = new GuiAutoLayout(box, id + "_LAYOUT", GuiAutoLayout::LayoutVerticalTopToBottom);
     layout->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    (new GuiLabel(layout, id + "_LABEL", "Self destruct activated!", 50))->setSize(GuiElement::GuiSizeMax, 80);
+    (new GuiLabel(layout, id + "_LABEL", "Auto-destruction activee!", 50))->setSize(GuiElement::GuiSizeMax, 80);
     code_label = new GuiLabel(layout, id + "_CODE_LABEL", "", 30);
     code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    
+
     code_entry = new GuiElement(layout, id + "_ENTRY_ELEMENT");
     code_entry->setSize(250, 320);
-    
-    code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Enter [A]", 30);
+
+    code_entry_code_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "Entrer [A]", 30);
     code_entry_code_label->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
     code_entry_label = new GuiLabel(code_entry, id + "_ENTRY_LABEL", "", 30);
     code_entry_label->addBackground()->setPosition(0, 50, ATopLeft)->setSize(GuiElement::GuiSizeMax, 50);
@@ -38,7 +38,7 @@ GuiSelfDestructEntry::GuiSelfDestructEntry(GuiContainer* owner, string id)
     (new GuiButton(code_entry, id + "_BUTTON_1", "1", [this]() {code_entry_label->setText(code_entry_label->getText() + "1");}))->setSize(50, 50)->setPosition(50, 200, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_2", "2", [this]() {code_entry_label->setText(code_entry_label->getText() + "2");}))->setSize(50, 50)->setPosition(100, 200, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_3", "3", [this]() {code_entry_label->setText(code_entry_label->getText() + "3");}))->setSize(50, 50)->setPosition(150, 200, ATopLeft);
-    (new GuiButton(code_entry, id + "_BUTTON_Clr", "Clr", [this]() {code_entry_label->setText("");}))->setSize(50, 50)->setPosition(50, 250, ATopLeft);
+    (new GuiButton(code_entry, id + "_BUTTON_Clr", "Eff", [this]() {code_entry_label->setText("");}))->setSize(50, 50)->setPosition(50, 250, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_0", "0", [this]() {code_entry_label->setText(code_entry_label->getText() + "0");}))->setSize(50, 50)->setPosition(100, 250, ATopLeft);
     (new GuiButton(code_entry, id + "_BUTTON_OK", "OK", [this]() {
         if (my_spaceship)
@@ -74,10 +74,10 @@ void GuiSelfDestructEntry::onDraw(sf::RenderTarget& window)
             code_label->setSize(GuiElement::GuiSizeMax, 30 + 30 * lines);
             code_label->setText(codes);
             code_label->setVisible(lines > 0);
-            
-            code_entry_code_label->setText("Enter [" + string(char('A' + code_entry_position)) + "]");
+
+            code_entry_code_label->setText("Entrer [" + string(char('A' + code_entry_position)) + "]");
             code_entry->setVisible(code_entry_position > -1);
-            
+
             if (code_entry->isVisible())
                 box->setSize(600, code_entry->getPositionOffset().y + code_entry->getSize().y);
             else if (code_label->isVisible())

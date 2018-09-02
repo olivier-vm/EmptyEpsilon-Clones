@@ -259,24 +259,24 @@ string CrewStationScreen::listHotkeysLimited(string station)
 	for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
 		if (shortcut.first == "Basculer vers la station de l'équipage suivant" || shortcut.first =="Basculer vers la station de l'équipage précédent")
 			keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
-	if (station == "Tactical")
+	if (station == "Tactique")
 	{
 
-		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Helms"))
+		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Pilote"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
-		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
+		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Armes"))
 		{
-			if (shortcut.first != "BAsculer les boucliers")
+			if (shortcut.first != "Basculer les boucliers")
 				ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		}
 	}
-	else if (station == "Engineering+")
+	else if (station == "Ingenieur+")
 	{
-		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Engineering"))
+		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Ingenieur"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
-        for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
+        for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Armes"))
         {
-            if (shortcut.first == "Toggle shields")
+            if (shortcut.first == "Basculer les boucliers")
 				ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		}
 	}
@@ -286,11 +286,11 @@ string CrewStationScreen::listHotkeysLimited(string station)
 //		return ret;
 //	----
 
-	else if (station == "Single Pilot")
+	else if (station == "Pilote solo")
 	{
-		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Helms"))
+		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Pilote"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
-		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
+		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Armes"))
 			ret += shortcut.second + ":\t" + shortcut.first + "\n";
 	}
     return ret;
