@@ -13,9 +13,9 @@ They come in 3 different subclasses:
 
 template = ShipTemplate():setName("Enhydra X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
 
-template:setDescription([[L'Enhydra X23 est le plus petit modèle de vaisseau destroyer, et sa combinaison "taille de frégate" et "puissance de corvette" en fait un excellent vaisseau d'escorte pour défendre de plus gros vaisseaux contre de multiple petits ennemis.
+template:setDescription([[L'Enhydra X23 est le plus petit modele de vaisseau destroyer, et sa combinaison "taille de fregate" et "puissance de corvette" en fait un excellent vaisseau d'escorte pour defendre de plus gros vaisseaux contre de multiple petits ennemis.
 
-L'Enhydra X23 est équippé d'un puissant moteur RLS, il peut donc aussi servir de navire de patrouille sur longues distances.]])
+L'Enhydra X23 est equippe d'un puissant moteur RLS, il peut donc aussi servir de navire de patrouille sur longues distances.]])
 template:setRadarTrace("radar_dread.png")
 template:setHull(100)
 template:setShields(200, 200, 200, 200)
@@ -35,9 +35,9 @@ template:setTubeDirection(3,  90)
 
 variation = template:copy("Enhydra"):setType("playership")
 
-variation:setDescription([[Un navire Enhydra X23 remanié pour plus de tâches générales. Très polycalent. Le grand système de bouclier a été remplacé par des sytèmes avancés de manoeuvre de combat. Le moteur RLS est de toute dernière génération.
+variation:setDescription([[Un navire Enhydra X23 remanie pour plus de tâches generales. Tres polycalent. Le grand systeme de bouclier a ete remplace par des sytemes avances de manoeuvre de combat. Le moteur RLS est de toute derniere generation.
 
-Ses lanceurs de missiles sont aussi adaptés à des types variés de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
+Ses lanceurs de missiles sont aussi adaptes a des types varies de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
 variation:setShields(200, 200)
 variation:setHull(250)
 variation:setSpeed(90, 10, 20)
@@ -90,9 +90,9 @@ variation:addDoor(8, 4, false);
 
 -- Duplicate pour apparition dans la database
 variation = template:copy("Enhydra*")
-variation:setDescription([[Un navire Enhydra X23 remanié pour plus de tâches générales. Très polycalent. Le grand système de bouclier a été remplacé par des sytèmes avancés de manoeuvre de combat. Le moteur RLS est de toute dernière génération.
+variation:setDescription([[Un navire Enhydra X23 remanie pour plus de tâches generales. Tres polycalent. Le grand systeme de bouclier a ete remplace par des sytemes avances de manoeuvre de combat. Le moteur RLS est de toute derniere generation.
 
-Ses lanceurs de missiles sont aussi adaptés à des types variés de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
+Ses lanceurs de missiles sont aussi adaptes a des types varies de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
 variation:setShields(200, 200)
 variation:setHull(250)
 variation:setSpeed(90, 10, 20)
@@ -148,12 +148,12 @@ template:setLASER(3, 30, 180, 4000.0, 1.5, 20)
 template:setLASER(4, 30, 240, 4000.0, 1.5, 20)
 template:setLASER(5, 30, 300, 4000.0, 1.5, 20)
 
--- Aérodock Trigone 1 - Triton (Petit)
+-- Aerodock Trigone 1 - Triton (Petit)
 
-template = ShipTemplate():setName("Aérodock Trigone 1 - Phoque"):setClass("Corvette", "Support"):setModel("space_station_4")
-template:setDescription([[Station spatiale de classe "Phoque". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons, un blindage moyen, et 2 niveaux de boucliers.
+template = ShipTemplate():setName("Aerodock Trigone 1 - Phoque"):setClass("Corvette", "Support"):setModel("space_station_4")
+template:setDescription([[Station spatiale de classe "Phoque". Aerogare du Trigone Arme. Possede de tres bons systemes de defense a rayons, un blindage moyen, et 2 niveaux de boucliers.
 
-Peut accueillir des chasseurs stellaires et des frégates.]])
+Peut accueillir des chasseurs stellaires et des fregates.]])
 template:setRadarTrace("radartrace_smallstation.png")
 template:setHull(400)
 template:setShields(1200, 1200)
@@ -167,12 +167,12 @@ template:setLASER(3, 30, 180, 2000.0, 1.5, 10)
 template:setLASER(4, 30, 240, 2000.0, 1.5, 10)
 template:setLASER(5, 30, 300, 2000.0, 1.5, 10)
 
--- Aérodock Trigone 2 - Dauphin (Moyen)
+-- Aerodock Trigone 2 - Dauphin (Moyen)
 
-template = ShipTemplate():setName("Aérodock Trigone 2 - Dauphin"):setClass("Corvette", "Support"):setModel("space_station_3")
-template:setDescription([[Station spatiale de classe "Dauphin". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons, un gros blindage, et 3 niveaux de boucliers.
+template = ShipTemplate():setName("Aerodock Trigone 2 - Dauphin"):setClass("Corvette", "Support"):setModel("space_station_3")
+template:setDescription([[Station spatiale de classe "Dauphin". Aerogare du Trigone Arme. Possede de tres bons systemes de defense a rayons, un gros blindage, et 3 niveaux de boucliers.
 
-Peut accueillir des chasseurs stellaires et des frégates.]])
+Peut accueillir des chasseurs stellaires et des fregates.]])
 template:setRadarTrace("radartrace_mediumstation.png")
 template:setHull(600)
 template:setShields(1200, 1200, 1200)
@@ -186,12 +186,12 @@ template:setLASER(3, 30, 180, 3000.0, 1.5, 15)
 template:setLASER(4, 30, 240, 3000.0, 1.5, 15)
 template:setLASER(5, 30, 300, 3000.0, 1.5, 15)
 
--- Aérodock Trigone 3 - Requin (Grand)
+-- Aerodock Trigone 3 - Requin (Grand)
 
-template = ShipTemplate():setName("Aérodock Trigone 3 - Epaulard"):setClass("Corvette", "Support"):setModel("space_station_2")
-template:setDescription([[Station spatiale de classe "Epaulard". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons, un gros blindage, et 4 niveaux de boucliers.
+template = ShipTemplate():setName("Aerodock Trigone 3 - Epaulard"):setClass("Corvette", "Support"):setModel("space_station_2")
+template:setDescription([[Station spatiale de classe "Epaulard". Aerogare du Trigone Arme. Possede de tres bons systemes de defense a rayons, un gros blindage, et 4 niveaux de boucliers.
 
-Peut accueillir des chasseurs stellaires et des frégates.]])
+Peut accueillir des chasseurs stellaires et des fregates.]])
 template:setRadarTrace("radartrace_largestation.png")
 template:setHull(800)
 template:setShields(1200, 1200, 1200, 1200)
@@ -205,16 +205,16 @@ template:setLASER(3, 30, 180, 4000.0, 1.5, 20)
 template:setLASER(4, 30, 240, 4000.0, 1.5, 20)
 template:setLASER(5, 30, 300, 4000.0, 1.5, 20)
 
--- Aérodock Trigone 4 - Rorqual (Enorme)
+-- Aerodock Trigone 4 - Rorqual (Enorme)
 -- voir shipTemplates_Dreadnaught.lua
 
 --[[----------------------Freighters----------------------]]
 
--- Démarrage boucle globale
+-- Demarrage boucle globale
 for cnt=1,5 do
 
 	template = ShipTemplate():setName("Transport personnes " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_1_" .. cnt)
-	template:setDescription([[Ces cargos sont concus pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armée, le personnel du Trigone Secours, et le matériel de combat.]])
+	template:setDescription([[Ces cargos sont concus pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armee, le personnel du Trigone Secours, et le materiel de combat.]])
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -230,11 +230,11 @@ for cnt=1,5 do
 	--]]
 	if cnt == 2 then
 		variation = template:copy("Transport personnes RLS"):setType("playership")
-		variation:setDescription([[Transport personne de catégorie 2. Ce type de cargo est concu pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armée, le personnel du Trigone Secours, et le matériel de combat. Le cargo contient aussi de petites soute ayant tout un environnement de stabilisation afin de transporter du matériel, des machineries délicates, et des instrumentations complexes. En plus petite quantité qu'un cargo de fret classique.
+		variation:setDescription([[Transport personne de categorie 2. Ce type de cargo est concu pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armee, le personnel du Trigone Secours, et le materiel de combat. Le cargo contient aussi de petites soute ayant tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes. En plus petite quantite qu'un cargo de fret classique.
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 4000/100P afin de pouvoir parcourir de très longues longues distances (inter-planétaires) rapidement. C'est une version hybride impulsion/RLS. L'accélération du moteur est bridée afin de rendre les transport de passager agréable. Le moteur à impulsion utilise une dérivation du moteur RLS pour atteindre des vitesses importantes. L'utilisation unique du moteur RLS permet une accélération rapide mais la vitesse est fortment limitée (moins importante qu'avec le moteur à impulsion). Les version militaires sont moins bridées mais reste dans un spectre d'accélération humainement supportable.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 4000/100P afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement. C'est une version hybride impulsion/RLS. L'acceleration du moteur est bridee afin de rendre les transport de passager agreable. Le moteur a impulsion utilise une derivation du moteur RLS pour atteindre des vitesses importantes. L'utilisation unique du moteur RLS permet une acceleration rapide mais la vitesse est fortment limitee (moins importante qu'avec le moteur a impulsion). Les version militaires sont moins bridees mais reste dans un spectre d'acceleration humainement supportable.
 
-Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		--variation:setShields(200, 200)
 		--variation:setHull(250)
 		variation:setSpeed(4000, 10, 10)
@@ -283,11 +283,11 @@ Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, néce
 
 		-- Duplicate pour apparition dans la database
 		variation = template:copy("Transport personnes RLS*")
-		variation:setDescription([[Transport personne de catégorie 2. Ce type de cargo est concu pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armée, le personnel du Trigone Secours, et le matériel de combat. Le cargo contient aussi de petites soute ayant tout un environnement de stabilisation afin de transporter du matériel, des machineries délicates, et des instrumentations complexes. En plus petite quantité qu'un cargo de fret classique.
+		variation:setDescription([[Transport personne de categorie 2. Ce type de cargo est concu pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armee, le personnel du Trigone Secours, et le materiel de combat. Le cargo contient aussi de petites soute ayant tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes. En plus petite quantite qu'un cargo de fret classique.
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 900 afin de pouvoir parcourir de très longues longues distances (inter-planétaires) rapidement. Toutefois l'accélération du moteur est bridée afin de rendre les transport de passager agréable. Les version militaires sont moins bridées mais reste dans un spectre d'accélération humainement supportable.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 900 afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement. Toutefois l'acceleration du moteur est bridee afin de rendre les transport de passager agreable. Les version militaires sont moins bridees mais reste dans un spectre d'acceleration humainement supportable.
 
-Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		variation:setSpeed(4000, 10, 10)
 		variation:setRLSSpeed(200)
 		variation:setCombatManeuver(200, 100)
@@ -299,9 +299,9 @@ Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, néce
 	end
 
 	template = ShipTemplate():setName("Cargo Marchandise " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_2_" .. cnt)
-	template:setDescription([[Ces cargos transportent de grosses quantités de marchandises sur de longues distances. Ils sont généralement affretés pour l'Utanscale et Technocorp.
+	template:setDescription([[Ces cargos transportent de grosses quantites de marchandises sur de longues distances. Ils sont generalement affretes pour l'Utanscale et Technocorp.
 
-Leurs baies de chargement possèdent des controles de climatisation, et des systèmes de stabilisation, ainsi que certaines structures en permatech qui maintiennent le cargo en bon état.]])
+Leurs baies de chargement possedent des controles de climatisation, et des systemes de stabilisation, ainsi que certaines structures en permatech qui maintiennent le cargo en bon etat.]])
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -314,11 +314,11 @@ Leurs baies de chargement possèdent des controles de climatisation, et des syst
 --	  end
 
 	template = ShipTemplate():setName("Cargo Dechets " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
-	template:setDescription([[Ces cargos sont spécialement conçus pour contenir les déchets, et des matière premières à ressources.
+	template:setDescription([[Ces cargos sont specialement concus pour contenir les dechets, et des matiere premieres a ressources.
 
-Ils sont équipés de chaines automatisée de tri, et de compacteurs à déchets. Ils possèdent moins de système de stabilisation que les autres cargos.
+Ils sont equipes de chaines automatisee de tri, et de compacteurs a dechets. Ils possedent moins de systeme de stabilisation que les autres cargos.
 
-Ces cargos sont utilisés par Technocorp afin d'acheminer les déchets dans les grandes stations de recyclage présentes dans l'espace, ou pour transporter les ressources primaires provenant des énormes carrières de certaines. On les rencontre donc en grand nombres aux alentours des planètes "ressources" (ex: Videsh dans l'arche Khayyam).]])
+Ces cargos sont utilises par Technocorp afin d'acheminer les dechets dans les grandes stations de recyclage presentes dans l'espace, ou pour transporter les ressources primaires provenant des enormes carrieres de certaines. On les rencontre donc en grand nombres aux alentours des planetes "ressources" (ex: Videsh dans l'arche Khayyam).]])
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -331,9 +331,9 @@ Ces cargos sont utilisés par Technocorp afin d'acheminer les déchets dans les 
 --	  end
 
 	template = ShipTemplate():setName("Cargo Equipement " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_4_" .. cnt)
-	template:setDescription([[Les cargos équipement ont des système de stabilisations et de climatisations spécialisés afin de pouvoir transporter de manière sécurisées les machineries délicates et de l'instrumentation scientifique.
+	template:setDescription([[Les cargos equipement ont des systeme de stabilisations et de climatisations specialises afin de pouvoir transporter de maniere securisees les machineries delicates et de l'instrumentation scientifique.
 
-Ils sont largement utilisés par Technocorp et Möbius, ainsi que l'Utanscale quand ils s'occupent de certains projets spécifiques.]])
+Ils sont largement utilises par Technocorp et Mobius, ainsi que l'Utanscale quand ils s'occupent de certains projets specifiques.]])
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -348,12 +348,12 @@ Ils sont largement utilisés par Technocorp et Möbius, ainsi que l'Utanscale qu
 	--[[ Cargo joueur
 	--]]
 	if cnt == 2 then
-		variation = template:copy("Cargo Matériel RLS"):setType("playership")
-		variation:setDescription([[Cargo transark Equipement de catégorie 2. Possède tout un environnement de stabilisation afin de transporter du matériel, des machineries délicates, et des instrumentations complexes.
+		variation = template:copy("Cargo Materiel RLS"):setType("playership")
+		variation:setDescription([[Cargo transark Equipement de categorie 2. Possede tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes.
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 900 afin de pouvoir parcourir de très longues longues distances (inter-planétaires) rapidement.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 900 afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement.
 
-Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		--variation:setShields(200, 200)
 		--variation:setHull(250)
 		variation:setSpeed(90, 10, 20)
@@ -401,12 +401,12 @@ Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, néce
 		variation:addDoor(5, 6, true);
 
 		-- Duplicate pour apparition dans la database
-		variation = template:copy("Cargo Matériel RLS*")
-		variation:setDescription([[Cargo transark Equipement de catégorie 2. Possède tout un environnement de stabilisation afin de transporter du matériel, des machineries délicates, et des instrumentations complexes.
+		variation = template:copy("Cargo Materiel RLS*")
+		variation:setDescription([[Cargo transark Equipement de categorie 2. Possede tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes.
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 900 afin de pouvoir parcourir de très longues longues distances (inter-planétaires) rapidement.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 900 afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement.
 
-Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		variation:setSpeed(90, 10, 20)
 		variation:setRLSSpeed(900)
 		variation:setCombatManeuver(200, 100)
@@ -418,11 +418,11 @@ Les compartiments arrières du cargo contiennent 8 mines spatio-sismiques, néce
 	end
 
 	template = ShipTemplate():setName("Cargo Carburant " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_5_" .. cnt)
-	template:setDescription([[Les cargos de carburants transportent principalement de l'hyperdeutérium, sous différentes formes. Leurs cuves sont prévues principalement pour les matériaux en phase liquide, gazeuse, en gel, voir plasmatique dans des champs de rétention magnétique puissants.
+	template:setDescription([[Les cargos de carburants transportent principalement de l'hyperdeuterium, sous differentes formes. Leurs cuves sont prevues principalement pour les materiaux en phase liquide, gazeuse, en gel, voir plasmatique dans des champs de retention magnetique puissants.
 
-Ils sont équipés de capteurs internes asservis à des systèmes de sécurités spécifique au transport de ce type de matériel.
+Ils sont equipes de capteurs internes asservis a des systemes de securites specifique au transport de ce type de materiel.
 
-Ils peuvent biensûr aussi être adaptés pour transporter d'autres matériaux que l'hyperdeutérium.]])
+Ils peuvent biensûr aussi etre adaptes pour transporter d'autres materiaux que l'hyperdeuterium.]])
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -438,13 +438,13 @@ Ils peuvent biensûr aussi être adaptés pour transporter d'autres matériaux q
 	--]]
 	if cnt == 2 then
 		variation = template:copy("Cargo Extracteur RLS"):setType("playership")
-		variation:setDescription([[Cargo transark extracteur de minerai de catégorie 2. En plus des sytème d'extraction de gaz et de minerai, le cargo possède un système de destruction d'astéroïde via des tirs "rafale".
+		variation:setDescription([[Cargo transark extracteur de minerai de categorie 2. En plus des syteme d'extraction de gaz et de minerai, le cargo possede un systeme de destruction d'asteroide via des tirs "rafale".
 
-Les cale du vaisseau sont adpatées pour le transport du minerai et du gaz (hyperdeuterium, etc...).
+Les cale du vaisseau sont adpatees pour le transport du minerai et du gaz (hyperdeuterium, etc...).
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 300, pour lui permettre certains déplacement plus rapide.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 300, pour lui permettre certains deplacement plus rapide.
 
-Les compartiments arrières du cargo contiennent aussi 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent aussi 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		--variation:setShields(200, 200)
 		--variation:setHull(250)
 		variation:setSpeed(90, 10, 20)
@@ -494,13 +494,13 @@ Les compartiments arrières du cargo contiennent aussi 8 mines spatio-sismiques,
 
 		-- Duplicate pour apparition dans la database
 		variation = template:copy("Cargo Extracteur RLS*")
-		variation:setDescription([[Cargo transark extracteur de minerai/gaz de catégorie 2. En plus des sytème d'extraction de gaz et de minerai, le cargo possède un système de destruction d'astéroïde via des tirs "rafale".
+		variation:setDescription([[Cargo transark extracteur de minerai/gaz de categorie 2. En plus des syteme d'extraction de gaz et de minerai, le cargo possede un systeme de destruction d'asteroide via des tirs "rafale".
 
-Les cales du vaisseau sont adpatées pour le transport du minerai et du gaz (hyperdeuterium, etc...).
+Les cales du vaisseau sont adpatees pour le transport du minerai et du gaz (hyperdeuterium, etc...).
 
-Le cargo est équippé en plus d'un moteur à impulsion RLS 300, pour lui permettre certains déplacement plus rapide.
+Le cargo est equippe en plus d'un moteur a impulsion RLS 300, pour lui permettre certains deplacement plus rapide.
 
-Les compartiments arrières du cargo contiennent aussi 8 mines spatio-sismiques, nécessaires en cas d'urgence dans les zones spatiolithique.]])
+Les compartiments arrieres du cargo contiennent aussi 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.]])
 		variation:setSpeed(90, 10, 20)
 		variation:setRLSSpeed(300)
 		variation:setCombatManeuver(200, 100)
@@ -519,9 +519,9 @@ end
 --]]
 
 template = ShipTemplate():setName("Transporteur WARP"):setClass("Corvette", "Freighter"):setModel("transport_4_2")
-template:setDescription([[Vaisseau expérimental - Concept (non encore fonctionnel)
+template:setDescription([[Vaisseau experimental - Concept (non encore fonctionnel)
 
-Le transporteur WARP est un cargo spécialisé. Il possède un énorme moteur à distorsion WARP expérimental ainsi que les gigantesques cellules énergétiques nécessaire pour le faire fonctionner.
+Le transporteur WARP est un cargo specialise. Il possede un enorme moteur a distorsion WARP experimental ainsi que les gigantesques cellules energetiques necessaire pour le faire fonctionner.
 
 Il est concu pour pouvoir accrocher (arrimage) un autre vaisseau afin de le transporter au plus profond de l'espace.]])
 template:setHull(100)

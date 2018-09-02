@@ -28,12 +28,12 @@ template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)
 template:setSpeed(0, 1, 0)
 
--- Aérodock Trigone 4 - Rorqual (Enorme)
+-- Aerodock Trigone 4 - Rorqual (Enorme)
 
-template = ShipTemplate():setName("Aérodock Trigone 4 - Rorqual"):setClass("Corvette", "Support", "Dreadnaught", "Odin"):setModel("space_station_1")
-template:setDescription([[Station spatiale de classe "Rorqual". Aérogare du Trigone Armé. Possède de très bons systèmes de défense à rayons et à missiles guidés, un énorme blindage, et 6 niveaux de boucliers.
+template = ShipTemplate():setName("Aerodock Trigone 4 - Rorqual"):setClass("Corvette", "Support", "Dreadnaught", "Odin"):setModel("space_station_1")
+template:setDescription([[Station spatiale de classe "Rorqual". Aerogare du Trigone Arme. Possede de tres bons systemes de defense a rayons et a missiles guides, un enorme blindage, et 6 niveaux de boucliers.
 
-Peut accueillir des chasseurs stellaires et des frégates.]])
+Peut accueillir des chasseurs stellaires et des fregates.]])
 template:setRadarTrace("radartrace_hugestation.png")
 template:setHull(2000)
 template:setShields(1200, 1200, 1200, 1200, 1200, 1200)

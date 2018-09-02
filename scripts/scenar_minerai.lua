@@ -1,16 +1,16 @@
 
 function init()
 
-	-- Peut être prévoir de scanner tous les joueurs pour leur attribuer cela
+	-- Peut etre prevoir de scanner tous les joueurs pour leur attribuer cela
 	player = getPlayerShip(-1)
 
 	-- Tableau des minerais
 
-	-- par ligne : id, nom, proba de trouver, facilité de scanner, concentration max
-	table_minerai = {} -- création d'une table
+	-- par ligne : id, nom, proba de trouver, facilite de scanner, concentration max
+	table_minerai = {} -- creation d'une table
 	table_minerai[1] = {"Fer",0.3,"facile",20}
 	table_minerai[2] = {"Cobalt",0.2,"moyen",20}
-	table_minerai[3] = {"Ruthénium",0.2,"moyen",15}
+	table_minerai[3] = {"Ruthenium",0.2,"moyen",15}
 	table_minerai[4] = {"Nickel",0.1,"moyen",20}
 	table_minerai[5] = {"Silice",0.05,"moyen",15}
 	table_minerai[6] = {"Scandium",0.15,"facile",5}
@@ -22,29 +22,29 @@ function init()
 	table_minerai_nebula = {}
 	table_minerai_nebula[1] = {"Fer",0.1,"facile",20}
 	table_minerai_nebula[2] = {"Cobalt",0.2,"moyen",20}
-	table_minerai_nebula[3] = {"Ruthénium",0.2,"moyen",15}
+	table_minerai_nebula[3] = {"Ruthenium",0.2,"moyen",15}
 	table_minerai_nebula[4] = {"Organocarbone gazeux",0.4,"difficile",20}
 	table_minerai_nebula[5] = {"Vide",0.1,"facile",0}
 
-	liste_minerais = {"Fer","Cobalt","Ruthénium","Organocarbone gazeux","Nickel","Silice","Scandium","Yttrium","Cerium","Praseodyme"}
-	player.minerai = {["Fer"]=0,["Cobalt"]=0,["Ruthénium"]=0,["Organocarbone gazeux"]=0,["Nickel"]=0,["Silice"]=0,["Scandium"]=0,["Yttrium"]=0,["Cerium"]=0,["Praseodyme"]=0}
+	liste_minerais = {"Fer","Cobalt","Ruthenium","Organocarbone gazeux","Nickel","Silice","Scandium","Yttrium","Cerium","Praseodyme"}
+	player.minerai = {["Fer"]=0,["Cobalt"]=0,["Ruthenium"]=0,["Organocarbone gazeux"]=0,["Nickel"]=0,["Silice"]=0,["Scandium"]=0,["Yttrium"]=0,["Cerium"]=0,["Praseodyme"]=0}
 
 	player.max_stock = 50
 
 	table_scan = {}
-	table_scan[1] = {"facile","Très faible probabilité de minerai/gaz précieux",0,0,1,1,"Faible probabilité de minerai/gaz précieux",0,1,1,2}
-	table_scan[2] = {"moyen","Faible probabilité de minerai/gaz précieux",1,3,1,2,"Moyenne probabilité de minerai/gaz précieux",1,3,2,3}
-	table_scan[3] = {"difficile","Moyenne probabilité de minerai/gaz précieux",1,3,2,3,"Forte probabilité de minerai/gaz précieux",2,4,1,3}
+	table_scan[1] = {"facile","Tres faible probabilite de minerai/gaz precieux",0,0,1,1,"Faible probabilite de minerai/gaz precieux",0,1,1,2}
+	table_scan[2] = {"moyen","Faible probabilite de minerai/gaz precieux",1,3,1,2,"Moyenne probabilite de minerai/gaz precieux",1,3,2,3}
+	table_scan[3] = {"difficile","Moyenne probabilite de minerai/gaz precieux",1,3,2,3,"Forte probabilite de minerai/gaz precieux",2,4,1,3}
 
-	-- Les astéroids avec du minerais
+	-- Les asteroids avec du minerais
 
 	for _, obj in ipairs(getAllObjects()) do
 		if obj.typeName == "Asteroid" then
-			creation_minerai(obj,"Vide","Rien d'intéressant","Rien d'intéressant",0,0,0)
+			creation_minerai(obj,"Vide","Rien d'interessant","Rien d'interessant",0,0,0)
 		end
 	end
 
-	-- Fonctions supplémentaires pour les joueurs
+	-- Fonctions supplementaires pour les joueurs
 	player:addCustomButton("engineering", "FARM_ASTEROID", "Extr Minerai/gaz", function()
 		x0,y0 = player:getPosition()
 		for _, obj in ipairs(getObjectsInRadius(x0,y0,1000)) do
@@ -52,7 +52,7 @@ function init()
 			if obj.typeName == "Asteroid" and obj:isScannedBy(player) and compte_stocks(player) < player.max_stock then
 				player:commandImpulse(0)
 				if obj.minerai == "Vide" then
-					player:addToShipLog("Rien d'intéressant à extraire","white")
+					player:addToShipLog("Rien d'interessant a extraire","white")
 				else
 					local diff_max = player.max_stock - compte_stocks(player)
 					player.minerai[obj.minerai] = player.minerai[obj.minerai] + math.min(obj.concentration,diff_max)
@@ -68,7 +68,7 @@ function init()
 		end
 	end)
 
-	player:addCustomButton("engineering", "REMOVE_ASTEROID", "Décharger Minerai", function()
+	player:addCustomButton("engineering", "REMOVE_ASTEROID", "Decharger Minerai", function()
 		if compte_stocks(player) > 0 then
 			for _, res in ipairs(liste_minerais) do
 				player.minerai[res] = 0
@@ -80,15 +80,15 @@ function init()
 				if obj.typeName == "SpaceStation" then dummy_station = 1 end
 			end
 			if dummy_station == 1 then
-				player:addToShipLog("Ressources minières déchargées","white")
+				player:addToShipLog("Ressources minieres dechargees","white")
 			else
-				player:addToShipLog("Ressources minières évacuées dans l'espace","red")
+				player:addToShipLog("Ressources minieres evacuees dans l'espace","red")
 			end
 			player.update_stock = 1
 		end
 	end)
 
-	player:addCustomButton("weapons", "ASTEROID_DESTROY", "Détruire les astéroïdes", function()
+	player:addCustomButton("weapons", "ASTEROID_DESTROY", "Detruire les asteroides", function()
 		x0,y0 = player:getPosition()
 		if player:getWeaponStorage("HVLI") >= 1 then
 			player:setWeaponStorage("HVLI",player:getWeaponStorage("HVLI")-1)
@@ -107,7 +107,7 @@ function init()
         end
     end)
 
-	addGMFunction("Ajouter minerai spé", function()
+	addGMFunction("Ajouter minerai spe", function()
 		for _, ligne_minerai_temp in ipairs(table_minerai_nebula) do
 			if ligne_minerai_temp[1] ~= "Vide" then
 				addGMFunction(ligne_minerai_temp[1], function()
@@ -141,7 +141,7 @@ function update(delta)
 	sonde_asteroid_new = 0
 	pc_minerai_new = 0
 
-	-- MAJ des descriptions des astéroids et des sondes du relais
+	-- MAJ des descriptions des asteroids et des sondes du relais
 	for _, obj in ipairs(getAllObjects()) do
 		if obj.typeName == "Asteroid" then
 			if obj:isScannedBy(player) then
@@ -193,7 +193,7 @@ function vider_minerai(obj)
 	obj.description2 = nil
 	obj.concentration = nil
 
-	obj:setDescription("Plus rien d'intéressant")
+	obj:setDescription("Plus rien d'interessant")
 	obj:setScanningParameters(0,0)
 
 end
@@ -217,7 +217,7 @@ function alea_creation_minerai(obj,choix_minerai)
 	if choix_minerai == nil then choix_minerai = "" end
 	if obj.typeName == "Asteroid" then
 
-		-- Pour savoir si l'astéroide est dans une nébuleuse
+		-- Pour savoir si l'asteroide est dans une nebuleuse
 		obj.bool_nebula = 0
 		local x0,y0 = obj:getPosition()
 		for _, obj_temp in ipairs(getObjectsInRadius(x0,y0,5000)) do
@@ -225,7 +225,7 @@ function alea_creation_minerai(obj,choix_minerai)
 		end
 
 		if choix_minerai == "" then
-			-- Astéroid avec ou sans nébuleuse
+			-- Asteroid avec ou sans nebuleuse
 			local table_minerai_temp
 			if obj.bool_nebula == 0 then table_minerai_temp = table_minerai end
 			if obj.bool_nebula == 1 then table_minerai_temp = table_minerai_nebula end
@@ -236,7 +236,7 @@ function alea_creation_minerai(obj,choix_minerai)
 				r_temp = r_temp + ligne_minerai[2]
 				-- obj:setDescription("TEST BUG")
 				if r <= r_temp then
-					-- Pour être sûr de ne plus avoir de résultat valide
+					-- Pour etre sûr de ne plus avoir de resultat valide
 					r = 1.1
 
 					-- la bonne description
@@ -244,44 +244,44 @@ function alea_creation_minerai(obj,choix_minerai)
 					local random_concentration = 0
 					if ligne_minerai[1] == "Vide" then
 						local random_concentration = 0
-						descri2 = "Aucune Ressource présente"
+						descri2 = "Aucune Ressource presente"
 					else
-						-- Pour déterminer la concentration
+						-- Pour determiner la concentration
 						random_concentration = math.floor(random(1,ligne_minerai[4]))
 						descri2 =  "Minerai : " .. ligne_minerai[1] .. " ; concentration : ".. random_concentration
 					end
 
-					-- Pour trouver la difficulté de scan
+					-- Pour trouver la difficulte de scan
 					for _, ligne_scan in ipairs(table_scan) do
 						if ligne_scan[1] == ligne_minerai[3] then
 							local random_scan = random(0,100)/100
 							if random_scan <= 0.5 then
-								-- création du minerai
+								-- creation du minerai
 								creation_minerai(obj,ligne_minerai[1],ligne_scan[2],descri2,random(ligne_scan[3],ligne_scan[4]),random(ligne_scan[5],ligne_scan[6]),random_concentration)
 							else
-								-- création du minerai
+								-- creation du minerai
 								creation_minerai(obj,ligne_minerai[1],ligne_scan[7],descri2,random(ligne_scan[8],ligne_scan[9]),random(ligne_scan[10],ligne_scan[11]),random_concentration)
 							end
 						end
 					end
 				end
 			end
-		else -- Détermination manuelle du minerai
+		else -- Determination manuelle du minerai
 			for _, ligne_minerai in ipairs(table_minerai_nebula) do
 				if ligne_minerai[1] == choix_minerai then
-					-- Pour déterminer la concentration
+					-- Pour determiner la concentration
 					local random_concentration = math.floor(random(1,ligne_minerai[4]))
 					local  descri2 =  "Minerai : " .. ligne_minerai[1] .. " ; concentration : ".. random_concentration
 
-					-- Pour trouver la difficulté de scan
+					-- Pour trouver la difficulte de scan
 					for _, ligne_scan in ipairs(table_scan) do
 						if ligne_scan[1] == ligne_minerai[3] then
 							local random_scan = random(0,100)/100
 							if random_scan <= 0.5 then
-								-- création du minerai
+								-- creation du minerai
 								creation_minerai(obj,ligne_minerai[1],ligne_scan[2],descri2,random(ligne_scan[3],ligne_scan[4]),random(ligne_scan[5],ligne_scan[6]),random_concentration)
 							else
-								-- création du minerai
+								-- creation du minerai
 								creation_minerai(obj,ligne_minerai[1],ligne_scan[7],descri2,random(ligne_scan[8],ligne_scan[9]),random(ligne_scan[10],ligne_scan[11]),random_concentration)
 							end
 						end

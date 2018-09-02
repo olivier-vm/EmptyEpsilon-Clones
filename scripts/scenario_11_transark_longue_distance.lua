@@ -1,5 +1,5 @@
 -- Name: Simulation Transark - Longue distance
--- Description: Mission de pilotage sur longue distance avec cargo. Nécessite de la dextérité pour le pilote. Un dosage des moteurs, et de l'ingénieur pour le refroiddement moteur.
+-- Description: Mission de pilotage sur longue distance avec cargo. Necessite de la dexterite pour le pilote. Un dosage des moteurs, et de l'ingenieur pour le refroiddement moteur.
 -- Type: Mission
 
 require("utils.lua")
@@ -10,9 +10,9 @@ function init()
 
 	x, y = player:getPosition()
 	asteroidList = {}
-	-- Création d'une aura d'asteroïdes
-	-- La répartition est "carrée" pour une bonne répartition géométrique
-	-- Si la répartition se faisait concentrique, il y a une plus forte concentration d'élément près du centre que de l'extérieur
+	-- Creation d'une aura d'asteroides
+	-- La repartition est "carree" pour une bonne repartition geometrique
+	-- Si la repartition se faisait concentrique, il y a une plus forte concentration d'element pres du centre que de l'exterieur
 
 	for n=1,500 do
 		Asteroid():setPosition(x + random(-30000, 30000), y + random(-30000, 30000)):setSize(random(10, 500))
@@ -39,7 +39,7 @@ function asteroidUpdate()
 	--player:setHullMax(1000)
 	--player:setHull(1000)
 
-	-- Il faut repérer dans quel quadrant (et quel coin éventuel) un astéroid est supprimé, pour en rajouter un dans le côté opposé, afin de garantir une répartition régulière
+	-- Il faut reperer dans quel quadrant (et quel coin eventuel) un asteroid est supprime, pour en rajouter un dans le cote oppose, afin de garantir une repartition reguliere
 	local x, y = player:getPosition()
 	for _, astero in ipairs(getAllObjects()) do
 		if astero.typeName == "Asteroid" then
@@ -52,7 +52,7 @@ function asteroidUpdate()
 			if yyy > 30200 then distanceTooFar = distanceTooFar + 4 end -- North
 			if yyy < -30200 then distanceTooFar = distanceTooFar + 8 end -- South
 			if distanceTooFar > 0 then
-				-- On change la position de l'astéroïde qui est trop loin, et on le place dans le quadrant opposé à une distance supérieur au champ de vision 30000 < ... < 30200
+				-- On change la position de l'asteroide qui est trop loin, et on le place dans le quadrant oppose a une distance superieur au champ de vision 30000 < ... < 30200
 				if distanceTooFar == 1 then
 					astero:setPosition(x + random(30000, 30200), y + random(-30000, 30000)):setSize(random(10, 500))
 				elseif distanceTooFar == 2 then
@@ -79,7 +79,7 @@ end
 -- Gestion des phases de missions
 ------------------------------------
 
--- Première phase de la mission
+-- Premiere phase de la mission
 function phase1(delta)
 --	if delta > 0 then
 --		mission_state = phase2

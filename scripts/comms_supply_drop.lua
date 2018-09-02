@@ -9,6 +9,6 @@ function mainMenu()
 	if player:isEnemy(comms_target) then
 		return false
 	end
-	setCommsMessage("Nous n'avons rien pour vous.\nBonne journée.");
+	setCommsMessage("Nous n'avons rien pour vous.\nBonne journee.");
 end
 mainMenu()

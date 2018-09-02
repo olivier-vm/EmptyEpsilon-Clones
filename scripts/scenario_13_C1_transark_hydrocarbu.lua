@@ -1,5 +1,5 @@
--- Name: C1 - Real Transark - Récolte Hydrocarbu
--- Description: Mission de pilotage sans ennemis. Un cargo mineur Transark doit récolter les composants (minerai, gaz) nécessaire pour le raffinage d'hydrocarbu.
+-- Name: C1 - Real Transark - Recolte Hydrocarbu
+-- Description: Mission de pilotage sans ennemis. Un cargo mineur Transark doit recolter les composants (minerai, gaz) necessaire pour le raffinage d'hydrocarbu.
 -- Type: Mission
 
 require("utils.lua")
@@ -10,9 +10,9 @@ function init()
 
 	x, y = player:getPosition()
 	asteroidList = {}
-	-- Création d'une aura d'asteroïdes
-	-- La répartition de fait "carrée" pour une bonne répartition géométrique
-	-- Si la répartition se faisait concentrique, il y a une plus forte concentration d'élément près du centre que de l'extérieur
+	-- Creation d'une aura d'asteroides
+	-- La repartition de fait "carree" pour une bonne repartition geometrique
+	-- Si la repartition se faisait concentrique, il y a une plus forte concentration d'element pres du centre que de l'exterieur
 
 	for n=1,4000 do
 		table.insert(asteroidList, Asteroid():setPosition(x + random(-300000, 300000), y + random(-300000, 300000)):setSize(random(10, 500)))
@@ -21,7 +21,7 @@ function init()
 	-- Station
 	SpaceStation():setTemplate("Large Station"):setFaction("Transark"):setCallSign("DS-HYDRO"):setPosition(-68203, 28889)
 
-	-- Nébuleuses
+	-- Nebuleuses
 	Nebula():setPosition(15444, -69333)
     Nebula():setPosition(29000, -50889)
     Nebula():setPosition(35444, -43111)
@@ -57,7 +57,7 @@ function init()
 end
 
 function asteroidUpdate()
-	-- Il faut repérer dans quel quadrant (et quel coin éventuel) un astéroide est supprimé, pour en rajouter un dans le côté opposé, afin de garantir une répartition régulière
+	-- Il faut reperer dans quel quadrant (et quel coin eventuel) un asteroide est supprime, pour en rajouter un dans le cote oppose, afin de garantir une repartition reguliere
 	local x, y = player:getPosition()
 	for n = 1,4000 do
 		distanceTooFar = 0
@@ -69,7 +69,7 @@ function asteroidUpdate()
 		if yyy > 302000 then distanceTooFar = distanceTooFar + 4 end -- North
 		if yyy < -302000 then distanceTooFar = distanceTooFar + 8 end -- South
 		if distanceTooFar > 0 then
-			-- On change la position de l'astéroïde qui est trop loin, et on le place dans le quadrant opposé à une distance supérieur au champ de vision 300000 < ... < 302000
+			-- On change la position de l'asteroide qui est trop loin, et on le place dans le quadrant oppose a une distance superieur au champ de vision 300000 < ... < 302000
 			if distanceTooFar == 1 then
 				asteroidList[n]:setPosition(x + random(30000, 302000), y + random(-300000, 300000)):setSize(random(10, 500))
 			elseif distanceTooFar == 2 then
@@ -95,7 +95,7 @@ end
 -- Gestion des phases de missions
 ------------------------------------
 
--- Première phase de la mission
+-- Premiere phase de la mission
 function phase1(delta)
 --	if delta > 0 then
 --		mission_state = phase2

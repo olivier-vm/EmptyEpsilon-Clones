@@ -257,7 +257,7 @@ string CrewStationScreen::listHotkeysLimited(string station)
 	string ret = "";
 	keyboard_general = "";
 	for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
-		if (shortcut.first == "Basculer vers la station de l'équipage suivant" || shortcut.first =="Basculer vers la station de l'équipage précédent")
+		if (shortcut.first == "Basculer vers la station de l'equipage suivant" || shortcut.first =="Basculer vers la station de l'equipage precedent")
 			keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
 	if (station == "Tactique")
 	{
