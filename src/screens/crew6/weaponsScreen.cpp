@@ -56,8 +56,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     if (gameGlobalInfo->use_LASER_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
         GuiElement* LASER_info_box = new GuiElement(this, "LASER_INFO_BOX");
-        LASER_info_box->setPosition(-20, -120, ABottomRight)->setSize(280, 150);
-        (new GuiLabel(LASER_info_box, "LASER_INFO_LABEL", "Info Laser", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+        LASER_info_box->setPosition(-20, -170, ABottomRight)->setSize(280, 150);
+        (new GuiLabel(LASER_info_box, "LASER_INFO_LABEL", "Reglages Laser", 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiPowerDamageIndicator(LASER_info_box, "", SYS_LASERWeapons, ACenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiLASERFrequencySelector(LASER_info_box, "LASER_FREQUENCY_SELECTOR"))->setPosition(0, 0, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
         (new GuiLASERTargetSelector(LASER_info_box, "LASER_TARGET_SELECTOR"))->setPosition(0, -50, ABottomRight)->setSize(GuiElement::GuiSizeMax, 50);
