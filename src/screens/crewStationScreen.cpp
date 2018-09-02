@@ -27,10 +27,10 @@ CrewStationScreen::CrewStationScreen()
 
     message_frame = new GuiPanel(this, "");
     message_frame->setPosition(0, 0, ATopCenter)->setSize(900, 230)->hide();
-    
+
     message_text = new GuiScrollText(message_frame, "", "");
     message_text->setTextSize(20)->setPosition(20, 20, ATopLeft)->setSize(900 - 40, 200 - 40);
-    message_close_button = new GuiButton(message_frame, "", "Close", [this]() {
+    message_close_button = new GuiButton(message_frame, "", "Fermer", [this]() {
         if (my_spaceship)
         {
             for(PlayerSpaceship::CustomShipFunction& csf : my_spaceship->custom_functions)
@@ -45,7 +45,7 @@ CrewStationScreen::CrewStationScreen()
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, ABottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHelpOverlay(this, "Keyboard Shortcuts");
+    keyboard_help = new GuiHelpOverlay(this, "Raccourcis Clavier");
 
     for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
         keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
@@ -55,10 +55,10 @@ CrewStationScreen::CrewStationScreen()
     {
         threat_estimate = new ThreatLevelEstimate();
         threat_estimate->setCallbacks([](){
-            LOG(INFO) << "Switching to ambient music";
+            LOG(INFO) << "Basculer vers musique d'ambiance";
             soundManager->playMusicSet(findResources("music/ambient/*.ogg"));
         }, []() {
-            LOG(INFO) << "Switching to combat music";
+            LOG(INFO) << "Basculer vers musique de combat";
             soundManager->playMusicSet(findResources("music/combat/*.ogg"));
         });
     }
@@ -231,7 +231,7 @@ void CrewStationScreen::showTab(GuiElement* element)
             for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory(info.button->getText()))
                 keyboard_category += shortcut.second + ":\t" + shortcut.first + "\n";
 			if (keyboard_category == "")	// special hotkey combination for crew1 and crew4 screens
-				keyboard_category = listHotkeysLimited(info.button->getText());               
+				keyboard_category = listHotkeysLimited(info.button->getText());
 
             keyboard_help->setText(keyboard_general + keyboard_category);
         }else{
@@ -253,20 +253,20 @@ GuiElement* CrewStationScreen::findTab(string name)
 }
 
 string CrewStationScreen::listHotkeysLimited(string station)
-{	
+{
 	string ret = "";
 	keyboard_general = "";
 	for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("General"))
-		if (shortcut.first == "Switch to next crew station" || shortcut.first =="Switch to previous crew station") 				
+		if (shortcut.first == "Basculer vers la station de l'équipage suivant" || shortcut.first =="Basculer vers la station de l'équipage précédent")
 			keyboard_general += shortcut.second + ":\t" + shortcut.first + "\n";
 	if (station == "Tactical")
-	{	
-		
+	{
+
 		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Helms"))
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
 		{
-			if (shortcut.first != "Toggle shields") 
+			if (shortcut.first != "BAsculer les boucliers")
 				ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		}
 	}
@@ -276,13 +276,13 @@ string CrewStationScreen::listHotkeysLimited(string station)
             ret += shortcut.second + ":\t" + shortcut.first + "\n";
         for (std::pair<string, string> shortcut : hotkeys.listHotkeysByCategory("Weapons"))
         {
-            if (shortcut.first == "Toggle shields") 
+            if (shortcut.first == "Toggle shields")
 				ret += shortcut.second + ":\t" + shortcut.first + "\n";
 		}
 	}
 
 //	-- not yet used --
-//	else if (station == "Operations") 
+//	else if (station == "Operations")
 //		return ret;
 //	----
 

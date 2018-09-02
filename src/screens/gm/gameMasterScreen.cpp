@@ -42,7 +42,7 @@ GameMasterScreen::GameMasterScreen()
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, ATopLeft)->setSize(250, 50);
 
     // Comm interception button
-    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercept all comms", [this](bool value) {
+    intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", "Intercepter les comms", [this](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, ATopLeft)->setSize(200, 25);
@@ -59,7 +59,7 @@ GameMasterScreen::GameMasterScreen()
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
 
     // Global message button
-    global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Global message", [this]() {
+    global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", "Message global", [this]() {
         global_message_entry->show();
     });
     global_message_button->setPosition(20, -20, ABottomLeft)->setSize(250, 50);
@@ -95,25 +95,25 @@ GameMasterScreen::GameMasterScreen()
     space_station_selector->setPosition(270, -120, ABottomLeft)->setSize(350, 50);
 
     // Create button
-    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Create...", [this]() {
+    create_button = new GuiButton(this, "CREATE_OBJECT_BUTTON", "Creer...", [this]() {
         object_creation_screen->show();
     });
     create_button->setPosition(20, -70, ABottomLeft)->setSize(250, 50);
 
     // Copy scenario button
-    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", "Copy scenario", [this]() {
+    copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", "Copier scenario", [this]() {
         Clipboard::setClipboard(getScriptExport(false));
     });
     copy_scenario_button->setTextSize(20)->setPosition(-20, -20, ABottomRight)->setSize(125, 25);
 
     // Copy selected button
-    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", "Copy selected", [this]() {
+    copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", "Copier selection", [this]() {
         Clipboard::setClipboard(getScriptExport(true));
     });
     copy_selected_button->setTextSize(20)->setPosition(-20, -45, ABottomRight)->setSize(125, 25);
 
     // Cancel create button
-    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Cancel", [this]() {
+    cancel_create_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", "Annuler", [this]() {
         create_button->show();
         cancel_create_button->hide();
     });
@@ -624,7 +624,7 @@ GuiObjectCreationScreen::GuiObjectCreationScreen(GameMasterScreen* gm_screen)
         y += 30;
     }
 
-    (new GuiButton(box, "CREATE_RLS_JAMMER", "RLS Jammer", [this]() {
+    (new GuiButton(box, "CREATE_RLS_JAMMER", "Brouilleur RLS", [this]() {
         setCreateScript("RLSJammer():setRotation(random(0, 360)):setFactionId(" + string(faction_selector->getSelectionIndex()) + ")");
     }))->setTextSize(20)->setPosition(-350, y, ATopRight)->setSize(300, 30);
     y += 30;

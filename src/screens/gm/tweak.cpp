@@ -32,21 +32,21 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
         pages.push_back(new GuiShipTweakBase(this));
         list->addEntry("Base", "");
         pages.push_back(new GuiShipTweakShields(this));
-        list->addEntry("Shields", "");
+        list->addEntry("Boucliers", "");
         pages.push_back(new GuiShipTweakMissileTubes(this));
         list->addEntry("Tubes", "");
         pages.push_back(new GuiShipTweakMissileWeapons(this));
         list->addEntry("Missiles", "");
         pages.push_back(new GuiShipTweakLASERweapons(this));
-        list->addEntry("LASERs", "");
+        list->addEntry("Lasers", "");
         pages.push_back(new GuiShipTweakSystems(this));
-        list->addEntry("Systems", "");
+        list->addEntry("Systemes", "");
     }
 
     if (tweak_type == TW_Player)
     {
         pages.push_back(new GuiShipTweakPlayer(this));
-        list->addEntry("Player", "");
+        list->addEntry("Participant", "");
     }
 
     if (tweak_type == TW_Object)
@@ -63,7 +63,7 @@ GuiObjectTweak::GuiObjectTweak(GuiContainer* owner, ETweakType tweak_type)
     pages[0]->show();
     list->setSelectionIndex(0);
 
-    (new GuiButton(this, "CLOSE_BUTTON", "Close", [this]() {
+    (new GuiButton(this, "CLOSE_BUTTON", "Fermer", [this]() {
         hide();
     }))->setTextSize(20)->setPosition(-10, 0, ATopRight)->setSize(70, 30);
 }
@@ -96,7 +96,7 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
     right_col->setPosition(-25, 25, ATopRight)->setSize(300, GuiElement::GuiSizeMax);
 
     // Left column
-    (new GuiLabel(left_col, "", "Callsign:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Indicatif:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     callsign = new GuiTextEntry(left_col, "", "");
     callsign->setSize(GuiElement::GuiSizeMax, 50);
@@ -115,19 +115,19 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
         target->setDescription(text);
     });
 
-    (new GuiLabel(left_col, "", "Impulse speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Vitesse d'impulsion:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     impulse_speed_slider = new GuiSlider(left_col, "", 0.0, 250, 0.0, [this](float value) {
         target->impulse_max_speed = value;
     });
     impulse_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Turn speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Vitesse de virage:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     turn_speed_slider = new GuiSlider(left_col, "", 0.0, 35, 0.0, [this](float value) {
         target->turn_speed = value;
     });
     turn_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Heading:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Cap:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     heading_slider = new GuiSlider(left_col, "", 0.0, 359.9, 0.0, [this](float value) {
         target->setHeading(value);
 
@@ -140,7 +140,7 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
 
     // Right column
     // Set type name. Does not change ship type.
-    (new GuiLabel(right_col, "", "Type name:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(right_col, "", "Nom du type:", 30))->setSize(GuiElement::GuiSizeMax, 50);
 
     type_name = new GuiTextEntry(right_col, "", "");
     type_name->setSize(GuiElement::GuiSizeMax, 50);
@@ -169,7 +169,7 @@ GuiShipTweakBase::GuiShipTweakBase(GuiContainer* owner)
    can_be_destroyed_toggle->setSize(GuiElement::GuiSizeMax, 40);
 
     // RLS and WARP drive toggles
-    (new GuiLabel(right_col, "", "Special drives:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(right_col, "", "Moteurs speciaux:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     RLS_toggle = new GuiToggleButton(right_col, "", "Moteur RLS", [this](bool value) {
         target->setRLSDrive(value);
     });
@@ -404,7 +404,7 @@ GuiShipTweakLASERweapons::GuiShipTweakLASERweapons(GuiContainer* owner)
     });
     index_selector->setSize(GuiElement::GuiSizeMax, 40);
     for(int n=0; n<max_LASER_weapons; n++)
-        index_selector->addEntry("LASER: " + string(n + 1), "");
+        index_selector->addEntry("Laser: " + string(n + 1), "");
     index_selector->setSelectionIndex(0);
 
     (new GuiLabel(right_col, "", "Arc:", 20))->setSize(GuiElement::GuiSizeMax, 30);
@@ -419,7 +419,7 @@ GuiShipTweakLASERweapons::GuiShipTweakLASERweapons(GuiContainer* owner)
     });
     direction_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Arc de tourelle:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Angle de tourelle:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     turret_arc_slider = new GuiSlider(right_col, "", 0.0, 360.0, 0.0, [this](float value) {
         target->LASER_weapons[LASER_index].setTurretArc(roundf(value));
     });
@@ -452,7 +452,7 @@ GuiShipTweakLASERweapons::GuiShipTweakLASERweapons(GuiContainer* owner)
     });
     range_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 30);
 
-    (new GuiLabel(right_col, "", "Cycle time:", 20))->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(right_col, "", "Temps de cycle:", 20))->setSize(GuiElement::GuiSizeMax, 30);
     cycle_time_slider = new GuiSlider(right_col, "", 0.1, 20.0, 0.0, [this](float value) {
         target->LASER_weapons[LASER_index].setCycleTime(value);
     });
@@ -586,7 +586,7 @@ GuiShipTweakPlayer::GuiShipTweakPlayer(GuiContainer* owner)
     });
     combat_maneuver_boost_speed_slider->addOverlay()->setSize(GuiElement::GuiSizeMax, 40);
 
-    (new GuiLabel(left_col, "", "Strafe Speed:", 30))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(left_col, "", "Vitesse de glissement:", 30))->setSize(GuiElement::GuiSizeMax, 50);
     combat_maneuver_strafe_speed_slider = new GuiSlider(left_col, "", 0.0, 1000, 0.0, [this](float value) {
         target->combat_maneuver_strafe_speed = value;
     });
