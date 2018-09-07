@@ -29,7 +29,7 @@ void BlackHole::update(float delta)
 void BlackHole::draw3DTransparent()
 {
     float distance = sf::length(camera_position - sf::Vector3f(getPosition().x, getPosition().y, 0));
-    void(distance); //to avoid unused variable warning
+    (void)distance; //to avoid unused variable warning
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("blackHole3d.png"));
