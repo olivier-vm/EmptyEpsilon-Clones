@@ -11,7 +11,7 @@ class RLSJammer : public SpaceObject
     float hull;
 public:
     RLSJammer();
-    
+
     void setRange(float range) { this->range = range; }
 
     virtual void drawOnRadar(sf::RenderTarget& window, sf::Vector2f position, float scale, bool long_range) override;
@@ -21,8 +21,8 @@ public:
 
     static bool isRLSJammed(sf::Vector2f position);
     static sf::Vector2f getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end);
-    
-    virtual string getExportLine() { return "RLSJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
+
+    virtual string getExportLine() override { return "RLSJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
 
 #endif//WARP_JAMMER_H
