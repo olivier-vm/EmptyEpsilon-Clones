@@ -313,6 +313,77 @@ Leurs baies de chargement possedent des controles de climatisation, et des syste
 --		  variation:setWARPDrive(true)
 --	  end
 
+	--[[ Cargo joueur
+	--]]
+	if cnt == 5 then
+		variation = template:copy("Cargo Marchandise RLS Dock"):setType("playership")
+		variation:setDescription([[Cargo transark Marchandise de categorie 5. Possede tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes.
+
+	Le cargo est equippe en plus d'un moteur a impulsion RLS 800 afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement.
+
+	Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.
+
+	Le cargo est capable de transporter d'autres vaisseaux (type corvette) qui peuvent donc s'y amarrer.]])
+		--variation:setShields(200, 200)
+		--variation:setHull(250)
+		variation:setDockClasses("Starfighter", "Frigate", "Corvette")
+		variation:setSpeed(90, 10, 20)
+		variation:setRLSSpeed(800)
+		variation:setCombatManeuver(200, 100)
+		variation:setLASER(2, 0, 0, 0, 0, 0)
+		variation:setWeaponStorage("Mine", 8)
+		variation:setTubes(1, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+		variation:setTubeDirection(0, 180):setWeaponTubeExclusiveFor(0, "Mine")
+		variation:addRoomSystem(1, 1, 7, 1, "MissileSystem");
+		variation:addRoomSystem(0, 3, 1, 2, "RearShield");
+		variation:addRoomSystem(1, 3, 2, 2, "Reactor");
+		variation:addRoomSystem(3, 3, 1, 2, "RLS");
+		variation:addRoomSystem(4, 3, 1, 2, "WARPDrive");
+		variation:addRoomSystem(5, 3, 2, 2, "Impulse");
+		variation:addRoomSystem(9, 3, 2, 2, "Maneuver");
+		variation:addRoomSystem(11, 3, 1, 2, "FrontShield");
+		variation:addRoomSystem(1, 6, 7, 1, "LASERWeapons");
+		variation:addRoom(2, 2, 2, 1);
+		variation:addRoom(2, 5, 2, 1);
+		variation:addRoom(7, 3, 2, 2);
+		variation:addRoom(5, 2, 2, 1);
+		variation:addRoom(5, 5, 2, 1);
+		--variation:addDoor(1, 1, true);
+		variation:addDoor(2, 2, true);
+		variation:addDoor(5, 2, true);
+		variation:addDoor(1, 3, false);
+		variation:addDoor(2, 3, true);
+		variation:addDoor(3, 3, true);
+		variation:addDoor(4, 3, false);
+		variation:addDoor(5, 3, false);
+		variation:addDoor(6, 3, true);
+		variation:addDoor(7, 3, false);
+		variation:addDoor(9, 3, false);
+		variation:addDoor(11, 3, false);
+		variation:addDoor(2, 5, true);
+		variation:addDoor(3, 5, true);
+		variation:addDoor(5, 5, true);
+		variation:addDoor(3, 6, true);
+		variation:addDoor(5, 6, true);
+
+		-- Duplicate pour apparition dans la database
+		variation = template:copy("Cargo Marchandise RLS Dock*")
+		variation:setDescription([[Cargo transark Marchandise de categorie 5. Possede tout un environnement de stabilisation afin de transporter du materiel, des machineries delicates, et des instrumentations complexes.
+
+	Le cargo est equippe en plus d'un moteur a impulsion RLS 800 afin de pouvoir parcourir de tres longues longues distances (inter-planetaires) rapidement.
+
+	Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necessaires en cas d'urgence dans les zones spatiolithique.
+
+	Le cargo est capable de transporter d'autres vaisseaux (type corvette) qui peuvent donc s'y amarrer.]])
+		variation:setSpeed(90, 10, 20)
+		variation:setRLSSpeed(800)
+		variation:setCombatManeuver(200, 100)
+		variation:setLASER(2, 0, 0, 0, 0, 0)
+		variation:setWeaponStorage("Mine", 8)
+		variation:setTubes(1, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+		variation:setTubeDirection(0, 180):setWeaponTubeExclusiveFor(0, "Mine")
+	end
+
 	template = ShipTemplate():setName("Cargo Dechets " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
 	template:setDescription([[Ces cargos sont specialement concus pour contenir les dechets, et des matiere premieres a ressources.
 
@@ -360,14 +431,9 @@ Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necess
 		variation:setRLSSpeed(900)
 		variation:setCombatManeuver(200, 100)
 		variation:setLASER(2, 0, 0, 0, 0, 0)
-		--variation:setWeaponStorage("Homing", 12)
-		--variation:setWeaponStorage("Nuke", 4)
 		variation:setWeaponStorage("Mine", 8)
-		--variation:setWeaponStorage("EMP", 6)
-		--variation:setTubes(5, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
-		variation:weaponTubeDisallowMissle(0, "Mine"):weaponTubeDisallowMissle(1, "Mine")
-		variation:weaponTubeDisallowMissle(2, "Mine"):weaponTubeDisallowMissle(3, "Mine")
-		variation:setTubeDirection(4, 180):setWeaponTubeExclusiveFor(4, "Mine")
+		variation:setTubes(1, 8.0) -- Amount of torpedo tubes, and loading time of the tubes.
+		variation:setTubeDirection(0, 180):setWeaponTubeExclusiveFor(0, "Mine")
 		variation:addRoomSystem(1, 1, 7, 1, "MissileSystem");
 		variation:addRoomSystem(0, 3, 1, 2, "RearShield");
 		variation:addRoomSystem(1, 3, 2, 2, "Reactor");
