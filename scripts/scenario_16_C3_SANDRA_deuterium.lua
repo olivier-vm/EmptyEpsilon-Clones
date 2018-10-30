@@ -1,6 +1,5 @@
 -- Name: C3 - Real Transark - S.A.N.D.R.A. Deuterium
 -- Description: Mission de pilotage sans ennemis. Un cargo mineur Transark doit recolter du Deuterium pur. Pour faire fonctionner le S.A.N.D.R.A., du Deuterium est necessaire, ce dont DNG-72 ne dispose pas. Le secteur ne possede pas encore non plus les moyens pour raffiner ce Deuterium. DNG-72 a donc recu la permission exceptionnelle d'effectuer une mission de collecte de Deuterium sur un asteroide en orbite autour de Maatrah et qui appartient au secteur Premier. Il faudra ensuite livrer ce Deuterium a BNA-108 qui le raffinera pour DNG-72.
-
 -- Type: Mission
 
 require("utils.lua")
