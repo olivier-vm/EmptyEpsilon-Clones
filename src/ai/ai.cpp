@@ -15,7 +15,7 @@ ShipAI::ShipAI(CpuShip* owner)
     has_LASERs = false;
     LASER_weapon_range = 0.0;
     weapon_direction = EWeaponDirection::Front;
-    
+
     update_target_delay = 0.0;
 }
 
@@ -40,7 +40,7 @@ void ShipAI::drawOnGMRadar(sf::RenderTarget& window, sf::Vector2f draw_position,
         a[0].color = a[1].color = sf::Color(255, 128, 128, 64);
         window.draw(a);
     }
-    
+
     sf::VertexArray a(sf::LinesStrip, pathPlanner.route.size() + 1);
     a[0].position = draw_position;
     a[0].color = sf::Color(255, 255, 255, 32);
@@ -114,10 +114,10 @@ void ShipAI::updateWeaponState(float delta)
     has_LASERs = false;
     LASER_weapon_range = 0;
     best_missile_type = MW_None;
-    
+
     float tube_strength_per_direction[4] = {0, 0, 0, 0};
     float LASER_strength_per_direction[4] = {0, 0, 0, 0};
-    
+
     //If we have weapon tubes, load them with torpedoes
     for(int n=0; n<owner->weapon_tube_count; n++)
     {
@@ -154,7 +154,7 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
-    
+
     int best_tube_index = -1;
     float best_tube_strenght = 0.0;
     int best_LASER_index = -1;
@@ -172,10 +172,10 @@ void ShipAI::updateWeaponState(float delta)
             best_LASER_strenght = LASER_strength_per_direction[n];
         }
     }
-    
+
     has_LASERs = best_LASER_index > -1;
     has_missiles = best_tube_index > -1;
-    
+
     if (has_LASERs)
     {
         //Figure out our LASER weapon range.
@@ -214,7 +214,7 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
-    
+
     int direction_index = best_tube_index;
     float* strength_per_direction = tube_strength_per_direction;
     if (best_LASER_strenght > best_tube_strenght)
@@ -531,6 +531,9 @@ void ShipAI::flyFormation(P<SpaceObject> target, sf::Vector2f offset)
 
     if (pathPlanner.route.size() == 1)
     {
+        if (owner->docking_state == DS_Docked)
+            owner->requestUndock();
+
         sf::Vector2f diff = target_position - owner->getPosition();
         float distance = sf::length(diff);
 
@@ -640,7 +643,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
 {
     if (P<ScanProbe>(target))   //Never fire missiles on scan probes
         return std::numeric_limits<float>::infinity();
-    
+
     EMissileWeapons type = owner->weapon_tube[tube_index].getLoadType();
 
     if (type == MW_HVLI)    //Custom HVLI targeting for AI, as the calculate firing solution
@@ -650,7 +653,7 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         sf::Vector2f target_position = target->getPosition();
         float target_angle = sf::vector2ToAngle(target_position - owner->getPosition());
         float fire_angle = owner->getRotation() + owner->weapon_tube[tube_index].getDirection();
-        
+
         float distance = sf::length(owner->getPosition() - target_position);
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = sf::angleDifference(target_angle, fire_angle);
@@ -662,14 +665,14 @@ float ShipAI::calculateFiringSolution(P<SpaceObject> target, int tube_index)
         //If our "error" of hitting is less then double the radius of the target, fire.
         if (fabs(angle_diff) < 80.0 && distance * tanf(fabs(angle_diff) / 180.0f * M_PI) < target->getRadius() * 2.0)
             return fire_angle;
-        
+
         return std::numeric_limits<float>::infinity();
     }
-    
+
     if (type == MW_Nuke || type == MW_EMP)
     {
         sf::Vector2f target_position = target->getPosition();
-        
+
         //Check if we can sort of safely fire an Nuke/EMP. The target needs to be clear of friendly/neutrals.
         float safety_radius = 1100;
         if (sf::length(target_position - owner->getPosition()) < safety_radius)
