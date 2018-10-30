@@ -20,14 +20,15 @@ function init()
 	table_minerai[10] = {"Vide",0.4,"facile",0}
 
 	table_minerai_nebula = {}
-	table_minerai_nebula[1] = {"Fer",0.1,"facile",20}
-	table_minerai_nebula[2] = {"Cobalt",0.2,"moyen",20}
-	table_minerai_nebula[3] = {"Ruthenium",0.2,"moyen",15}
-	table_minerai_nebula[4] = {"Organocarbone gazeux",0.4,"difficile",20}
-	table_minerai_nebula[5] = {"Vide",0.1,"facile",0}
+	table_minerai_nebula[1] = {"Fer",0.5,"facile",20}
+	table_minerai_nebula[2] = {"Cobalt",0.1,"moyen",20}
+	table_minerai_nebula[3] = {"Ruthenium",0.15,"moyen",15}
+	table_minerai_nebula[4] = {"Organocarbone gazeux",0.3,"difficile",20}
+	table_minerai_nebula[5] = {"Deuterium",0.3,"difficile",20}
+	table_minerai_nebula[6] = {"Vide",0.1,"facile",0}
 
-	liste_minerais = {"Fer","Cobalt","Ruthenium","Organocarbone gazeux","Nickel","Silice","Scandium","Yttrium","Cerium","Praseodyme"}
-	player.minerai = {["Fer"]=0,["Cobalt"]=0,["Ruthenium"]=0,["Organocarbone gazeux"]=0,["Nickel"]=0,["Silice"]=0,["Scandium"]=0,["Yttrium"]=0,["Cerium"]=0,["Praseodyme"]=0}
+	liste_minerais = {"Fer","Cobalt","Ruthenium","Organocarbone gazeux","Deuterium","Nickel","Silice","Scandium","Yttrium","Cerium","Praseodyme"}
+	player.minerai = {["Fer"]=0,["Cobalt"]=0,["Ruthenium"]=0,["Organocarbone gazeux"]=0,["Deuterium"]=0,["Nickel"]=0,["Silice"]=0,["Scandium"]=0,["Yttrium"]=0,["Cerium"]=0,["Praseodyme"]=0}
 
 	player.max_stock = 50
 
