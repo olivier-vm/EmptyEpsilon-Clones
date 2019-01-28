@@ -21,6 +21,16 @@ class ScriptFunction(object):
 		ret = self.name
 		return '%s' % (ret)
 
+class ScriptMember(object):
+		def __init__(self, name):
+			self.name = name
+			self.description = ""
+			self.origin_class = None
+
+		def __repr__(self):
+			ret = self.name
+			return '%s' % (ret)
+
 class ScriptClass(object):
 	def __init__(self, name):
 		self.name = name
@@ -30,16 +40,21 @@ class ScriptClass(object):
 		self.children = []
 		self.create = True
 		self.functions = []
+		self.members = []
 		self.callbacks = []
-	
+
 	def addFunction(self, function_name):
 		self.functions.append(ScriptFunction(function_name))
 		return self.functions[-1]
 
+	def addMember(self, member_name):
+			self.members.append(ScriptMember(member_name))
+			return self.members[-1]
+
 	def addCallback(self, callback_name):
 		self.callbacks.append(callback_name)
 		return self.callbacks[-1]
-	
+
 	def __repr__(self):
 		ret = self.name
 		if self.parent is not None:
@@ -47,7 +62,7 @@ class ScriptClass(object):
 		for func in self.functions:
 			ret += ':%s' % (func)
 		return '{%s}' % (ret)
-	
+
 	def outputClassTree(self, stream):
 		stream.write('<li><a href="#class_%s">%s</a>\n' % (self.name, self.name))
 		if len(self.children) > 0:
@@ -61,13 +76,13 @@ class DocumentationGenerator(object):
         self._definitions = []
         self._function_info = []
         self._files = set()
-    
+
     def addFile(self, filename):
         if filename in self._files:
             return
         if not os.path.isfile(filename):
             return
-        
+
         self._files.add(filename)
         ext = os.path.splitext(filename)[1].lower()
         if ext == '.cbp':
@@ -81,7 +96,7 @@ class DocumentationGenerator(object):
                 if m is not None:
                     self.addFile(m.group(1))
                     self.addFile(os.path.join(os.path.dirname(filename), m.group(1)))
-    
+
     def readFunctionInfo(self):
         for filename in self._files:
             if not filename.endswith('.h'):
@@ -102,7 +117,7 @@ class DocumentationGenerator(object):
                         res = re.search('^ *([a-zA-Z0-9 \:\<\>]+) +([a-zA-Z0-9]+)\(([^\)]*)\)', line)
                         if res != None and res.group(2) != '':
                             self._function_info.append((current_class, res.group(2), res.group(3)))
-    
+
     def readScriptDefinitions(self):
         for filename in self._files:
             description = ""
@@ -154,7 +169,7 @@ class DocumentationGenerator(object):
                     self._definitions.append(ScriptFunction(res.group(1).strip()))
                     self._definitions[-1].description = description
                 description = ""
-    
+
     def linkFunctions(self):
         for class_name, function_name, parameters in self._function_info:
             for definition in self._definitions:
@@ -162,7 +177,7 @@ class DocumentationGenerator(object):
                     for func in definition.functions:
                         if (func.origin_class == class_name) and func.name == function_name:
                             func.parameters = parameters
-    
+
     def linkParents(self):
         for definition in self._definitions:
             if isinstance(definition, ScriptClass):
@@ -177,12 +192,11 @@ class DocumentationGenerator(object):
                     f = definition.addFunction('isValid')
                     f.parameters = ''
                     f.description = 'Check if this is still looking at a valid object. Returns false when the objects that this variable references is destroyed.'
-                    f = definition.addFunction('typeName')
-                    f.parameters = ''
-                    f.description = 'Returns the class name of this object.'
                     f = definition.addFunction('destroy')
                     f.parameters = ''
                     f.description = 'Removes this object from the game.'
+                    f = definition.addMember('typeName')
+                    f.description = 'Returns the class name of this object, this is not a function, but a direct member: if object.typeName == "Mine" then print("MINE!") end'
 
     def generateDocs(self, stream):
         stream.write('<!doctype html><html lang="us"><head><meta charset="utf-8"><title>EmptyEpsilon - Scripting documentation</title>')
@@ -230,6 +244,9 @@ class DocumentationGenerator(object):
                     else:
                         stream.write('<dt>%s:%s(%s)</dt>' % (d.name, func.name, func.parameters.replace('<', '&lt;')))
                     stream.write('<dd>%s</dd>' % (func.description.replace('<', '&lt;')))
+                for member in d.members:
+                    stream.write('<dt>%s:%s</dt>' % (d.name, member.name))
+                    stream.write('<dd>%s</dd>' % (member.description.replace('<', '&lt;')))
                 stream.write('</dl>')
                 stream.write('</div>')
 
