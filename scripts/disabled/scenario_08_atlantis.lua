@@ -3,6 +3,16 @@
 --- Your mission will be to take it trough it's first tests and initial mission.
 -- Type: Mission
 
+--[[Problems
+no rep at start....
+Unclear who to contact for first mission
+jump ship under attack after first jump
+not clear that you need to escape
+warp scramblers not visible
+nebula in kraylor defense line makes it unclear
+jump jammers not always blocking jump?
+--]]
+
 require("utils.lua")
 
 --[[
@@ -12,21 +22,21 @@ Rundown of the mission:
 * Engineering has to power up all systems to 100%.
 * After that, undocking is possible.
 * After undocking, flying to the supply package to pick up missiles.
-* Then test the WARP drive to WARP towards the weapons testing area.
+* Then test the jump drive to jump towards the weapons testing area.
 * At the weapons testing area, science needs to scan two dummy ships before they can be destroyed.
 * Destroy the two dummy ships, one can only be destroyed with missile weapons.
 * Have relay open communications to the station for the next objective.
 ==Phase 2: Discovery
 * You first mission will be to investigate a strange signal from a nebula.
-* As the nebula is in the outer space regions, you'll have you use a WARP carrier.
-* The WARP carrier delivers you to the edge of a nebulea cloud. There are a few kraylor ships here for you to fight.
+* As the nebula is in the outer space regions, you'll have you use a jump carrier.
+* The jump carrier delivers you to the edge of a nebulea cloud. There are a few kraylor ships here for you to fight.
 * The objective is to find an artifact within the nebulea, and scan it. This is a tough scan (lvl3)
 * In these nebulea, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artefacts that are not the source of the signal.
 * When you scan the proper artifact, it gives you 4 readings in the description. Relay needs to pass these readings to the JC-88 or Shipyard before the mission continues.
 * When this is done, the artifact becomes unstable, and becomes a wormhole that sucks in the player.
 ==Phase 3: Lost in enemy space...
 * After the wormhole, the player finds himself in Kraylor space.
-* There are RLS jammers blocking you from WARPing away. And these jammers are well defended. You'll need to navigate or fight you way out of this.
+* There are warp jammers blocking you from jumping away. And these jammers are well defended. You'll need to navigate or fight you way out of this.
 * I highly recommend navigating. Really. There is some code in place that makes all enemies attack if you engage the jammers.
 * JC88 will be waiting for you outside of the defense line. He will take you back to the shipyard.
 * At the shipyard you will hand in your data, and get your new objective.
@@ -43,7 +53,7 @@ function init()
     -- Create the main ship for the players.
     player = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis")
 	player:setPosition(25276, 133850):setCallSign("Atlantis-1"):setRotation(-90):commandTargetRotation(-90)
-    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemPower(system, 0.0)
         player:commandSetSystemPowerRequest(system, 0.0)
     end
@@ -86,7 +96,7 @@ function init()
     target_dummy_1:setHullMax(1):setHull(1):setShieldsMax(300):setScanningParameters(1, 1):setCommsScript("")
     target_dummy_2:setHullMax(1):setHull(1):setShieldsMax(300):setScanningParameters(1, 1):setCommsScript("")
 
-    jc88 = CpuShip():setFaction("Human Navy"):setTemplate("WARP Carrier"):setCallSign("JC-88"):setScanned(true):setPosition(18972, 135882):orderIdle()
+    jc88 = CpuShip():setFaction("Human Navy"):setTemplate("Jump Carrier"):setCallSign("JC-88"):setScanned(true):setPosition(18972, 135882):orderIdle()
     jc88:setCommsFunction(jc88Comms)
 
     --Sector B20
@@ -138,33 +148,33 @@ Doppler instability: %i]], b20_artifact.beta_radiation, b20_artifact.gravity_dis
     
     --kraylor defense line.
     kraylor_defense_line = {
-        RLSJammer():setFaction("Kraylor"):setPosition(7657, -264940),
-        RLSJammer():setFaction("Kraylor"):setPosition(9915, -289620),
-        RLSJammer():setFaction("Kraylor"):setPosition(1822, -287037),
-        RLSJammer():setFaction("Kraylor"):setPosition(-6615, -285401),
-        RLSJammer():setFaction("Kraylor"):setPosition(-18324, -283593),
-        RLSJammer():setFaction("Kraylor"):setPosition(-24522, -276878),
-        RLSJammer():setFaction("Kraylor"):setPosition(-28138, -268613),
-        RLSJammer():setFaction("Kraylor"):setPosition(-23403, -256302),
-        RLSJammer():setFaction("Kraylor"):setPosition(-11608, -254149),
-        RLSJammer():setFaction("Kraylor"):setPosition(46849, -260262),
-        RLSJammer():setFaction("Kraylor"):setPosition(35571, -254924),
-        RLSJammer():setFaction("Kraylor"):setPosition(22312, -254063),
-        RLSJammer():setFaction("Kraylor"):setPosition(10842, -255239),
-        RLSJammer():setFaction("Kraylor"):setPosition(65015, -272745),
-        RLSJammer():setFaction("Kraylor"):setPosition(60452, -263189),
-        RLSJammer():setFaction("Kraylor"):setPosition(56664, -280494),
-        RLSJammer():setFaction("Kraylor"):setPosition(48829, -284454),
-        RLSJammer():setFaction("Kraylor"):setPosition(22915, -287381),
-        RLSJammer():setFaction("Kraylor"):setPosition(36690, -287554),
-        RLSJammer():setFaction("Kraylor"):setPosition(-34202, -259093),
-        RLSJammer():setFaction("Kraylor"):setPosition(29547, -294816),
-        RLSJammer():setFaction("Kraylor"):setPosition(54372, -255958)
+        WarpJammer():setFaction("Kraylor"):setPosition(7657, -264940),
+        WarpJammer():setFaction("Kraylor"):setPosition(9915, -289620),
+        WarpJammer():setFaction("Kraylor"):setPosition(1822, -287037),
+        WarpJammer():setFaction("Kraylor"):setPosition(-6615, -285401),
+        WarpJammer():setFaction("Kraylor"):setPosition(-18324, -283593),
+        WarpJammer():setFaction("Kraylor"):setPosition(-24522, -276878),
+        WarpJammer():setFaction("Kraylor"):setPosition(-28138, -268613),
+        WarpJammer():setFaction("Kraylor"):setPosition(-23403, -256302),
+        WarpJammer():setFaction("Kraylor"):setPosition(-11608, -254149),
+        WarpJammer():setFaction("Kraylor"):setPosition(46849, -260262),
+        WarpJammer():setFaction("Kraylor"):setPosition(35571, -254924),
+        WarpJammer():setFaction("Kraylor"):setPosition(22312, -254063),
+        WarpJammer():setFaction("Kraylor"):setPosition(10842, -255239),
+        WarpJammer():setFaction("Kraylor"):setPosition(65015, -272745),
+        WarpJammer():setFaction("Kraylor"):setPosition(60452, -263189),
+        WarpJammer():setFaction("Kraylor"):setPosition(56664, -280494),
+        WarpJammer():setFaction("Kraylor"):setPosition(48829, -284454),
+        WarpJammer():setFaction("Kraylor"):setPosition(22915, -287381),
+        WarpJammer():setFaction("Kraylor"):setPosition(36690, -287554),
+        WarpJammer():setFaction("Kraylor"):setPosition(-34202, -259093),
+        WarpJammer():setFaction("Kraylor"):setPosition(29547, -294816),
+        WarpJammer():setFaction("Kraylor"):setPosition(54372, -255958)
     }
     kraylor_defense_line_ships = {}
     kraylor_defense_line_engaged = false
-    for _, RLS_jammer in ipairs(kraylor_defense_line) do
-        x, y = RLS_jammer:getPosition()
+    for _, warp_jammer in ipairs(kraylor_defense_line) do
+        x, y = warp_jammer:getPosition()
         ship = CpuShip():setFaction("Kraylor"):setPosition(x + random(-1000, 1000), y + random(-1000, 1000)):orderDefendLocation(x, y)
         if random(0, 100) < 20 then
             ship:setTemplate("Defense platform")
@@ -239,13 +249,13 @@ Doppler instability: %i]], b20_artifact.beta_radiation, b20_artifact.gravity_dis
     --[[TEMP
     mission_state = phase2SeekArtifact
     player:setPosition(310000, -71000)
-    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "RLS", "WARPdrive", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "warp", "jumpdrive", "frontshield", "rearshield"}) do
         player:setSystemPower(system, 1.0)
         player:commandSetSystemPowerRequest(system, 1.0)
     end
     
     --TEMP
-    mission_state = phase2WaitTillWormholeRLSedPlayer
+    mission_state = phase2WaitTillWormholeWarpedPlayer
     player:setPosition(30036, -270545)
     
     --TEMP
@@ -267,7 +277,7 @@ First, have your engineer power up all systems to 100%, as you are currently in 
 end
 
 function phase1WaitForPowerup(delta)
-    for _, system in ipairs({"reactor", "LASERweapons", "missilesystem", "maneuver", "impulse", "frontshield", "rearshield"}) do
+    for _, system in ipairs({"reactor", "beamweapons", "missilesystem", "maneuver", "impulse", "frontshield", "rearshield"}) do
         if player:getSystemPower(system) < 1.0 then
             return
         end
@@ -302,8 +312,8 @@ function phase1ScanDummyShips(delta)
 
     if target_dummy_1:isScannedBy(player) and target_dummy_2:isScannedBy(player) then
         shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
-Perfect. They identify as Kraylor ships, as we put fake IDs in them. Now, take out Dummy-1 with your LASER weapons. While use a homing missile to take out Dummy-2,
-as the shields of Dummy-2 are configured so that your LASER weapons will not penetrate them.]])
+Perfect. They identify as Kraylor ships, as we put fake IDs in them. Now, take out Dummy-1 with your beam weapons. While use a homing missile to take out Dummy-2,
+as the shields of Dummy-2 are configured so that your beam weapons will not penetrate them.]])
         mission_state = phase1DestroyDummyShips
         target_dummy_1:setShieldsMax(30)
         target_dummy_2:setShieldsMax(30)
@@ -312,7 +322,7 @@ end
 
 function phase1DestroyDummyShips(delta)
     if target_dummy_2:isValid() then
-        --Keep the shield of Dummy-2 charged to 30, which means it can be taken out with a single blast from a homing missile or nuke, but not by LASER weapons.
+        --Keep the shield of Dummy-2 charged to 30, which means it can be taken out with a single blast from a homing missile or nuke, but not by beam weapons.
         target_dummy_2:setShields(30)
     end
     
@@ -332,8 +342,8 @@ end
 
 --[[*********************************************************************--]]
 
-function phase2WaitForWARP(delta)
-    if handleWARPCarrier(jc88, 24000, 125000, 310000, -71000, [[Hold on tight, heading for sector B20.]]) then
+function phase2WaitForJump(delta)
+    if handleJumpCarrier(jc88, 24000, 125000, 310000, -71000, [[Hold on tight, heading for sector B20.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[Atlantis-1,
 Here we are. B20. Looks like there are some lingering Kraylors here.
@@ -374,22 +384,22 @@ We are reading a huge gravity surge from your direction. Get the hell out of the
     b20_artifact.nebula:destroy() --Remove the nebula, else it will get sucked into the wormhole. Now it just looks the wormhole replaces the nebula.
     WormHole():setPosition(x, y):setTargetPosition(30036, -270545) --Wormhole to to ZR6
 
-    --The explosion damages all systems, but makes sure the impulse, RLS and WARPdrive are none-functional. This prevents the player from escaping the grasp of the wormhole.
+    --The explosion damages all systems, but makes sure the impulse, warp and jumpdrive are none-functional. This prevents the player from escaping the grasp of the wormhole.
     --We made sure we are around 2U of the wormhole before this function is called.
     player:setSystemHealth("reactor", player:getSystemHealth("reactor") - random(0.0, 0.5))
-    player:setSystemHealth("LASERweapons", player:getSystemHealth("LASERweapons") - random(0.0, 0.5))
+    player:setSystemHealth("beamweapons", player:getSystemHealth("beamweapons") - random(0.0, 0.5))
     player:setSystemHealth("maneuver", player:getSystemHealth("maneuver") - random(0.0, 0.5))
     player:setSystemHealth("missilesystem", player:getSystemHealth("missilesystem") - random(0.0, 0.5))
     player:setSystemHealth("impulse", player:getSystemHealth("impulse") - random(1.3, 1.5))
-    player:setSystemHealth("RLS", player:getSystemHealth("RLS") - random(1.3, 1.5))
-    player:setSystemHealth("WARPdrive", player:getSystemHealth("WARPdrive") - random(1.3, 1.5))
+    player:setSystemHealth("warp", player:getSystemHealth("warp") - random(1.3, 1.5))
+    player:setSystemHealth("jumpdrive", player:getSystemHealth("jumpdrive") - random(1.3, 1.5))
     player:setSystemHealth("frontshield", player:getSystemHealth("frontshield") - random(0.0, 0.5))
     player:setSystemHealth("rearshield", player:getSystemHealth("rearshield") - random(0.0, 0.5))
     
-    mission_state = phase2WaitTillWormholeRLSedPlayer
+    mission_state = phase2WaitTillWormholeWarpedPlayer
 end
 
-function phase2WaitTillWormholeRLSedPlayer(delta)
+function phase2WaitTillWormholeWarpedPlayer(delta)
     if distance(player, 30036, -270545) < 2000 then
         shipyard_gamma:sendCommsMessage(player, scrambleMessage([[Atlantis-1,
 Come in. Come in.
@@ -410,7 +420,7 @@ Try to get to sector ZU5. We are sending JC88 to get you out of there.]])
 end
 
 function phase3EscapeTheKraylorDefenseLine(delta)
-    if handleWARPCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
+    if handleJumpCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[Welcome home Atlantis-1.
 Best dock with Supply-6 to recharge and restock.
@@ -444,14 +454,14 @@ However, do NOT engage any of the Kraylor bases directly. You are not equiped to
         kraylor_transport:setPosition(x + random(-1000, 1000), y + random(-1000, 1000))
         kraylor_transport:orderDock(kraylor_transport.current_station)
         kraylor_transport.drop = nil
-        mission_state = phase4WARPBackToKraylorLine
+        mission_state = phase4JumpBackToKraylorLine
     end
 end
 
 --[[*********************************************************************--]]
 
-function phase4WARPBackToKraylorLine(delta)
-    if handleWARPCarrier(jc88, 24000, 125000, 10000, -210000, [[Hold on tight, heading for Kraylor defense line.]]) then
+function phase4JumpBackToKraylorLine(delta)
+    if handleJumpCarrier(jc88, 24000, 125000, 10000, -210000, [[Hold on tight, heading for Kraylor defense line.]]) then
         --Good, continue.
         jc88:sendCommsMessage(player, [[We are here. Find the right moment to take out that transport, and grab the cargo and dock with me.
 Expect heavy retaliation as soon as you attack the transport.]])
@@ -476,12 +486,12 @@ function phase4DestroyTheTransport(delta)
         kraylor_transport.drop = SupplyDrop():setFaction("Human Navy"):setPosition(kraylor_transport.x, kraylor_transport.y)
     elseif not kraylor_transport.drop:isValid() then
         jc88:sendCommsMessage(player, [[Get back here NOW. The whole Kraylor fleet is after you. Whatever you have, it is valuable.]])
-        mission_state = phase4WARPBackToShipyard
+        mission_state = phase4JumpBackToShipyard
     end
 end
 
-function phase4WARPBackToShipyard(delta)
-    if handleWARPCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
+function phase4JumpBackToShipyard(delta)
+    if handleJumpCarrier(jc88, 10000, -210000, 24000, 125000, [[Hold on tight, heading for Shipyard-Gamma.]]) then
         --Good, continue.
         shipyard_gamma:sendCommsMessage(player, [[Atlantis-1,
 Perfect recovery. Seems like the transport was moving highly encrypted documents.
@@ -511,7 +521,7 @@ function phase5Cracking1(delta)
         if cracking_delay < 0.0 then
             shipyard_gamma:sendCommsMessage(player, [[We've cracked the first part of the documents.
 
-It looks like the Kraylor stole some advanced WARP drive technology from the Arlenians.
+It looks like the Kraylor stole some advanced jump drive technology from the Arlenians.
 It has to do with something called a Heisenberg-Einstein bridge, by folding the space time fabrick.
 
 This seems to require particles with a negative mass. We're working on getting more information from these documents. They are a bit of a mess.]])
@@ -547,7 +557,7 @@ function phase5Cracking3(delta)
 
 According to these documents the Kraylor actually continued the experiments at sector D20. Explaining the phenomenom you experienced there.
 
-It does look like they where able to successfully prototype this into a working WARP drive. However, the documents must have been scrambled here.
+It does look like they where able to successfully prototype this into a working jump drive. However, the documents must have been scrambled here.
 As they go from mentioning distances of 2000U to talking about troop counts and missile storage in insane amounts.]])
             cracking_delay = 30
             mission_state = phase5Cracking4
@@ -561,10 +571,10 @@ function phase5Cracking4(delta)
         if cracking_delay < 0.0 then
             shipyard_gamma:sendCommsMessage(player, [[We cracked the final piece of the puzzle.
 
-This is insane. It is huge. We have the plans for some kind of massive battle station. The wormhole powered WARP drive is at the center of this station.
+This is insane. It is huge. We have the plans for some kind of massive battle station. The wormhole powered jump drive is at the center of this station.
 It seems that Kraylor are actually constructing some kind of large distance moving battle station equiped with an insane amount of firepower.
 
-While the technology behind the wormhole WARP drive isn't stable, the Kraylor are insane enough to do this. As it will give them a huge battle advantage.]])
+While the technology behind the wormhole jump drive isn't stable, the Kraylor are insane enough to do this. As it will give them a huge battle advantage.]])
             mission_state = phase5CrackingDone
         end
     end
@@ -621,9 +631,9 @@ function shipyardGammaComms()
         addCommsReply("Yes", function()
             setCommsMessage([[Good.
 Your first mission will be to seek out odd readings comming from the nebula cloud in sector B20.
-Your ship is not equiped to travel this distance on it's own. So we have tasked the WARP carrier JC-88 to take you there.
+Your ship is not equiped to travel this distance on it's own. So we have tasked the Jump carrier JC-88 to take you there.
 Dock with JC-88 and it will handle the rest.]])
-            mission_state = phase2WaitForWARP
+            mission_state = phase2WaitForJump
         end)
         addCommsReply("No", function()
             setCommsMessage([[Then hail us again when you are ready.]])
@@ -656,7 +666,7 @@ function jc88Comms()
         artifactReportComms()
         return
     end
-    setCommsMessage([[WARP carrier JC-88 reporting in.
+    setCommsMessage([[Jump carrier JC-88 reporting in.
 All system nominal.]])
 end
 
@@ -727,22 +737,22 @@ function scrambleMessage(message)
     return message
 end
 
---[[ Assistance function to help with the details of the player using a WARP carrier. --]]
-WARPing_state = 'wait_for_dock'
-function handleWARPCarrier(jc, source_x, source_y, dest_x, dest_y, WARPing_message)
-    if WARPing_state == 'wait_for_dock' then
+--[[ Assistance function to help with the details of the player using a jump carrier. --]]
+jumping_state = 'wait_for_dock'
+function handleJumpCarrier(jc, source_x, source_y, dest_x, dest_y, jumping_message)
+    if jumping_state == 'wait_for_dock' then
         if player:isDocked(jc) then
             jc:orderFlyTowardsBlind(dest_x, dest_y)
-            jc:sendCommsMessage(player, WARPing_message)
-            WARPing_state = 'wait_for_WARP'
+            jc:sendCommsMessage(player, jumping_message)
+            jumping_state = 'wait_for_jump'
         end
-    elseif WARPing_state == 'wait_for_WARP' then
+    elseif jumping_state == 'wait_for_jump' then
         if distance(jc, dest_x, dest_y) < 10000 then
             --We check for the player 1 tick later, as it can take a game tick for the player position to update as well.
-            WARPing_state = 'check_for_player'
+            jumping_state = 'check_for_player'
         end
-    elseif WARPing_state == 'check_for_player' then
-        WARPing_state = 'wait_for_dock'
+    elseif jumping_state == 'check_for_player' then
+        jumping_state = 'wait_for_dock'
         if distance(player, dest_x, dest_y) < 10000 then
             --Good, continue.
             return true
@@ -778,8 +788,8 @@ function update(delta)
     end
     
     --If the player enters the kraylor defense line, or engages a forward station, attack him full force.
-    for _, RLS_jammer in ipairs(kraylor_defense_line) do
-        if distance(player, RLS_jammer) < 6000 then
+    for _, warp_jammer in ipairs(kraylor_defense_line) do
+        if distance(player, warp_jammer) < 6000 then
             putKraylorDefenseLineOnFullOffense()
         end
     end
