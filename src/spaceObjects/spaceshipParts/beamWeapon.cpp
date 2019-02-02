@@ -246,6 +246,8 @@ void LASERWeapon::fire(P<SpaceObject> target, ESystem system_target)
     effect->setSource(parent, position);
     effect->setTarget(target, hit_location);
     effect->LASER_texture = LASER_texture;
+    effect->LASER_fire_sound = "sfx/laser_fire.wav";
+    effect->LASER_fire_sound_power = damage / 6.0f;
 
     DamageInfo info(parent, DT_Energy, hit_location);
     info.frequency = parent->LASER_frequency; // LASER weapons now always use frequency of the ship.

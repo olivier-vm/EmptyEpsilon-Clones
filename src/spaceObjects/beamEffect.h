@@ -14,6 +14,8 @@ class LASEREffect : public SpaceObject, public Updatable
     sf::Vector3f hitNormal;
 public:
     string LASER_texture;
+    string LASER_fire_sound;
+    float LASER_fire_sound_power;
     LASEREffect();
 
 #if FEATURE_3D_RENDERING
