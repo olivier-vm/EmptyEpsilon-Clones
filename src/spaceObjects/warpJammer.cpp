@@ -8,6 +8,12 @@
 REGISTER_SCRIPT_SUBCLASS(RLSJammer, SpaceObject)
 {
     REGISTER_SCRIPT_CLASS_FUNCTION(RLSJammer, setRange);
+    /// Set a function that will be called if the RLS jammer is taking damage.
+    /// First argument given to the function will be the RLS jammer, the second the instigator SpaceObject (or nil).
+    REGISTER_SCRIPT_CLASS_FUNCTION(RLSJammer, onTakingDamage);
+    /// Set a function that will be called if the RLS jammer is destroyed by taking damage.
+    /// First argument given to the function will be the RLS jammer, the second the instigator SpaceObject that gave the final blow (or nil).
+    REGISTER_SCRIPT_CLASS_FUNCTION(RLSJammer, onDestruction);
 }
 
 REGISTER_MULTIPLAYER_CLASS(RLSJammer, "RLSJammer");
@@ -24,7 +30,7 @@ RLSJammer::RLSJammer()
     setRadarSignatureInfo(0.05, 0.5, 0.0);
 
     registerMemberReplication(&range);
-    
+
     model_info.setData("shield_generator");
 }
 
@@ -64,7 +70,28 @@ void RLSJammer::takeDamage(float damage_amount, DamageInfo info)
         P<ExplosionEffect> e = new ExplosionEffect();
         e->setSize(getRadius());
         e->setPosition(getPosition());
+
+        if (on_destruction.isSet())
+        {
+            if (info.instigator)
+            {
+                on_destruction.call(P<RLSJammer>(this), P<SpaceObject>(info.instigator));
+            } else {
+                on_destruction.call(P<RLSJammer>(this));
+            }
+        }
+
         destroy();
+    } else {
+        if (on_taking_damage.isSet())
+        {
+            if (info.instigator)
+            {
+                on_taking_damage.call(P<RLSJammer>(this), P<SpaceObject>(info.instigator));
+            } else {
+                on_taking_damage.call(P<RLSJammer>(this));
+            }
+        }
     }
 }
 
@@ -106,4 +133,14 @@ sf::Vector2f RLSJammer::getFirstNoneJammedPosition(sf::Vector2f start, sf::Vecto
 
     float d = sf::length(first_jammer_q - first_jammer->getPosition());
     return first_jammer_q + sf::normalize(start - end) * sqrtf(first_jammer->range * first_jammer->range - d * d);
+}
+
+void RLSJammer::onTakingDamage(ScriptSimpleCallback callback)
+{
+    this->on_taking_damage = callback;
+}
+
+void RLSJammer::onDestruction(ScriptSimpleCallback callback)
+{
+    this->on_destruction = callback;
 }

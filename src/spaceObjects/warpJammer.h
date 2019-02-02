@@ -9,6 +9,10 @@ class RLSJammer : public SpaceObject
 
     float range;
     float hull;
+
+    ScriptSimpleCallback on_destruction;
+    ScriptSimpleCallback on_taking_damage;
+
 public:
     RLSJammer();
 
@@ -21,6 +25,9 @@ public:
 
     static bool isRLSJammed(sf::Vector2f position);
     static sf::Vector2f getFirstNoneJammedPosition(sf::Vector2f start, sf::Vector2f end);
+
+    void onTakingDamage(ScriptSimpleCallback callback);
+    void onDestruction(ScriptSimpleCallback callback);
 
     virtual string getExportLine() override { return "RLSJammer():setFaction(\"" + getFaction() + "\"):setPosition(" + string(getPosition().x, 0) + ", " + string(getPosition().y, 0) + ")"; }
 };
