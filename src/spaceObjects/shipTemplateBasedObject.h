@@ -30,6 +30,9 @@ public:
 
     bool shares_energy_with_docked;       //[config]
     bool repair_docked;                   //[config]
+
+    ScriptSimpleCallback on_destruction;
+    ScriptSimpleCallback on_taking_damage;
 public:
     ShipTemplateBasedObject(float collision_range, string multiplayer_name, float multiplayer_significant_range=-1);
 
