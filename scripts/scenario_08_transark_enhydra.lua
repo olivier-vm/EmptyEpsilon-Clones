@@ -21,8 +21,8 @@ Rundown of the mission:
 * You first mission will be to investigate a strange signal from a nebula.
 * As the nebula is in the outer space regions, you'll have you use a WARP carrier.
 * The WARP carrier delivers you to the edge of a nebulea cloud. There are a few Insurges ships here for you to fight.
-* The objective is to find an artifact within the nebulea, and scan it. This is a tough scan (lvl3)
-* In these nebulea, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artefacts that are not the source of the signal.
+* The objective is to find an artifact within the nebulea, and scan it. This is a tough scan (level 3)
+* In these nebulea, you can also encounter ghost ships. Which are just lost single ships. As well as two "dud" artifacts that are not the source of the signal.
 * When you scan the proper artifact, it gives you 4 readings in the description. Relay needs to pass these readings to the JC-88 or Shipyard before the mission continues.
 * When this is done, the artifact becomes unstable, and becomes a wormhole that sucks in the player.
 ==Phase 3: Lost in enemy space...
@@ -58,6 +58,7 @@ function init()
 	shipyard_gamma = SpaceStation():setTemplate("Medium Station"):setFaction("Transark"):setCallSign("Spatiodock Gamma"):setPosition(25276, 134550)
 	shipyard_gamma:setCommsFunction(shipyardGammaComms)
 	player:commandDock(shipyard_gamma)
+		player:addReputationPoints(5)	--initial reputation
 	supply_station_6 = SpaceStation():setTemplate("Small Station"):setFaction("Transark"):setCallSign("Supply-6"):setPosition(14491, 126412)
 	supply_station_6.comms_data = { --Do not allow supply drops or reinforcements from the supply station.
 		services = {
@@ -345,6 +346,7 @@ Bien, nous voyons que tous vos sytemes sont operationnels. Vous pouvez vous decr
 Foncez au secteur K6, il y a un largage provenant du transporteur F-1. Ramassez-le pour faire le plein de missiles.]])
 	supply_drop = SupplyDrop():setFaction("Transark"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)
 	transport_f1:orderDock(supply_station_6)
+		player:addReputationPoints(5)
 	mission_state = phase1WaitForSupplyPickup
 end
 
@@ -362,6 +364,7 @@ Il y a deux vaisseaux factices dans vos environs proches.
 Avant de tester votre systeme d'armement, nous allons d'abord identifier les vaisseaux pour etre certains de ne pas detruire un vaisseau allie.
 Demandez a votre operateur "Sciences/Radar" de scanner les vaisseaux Factice-1 et Factice-2 pour les identifier correctement.]])
 		mission_state = phase1ScanDummyShips
+			player:addReputationPoints(5)
 	end
 end
 
@@ -378,6 +381,7 @@ Et utilisez un missile a autoguidage pour aneantir "Factice-2" (ses boucliers so
 		mission_state = phase1DestroyDummyShips
 		target_dummy_1:setShieldsMax(30)
 		target_dummy_2:setShieldsMax(30)
+			player:addReputationPoints(5)
 	end
 end
 
@@ -395,6 +399,7 @@ Maintenant, lorsque vous etes prets pour une premiere mission d'essai, contactez
 
 (Arrimez-vous a au Spatiodock Supply-6 quand vous en avez besoin pour refaire le plein)]])
 		mission_state = phase1WaitForContact
+			player:addReputationPoints(5)
 	end
 end
 
@@ -422,6 +427,7 @@ end
 function phase2SeekArtifact(delta)
 	if b20_artifact:isScannedBy(player) then
 		mission_state = phase2ReportArtifactReadings
+			player:addReputationPoints(5)
 	end
 end
 
@@ -448,10 +454,10 @@ function phase2SpawnWormhole(delta)
 	Nous detectons un enorme afflux gravitationnel allant dans votre direction. Fichez-le camps d'ici.]])
 		x, y = b20_artifact:getPosition()
 		b20_artifact:explode()
-		b20_artifact.nebula:destroy() --Remove the nebula, else it will get sucked into the wormhole. Now it just looks the wormhole replaces the nebula.
+		b20_artifact.nebula:destroy() --Remove the nebula, else it will get sucked into the wormhole. Now it just looks like the wormhole replaces the nebula.
 		WormHole():setPosition(x, y):setTargetPosition(30036, -270545) --Wormhole to to ZR6
 	end
-	--The explosion damages all systems, but makes sure the impulse, RLS and WARPdrive are none-functional. This prevents the player from escaping the grasp of the wormhole.
+	--The explosion damages all systems, but makes sure the impulse, RLS and WARPdrive are non-functional. This prevents the player from escaping the grasp of the wormhole.
 	--We made sure we are around 2U of the wormhole before this function is called.
 	if puitGravitationnelActive then
 		moteursEnRade()
@@ -472,16 +478,24 @@ end
 --[[*********************************************************************--]]
 
 function phase3FindHoleInTheInsurgesDefenseLine(delta)
-	if distance(player, -5000, -260000) < 10000 then
-		shipyard_gamma:sendCommsMessage(player, [[Enfin Enhydra-1,
+	px, py = player:getPosition()
+	if distance(player, -5000, -260000) < 10000 or py > -248000 or px > 75000 then
+		if py > -248000 or px > 75000 then
+			shipyard_gamma:sendCommsMessage(player, [[Enfin Atlantis-1,
+nous pensions vous avoir perdu. Vous n'etes pas encore sorti de la melasse.
+Essayez d'atteindre le secteur ZU5. Nous vous envoyons "JC-88" pour vous sortir de la.]])
+		else
+			shipyard_gamma:sendCommsMessage(player, [[Enfin Atlantis-1,
 nous pensions vous avoir perdu. Vous n'etes pas encore sorti de la melasse.
 Cherchez apres une faille au-travers des defenses des Insurges.
 Essayez d'atteindre le secteur ZU5. Nous vous envoyons "JC-88" pour vous sortir de la.
 
 Les insurges semblent utiliser des brouilleurs RLS. Il est possible que vos moteurs RLS restent en rade dans cette zone.
 ]])
+		end
 		jc88:orderFlyTowardsBlind(10000, -210000)
 		mission_state = phase3EscapeTheInsurgesDefenseLine
+			player:addReputationPoints(5)
 	end
 	--RLS jammer: RLS en permanence sans puissance et a niveau de sante proche de 0, mais le moteur a impulsion fonctionne
 	moteurRLSJammed()
@@ -494,6 +508,7 @@ function phase3EscapeTheInsurgesDefenseLine(delta)
 Le mieux est de vous accrocher a "Supply-6" pour refaire le plein.
 Ensuite, faites un rapport de mission aupres du Spatiodock Gamma.]])
 		mission_state = phase3ReportBackToShipyard
+			player:addReputationPoints(5)
 	end
 end
 
@@ -560,6 +575,7 @@ function phase4DestroyTheTransport(delta)
 	elseif not insurges_transport.drop:isValid() then
 		jc88:sendCommsMessage(player, [[Revenez ici MAINTENANT. Toute la flotte d'Insurges colle a vos basques. Quoique vous ayez, cela nous sera utile.]])
 		mission_state = phase4WARPBackToShipyard
+			player:addReputationPoints(5)
 	end
 end
 
@@ -575,6 +591,7 @@ Appontez sur notre station. Nous allons mettre nos specialistes d'Intricomm et d
 		end
 
 		mission_state = phase5DockWithShipyard
+			player:addReputationPoints(5)
 	end
 end
 
@@ -658,7 +675,7 @@ end
 
 function phase5CrackingDone(delta)
 	if player:isCommsInactive() then
-		shipyard_gamma:sendCommsMessage(player, [[Nous detectons un afflux de puissance... C'EST LA STATION DE COMBAT !
+		shipyard_gamma:sendCommsMessage(player, [[Nous detectons un afflux de puissance... C ' E S T   L A   S T A T I O N   D E   C O M B A T   !
 
 Stoppez vos activites! Retraite! A toutes les statiosn, evacuez au plus vite! Sauvez ce que vous pouvez!]])
 		odin = CpuShip():setFaction("Insurges"):setTemplate("Odin"):setCallSign("Odin"):setScanned(true):setPosition(26900, 132872):orderAttack(shipyard_gamma)
@@ -671,6 +688,7 @@ end
 function phase5OdinAttack(delta)
 	-- Soit Odin est mort (mais bon j'y crois pas trop)
 	if not odin:isValid() then	--WTF man, you get bonus points for this.
+			globalMessage("La station de combat a été détruite... Incroyable!")
 		victory("Transark")
 		return
 	end
@@ -683,18 +701,22 @@ function phase5OdinAttack(delta)
 	if not odin.target:isValid() then
 		if shipyard_gamma:isValid() then
 			odin.target = shipyard_gamma
+				player:addReputationPoints(5)
 		elseif supply_station_6:isValid() then
 			odin.target = supply_station_6
+				player:addReputationPoints(5)
 		elseif jc88:isValid() then
 			odin.target = jc88
+				player:addReputationPoints(5)
 		elseif player:isValid() then
 			odin.target = player
+				player:addReputationPoints(5)
 		end
 	-- Tant qu'a faire, autant se teleporter pres de sa victime, qui ne sait pas encore qu'elle va mourir
 		if odin.target:isValid() then
 			odin:orderAttack(odin.target)
 			local x, y = odin.target:getPosition()
-			odin:setPosition(x + random(2000, 2000), y + random(2000, 2000))
+			odin:setPosition(x + random(-2000, 2000), y + random(-2000, 2000))
 		end
 	end
 end
