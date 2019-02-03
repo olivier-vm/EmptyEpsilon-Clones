@@ -32,7 +32,7 @@ void BlackHole::draw3DTransparent()
     (void)distance; //to avoid unused variable warning
 
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ShaderManager::getShader("billboardShader")->setParameter("textureMap", *textureManager.getTexture("blackHole3d.png"));
+    ShaderManager::getShader("billboardShader")->setUniform("textureMap", *textureManager.getTexture("blackHole3d.png"));
     sf::Shader::bind(ShaderManager::getShader("billboardShader"));
     glColor4f(1, 1, 1, 5000.0);
     glBegin(GL_QUADS);
