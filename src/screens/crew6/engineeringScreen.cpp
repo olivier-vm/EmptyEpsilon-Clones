@@ -115,8 +115,10 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, ECrewPosition crew_pos
     box->setPosition(0, 0, ABottomRight)->setSize(270, 400);
     power_label = new GuiLabel(box, "POWER_LABEL", "Puissance", 30);
     power_label->setVertical()->setAlignment(ACenterLeft)->setPosition(20, 20, ATopLeft)->setSize(30, 360);
-    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Liquide de refroidissement", 30);
+    coolant_label = new GuiLabel(box, "COOLANT_LABEL", "Refrigerant", 30);
     coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(110, 20, ATopLeft)->setSize(30, 360);
+    total_coolant_label = new GuiLabel(box, "TOTAL_COOLANT_LABEL", "Refrigerant Total", 30);
+    total_coolant_label->setVertical()->setAlignment(ACenterLeft)->setPosition(200, 20, ATopLeft)->setSize(30, 360);
 
     power_slider = new GuiSlider(box, "POWER_SLIDER", 3.0, 0.0, 1.0, [this](float value) {
         if (my_spaceship && selected_system != SYS_None)
@@ -179,6 +181,7 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
         front_shield_display->setValue(string(my_spaceship->getShieldPercentage(0)) + "%");
         rear_shield_display->setValue(string(my_spaceship->getShieldPercentage(1)) + "%");
 
+        float total_coolant = 0.0f;
         for(int n=0; n<SYS_COUNT; n++)
         {
             SystemRow info = system_rows[n];
@@ -207,13 +210,19 @@ void EngineeringScreen::onDraw(sf::RenderTarget& window)
 
             info.power_bar->setValue(my_spaceship->systems[n].power_level);
             info.coolant_bar->setValue(my_spaceship->systems[n].coolant_level);
+
+            total_coolant += my_spaceship->systems[n].coolant_level;
         }
+
+        total_coolant_label->setText("Refrigerant Total: " + string(int(total_coolant / PlayerSpaceship::max_coolant_per_system * 100)) + "/" + string(int(my_spaceship->max_coolant / PlayerSpaceship::max_coolant_per_system * 100)));
+
         if (selected_system != SYS_None)
         {
             ShipSystem& system = my_spaceship->systems[selected_system];
             power_label->setText("Puissance: " + string(int(system.power_level * 100)) + "%/" + string(int(system.power_request * 100)) + "%");
-            coolant_label->setText("Liquide de refroidissement: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant * 100)) + "%/" + string(int(system.coolant_request / PlayerSpaceship::max_coolant * 100)) + "%");
+            coolant_label->setText("Refrigerant: " + string(int(system.coolant_level / PlayerSpaceship::max_coolant_per_system * 100)) + "/" + string(int(std::min(system.coolant_request, my_spaceship->max_coolant) / PlayerSpaceship::max_coolant_per_system * 100)));
             coolant_slider->setEnable(!my_spaceship->auto_coolant_enabled);
+            coolant_slider->setValue(std::min(system.coolant_request, my_spaceship->max_coolant));
 
             system_effects_index = 0;
             float effectiveness = my_spaceship->getSystemEffectiveness(selected_system);
