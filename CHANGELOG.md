@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+### Added
+
+- Mission scripts can modify the total coolant available to engineering
+
+### Changed
+
 - Nothing
 
 ## [2018-02-15]
@@ -92,7 +98,7 @@
 - Spelling on _Birth of the Atlantis_ scenario.
 - `TOGGLE_AIM_LOCK` will only work if button state is properly set.
 
-## [2017-05-06] 
+## [2017-05-06]
 
 ### Added
 
@@ -409,7 +415,7 @@
     - Beam weapon and engine emitter positions on some models
     - Extra set of 3d models for use as frigates
 - Headless server options
-- Allow tweaking weapon tube details and availability at load time 
+- Allow tweaking weapon tube details and availability at load time
 - Allow game master to change a ship's callsign
 
 ### Changed
