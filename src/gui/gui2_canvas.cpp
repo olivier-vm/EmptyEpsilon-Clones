@@ -17,14 +17,14 @@ void GuiCanvas::render(sf::RenderTarget& window)
 {
     sf::Vector2f window_size = window.getView().getSize();
     sf::FloatRect window_rect(0, 0, window_size.x, window_size.y);
-    
+
     sf::Vector2f mouse_position = InputHandler::getMousePos();
     sf::Vector2f joystick_xy_position = InputHandler::getJoysticXYPos();
     float joystick_z_position = InputHandler::getJoysticZPos();
     float joystick_r_position = InputHandler::getJoysticRPos();
-    
+
     drawElements(window_rect, window);
-    
+
     if (enable_debug_rendering)
     {
         drawDebugElements(window_rect, window);
@@ -35,11 +35,7 @@ void GuiCanvas::render(sf::RenderTarget& window)
         click_element = getClickElement(mouse_position);
         if (!click_element)
             onClick(mouse_position);
-        if (focus_element)
-            focus_element->focus = false;
-        focus_element = click_element;
-        if (focus_element)
-            focus_element->focus = true;
+        focus(click_element);
     }
     if (InputHandler::mouseIsDown(sf::Mouse::Left) || InputHandler::mouseIsDown(sf::Mouse::Right) || InputHandler::mouseIsDown(sf::Mouse::Middle))
     {
@@ -55,16 +51,16 @@ void GuiCanvas::render(sf::RenderTarget& window)
             click_element = nullptr;
         }
     }
-    
+
     if (joystick_xy_position != previous_joystick_xy_position)
         forwardJoystickXYMoveToElements(joystick_xy_position);
-        
+
     if (joystick_z_position != previous_joystick_z_position)
         forwardJoystickZMoveToElements(joystick_z_position);
-        
+
     if (joystick_r_position != previous_joystick_r_position)
         forwardJoystickRMoveToElements(joystick_r_position);
-    
+
     previous_joystick_xy_position = joystick_xy_position;
     previous_joystick_z_position = joystick_z_position;
     previous_joystick_r_position = joystick_r_position;
@@ -95,6 +91,15 @@ void GuiCanvas::onHotkey(const HotkeyResult& key)
 
 void GuiCanvas::onKey(sf::Event::KeyEvent key, int unicode)
 {
+}
+
+void GuiCanvas::focus(GuiElement* element)
+{
+    if (focus_element)
+        focus_element->focus = false;
+    focus_element = element;
+    if (focus_element)
+        focus_element->focus = true;
 }
 
 void GuiCanvas::unfocusElementTree(GuiElement* element)
