@@ -47,8 +47,10 @@ GuiRLSControls::GuiRLSControls(GuiContainer* owner, string id)
 void GuiRLSControls::onDraw(sf::RenderTarget& window)
 {
     // Update the label with the current RLS factor.
-    if (my_spaceship)
+    if (my_spaceship) {
         label->setValue(string(my_spaceship->current_RLS, 1));
+        slider->setValue(my_spaceship->RLS_request);
+    }
 }
 
 void GuiRLSControls::onHotkey(const HotkeyResult& key)
