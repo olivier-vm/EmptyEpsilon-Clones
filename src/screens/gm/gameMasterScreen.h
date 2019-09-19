@@ -2,6 +2,8 @@
 #define GAME_MASTER_SCREEN_H
 
 #include "engine.h"
+#include "gui/gui2_panel.h"
+#include "gui/gui2_scrolltext.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_overlay.h"
 #include "screenComponents/targetsContainer.h"
@@ -52,6 +54,10 @@ private:
     GuiSelector* player_ship_selector;
     GuiSelector* CPU_ship_selector;
     GuiSelector* space_station_selector;
+
+    GuiPanel* message_frame;
+    GuiScrollText* message_text;
+    GuiButton* message_close_button;
 
     enum EClickAndDragState
     {
