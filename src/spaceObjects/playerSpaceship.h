@@ -198,6 +198,7 @@ public:
     int getLASERFrequency(){ return LASER_frequency; }
     ESystem getLASERSystemTarget(){ return LASER_system_target; }
 
+    string getLASERSystemTargetName(){ return getSystemName(LASER_system_target); }
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);

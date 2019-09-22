@@ -70,6 +70,8 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
 
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLASERFrequency);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLASERSystemTarget);
+    /// Gets the name of the target system, instead of the ID
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLASERSystemTargetName);
 
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
