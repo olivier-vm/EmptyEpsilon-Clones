@@ -27,6 +27,8 @@ ServerCreationScreen::ServerCreationScreen()
     gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(PreferencesManager::get("server_config_RLS_WARP_drive_setting", "0").toInt());
     gameGlobalInfo->long_range_radar_range = PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt();
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
+    gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
+    gameGlobalInfo->hacking_games = EHackingGames(PreferencesManager::get("server_config_hacking_games", "2").toInt());
     gameGlobalInfo->use_LASER_shield_frequencies = PreferencesManager::get("server_config_use_LASER_shield_frequencies", "1").toInt();
     gameGlobalInfo->use_system_damage = PreferencesManager::get("server_config_use_system_damage", "1").toInt();
     gameGlobalInfo->allow_main_screen_tactical_radar = PreferencesManager::get("server_config_allow_main_screen_tactical_radar", "1").toInt();
@@ -119,6 +121,22 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiSelector(row, "GAME_SCANNING_COMPLEXITY", [](int index, string value) {
         gameGlobalInfo->scanning_complexity = EScanningComplexity(index);
     }))->setOptions({"Rien (delais)", "Simple", "Normal", "Avance"})->setSelectionIndex((int)gameGlobalInfo->scanning_complexity)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Hacking difficulty selector.
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", "Difficulte Hacking: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
+        gameGlobalInfo->hacking_difficulty = index;
+    }))->setOptions({"Simple", "Normal", "Difficile", "Diabolique"})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    // Hacking games selector.
+    row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
+    row->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiLabel(row, "GAME_HACKING_GAMES_LABEL", "Type de Hacking: ", 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiSelector(row, "GAME_HACKING_GAME", [](int index, string value) {
+        gameGlobalInfo->hacking_games = EHackingGames(index);
+    }))->setOptions({"Mine", "Lumieres", "Tous"})->setSelectionIndex((int)gameGlobalInfo->hacking_games)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Frequency and system damage row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
