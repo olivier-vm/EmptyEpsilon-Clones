@@ -4,6 +4,14 @@
 #include "mesh.h"
 #include "main.h"
 
+/// LASEREffect is a LASER weapon fire effect that will fade after 1 seond
+/// Example: LASEREffect():setSource(player):setTarget(enemy_ship)
+REGISTER_SCRIPT_SUBCLASS(LASEREffect, SpaceObject)
+{
+    REGISTER_SCRIPT_CLASS_FUNCTION(LASEREffect, setSource);
+    REGISTER_SCRIPT_CLASS_FUNCTION(LASEREffect, setTarget);
+}
+
 REGISTER_MULTIPLAYER_CLASS(LASEREffect, "LASEREffect");
 LASEREffect::LASEREffect()
 : SpaceObject(1000, "LASEREffect")
