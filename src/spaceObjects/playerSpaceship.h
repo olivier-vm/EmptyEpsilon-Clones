@@ -195,6 +195,9 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
+    int getLASERFrequency(){ return LASER_frequency; }
+    ESystem getLASERSystemTarget(){ return LASER_system_target; }
+
     // Client command functions
     virtual void onReceiveClientCommand(int32_t client_id, sf::Packet& packet) override;
     void commandTargetRotation(float target);

@@ -68,6 +68,9 @@ REGISTER_SCRIPT_SUBCLASS(PlayerSpaceship, SpaceShip)
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, addCustomMessageWithCallback);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, removeCustom);
 
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLASERFrequency);
+    REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, getLASERSystemTarget);
+
     // Command functions
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandTargetRotation);
     REGISTER_SCRIPT_CLASS_FUNCTION(PlayerSpaceship, commandImpulse);
