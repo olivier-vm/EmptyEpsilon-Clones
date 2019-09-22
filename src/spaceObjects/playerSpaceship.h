@@ -195,7 +195,6 @@ public:
     void addCustomMessageWithCallback(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void removeCustom(string name);
 
-    int getLASERFrequency(){ return LASER_frequency; }
     ESystem getLASERSystemTarget(){ return LASER_system_target; }
 
     string getLASERSystemTargetName(){ return getSystemName(LASER_system_target); }

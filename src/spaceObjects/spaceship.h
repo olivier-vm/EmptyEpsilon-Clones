@@ -327,7 +327,7 @@ public:
     float getLASERWeaponDirection(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getDirection(); }
     float getLASERWeaponRange(int index) { if (index < 0 || index >= max_LASER_weapons) return 0.0; return LASER_weapons[index].getRange(); }
 
-    float getLASERWeaponTurretArc(int index) 
+    float getLASERWeaponTurretArc(int index)
     {
         if (index < 0 || index >= max_LASER_weapons)
             return 0.0;
@@ -355,6 +355,8 @@ public:
 
     int getShieldsFrequency(void){ return shield_frequency; }
     void setShieldsFrequency(float freq) { if ((freq > SpaceShip::max_frequency) || (freq < 0)) return; shield_frequency = freq;}
+
+    int getLASERFrequency(){ return LASER_frequency; }
 
     void setLASERWeapon(int index, float arc, float direction, float range, float cycle_time, float damage)
     {
