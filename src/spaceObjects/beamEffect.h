@@ -13,6 +13,7 @@ class LASEREffect : public SpaceObject, public Updatable
     sf::Vector2f targetLocation;
     sf::Vector3f hitNormal;
 public:
+    bool fire_ring;
     string LASER_texture;
     string LASER_fire_sound;
     float LASER_fire_sound_power;
@@ -34,6 +35,7 @@ public:
     void setLASERFireSoundPower(float power) {this->LASER_fire_sound_power = power;}
     ///Control Duration of the LASER. Default is 1 second
     void setDuration(float duration) {this->lifetime = duration;}
+    void setRing(bool ring) {this->fire_ring = ring;}
 };
 
 #endif//BEAM_EFFECT_H
