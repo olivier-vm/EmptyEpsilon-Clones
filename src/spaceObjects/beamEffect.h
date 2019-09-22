@@ -26,11 +26,11 @@ public:
     void setSource(P<SpaceObject> source, sf::Vector3f offset);
     void setTarget(P<SpaceObject> target, sf::Vector2f hitLocation);
 
-    ///Set the texture used for this LASER. Options available by default take the form LASER_color.png
+    ///Set the texture used for this LASER. Default is beam_orange.png
     void setTexture(string texture) {this->LASER_texture = texture;}
-    ///Set the sound played when firing the LASER. Included laser sound is laser.wav
+    ///Set the sound played when firing the LASER. Default firing sound is sfx/laser_fire.wav
     void setLASERFireSound(string sound) {this->LASER_fire_sound = sound;}
-    ///Control volume and pitch of firing sound
+    ///Control volume and pitch of firing sound. Default is 1.0, ships use LASER damage/6
     void setLASERFireSoundPower(float power) {this->LASER_fire_sound_power = power;}
     ///Control Duration of the LASER. Default is 1 second
     void setDuration(float duration) {this->lifetime = duration;}
