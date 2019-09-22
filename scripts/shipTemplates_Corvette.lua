@@ -1,7 +1,7 @@
 --[[				  Corvette
 Corvettes are the common large ships. Larger then a frigate, smaller then a dreadnaught.
 They generally have 4 or more shield sections. Run with a crew of 20 to 250.
-This class generally has WARPdrives or RLSdrives. But lack the manouverbility that is seen in frigates.
+This class generally has WARPdrives or RLSdrives. But lack the maneuverability that is seen in frigates.
 
 They come in 3 different subclasses:
 * Destroyer: Combat oriented ships. No science, no transport. Just death in a large package.
@@ -595,9 +595,8 @@ template:setShields(50, 50)
 template:setSpeed(50, 6, 10)
 template:setRadarTrace("radar_transport.png")
 template:setWARPDrive(true)
-template:setWARPDriveRange(5000, 100 * 50000) --The WARP carrier can WARP a 100x longer distance then normal WARP drives.
+template:setWARPDriveRange(5000, 100 * 50000) -- The WARP carrier can WARP a 100x longer distance then normal WARP drives.
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
---template:setSharesEnergyWithDocked(true)
 
  variation = template:copy("Benedict"):setType("playership"):setClass("Corvette","Freighter/Carrier")
  variation:setDescription("Le Benedict (concept experimental) est une version amelioree du transporteur WARP")
