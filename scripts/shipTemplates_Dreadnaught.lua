@@ -22,7 +22,7 @@ template:setTubes(16, 3.0)
 template:setWeaponStorage("Homing", 1000)
 for n=0,15 do
     template:setLASERWeapon(n, 90,  n * 22.5, 3200, 3, 10)
-    template:setTubeDirection(n, n * 22.5
+    template:setTubeDirection(n, n * 22.5)
     template:setTubeSize(0, "large")
 end
 template:setHull(2000)
