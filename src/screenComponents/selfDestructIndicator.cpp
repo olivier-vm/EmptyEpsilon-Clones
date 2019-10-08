@@ -29,12 +29,18 @@ void GuiSelfDestructIndicator::onDraw(sf::RenderTarget& window)
             for(int n=0; n<PlayerSpaceship::max_self_destruct_codes; n++)
                 if (!my_spaceship->self_destruct_code_confirmed[n])
                     todo++;
-            label->setText("Waiting for autorization input: " + string(todo) + " left");
+            label->setText("En attente d'autorisation: " + string(todo) + " restant(s)");
         }else{
             if (my_spaceship->self_destruct_countdown <= 3.0f)
-                label->setText("Have a nice day.");
+            {
+                label->setText("Bonne journee.");
+            }
             else
-                label->setText("This ship will self-destruct in exactly 10 seconds.");
+            {
+                char buffer[46];
+                snprintf(buffer, 46, "Ce vaisseau va s'autodetruire dans %.0f secondes.", my_spaceship->self_destruct_countdown);
+                label->setText(buffer);
+            }
         }
     }else{
         box->hide();

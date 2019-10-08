@@ -536,10 +536,10 @@ void PlayerSpaceship::update(float delta)
                     if (!self_destruct_code_confirmed[n])
                         do_self_destruct = false;
 
-                // Then start and announce the 10-second countdown.
+                // Then start and announce the countdown.
                 if (do_self_destruct)
                 {
-                    self_destruct_countdown = 10.0f;
+                    self_destruct_countdown = PreferencesManager::get("self_destruct_countdown", "10").toFloat();
                     playSoundOnMainScreen("vocal_self_destruction.wav");
                 }
             }else{
