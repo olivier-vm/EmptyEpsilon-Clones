@@ -5,6 +5,7 @@
 #include "explosionEffect.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 #include "scriptInterface.h"
 
