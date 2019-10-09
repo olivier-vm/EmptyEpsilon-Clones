@@ -28,7 +28,7 @@ cd "${EE_BUILD_EE_PATH}"
 git checkout variant/garou
 
 cd "${EE_BUILD_HOME}"
-cmake "${EE_BUILD_EE_PATH}/CMakeLists.txt" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
+cmake "${EE_BUILD_EE_PATH}/CMakeLists.txt" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/" -DCPACK_PACKAGE_VERSION_MAJOR="201910"
 cd "${EE_BUILD_EE_PATH}"
 make -j > "${EE_BUILD_HOME}/compile.log"
 make -j install >> "${EE_BUILD_HOME}/compile.log"
