@@ -49,5 +49,5 @@ if [ ! -d _build_win32 ]; then
 fi
 cd _build_win32
 
-cmake .. -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
+cmake .. -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/" -DCPACK_PACKAGE_VERSION_MAJOR="201910"
 make -j 12 package
