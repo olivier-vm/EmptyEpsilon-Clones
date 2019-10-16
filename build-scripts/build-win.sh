@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script to buil (under Debian) EE Garou Clone variant for Microsoft Windows
+# Script to build (under Debian) EE Garou Clone variant for Microsoft Windows
 
 # Install needed packages if not installed
 sudo apt install mingw-w64 cmake
@@ -49,5 +49,5 @@ if [ ! -d _build_win32 ]; then
 fi
 cd _build_win32
 
-cmake .. -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/" -DCPACK_PACKAGE_VERSION_MAJOR="201910"
+cmake .. -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
 make -j 12 package
