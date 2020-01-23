@@ -135,6 +135,8 @@ public:
     int scan_probe_stock;
     float scan_probe_recharge;
 
+    ScriptSimpleCallback on_probe_launch;
+
     // Main screen content
     EMainScreenSetting main_screen_setting;
     // Content overlaid on the main screen, such as comms
@@ -188,6 +190,8 @@ public:
     int getScanProbeCount() { return scan_probe_stock; }
     void setMaxScanProbeCount(int amount) { max_scan_probes = std::max(0, amount); scan_probe_stock = std::min(scan_probe_stock, max_scan_probes); }
     int getMaxScanProbeCount() { return max_scan_probes; }
+
+    void onProbeLaunch(ScriptSimpleCallback callback);
 
     void addCustomButton(ECrewPosition position, string name, string caption, ScriptSimpleCallback callback);
     void addCustomInfo(ECrewPosition position, string name, string caption);
