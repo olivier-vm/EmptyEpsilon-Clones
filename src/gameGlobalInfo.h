@@ -123,5 +123,6 @@ string playerRLSWARPDriveToString(EPlayerRLSWARPDrive player_RLS_WARP_drive);
 string getSectorName(sf::Vector2f position);
 
 REGISTER_MULTIPLAYER_ENUM(EScanningComplexity);
+REGISTER_MULTIPLAYER_ENUM(EHackingGames);
 
 #endif//GAME_GLOBAL_INFO_H
