@@ -44,7 +44,7 @@ LASEREffect::LASEREffect()
 
 }
 
-BeamEffect::~BeamEffect()
+LASEREffect::~LASEREffect()
 {
 }
 
