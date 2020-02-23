@@ -297,20 +297,20 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
 
         // ... adjust the electrical band if system power allocation is not
         // 100%.
-        if (ship_system == SYS_JumpDrive && jump_drive_charge < jump_drive_max_distance)
+        if (ship_system == SYS_WARPDrive && WARP_drive_charge < WARP_drive_max_distance)
         {
-            // ... elevate electrical after a jump, since recharging jump
+            // ... elevate electrical after a WARP, since recharging WARP
             // consumes energy.
             signature_delta.electrical += std::max(
                 0.0f,
                 std::min(
                     1.0f,
-                    getSystemPower(ship_system) * (jump_drive_charge + 0.01f / jump_drive_max_distance)
+                    getSystemPower(ship_system) * (WARP_drive_charge + 0.01f / WARP_drive_max_distance)
                 )
             );
         } else if (getSystemPower(ship_system) != 1.0f)
         {
-            // For non-Jump systems, allow underpowered systems to reduce the
+            // For non-WARP systems, allow underpowered systems to reduce the
             // total electrical signal output.
             signature_delta.electrical += std::max(
                 -1.0f,
@@ -322,20 +322,20 @@ RawRadarSignatureInfo SpaceShip::getDynamicRadarSignatureInfo()
         }
     }
 
-    // Increase the gravitational band if the ship is about to jump, or is
-    // actively warping.
-    if (jump_delay > 0.0f)
+    // Increase the gravitational band if the ship is about to WARP, or is
+    // actively RLSing.
+    if (WARP_delay > 0.0f)
     {
         signature_delta.gravity += std::max(
             0.0f,
             std::min(
-                (1.0f / jump_delay + 0.01f) + 0.25f,
+                (1.0f / WARP_delay + 0.01f) + 0.25f,
                 10.0f
             )
         );
-    } else if (current_warp > 0.0f)
+    } else if (current_RLS > 0.0f)
     {
-        signature_delta.gravity += current_warp;
+        signature_delta.gravity += current_RLS;
     }
 
     // Update the signature by adding the delta to its baseline.
