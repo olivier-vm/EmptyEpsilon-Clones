@@ -131,7 +131,7 @@ void PlayerInfo::spawnUI()
             screen->addStationTab(new ScienceScreen(screen), scienceOfficer, getCrewPositionName(scienceOfficer), getCrewPositionIcon(scienceOfficer));
         if (crew_position[relayOfficer])
             screen->addStationTab(new RelayScreen(screen, true), relayOfficer, getCrewPositionName(relayOfficer), getCrewPositionIcon(relayOfficer));
-        
+
         //Crew 4/3
         if (crew_position[tacticalOfficer])
             screen->addStationTab(new TacticalScreen(screen), tacticalOfficer, getCrewPositionName(tacticalOfficer), getCrewPositionIcon(tacticalOfficer));
@@ -189,10 +189,10 @@ string getCrewPositionName(ECrewPosition position)
     switch(position)
     {
     case helmsOfficer: return "Pilote";
-    case weaponsOfficer: return "Armes";
+    case weaponsOfficer: return "Armement";
     case engineering: return "Ingenieur";
     case scienceOfficer: return "Science";
-    case relayOfficer: return "Communications";
+    case relayOfficer: return "Relayeur";
     case tacticalOfficer: return "Tactique";
     case engineeringAdvanced: return "Ingenieur+";
     case operationsOfficer: return "Operations";
@@ -200,10 +200,10 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Controle Degats";
     case powerManagement: return "Gestion Puissance";
     case databaseView: return "Base de Donnees";
-    case altRelay: return "AltRelay";
-    case commsOnly: return "Comms";
-    case shipLog: return "Ship's Log";
-    default: return "ErrUnk: " + string(position);
+    case altRelay: return "Relayeur secondaire";
+    case commsOnly: return "Communications";
+    case shipLog: return "Journal de bord";
+    default: return "Erreur Inconnue: " + string(position);
     }
 }
 
