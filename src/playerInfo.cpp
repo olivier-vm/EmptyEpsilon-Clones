@@ -200,7 +200,7 @@ string getCrewPositionName(ECrewPosition position)
     case damageControl: return "Controle Degats";
     case powerManagement: return "Gestion Puissance";
     case databaseView: return "Base de Donnees";
-    case altRelay: return "Relayeur secondaire";
+    case altRelay: return "Carte Strategique";
     case commsOnly: return "Communications";
     case shipLog: return "Journal de bord";
     default: return "Erreur Inconnue: " + string(position);

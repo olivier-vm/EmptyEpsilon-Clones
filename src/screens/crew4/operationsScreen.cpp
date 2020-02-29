@@ -58,7 +58,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
         }
     );
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", "Open Comms", &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
+    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", "Ouvrir Communications", &science->targets))->setPosition(-270, -20, ABottomRight)->setSize(200, 50);
 
     // Manage waypoints.
     place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", "Placer Balise", [this, science]() {
@@ -73,9 +73,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
         }
     });
     delete_waypoint_button->setPosition(-270, -120, ABottomRight)->setSize(200, 50);
-    
+
     mode = TargetSelection;
-    
+
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }

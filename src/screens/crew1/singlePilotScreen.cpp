@@ -138,14 +138,14 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
 
     // Docking, comms, and shields buttons across top.
     (new GuiDockingButton(left_panel, "DOCKING"))->setPosition(20, 20, ATopLeft)->setSize(250, 50);
-    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", "Open Comms", &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
+    (new GuiOpenCommsButton(left_panel, "OPEN_COMMS_BUTTON", "Ouvrir Communications", &targets))->setPosition(270, 20, ATopLeft)->setSize(250, 50);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     (new GuiShieldsEnableButton(left_panel, "SHIELDS_ENABLE"))->setPosition(520, 20, ATopLeft)->setSize(250, 50);
 
     // Missile lock button near top right of left panel.
     lock_aim = new AimLockButton(left_panel, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, ATopCenter)->setSize(130, 50);
-    
+
     (new GuiCustomShipFunctions(this, singlePilot, ""))->setPosition(-20, 120, ATopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
