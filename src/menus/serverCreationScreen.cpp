@@ -87,7 +87,7 @@ ServerCreationScreen::ServerCreationScreen()
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
     row->setSize(GuiElement::GuiSizeMax, 50);
     (new GuiLabel(row, "WARP_JUMP_LABEL", tr("Warp/Jump: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
-    (new GuiSelector(row, "RLS_WARP_SELECT", [](int index, string value) {
+    (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(index);
     }))->setOptions({tr("warp/jump", "Ship default"), tr("warp/jump", "Warp drive"), tr("warp/jump", "Jump drive"), tr("warp/jump", "Both"), tr("warp/jump", "Neither")})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -129,7 +129,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "GAME_HACKING_DIFFICULTY_LABEL", tr("Hacking difficulty: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "GAME_HACKING_DIFFICULTY", [](int index, string value) {
         gameGlobalInfo->hacking_difficulty = index;
-    }))->setOptions({tr("Simple", "hacking"), tr("Normal", "hacking"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({tr("hacking", "Simple"), tr("hacking", "Normal"), tr("hacking", "Difficult"), tr("hacking", "Fiendish")})->setSelectionIndex(gameGlobalInfo->hacking_difficulty)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Hacking games selector.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);

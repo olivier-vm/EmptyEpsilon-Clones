@@ -44,6 +44,187 @@ msgstr ""
 "Calibrage\n"
 "Ecran tactile"
 
+#: src/menus/serverCreationScreen.cpp:52
+msgid "Server configuration"
+msgstr "Configuration serveur"
+
+#: src/menus/serverCreationScreen.cpp:57
+msgid "Server name: "
+msgstr "Nom du serveur: "
+
+#: src/menus/serverCreationScreen.cpp:63
+msgid "Server password: "
+msgstr "Mot de passe serveur: "
+
+#: src/menus/serverCreationScreen.cpp:69
+msgid "GM control code: "
+msgstr ""
+
+#: src/menus/serverCreationScreen.cpp:69
+msgid "Server IP: "
+msgstr "Adr IP serveur: "
+
+#: src/menus/serverCreationScreen.cpp:75
+msgid "Server visibility: "
+msgstr "Visibilite serveur: "
+
+#: src/menus/serverCreationScreen.cpp:81
+msgid "LAN only"
+msgstr "Réseau local"
+
+#: src/menus/serverCreationScreen.cpp:84
+msgid "Player ship options"
+msgstr "Options vaisseau participant"
+
+#: src/menus/serverCreationScreen.cpp:89
+msgid "Warp/Jump: "
+msgstr "RLS/WARP: "
+
+#: src/menus/serverCreationScreen.cpp:92
+msgctxt "warp/jump"
+msgid "Ship default"
+msgstr "Defaut"
+
+#: src/menus/serverCreationScreen.cpp:92
+msgctxt "warp/jump"
+msgid "Warp drive"
+msgstr "Moteur RLS"
+
+#: src/menus/serverCreationScreen.cpp:92
+msgctxt "warp/jump"
+msgid "Jump drive"
+msgstr "Moteur WARP"
+
+#: src/menus/serverCreationScreen.cpp:92
+msgctxt "warp/jump"
+msgid "Both"
+msgstr "RLS+WARP"
+
+#: src/menus/serverCreationScreen.cpp:92
+msgctxt "warp/jump"
+msgid "Neither"
+msgstr "Aucun"
+
+#: src/menus/serverCreationScreen.cpp:103
+msgid "Main screen options"
+msgstr "Options ecran principal"
+
+#: src/menus/serverCreationScreen.cpp:108
+msgid "Tactical radar"
+msgstr "Radar tactique"
+
+#: src/menus/serverCreationScreen.cpp:111
+msgid "Long range radar"
+msgstr "Radar longue portee"
+
+#: src/menus/serverCreationScreen.cpp:116
+msgid "Game rules"
+msgstr "Regles de simulation"
+
+#: src/menus/serverCreationScreen.cpp:121
+msgid "Scan complexity: "
+msgstr "Complexite scan: "
+
+#: src/menus/serverCreationScreen.cpp:124
+msgctxt "scanning"
+msgid "None (delay)"
+msgstr "Aucun (delais)"
+
+#: src/menus/serverCreationScreen.cpp:124
+msgctxt "scanning"
+msgid "Simple"
+msgstr "Simple"
+
+#: src/menus/serverCreationScreen.cpp:124
+msgctxt "scanning"
+msgid "Normal"
+msgstr "Normal"
+
+#: src/menus/serverCreationScreen.cpp:124
+msgctxt "scanning"
+msgid "Advanced"
+msgstr "Avance"
+
+#: src/menus/serverCreationScreen.cpp:129
+msgid "Hacking difficulty: "
+msgstr "Difficulte hacking: "
+
+#: src/menus/serverCreationScreen.cpp:132
+msgctxt "hacking"
+msgid "Simple"
+msgstr "Simple"
+
+#: src/menus/serverCreationScreen.cpp:132
+msgctxt "hacking"
+msgid "Normal"
+msgstr "Normal"
+
+#: src/menus/serverCreationScreen.cpp:132
+msgctxt "hacking"
+msgid "Difficult"
+msgstr "Difficile"
+
+#: src/menus/serverCreationScreen.cpp:132
+msgctxt "hacking"
+msgid "Fiendish"
+msgstr "Diabolique"
+
+#: src/menus/serverCreationScreen.cpp:137
+msgid "Hacking type: "
+msgstr "Type de hacking: "
+
+#: src/menus/serverCreationScreen.cpp:140
+msgctxt "hacking"
+msgid "Mine"
+msgstr "Mine"
+
+#: src/menus/serverCreationScreen.cpp:140
+msgctxt "hacking"
+msgid "Lights"
+msgstr "Lumière"
+
+#: src/menus/serverCreationScreen.cpp:140
+msgctxt "hacking"
+msgid "All"
+msgstr "Tous"
+
+#: src/menus/serverCreationScreen.cpp:145
+msgid "Beam/shield frequencies"
+msgstr "Frequences laser/bouclier"
+
+#: src/menus/serverCreationScreen.cpp:149
+msgid "Per-system damage"
+msgstr "Dommages par systeme"
+
+#: src/menus/serverCreationScreen.cpp:155
+msgid "Scenario"
+msgstr "Scenario"
+
+#: src/menus/serverCreationScreen.cpp:174
+msgid "Variation: "
+msgstr "Variation: "
+
+#: src/menus/serverCreationScreen.cpp:188
+msgid "Close server"
+msgstr "Fermer serveur"
+
+#: src/menus/serverCreationScreen.cpp:195
+msgid "Start scenario"
+msgstr "Demarrer scenario"
+
+#: src/menus/serverCreationScreen.cpp:225
+msgctxt "variation"
+msgid "None"
+msgstr "Aucun"
+
+#: src/menus/serverCreationScreen.cpp:228
+msgid "No variation."
+msgstr "Pas de variation."
+
+#: src/menus/serverCreationScreen.cpp:229
+msgid "No variation selected. Play the scenario as intended."
+msgstr "Pas de variation selectionnee. Activer le scenario tel que prevu."
+
 #: src/menus/optionsMenu.cpp:26
 msgid "Graphics Options"
 msgstr "Options graphiques"
