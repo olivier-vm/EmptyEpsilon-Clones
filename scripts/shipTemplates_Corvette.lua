@@ -84,9 +84,7 @@ variation:addDoor(8, 4, false);
 
 -- Duplicate pour apparition dans la database
 variation = template:copy("Enhydra*")
-variation:setDescription([[Un navire Enhydra X23 remanie pour plus de tâches generales. Tres polycalent. Le grand systeme de bouclier a ete remplace par des sytemes avances de manoeuvre de combat. Le moteur RLS est de toute derniere generation.
-
-Ses lanceurs de missiles sont aussi adaptes a des types varies de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
+variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
 variation:setShields(200, 200)
 variation:setHull(250)
 variation:setSpeed(90, 10, 20)
@@ -320,7 +318,7 @@ template:setLASER(5, 30, 300, 4000.0, 1.5, 20)
 for cnt=1,5 do
 
 	template = ShipTemplate():setName("Transport personnes " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_1_" .. cnt)
-	template:setDescription([[Ces cargos sont concus pour le transport des personnes. Leur version militaire peut transporter des troupes du Trigone Armee, le personnel du Trigone Secours, et le materiel de combat.]])
+	template:setDescription(_([[These freighters are designed to transport armed troops, military support personnel, and combat gear.]]))
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -405,9 +403,7 @@ Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necess
 	end
 
 	template = ShipTemplate():setName("Cargo Marchandise " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_2_" .. cnt)
-	template:setDescription([[Ces cargos transportent de grosses quantites de marchandises sur de longues distances. Ils sont generalement affretes pour l'Utanscale et Technocorp.
-
-Leurs baies de chargement possedent des controles de climatisation, et des systemes de stabilisation, ainsi que certaines structures en permatech qui maintiennent le cargo en bon etat.]])
+	template:setDescription(_([[Cargo freighters haul large loads of cargo across long distances on impulse power. Their cargo bays include climate control and stabilization systems that keep the cargo in good condition.]]))
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -491,11 +487,7 @@ Leurs baies de chargement possedent des controles de climatisation, et des syste
 	end
 
 	template = ShipTemplate():setName("Cargo Dechets " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_3_" .. cnt)
-	template:setDescription([[Ces cargos sont specialement concus pour contenir les dechets, et des matiere premieres a ressources.
-
-Ils sont equipes de chaines automatisee de tri, et de compacteurs a dechets. Ils possedent moins de systeme de stabilisation que les autres cargos.
-
-Ces cargos sont utilises par Technocorp afin d'acheminer les dechets dans les grandes stations de recyclage presentes dans l'espace, ou pour transporter les ressources primaires provenant des enormes carrieres de certaines. On les rencontre donc en grand nombres aux alentours des planetes "ressources" (ex: Videsh dans l'arche Khayyam).]])
+	template:setDescription(_([[These freighters are specially designed to haul garbage and waste. They are fitted with a trash compactor and fewer stabilzation systems than cargo freighters.]]))
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -508,9 +500,7 @@ Ces cargos sont utilises par Technocorp afin d'acheminer les dechets dans les gr
 --	  end
 
 	template = ShipTemplate():setName("Cargo Equipement " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_4_" .. cnt)
-	template:setDescription([[Les cargos equipement ont des systeme de stabilisations et de climatisations specialises afin de pouvoir transporter de maniere securisees les machineries delicates et de l'instrumentation scientifique.
-
-Ils sont largement utilises par Technocorp et Mobius, ainsi que l'Utanscale quand ils s'occupent de certains projets specifiques.]])
+	template:setDescription(_([[Equipment freighters have specialized environmental and stabilization systems to safely carry delicate machinery and complex instruments.]]))
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -590,11 +580,7 @@ Les compartiments arrieres du cargo contiennent 8 mines spatio-sismiques, necess
 	end
 
 	template = ShipTemplate():setName("Cargo Carburant " .. cnt):setClass("Corvette", "Freighter"):setModel("transport_5_" .. cnt)
-	template:setDescription([[Les cargos de carburants transportent principalement de l'hyperdeuterium, sous differentes formes. Leurs cuves sont prevues principalement pour les materiaux en phase liquide, gazeuse, en gel, voir plasmatique dans des champs de retention magnetique puissants.
-
-Ils sont equipes de capteurs internes asservis a des systemes de securites specifique au transport de ce type de materiel.
-
-Ils peuvent biensûr aussi etre adaptes pour transporter d'autres materiaux que l'hyperdeuterium.]])
+	template:setDescription(_([[Fuel freighters have massive tanks for hauling fuel, and delicate internal sensors that watch for any changes to their cargo's potentially volatile state.]]))
 	template:setHull(100)
 	template:setShields(50, 50)
 	template:setSpeed(60 - 5 * cnt, 6, 10)
@@ -691,11 +677,8 @@ end
 --]]
 
 template = ShipTemplate():setName("Transporteur WARP"):setClass("Corvette", "Freighter"):setModel("transport_4_2")
-template:setDescription([[Vaisseau experimental - Concept (non encore fonctionnel)
-
-Le transporteur WARP est un cargo specialise. Il possede un enorme moteur a distorsion WARP experimental ainsi que les gigantesques cellules energetiques necessaire pour le faire fonctionner.
-
-Il est concu pour pouvoir accrocher (arrimage) un autre vaisseau afin de le transporter au plus profond de l'espace.]])
+template:setDescription(_([[The Jump Carrier is a specialized Freighter. It does not carry any cargo, as it's cargo bay is taken up by a specialized jump drive and the energy storage required to run this jump drive.
+It is designed to carry other ships deep into space. So it has special docking parameters, allowing other ships to attach themselves to this ship.]]))
 template:setHull(100)
 template:setShields(50, 50)
 template:setSpeed(50, 6, 10)
@@ -705,7 +688,7 @@ template:setWARPDriveRange(5000, 100 * 50000) -- The WARP carrier can WARP a 100
 template:setDockClasses("Starfighter", "Frigate", "Corvette")
 
  variation = template:copy("Benedict"):setType("playership"):setClass("Corvette","Freighter/Carrier")
- variation:setDescription("Le Benedict (concept experimental) est une version amelioree du transporteur WARP")
+ variation:setDescription(_("Benedict is an improved version of the Jump Carrier"))
  variation:setShields(70, 70)
  variation:setHull(200)
  variation:setSpeed(60, 6, 8)
@@ -739,7 +722,7 @@ template:setDockClasses("Starfighter", "Frigate", "Corvette")
  variation:addDoor(9, 3, false)
 
  var2 = variation:copy("Kiriya")
- var2:setDescription("Le Kiriya est la version RLS operationnelle du transporteur WARP (sans moteur WARP)")
+ var2:setDescription(_("Kiriya is an improved warp drive version of the Jump Carrier"))
  --                  Arc, Dir, Range, CycleTime, Dmg
  var2:setLASER(0, 10,   0, 1500.0, 6.0, 4)
  var2:setLASER(1, 10, 180, 1500.0, 6.0, 4)
