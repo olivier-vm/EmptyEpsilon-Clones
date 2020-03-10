@@ -89,7 +89,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiLabel(row, "WARP_JUMP_LABEL", tr("Warp/Jump: "), 30))->setAlignment(ACenterRight)->setSize(250, GuiElement::GuiSizeMax);
     (new GuiSelector(row, "WARP_JUMP_SELECT", [](int index, string value) {
         gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(index);
-    }))->setOptions({tr("warp/jump", "Ship default"), tr("warp/jump", "Warp drive"), tr("warp/jump", "Jump drive"), tr("warp/jump", "Both"), tr("warp/jump", "Neither")})->setSelectionIndex((int)gameGlobalInfo->player_warp_jump_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }))->setOptions({tr("warp/jump", "Ship default"), tr("warp/jump", "Warp drive"), tr("warp/jump", "Jump drive"), tr("warp/jump", "Both"), tr("warp/jump", "Neither")})->setSelectionIndex((int)gameGlobalInfo->player_RLS_WARP_drive_setting)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Radar range limit row.
     row = new GuiAutoLayout(left_panel, "", GuiAutoLayout::LayoutHorizontalLeftToRight);
