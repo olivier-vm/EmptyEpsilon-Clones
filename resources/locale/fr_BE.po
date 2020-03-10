@@ -241,6 +241,10 @@ msgstr "Options audio"
 msgid "Sound Volume: {volume}%"
 msgstr "Volume son: {volume}%"
 
+#: src/screenComponents/indicatorOverlays.cpp:129
+msgid "{faction} wins"
+msgstr "{faction} gagne"
+
 #: scripts/shipTemplates_Corvette.lua:15
 msgid ""
 "The Atlantis X23 is the smallest model of destroyer, and its combination of "
