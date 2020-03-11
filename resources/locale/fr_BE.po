@@ -12,6 +12,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr_BE\n"
 
+#: src/shipTemplate.cpp:338
+msgctxt "system"
+msgid "Reactor"
+msgstr "Generateur"
+
+#: src/shipTemplate.cpp:339
+msgctxt "system"
+msgid "Beam Weapons"
+msgstr "Armes Laser"
+
+#: src/shipTemplate.cpp:340
+msgctxt "system"
+msgid "Missile System"
+msgstr "Systeme de Missiles"
+
+#: src/shipTemplate.cpp:341
+msgctxt "system"
+msgid "Maneuvering"
+msgstr "Manoeuvre"
+
+#: src/shipTemplate.cpp:342
+msgctxt "system"
+msgid "Impulse Engines"
+msgstr "Moteurs a Impulsion"
+
+#: src/shipTemplate.cpp:343
+msgctxt "system"
+msgid "Warp Drive"
+msgstr "Moteur RLS"
+
+#: src/shipTemplate.cpp:344
+msgctxt "system"
+msgid "Jump Drive"
+msgstr "Moteur WARP"
+
+#: src/shipTemplate.cpp:345
+msgctxt "system"
+msgid "Front Shield Generator"
+msgstr "Bouclier Avant"
+
+#: src/shipTemplate.cpp:346
+msgctxt "system"
+msgid "Rear Shield Generator"
+msgstr "Bouclier Arriere"
+
 #: src/menus/mainMenus.cpp:72
 msgid "Version: {version}"
 msgstr "Version: {version}"
@@ -240,6 +285,29 @@ msgstr "Options audio"
 #: src/menus/optionsMenu.cpp:67
 msgid "Sound Volume: {volume}%"
 msgstr "Volume son: {volume}%"
+
+#: src/screens/extra/powerManagement.cpp:37
+msgctxt "button"
+msgid "Power"
+msgstr "Puissance"
+
+#: src/screens/extra/powerManagement.cpp:38
+msgctxt "button"
+msgid "Coolant"
+msgstr "Refrigerant"
+
+#: src/screens/extra/powerManagement.cpp:39
+msgctxt "button"
+msgid "Heat"
+msgstr "Chaleur"
+
+#: src/screens/gm/tweak.cpp:501
+msgid "{system} health"
+msgstr "{system} : sante"
+
+#: src/screens/gm/tweak.cpp:510
+msgid "{system} heat"
+msgstr "{system} : chaleur"
 
 #: src/screenComponents/indicatorOverlays.cpp:129
 msgid "{faction} wins"
