@@ -26,7 +26,7 @@ ServerCreationScreen::ServerCreationScreen()
     (new GuiOverlay(this, "", sf::Color::White))->setTextureTiled("gui/BackgroundCrosses");
 
     // Set defaults from preferences.
-    gameGlobalInfo->player_warp_jump_drive_setting = EPlayerWarpJumpDrive(PreferencesManager::get("server_config_warp_jump_drive_setting", "0").toInt());
+    gameGlobalInfo->player_RLS_WARP_drive_setting = EPlayerRLSWARPDrive(PreferencesManager::get("server_config_RLS_WARP_drive_setting", "0").toInt());
     gameGlobalInfo->setLongRangeRadarRange(PreferencesManager::get("server_config_long_range_radar_range", "30000").toInt());
     gameGlobalInfo->scanning_complexity = EScanningComplexity(PreferencesManager::get("server_config_scanning_complexity", "2").toInt());
     gameGlobalInfo->hacking_difficulty = PreferencesManager::get("server_config_hacking_difficulty", "1").toInt();
