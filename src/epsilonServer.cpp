@@ -7,6 +7,8 @@
 EpsilonServer::EpsilonServer()
 : GameServer("Server", VERSION_NUMBER)
 {
+  if (game_server)
+  {
     new GameGlobalInfo();
     new GameMasterActions();
     PlayerInfo* info = new PlayerInfo();
@@ -15,6 +17,7 @@ EpsilonServer::EpsilonServer()
     engine->setGameSpeed(0.0);
     for(unsigned int n=0; n<factionInfo.size(); n++)
         factionInfo[n]->reset();
+  }
 }
 
 EpsilonServer::~EpsilonServer()
