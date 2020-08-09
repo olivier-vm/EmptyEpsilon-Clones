@@ -33,9 +33,9 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
 {
     string script_name = target->comms_script_name;
     comms_script_interface = this;
-    
+
     reply_callbacks.clear();
-    
+
     this->ship = ship;
     this->target = target;
 
@@ -43,7 +43,7 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
         scriptObject->destroy();
     scriptObject = nullptr;
     has_message = false;
-    
+
     if (script_name != "")
     {
         scriptObject = new ScriptObject();
@@ -63,8 +63,8 @@ bool CommsScriptInterface::openCommChannel(P<PlayerSpaceship> ship, P<SpaceObjec
 void CommsScriptInterface::commChannelMessage(int32_t message_id)
 {
     comms_script_interface = this;
-    
-    if (message_id >= 0 && message_id < int(reply_callbacks.size()))
+
+    if (message_id >= 0 && message_id < int(reply_callbacks.size()) && ship && target)
     {
         ScriptSimpleCallback callback = reply_callbacks[message_id];
         if (!scriptObject)
