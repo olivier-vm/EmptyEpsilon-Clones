@@ -37,7 +37,8 @@ echo
 # SeriousProton: check older compatible release
 
 cd "${EE_BUILD_SP_PATH}"
-git checkout EE-2019.09.09
+#git checkout EE-2019.09.09
+git checkout EE-2020.02.18
 
 # Build EmptyEpsilon.
 
