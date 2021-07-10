@@ -2,7 +2,7 @@
 # Script to build (under Debian) EE Garou Clone variant for Microsoft Windows
 
 # Install needed packages if not installed
-sudo apt install mingw-w64 cmake
+sudo apt install mingw-w64 cmake git build-essential ninja-build zip
 
 # Variables
 EE_BUILD_HOME=`pwd`
@@ -34,6 +34,11 @@ else
 fi
 echo
 
+# SeriousProton: check older compatible release
+
+cd "${EE_BUILD_SP_PATH}"
+git checkout EE-2019.09.09
+
 # Build EmptyEpsilon.
 
 cd "${EE_BUILD_EE_PATH}"
@@ -49,5 +54,8 @@ if [ ! -d _build_win32 ]; then
 fi
 cd _build_win32
 
-cmake .. -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
-make -j 12 package
+#cmake .. -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
+#ninja -j 9 package
+
+cmake .. -DCMAKE_MAKE_PROGRAM=make -DCMAKE_TOOLCHAIN_FILE="${EE_BUILD_CMAKE}/mingw.toolchain" -DSERIOUS_PROTON_DIR="${EE_BUILD_SP_PATH}/"
+make -j 9 package
