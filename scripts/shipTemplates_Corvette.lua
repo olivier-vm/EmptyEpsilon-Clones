@@ -12,10 +12,7 @@ They come in 3 different subclasses:
 --[[----------------------Destroyers----------------------]]
 
 template = ShipTemplate():setName("Enhydra X23"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_1_upgraded")
-
-template:setDescription([[L'Enhydra X23 est le plus petit modele de vaisseau destroyer, et sa combinaison "taille de fregate" et "puissance de corvette" en fait un excellent vaisseau d'escorte pour defendre de plus gros vaisseaux contre de multiple petits ennemis.
-
-L'Enhydra X23 est equippe d'un puissant moteur RLS, il peut donc aussi servir de navire de patrouille sur longues distances.]])
+template:setDescription(_([[The Atlantis X23 is the smallest model of destroyer, and its combination of frigate-like size and corvette-like power makes it an excellent escort ship when defending larger ships against multiple smaller enemies. Because the Atlantis X23 is fitted with a jump drive, it can also serve as an intersystem patrol craft.]]))
 template:setRadarTrace("radar_dread.png")
 template:setHull(100)
 template:setShields(200, 200, 200, 200)
@@ -34,10 +31,7 @@ template:setTubeDirection(2,  90)
 template:setTubeDirection(3,  90)
 
 variation = template:copy("Enhydra"):setType("playership")
-
-variation:setDescription([[Un navire Enhydra X23 remanie pour plus de tâches generales. Tres polycalent. Le grand systeme de bouclier a ete remplace par des sytemes avances de manoeuvre de combat. Le moteur RLS est de toute derniere generation.
-
-Ses lanceurs de missiles sont aussi adaptes a des types varies de munitions. Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous coûter la vie.]])
+variation:setDescription(_([[A refitted Atlantis X23 for more general tasks. The large shield system has been replaced with an advanced combat maneuvering systems and improved impulse engines. Its missile loadout is also more diverse. Mistaking the modified Atlantis for an Atlantis X23 would be a deadly mistake.]]))
 variation:setShields(200, 200)
 variation:setHull(250)
 variation:setSpeed(90, 10, 20)
@@ -112,7 +106,7 @@ variation:setTubeDirection(4, 180):setWeaponTubeExclusiveFor(4, "Mine")
 --
 
 template = ShipTemplate():setName("Starhammer II"):setClass("Corvette", "Destroyer"):setModel("battleship_destroyer_4_upgraded")
-template:setDescription([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]])
+template:setDescription(_([[Contrary to its predecessor, the Starhammer II lives up to its name. By resolving the original Starhammer's power and heat management issues, the updated model makes for a phenomenal frontal assault ship. Its low speed makes it difficult to position, but when in the right place at the right time, even the strongest shields can't withstand a Starhammer's assault for long.]]))
 template:setRadarTrace("radar_dread.png")
 template:setHull(200)
 template:setShields(450, 350, 150, 150, 350)
@@ -132,7 +126,7 @@ template:weaponTubeDisallowMissle(1, "EMP")
 --
 
 template = ShipTemplate():setName("Crucible"):setClass("Corvette","Popper"):setModel("LaserCorvetteRed"):setType("playership")
-template:setDescription("A number of missile tubes range around this ship. LASERs were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
+template:setDescription(_("A number of missile tubes range around this ship. Beams were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 template:setRadarTrace("radar_laser.png")
 template:setHull(160)
 template:setShields(160,160)
@@ -188,7 +182,7 @@ template:addDoor(9, 2, true)
 template:addDoor(10,4, true)
 
 template = ShipTemplate():setName("Maverick"):setClass("Corvette","Gunner"):setModel("LaserCorvetteGreen"):setType("playership")
-template:setDescription("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis")
+template:setDescription(_("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 template:setRadarTrace("radar_laser.png")
 template:setHull(160)
 template:setShields(160,160)
@@ -246,7 +240,7 @@ template:addDoor(10,4, true)
 -- The weapons-platform is a stationary platform with LASER-weapons. It's extremely slow to turn, but it's LASER weapons do a huge amount of damage.
 -- Smaller ships can dock to this platform to re-supply.
 template = ShipTemplate():setName("Defense platform"):setClass("Corvette", "Support"):setModel("space_station_4")
-template:setDescription([[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful LASER weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]])
+template:setDescription(_([[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
 template:setRadarTrace("radartrace_smallstation.png")
 template:setHull(150)
 template:setShields(120, 120, 120, 120, 120, 120)
