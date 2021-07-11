@@ -21,6 +21,7 @@ REGISTER_MULTIPLAYER_CLASS(LASEREffect, "LASEREffect");
 LASEREffect::LASEREffect()
 : SpaceObject(1000, "LASEREffect")
 {
+    setRadarSignatureInfo(0.0, 0.3, 0.0);
     setCollisionRadius(1.0);
     lifetime = 1.0;
     sourceId = -1;
@@ -41,7 +42,6 @@ LASEREffect::LASEREffect()
     registerMemberReplication(&LASER_fire_sound);
     registerMemberReplication(&LASER_fire_sound_power);
     registerMemberReplication(&fire_ring);
-
 }
 
 LASEREffect::~LASEREffect()
