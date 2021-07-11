@@ -1,0 +1,213 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"Last-Translator: Ovehem\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_BE\n"
+
+#: src/menus/mainMenus.cpp:72
+msgid "Version: {version}"
+msgstr "Version: {version}"
+
+#: src/menus/mainMenus.cpp:74
+msgid "Start server"
+msgstr "Demarrer serveur"
+
+#: src/menus/mainMenus.cpp:83
+msgid "Start client"
+msgstr "Demarrer client"
+
+#: src/menus/mainMenus.cpp:88
+msgid "Options"
+msgstr "Options"
+
+#: src/menus/mainMenus.cpp:93
+msgid "Quit"
+msgstr "Quitter"
+
+#: src/menus/mainMenus.cpp:97
+msgid "Tutorials"
+msgstr "Apprentissage"
+
+#: src/menus/mainMenus.cpp:104
+msgid ""
+"Calibrate\n"
+"Touchscreen"
+msgstr ""
+"Calibrage\n"
+"Ecran tactile"
+
+#: src/menus/optionsMenu.cpp:26
+msgid "Graphics Options"
+msgstr "Options graphiques"
+
+#: src/menus/optionsMenu.cpp:30
+msgid "Fullscreen toggle"
+msgstr "Basculer en plein-ecran"
+
+#: src/menus/optionsMenu.cpp:60
+msgid "Sound Options"
+msgstr "Options audio"
+
+#: src/menus/optionsMenu.cpp:67
+msgid "Sound Volume: {volume}%"
+msgstr "Volume son: {volume}%"
+
+#: scripts/shipTemplates_Corvette.lua:15
+msgid ""
+"The Atlantis X23 is the smallest model of destroyer, and its combination of "
+"frigate-like size and corvette-like power makes it an excellent escort ship "
+"when defending larger ships against multiple smaller enemies. Because the "
+"Atlantis X23 is fitted with a jump drive, it can also serve as an "
+"intersystem patrol craft."
+msgstr ""
+"L’Enhydra X23 est le plus petit modele de vaisseau destroyer, et sa "
+"combinaison “taille de fregate” et “puissance de corvette” en fait un "
+"excellent vaisseau d’escorte pour defendre de plus gros vaisseaux contre de "
+"multiples petits ennemis.\n"
+"L’Enhydra X23 est equipe d’un puissant moteur RLS, il peut donc aussi servir "
+"de navire de patrouille sur longues distances."
+
+#: scripts/shipTemplates_Corvette.lua:34
+msgid ""
+"A refitted Atlantis X23 for more general tasks. The large shield system has "
+"been replaced with an advanced combat maneuvering systems and improved "
+"impulse engines. Its missile loadout is also more diverse. Mistaking the "
+"modified Atlantis for an Atlantis X23 would be a deadly mistake."
+msgstr ""
+"Un navire Enhydra X23 remanie pour plus de tâches generales. Tres "
+"polyvalent. Le grand systeme de bouclier a ete remplace par des systemes "
+"avances de manoeuvre de combat. Le moteur RLS est de toute derniere "
+"generation.\n"
+"Ses lanceurs de missiles sont aussi adaptes a des types varies de munitions. "
+"Confondre un Enhydra avec un Enhydra X23 serait une erreur qui pourrait vous "
+"couter la vie."
+
+#: scripts/shipTemplates_Corvette.lua:107
+msgid ""
+"Contrary to its predecessor, the Starhammer II lives up to its name. By "
+"resolving the original Starhammer's power and heat management issues, the "
+"updated model makes for a phenomenal frontal assault ship. Its low speed "
+"makes it difficult to position, but when in the right place at the right "
+"time, even the strongest shields can't withstand a Starhammer's assault for "
+"long."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:127
+msgid ""
+"A number of missile tubes range around this ship. Beams were deemed lower "
+"priority, though they are still present. Stronger defenses than a frigate, "
+"but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:183
+msgid ""
+"A number of beams bristle from various points on this gunner. Missiles were "
+"deemed lower priority, though they are still present. Stronger defenses than "
+"a frigate, but not as strong as the Atlantis"
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:241
+msgid ""
+"This stationary defense platform operates like a station, with docking and "
+"resupply functions, but is armed with powerful beam weapons and can slowly "
+"rotate. Larger systems often use these platforms to resupply patrol ships."
+msgstr ""
+
+#: scripts/shipTemplates_Corvette.lua:321
+msgid ""
+"These freighters are designed to transport armed troops, military support "
+"personnel, and combat gear."
+msgstr ""
+"Ces cargos sont concus pour le transport des personnes. Leur version "
+"militaire peut transporter des troupes du Trigone Armee, le personnel du "
+"Trigone Secours, et le materiel de combat."
+
+#: scripts/shipTemplates_Corvette.lua:406
+msgid ""
+"Cargo freighters haul large loads of cargo across long distances on impulse "
+"power. Their cargo bays include climate control and stabilization systems "
+"that keep the cargo in good condition."
+msgstr ""
+"Ces cargos transportent de grosses quantites de marchandises sur de longues "
+"distances. Ils sont generalement affretes pour l’Utanscale et Technocorp.\n"
+"Leurs baies de chargement possedent des controles de climatisation, et des "
+"systemes de stabilisation, ainsi que certaines structures en permatech qui "
+"maintiennent le cargo en bon etat."
+
+#: scripts/shipTemplates_Corvette.lua:490
+msgid ""
+"These freighters are specially designed to haul garbage and waste. They are "
+"fitted with a trash compactor and fewer stabilzation systems than cargo "
+"freighters."
+msgstr ""
+"Ces cargos sont specialement concus pour contenir les dechets, et des "
+"matiere premieres a ressources.\n"
+"Ils sont equipes de chaines automatisees de tri, et de compacteurs a "
+"dechets. Ils possedent moins de systemes de stabilisation que les autres "
+"cargos.\n"
+"Ces cargos sont utilises par Technocorp afin d’acheminer les dechets dans "
+"les grandes stations de recyclage presentes dans l’espace, ou pour "
+"transporter les ressources primaires provenant des enormes carrieres de "
+"certaines zones. On les rencontre donc en grand nombres aux alentours des "
+"planetes “ressources” (ex: Videsh dans l’arche Khayyam)."
+
+#: scripts/shipTemplates_Corvette.lua:503
+msgid ""
+"Equipment freighters have specialized environmental and stabilization "
+"systems to safely carry delicate machinery and complex instruments."
+msgstr ""
+"Les cargos equipement ont des systemes de stabilisations et de "
+"climatisations specialises afin de pouvoir transporter de maniere securisee "
+"les machineries delicates et de l’instrumentation scientifique.\n"
+"Ils sont largement utilises par Technocorp et Mobius, ainsi que l’Utanscale "
+"quand ils s’occupent de certains projets specifiques."
+
+#: scripts/shipTemplates_Corvette.lua:583
+msgid ""
+"Fuel freighters have massive tanks for hauling fuel, and delicate internal "
+"sensors that watch for any changes to their cargo's potentially volatile "
+"state."
+msgstr ""
+"Les cargos de carburants transportent principalement de l’hyperdeuterium, "
+"sous differentes formes. Leurs cuves sont prevues principalement pour les "
+"materiaux en phase liquide, gazeuse, en gel, voir plasmatique dans des "
+"champs de retention magnetique puissants.\n"
+"Ils sont equipes de capteurs internes asservis a des systemes de securites "
+"specifique au transport de ce type de materiel.\n"
+"Ils peuvent biensur aussi etre adaptes pour transporter d’autres materiaux "
+"que l’hyperdeuterium."
+
+#: scripts/shipTemplates_Corvette.lua:680
+msgid ""
+"The Jump Carrier is a specialized Freighter. It does not carry any cargo, as "
+"it's cargo bay is taken up by a specialized jump drive and the energy "
+"storage required to run this jump drive.\n"
+"It is designed to carry other ships deep into space. So it has special "
+"docking parameters, allowing other ships to attach themselves to this ship."
+msgstr ""
+"Vaisseau experimental - Concept (non encore fonctionnel)\n"
+"Le transporteur WARP est un cargo specialise. Il possede un enorme moteur a "
+"distorsion WARP experimental ainsi que les gigantesques cellules "
+"energetiques necessaire pour le faire fonctionner.\n"
+"Il est concu pour pouvoir accrocher (arrimage) un autre vaisseau afin de le "
+"transporter au plus profond de l’espace."
+
+#: scripts/shipTemplates_Corvette.lua:690
+msgid "Benedict is an improved version of the Jump Carrier"
+msgstr ""
+"Le Benedict (concept experimental) est une version amelioree du transporteur "
+"WARP"
+
+#: scripts/shipTemplates_Corvette.lua:725
+msgid "Kiriya is an improved warp drive version of the Jump Carrier"
+msgstr ""
+"Le Kiriya est la version RLS operationnelle du transporteur WARP (sans "
+"moteur WARP)"
