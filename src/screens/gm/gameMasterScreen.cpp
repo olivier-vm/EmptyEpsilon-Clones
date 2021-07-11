@@ -57,7 +57,7 @@ GameMasterScreen::GameMasterScreen()
         }
     });
     for(P<FactionInfo> info : factionInfo)
-        faction_selector->addEntry(info->getName(), info->getName());
+        faction_selector->addEntry(info->getLocaleName(), info->getName());
     faction_selector->setPosition(20, 70, ATopLeft)->setSize(250, 50);
 
     // Global message button
