@@ -74,7 +74,8 @@ public:
     GuiButton* cancel_create_button;
 
     GameMasterScreen();
-
+    virtual ~GameMasterScreen();
+    
     virtual void update(float delta);
 
     void onMouseDown(sf::Vector2f position);

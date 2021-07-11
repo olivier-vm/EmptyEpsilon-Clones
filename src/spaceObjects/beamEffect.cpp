@@ -44,6 +44,10 @@ LASEREffect::LASEREffect()
 
 }
 
+BeamEffect::~BeamEffect()
+{
+}
+
 #if FEATURE_3D_RENDERING
 void LASEREffect::draw3DTransparent()
 {

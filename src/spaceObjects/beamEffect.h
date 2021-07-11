@@ -18,6 +18,7 @@ public:
     string LASER_fire_sound;
     float LASER_fire_sound_power;
     LASEREffect();
+    virtual ~BeamEffect();
 
 #if FEATURE_3D_RENDERING
     virtual void draw3DTransparent();
