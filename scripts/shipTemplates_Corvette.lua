@@ -179,7 +179,7 @@ template:addDoor(6, 3, false)
 template:addDoor(9, 2, true)
 template:addDoor(10,4, true)
 
-template = ShipTemplate():setName("Maverick"):setClass("Corvette","Gunner"):setModel("LaserCorvetteGreen"):setType("playership")
+template = ShipTemplate():setName("Maverick"):setLocaleName(_("Maverick")):setClass(_("Corvette"),_("Gunner")):setModel("LaserCorvetteGreen"):setType("playership")
 template:setDescription(_("A number of beams bristle from various points on this gunner. Missiles were deemed lower priority, though they are still present. Stronger defenses than a frigate, but not as strong as the Atlantis"))
 template:setRadarTrace("radar_laser.png")
 template:setHull(160)
@@ -237,7 +237,7 @@ template:addDoor(10,4, true)
 
 -- The weapons-platform is a stationary platform with LASER-weapons. It's extremely slow to turn, but it's LASER weapons do a huge amount of damage.
 -- Smaller ships can dock to this platform to re-supply.
-template = ShipTemplate():setName("Defense platform"):setClass("Corvette", "Support"):setModel("space_station_4")
+template = ShipTemplate():setName("Defense platform"):setLocaleName(_("Defense platform")):setClass(_("Corvette"), _("Support")):setModel("space_station_4")
 template:setDescription(_([[This stationary defense platform operates like a station, with docking and resupply functions, but is armed with powerful beam weapons and can slowly rotate. Larger systems often use these platforms to resupply patrol ships.]]))
 template:setRadarTrace("radartrace_smallstation.png")
 template:setHull(150)
