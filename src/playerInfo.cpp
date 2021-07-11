@@ -223,7 +223,7 @@ string getCrewPositionIcon(ECrewPosition position)
     case damageControl: return "";
     case powerManagement: return "";
     case databaseView: return "";
-    case altRelay: return "gui/icons/station-relay";
+    case altRelay: return "";
     case commsOnly: return "";
     case shipLog: return "";
     default: return "ErrUnk: " + string(position);
