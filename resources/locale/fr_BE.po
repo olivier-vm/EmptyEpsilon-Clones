@@ -81,6 +81,14 @@ msgstr "Quitter"
 msgid "Tutorials"
 msgstr "Apprentissage"
 
+#: src/menus/mainMenus.cpp:109
+msgid ""
+"Calibrate\n"
+"Touchscreen"
+msgstr ""
+"Calibrer\n"
+"Écran tactile"
+
 #: src/menus/mainMenus.cpp:104
 msgid ""
 "Calibrate\n"
