@@ -1,3 +1,4 @@
+#include <i18n.h>
 #include "shipTemplate.h"
 #include "spaceObjects/spaceObject.h"
 #include "mesh.h"
@@ -327,6 +328,24 @@ string getSystemName(ESystem system)
     case SYS_RearShield: return "Bouclier Arriere";
     default:
         return "INCONNU";
+    }
+}
+
+string getLocaleSystemName(ESystem system)
+{
+    switch(system)
+    {
+    case SYS_Reactor: return tr("system", "Reactor");
+    case SYS_BeamWeapons: return tr("system", "Beam Weapons");
+    case SYS_MissileSystem: return tr("system", "Missile System");
+    case SYS_Maneuver: return tr("system", "Maneuvering");
+    case SYS_Impulse: return tr("system", "Impulse Engines");
+    case SYS_Warp: return tr("system", "Warp Drive");
+    case SYS_JumpDrive: return tr("system", "Jump Drive");
+    case SYS_FrontShield: return tr("system", "Front Shield Generator");
+    case SYS_RearShield: return tr("system", "Rear Shield Generator");
+    default:
+        return "UNKNOWN";
     }
 }
 
